@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  maker: MyString
+  model: MyString
+  length: 1
+  width: 1
+  thickness: 1
+  style_id: 1
+  user_id: 1
+  description: MyText
+
+two:
+  maker: MyString
+  model: MyString
+  length: 1
+  width: 1
+  thickness: 1
+  style_id: 1
+  user_id: 1
+  description: MyText

@@ -1,0 +1,22 @@
+<div>
+  <p class="link">
+    Don't have an account yet? 
+    <%= link_to 'Sign up now!', new_user_path %>
+  </p>
+
+  <%= form.label :email, 'Email' %>
+  <%= form.text_field :email %>
+
+  <%= form.label :password, 'Password' %>
+  <%= form.password_field :password %>
+  <div class="forgot_password">
+     <!--%= link_to "Forgot Password?", new_password_path %-->
+  </div>
+
+  <span style="display: none;">
+  <%= form.check_box :remember_me %>
+  <%= form.label :remember_me %>
+  </span>
+
+  <%= form.submit 'Login', :class => 'submitBtn' %>
+</div>

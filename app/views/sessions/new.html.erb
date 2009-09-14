@@ -1,0 +1,18 @@
+<h1>Please log in first</h1>
+
+<h3>Don't have an account?</h3>
+ <%= link_to 'Sign up now!', new_user_path %>
+ <h3>As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
+
+<% form_tag session_path do -%>
+<p><label for="login">Login</label><br/>
+<%= text_field_tag 'login' %></p>
+
+<p><label for="password">Password</label><br/>
+<%= password_field_tag 'password' %></p>
+
+<p><label for="remember_me">Remember me:</label>
+<%= check_box_tag 'remember_me' %></p>
+
+<p><%= submit_tag 'Log in' %></p>
+<% end -%>

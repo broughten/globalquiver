@@ -1,0 +1,20 @@
+<h1>Listing styles</h1>
+
+<table>
+  <tr>
+    <th>Style</th>
+  </tr>
+
+<% @styles.each do |style| %>
+  <tr>
+    <td><%=h style.style %></td>
+    <td><%= link_to 'Show', style %></td>
+    <td><%= link_to 'Edit', edit_style_path(style) %></td>
+    <td><%= link_to 'Destroy', style, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New style', new_style_path %>

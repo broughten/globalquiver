@@ -1,0 +1,113 @@
+#login_form,
+#signup_form {
+  width: 205px;
+}
+
+* html #login_form,
+* html #signup_form {
+  width: 208px;
+}
+
+#application .box,
+#dashboard .header,
+#dashboard .action {
+  zoom: 1;
+}
+
+#application #app_main,
+#application #app_sub {
+  zoom: 1;
+  display: inline;
+}
+
+
+ul.subsection_tabs,
+#tab_contents {
+  float: left;
+}
+
+#login-signup ul li,
+#login-signup ul li a {
+  zoom: 1;
+  display: inline;
+}
+
+#login-signup #homeSignup #tos_field label {
+  line-height: 1.5;
+}
+
+.raised-to-date { 
+  zoom: 1;
+  display: inline;
+}
+
+.raised-to-date span.float {
+  bottom: 1px;
+}
+
+.raised-to-date span.amount span.float {
+  border-right: none;
+  padding-right: 7px;
+}
+
+.raised-to-date span.amount span.last {
+  padding: 0 6px;
+}
+
+#my_information .box-contents div.vcard {
+  zoom: 1;
+  display: inline;
+}
+
+#invite-sponsor #invite-new-sponsor,
+#invite-sponsor #past-invitations {
+  zoom: 1;
+  display: inline;
+}
+
+#billing-info,
+#cc-info {
+  zoom: 1;
+  display: inline;
+}
+
+#billing-info select,
+#cc-info select {
+  padding: 5px;
+  margin-left: 5px;
+  border: none;
+  font-size: 1.2em;
+  font-family: arial;
+  background: #FFF;
+  border: 1px solid #dbd7c9;
+  vertical-align: middle;
+}
+
+#login-signup ul form#signup_form div#tos_field label a {
+  width: auto;
+  padding: 1px 0 0 0;
+}
+
+.a_grades div,
+.b_grades div {
+  zoom: 1;
+  display: inline;
+}
+
+#sponsorships .student-information div.vcard,
+#sponsorships .student-information img {
+  zoom: 1;
+  display: inline;
+}
+
+#app_sub #my_sponsors ol li .vcard {
+  zoom: 1;
+  display: inline;
+}
+
+
+#causes #new-cause,
+#causes #cause-details {
+  zoom: 1;
+  display: inline;
+}

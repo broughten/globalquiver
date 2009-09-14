@@ -1,0 +1,10 @@
+<h2>Signup</h2>
+
+<div id="login-signup">
+<% form_for :user,
+            :url => users_url,
+            :html => { :method => 'POST',
+                       :id => 'signup_form' } do |form| %>
+  <%= render :partial => '/users/form', :object => form %>
+<% end %>
+</div>

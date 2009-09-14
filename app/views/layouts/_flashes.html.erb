@@ -1,0 +1,7 @@
+<% flash.each do |key, value| -%>
+    <div class="flash">
+      <div id="flash_<%= key %>">
+        <p><%=h value %></p>
+      </div>
+    </div>
+<% end %>

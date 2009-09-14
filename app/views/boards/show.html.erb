@@ -1,0 +1,43 @@
+<p>
+  <b>Maker:</b>
+  <%=h @board.maker %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%=h @board.model %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%=h @board.length %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%=h @board.width %>
+</p>
+
+<p>
+  <b>Thickness:</b>
+  <%=h @board.thickness %>
+</p>
+
+<p>
+  <b>Style:</b>
+  <%=h @board.style_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @board.user_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @board.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_board_path(@board) %> |
+<%= link_to 'Back', boards_path %>

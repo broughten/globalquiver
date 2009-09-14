@@ -1,0 +1,22 @@
+<div id="locationFields">
+  <form id="addressForm"action="#" onsubmit="showAddress(this.address.value); return false;">
+    <h2>First, where is this board?</h2>
+    <h3>Enter an address below, or click a location on the map.</h3>
+    <br>
+    <input id="addressInput" type="text" name="address" value="Montevideo, Uruguay" />
+    <input type="submit" value="Go!" />
+    <%= @map.div(:width => 600, :height => 400) %>
+  </form>
+  <div id="currentLocation">
+    <h3>Currently Selected Location</h3>
+    <br>
+
+    <dl>
+      <dt>Street:</dt><dd id="street">&nbsp;<%= @location.street %></dd><br>
+      <dt>City:</dt><dd id="locality">&nbsp;<%= @location.locality %></dd><br>
+      <dt>State:</dt><dd id="region">&nbsp;<%= @location.region %></dd><br>
+      <dt>Postal Code:</dt><dd id="postal_code">&nbsp;<%= @location.postal_code %></dd><br>
+      <dt>Country:</dt><dd id="country">&nbsp;<%= @location.country %></dd>
+    </dl>
+  </div>
+</div>

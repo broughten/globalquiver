@@ -1,0 +1,19 @@
+<div id="welcome">
+  <h1>Time for a surf trip?</h1>
+  <h3>Global Quiver is a respectful community of surfers that travel without shlepping boards around the planet.</h3>
+  <div id="divider"></div>
+  <h3>Here you can borrow or rent boards for your next surf trip.  Or if you have an extra board, loan it or rent it.</h3>
+</div>
+<div id="buttonArea">
+  <div id="mainButtons">
+     <%= link_to image_tag("/images/lendbtn.png", :border=>0), new_board_url, :id=>"rent"%>
+     <%= link_to image_tag("/images/reservebtn.png", :border=>0), boards_url, :id=>"reserve" %>
+  </div>
+  <div id="questionButtons">
+     <%= link_to image_tag("/images/why.png", :border=>0), page_url('why'), :id=>"why"%>
+     <%= link_to image_tag("/images/how.png", :border=>0), page_url('how'), :id=>"how" %>
+  </div>  
+</div>
+
+
+

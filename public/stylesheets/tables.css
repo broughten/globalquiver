@@ -1,0 +1,36 @@
+/* Generic Listing Table Styles */
+
+table.listing {
+  margin: 10px;
+  width: 95%;
+}
+
+table.listing thead {
+  border-bottom: 1px solid #e2dfd4;
+}
+
+table.listing thead td {
+  font-weight: bold;
+}
+
+table.listing td {
+  padding: .5em;
+}
+
+table.listing tbody tr {
+  border-bottom: 1px solid #e2dfd4;
+}
+
+table.listing tbody tr:last-child {
+  border-bottom: none;
+}
+
+table.listing tbody tr:hover {
+  background-color: #e2dfd4;
+}
+
+/* Admin Grade Listing */
+
+td.grade {
+  text-align: center;
+}

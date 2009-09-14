@@ -1,0 +1,12 @@
+<%= render :partial => 'layouts/header' %>
+
+      <div id="topper">
+        <img class="topper" alt="" src="/images/topper.png"/>
+      </div>
+      <div id="mainContent">
+        <%= render :partial => 'layouts/flashes' %>
+        <%= yield %>
+ 
+
+<%= render :partial => 'pages/sidebar' %>
+<%= render :partial => 'layouts/footer' %>

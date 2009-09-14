@@ -1,0 +1,105 @@
+<% content_for :head do %>
+  <%= GMap.header %>
+  <%= @map.to_html %>
+  <%= javascript_include_tag 'newboard.js', 'json2.js' %>
+<% end %>
+
+<h1>List a board for borrow or rent</h1>
+<br>
+<h3>When you enter one of your extra surfboards below, it will be added to your quiver.</h3>
+<h3>If someone wants to borrow or rent it, we'll send you an email.</h3>
+<h3>You will then need to reply with pickup and payment instructions.</h3>
+<br>
+
+<%= render :partial => '/locations/new', :object => @location %>
+
+<% form_for(@board) do |f| %>
+  <%= f.error_messages %>
+
+
+  <%= render :partial => '/locations/form', :object => @location %>
+
+
+  <div id="boardDetails">
+
+    <br>
+    <br>
+
+  <h2>List the details of this board.</h2>
+    <p>
+      <%= f.label :maker %><br />
+      <%= f.text_field :maker %>
+    </p>
+    <p>
+      <%= f.label :model %><br />
+      <%= f.text_field :model %>
+
+    </p>
+    <p>
+      <%= f.label :length %><br />
+      <%= f.text_field :length_feet, :value => "feet"%>
+      <%= f.text_field :length_inches, :value => "inches" %>
+    </p>
+    <p>
+      <%= f.label :width %><br />
+      <%= f.text_field :width_inches, :value => "inches"%>
+      <%= f.select :width_fraction, [
+                                  ['0'         , '0'],
+                                  ['1/16'      , '0.0625'],
+                                  ['1/8'       , '0.125'],
+                                  ['3/16'      , '0.1875'],
+                                  ['1/4'       , '0.25'],
+                                  ['5/16'      , '0.3125'],
+                                  ['3/8'       , '0.375'],
+                                  ['7/16'      , '0.4375'],
+                                  ['1/2'       , '0.5'],
+                                  ['9/16'      , '0.5625'],
+                                  ['5/8'       , '0.625'],
+                                  ['11/16'     , '0.6875'],
+                                  ['3/4'       , '0.75'],
+                                  ['13/16'     , '0.8125'],
+                                  ['7/8'       , '0.875'],
+                                  ['15/16'     , '0.9375']
+                                  ] %>
+    </p>
+    <p>
+      <%= f.label :thickness %><br />
+      <%= f.text_field :thickness_inches, :value => "inches"  %>
+      <%= f.select :thickness_fraction, [
+                                  ['0'         , '0'],
+                                  ['1/16'      , '0.0625'],
+                                  ['1/8'       , '0.125'],
+                                  ['3/16'      , '0.1875'],
+                                  ['1/4'       , '0.25'],
+                                  ['5/16'      , '0.3125'],
+                                  ['3/8'       , '0.375'],
+                                  ['7/16'      , '0.4375'],
+                                  ['1/2'       , '0.5'],
+                                  ['9/16'      , '0.5625'],
+                                  ['5/8'       , '0.625'],
+                                  ['11/16'     , '0.6875'],
+                                  ['3/4'       , '0.75'],
+                                  ['13/16'     , '0.8125'],
+                                  ['7/8'       , '0.875'],
+                                  ['15/16'     , '0.9375']
+                                  ] %>
+    </p>
+    <p>
+      <%= f.label :style_name %><br />
+      <%= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
+        { :url => formatted_styles_path(:js), :method => :get,
+        :with => "'search=' + element.value" } %>
+    </p>
+    <p>
+      <%= f.label :construction %><br />
+      <%= f.text_field :construction %>
+    </p>
+    <p>
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+    </p>
+  </div>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

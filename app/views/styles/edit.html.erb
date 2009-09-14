@@ -1,0 +1,16 @@
+<h1>Editing style</h1>
+
+<% form_for(@style) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :style %><br />
+    <%= f.text_field :style %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @style %> |
+<%= link_to 'Back', styles_path %>

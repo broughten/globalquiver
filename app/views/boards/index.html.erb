@@ -1,0 +1,34 @@
+<h1>Listing boards</h1>
+
+<table>
+  <tr>
+    <th>Maker</th>
+    <th>Model</th>
+    <th>Length</th>
+    <th>Width</th>
+    <th>Thickness</th>
+    <th>Style</th>
+    <th>User</th>
+    <th>Description</th>
+  </tr>
+
+<% @boards.each do |board| %>
+  <tr>
+    <td><%=h board.maker %></td>
+    <td><%=h board.model %></td>
+    <td><%=h board.length %></td>
+    <td><%=h board.width %></td>
+    <td><%=h board.thickness %></td>
+    <td><%=h board.style_id %></td>
+    <td><%=h board.user_id %></td>
+    <td><%=h board.description %></td>
+    <td><%= link_to 'Show', board %></td>
+    <td><%= link_to 'Edit', edit_board_path(board) %></td>
+    <td><%= link_to 'Destroy', board, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New board', new_board_path %>

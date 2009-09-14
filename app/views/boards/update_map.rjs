@@ -1,0 +1,7 @@
+page << "
+
+if (GBrowserIsCompatible()) {
+  map = new GMap2(document.getElementById(\"map\"));
+  map.setCenter(new GLatLng(-37.8833,-46.1833),3);
+  map.addControl(new GLargeMapControl());
+}"
