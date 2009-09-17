@@ -25628,3 +25628,148 @@ Rendered layouts/_javascripts (0.2ms)
 Rendered layouts/_footer (0.9ms)
 DEPRECATION WARNING: The binding argument of #concat is no longer needed.  Please remove it from your views and helpers.. (called from inside_layout at /Users/JC/Dev/globalquiver/vendor/plugins/nested_layouts/lib/nested_layouts.rb:14)
 Completed in 6073ms (View: 25, DB: 1) | 200 OK [http://localhost/boards/new]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing PagesController#show (for 127.0.0.1 at 2009-09-17 14:30:33) [GET]
+  Parameters: {"id"=>"home"}
+Rendering template within layouts/pages
+Rendering pages/home
+Rendered sessions/_form (24.3ms)
+Rendered users/_form (17.0ms)
+Rendered layouts/_header (135.3ms)
+Rendered layouts/_flashes (14.6ms)
+  [4;36;1mSQL (17.7ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+Rendered pages/_sidebar (286.3ms)
+Rendered layouts/_javascripts (11.2ms)
+Rendered layouts/_footer (34.5ms)
+Completed in 642ms (View: 616, DB: 18) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-09-17 14:30:35) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing BoardsController#new (for 127.0.0.1 at 2009-09-17 14:30:40) [GET]
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/boards/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-09-17 14:30:40) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered layouts/_flashes (0.6ms)
+Rendered layouts/_header (3.1ms)
+Rendered layouts/_javascripts (0.2ms)
+Rendered layouts/_footer (1.0ms)
+DEPRECATION WARNING: The binding argument of #concat is no longer needed.  Please remove it from your views and helpers.. (called from inside_layout at /Users/JC/Dev/globalquiver/vendor/plugins/nested_layouts/lib/nested_layouts.rb:14)
+Completed in 72ms (View: 64, DB: 0) | 200 OK [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-09-17 14:30:40) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2009-09-17 14:30:46) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"PCcOT9AgsxV3Hn9M9zQyaBGJ9a2eGxJu5GgC1XZ0rKc=", "login"=>"mr.jonc@gmail.com", "password"=>"torres1"}
+  [4;35;1mUser Load (9.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = E'mr.jonc@gmail.com') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered layouts/_flashes (0.2ms)
+Rendered layouts/_header (2.3ms)
+Rendered layouts/_javascripts (0.2ms)
+Rendered layouts/_footer (0.8ms)
+DEPRECATION WARNING: The binding argument of #concat is no longer needed.  Please remove it from your views and helpers.. (called from inside_layout at /Users/JC/Dev/globalquiver/vendor/plugins/nested_layouts/lib/nested_layouts.rb:14)
+Completed in 48ms (View: 7, DB: 10) | 200 OK [http://localhost/session]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-09-17 14:30:46) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2009-09-17 14:30:52) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"PCcOT9AgsxV3Hn9M9zQyaBGJ9a2eGxJu5GgC1XZ0rKc=", "login"=>"mr.jonc", "password"=>"torres1"}
+  [4;36;1mUser Load (0.8ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = E'mr.jonc') LIMIT 1[0m
+Redirected to http://localhost:3000/boards/new
+Completed in 37ms (DB: 1) | 302 Found [http://localhost/session]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing BoardsController#new (for 127.0.0.1 at 2009-09-17 14:30:52) [GET]
+  [4;35;1mUser Load (12.8ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering boards/new
+Rendered locations/_new (9.9ms)
+Rendered locations/_form (13.9ms)
+DEPRECATION WARNING: formatted_styles_path() has been deprecated. Please pass format to the standard styles_path method instead.. (called from _run_erb_app47views47boards47new46html46erb at /Users/JC/Dev/globalquiver/app/views/boards/new.html.erb:90)
+Rendered layouts/_flashes (0.2ms)
+Rendered layouts/_header (4.8ms)
+Rendered layouts/_javascripts (0.2ms)
+Rendered layouts/_footer (0.8ms)
+DEPRECATION WARNING: The binding argument of #concat is no longer needed.  Please remove it from your views and helpers.. (called from inside_layout at /Users/JC/Dev/globalquiver/vendor/plugins/nested_layouts/lib/nested_layouts.rb:14)
+Completed in 1683ms (View: 108, DB: 13) | 200 OK [http://localhost/boards/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-09-17 14:30:56) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing PagesController#show (for 127.0.0.1 at 2009-09-17 14:44:36) [GET]
+  Parameters: {"id"=>"home"}
+Rendering template within layouts/pages
+Rendering pages/home
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendered layouts/_header (109.7ms)
+Rendered layouts/_flashes (21.8ms)
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM "users" [0m
+Rendered pages/_sidebar (15.7ms)
+Rendered layouts/_javascripts (1.6ms)
+Rendered layouts/_footer (29.2ms)
+Completed in 393ms (View: 384, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-09-17 14:44:36) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  
+
+Rendering rescues/layout (not_found)
