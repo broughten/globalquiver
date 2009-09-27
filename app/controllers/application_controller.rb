@@ -22,14 +22,5 @@ class ApplicationController < ActionController::Base
       redirect_to :controller=>'user', :action=>'welcome'
     end
   end
-
-
-  #TODO get an owner on the boards
-  #TODO get an owner on the locations
-  #TODO Make the map only load if there's no location or if the user requests it
-  #TODO make some board fields required and others optional
-  #TODO make the board type something that comes from an ever growing dropdown
-  #TODO provide a dropdown of previous locations for subsequent board additions.
   
-
 end

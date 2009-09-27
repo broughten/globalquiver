@@ -25773,3 +25773,196 @@ ActionController::RoutingError (No route matches "/images/lightbox/close.gif" wi
   
 
 Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (6.2ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [4;35;1mSQL (2.9ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20090430003355)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (7.8ms)[0m   [0;1mCREATE TABLE "users" ("id" serial primary key, "login" character varying(255), "email" character varying(255), "crypted_password" character varying(40), "salt" character varying(40), "created_at" timestamp, "updated_at" timestamp, "remember_token" character varying(255), "remember_token_expires_at" timestamp) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090430003355')[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateBoards (20090506024411)
+  [4;35;1mSQL (0.5ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (4.3ms)[0m   [0;1mCREATE TABLE "boards" ("id" serial primary key, "maker" character varying(255), "model" character varying(255), "length" integer, "width" integer, "thickness" integer, "style_id" integer, "user_id" integer, "description" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090506024411')[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateStyles (20090506024656)
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (4.3ms)[0m   [0;1mCREATE TABLE "styles" ("id" serial primary key, "style" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090506024656')[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCOMMIT[0m
+Migrating to AddGeocodableTables (20090509171547)
+  [4;35;1mSQL (0.3ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (4.5ms)[0m   [0;1mCREATE TABLE "geocodes" ("id" serial primary key, "latitude" decimal(15,12), "longitude" decimal(15,12), "query" character varying(255), "street" character varying(255), "locality" character varying(255), "region" character varying(255), "postal_code" character varying(255), "country" character varying(255), "precision" character varying(255)) [0m
+  [4;35;1mSQL (1.2ms)[0m   [0mCREATE INDEX "geocodes_longitude_index" ON "geocodes" ("longitude")[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE INDEX "geocodes_latitude_index" ON "geocodes" ("latitude")[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCREATE UNIQUE INDEX "geocodes_query_index" ON "geocodes" ("query")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCREATE INDEX "geocodes_locality_index" ON "geocodes" ("locality")[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mCREATE INDEX "geocodes_region_index" ON "geocodes" ("region")[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE INDEX "geocodes_postal_code_index" ON "geocodes" ("postal_code")[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCREATE INDEX "geocodes_country_index" ON "geocodes" ("country")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCREATE INDEX "geocodes_precision_index" ON "geocodes" ("precision")[0m
+  [4;35;1mSQL (3.2ms)[0m   [0mCREATE TABLE "geocodings" ("id" serial primary key, "geocodable_id" integer, "geocode_id" integer, "geocodable_type" character varying(255)) [0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mCREATE INDEX "geocodings_geocodable_type_index" ON "geocodings" ("geocodable_type")[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mCREATE INDEX "geocodings_geocode_id_index" ON "geocodings" ("geocode_id")[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mCREATE INDEX "geocodings_geocodable_id_index" ON "geocodings" ("geocodable_id")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090509171547')[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCOMMIT[0m
+Migrating to AddLocationToBoard (20090509174614)
+  [4;35;1mSQL (0.9ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mALTER TABLE "boards" ADD COLUMN "street" character varying(255)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mALTER TABLE "boards" ADD COLUMN "locality" character varying(255)[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mALTER TABLE "boards" ADD COLUMN "region" character varying(255)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mALTER TABLE "boards" ADD COLUMN "postal_code" character varying(255)[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mALTER TABLE "boards" ADD COLUMN "country" character varying(255)[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090509174614')[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateLocations (20090511135413)
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (6.1ms)[0m   [0;1mCREATE TABLE "locations" ("id" serial primary key, "street" character varying(255), "locality" character varying(255), "region" character varying(255), "postal_code" character varying(255), "country" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090511135413')[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mCOMMIT[0m
+Migrating to RemoveLocationFromBoard (20090511135609)
+  [4;35;1mSQL (0.4ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mALTER TABLE "boards" DROP "street"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mALTER TABLE "boards" DROP "locality"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mALTER TABLE "boards" DROP "region"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mALTER TABLE "boards" DROP "postal_code"[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mALTER TABLE "boards" DROP "country"[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090511135609')[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCOMMIT[0m
+Migrating to AddLocationIdToBoard (20090511142002)
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mALTER TABLE "boards" ADD COLUMN "location_id" integer[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090511142002')[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCOMMIT[0m
+Migrating to IntToFloatForBoards (20090612123214)
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (6.9ms)[0m   [0;1mALTER TABLE "boards" ALTER COLUMN "width" TYPE float[0m
+  [4;35;1mSQL (5.2ms)[0m   [0mALTER TABLE "boards" ALTER COLUMN "thickness" TYPE float[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090612123214')[0m
+  [4;35;1mSQL (1.7ms)[0m   [0mCOMMIT[0m
+Migrating to AddConstructionToBoards (20090612125718)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mALTER TABLE "boards" ADD COLUMN "construction" character varying(255)[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090612125718')[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCOMMIT[0m
+Migrating to RemoveStyleFromStyles (20090612181616)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mALTER TABLE "styles" DROP "style"[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090612181616')[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCOMMIT[0m
+Migrating to AddNameToStyles (20090612181635)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mALTER TABLE "styles" ADD COLUMN "name" character varying(255)[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090612181635')[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing PagesController#show (for ::1 at 2009-09-17 21:23:28) [GET]
+  Parameters: {"id"=>"home"}
+Rendering template within layouts/pages
+Rendering pages/home
+Rendered sessions/_form (17.2ms)
+Rendered users/_form (20.5ms)
+Rendered layouts/_header (100.9ms)
+Rendered layouts/_flashes (11.7ms)
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+Rendered pages/_sidebar (24.4ms)
+Rendered layouts/_javascripts (0.8ms)
+Rendered layouts/_footer (16.8ms)
+Completed in 336ms (View: 334, DB: 1) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for ::1 at 2009-09-17 21:23:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  /opt/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /opt/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing SessionsController#create (for ::1 at 2009-09-17 21:23:36) [POST]
+  Parameters: {"commit"=>"Login", "session"=>{"remember_me"=>"0", "password"=>"torres1", "email"=>"mr.jonc"}, "authenticity_token"=>"OX/y1gGm16h8jqdueNGoCXTW3/1nBfnD0t0XfJDQ56U="}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" IS NULL) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered layouts/_flashes (0.1ms)
+Rendered layouts/_header (3.3ms)
+Rendered layouts/_javascripts (0.1ms)
+Rendered layouts/_footer (0.6ms)
+DEPRECATION WARNING: The binding argument of #concat is no longer needed.  Please remove it from your views and helpers.. (called from inside_layout at /Users/JC/Dev/globalquiver/vendor/plugins/nested_layouts/lib/nested_layouts.rb:14)
+Completed in 76ms (View: 65, DB: 1) | 200 OK [http://localhost/session]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for ::1 at 2009-09-17 21:23:36) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  /opt/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /opt/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+
+
+Processing PagesController#show (for ::1 at 2009-09-27 11:15:45) [GET]
+  Parameters: {"id"=>"home"}
+Rendering template within layouts/pages
+Rendering pages/home
+Rendered sessions/_form (3.0ms)
+Rendered users/_form (4.0ms)
+Rendered layouts/_header (86.8ms)
+Rendered layouts/_flashes (0.6ms)
+  [4;36;1mSQL (19.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+Rendered pages/_sidebar (971.2ms)
+Rendered layouts/_javascripts (0.5ms)
+Rendered layouts/_footer (5.1ms)
+Completed in 1203ms (View: 1182, DB: 20) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+
+
+Processing ApplicationController#index (for ::1 at 2009-09-27 11:15:48) [GET]
+
+ActionController::RoutingError (No route matches "/images/lightbox/close.gif" with {:method=>:get}):
+  /opt/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /opt/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /opt/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
