@@ -2,14 +2,12 @@
 
 <p class="link">
   Already have an account?
-  <%= link_to 'Login instead!', new_session_path %>
+  <%= link_to 'Login instead!', new_session_path, :class => "login_link"%>
 </p>
-
-<div id="signup_name_field" class="text_field">
+<div>
   <%= form.label :login, 'Login' %>
   <%= form.text_field :login, :class => 'initial_value' %>
-</div>
-<div>
+
   <%= form.label :email %>
   <%= form.text_field :email %>
 
