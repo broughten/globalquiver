@@ -640,13 +640,16 @@ a:hover{
 }
 
 /*Home login---------------------------*/
+#login-signup{
+    float:none;
+}
 
 #login-signup ul li {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: top;
-  margin-left: 1px;
+  /*margin-left: 1px;*/
   margin-top: 30px;
   font-size: 1.2em;
 }
@@ -656,16 +659,17 @@ a:hover{
   color: #FFF;
 }
 
-#login-signup ul li a {
+#login-signup ul li a, #login-signup ul li span {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
   vertical-align: top;
-  width: 80px;
+ /* width: 80px;*/
   padding: 10px 15px;
   text-align: center;
   background: #172322;
   color: #ffffff;
+  font-weight:bold;
 }
 
 /* FF2 */ #header #login-signup ul li a, x:-moz-any-link { width: 100%;}
