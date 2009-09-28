@@ -1,2 +1,4 @@
 *.log
 database.yml
+nbproject
+.DS_Store

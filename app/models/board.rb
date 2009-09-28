@@ -1,6 +1,8 @@
 class Board < ActiveRecord::Base
 
   belongs_to :style
+  belongs_to :creator, :class_name => 'User'
+  belongs_to :updater, :class_name => 'User'
 
   def style_name
     style.name if style

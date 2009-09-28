@@ -41,7 +41,7 @@ class BoardsController < ApplicationController
     # Center the map on specific coordinates and focus in fairly
     # closely
 
-    if (remote_location.latitude.nil?)
+    if (remote_location.nil? || remote_location.latitude.nil?)
       @map.center_zoom_init([25.165173,-158.203125], 1  )
     else
       @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
