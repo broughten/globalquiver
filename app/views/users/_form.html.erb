@@ -1,10 +1,5 @@
 <%= error_messages_for :user %>
-
-<p class="link">
-  Already have an account?
-  <%= link_to 'Login instead!', new_session_path, :class => "login_link"%>
-</p>
-<div>
+<div class="user_fields">
   <%= form.label :login, 'Login' %>
   <%= form.text_field :login, :class => 'initial_value' %>
 

@@ -701,7 +701,7 @@ a:hover{
   width: 60px;
   float: left;
   margin-top: 5px;
-  margin-right: 5px;
+  margin-right: 4px;
   text-align: right;
   font-size: 1.2em;
 }
@@ -731,8 +731,9 @@ body:first-of-type #login-signup input {
   top: 62px;
 }
 
-#login_form {
+#login_form, #signup_form {
   padding: 0 20px 20px 20px;
+  width: 200px;
 }
 
 #login_form .forgot_password {
@@ -851,6 +852,11 @@ body:first-of-type #login-signup input {
 #signup_form .fieldWithErrors,
 #login_form .fieldWithErrors {
   display: inline
+}
+
+#signup_form .user_fields,
+#login_form .user_fields{
+    margin-top:10px;
 }
 
 /*Footer--------------------------*/
