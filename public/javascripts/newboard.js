@@ -72,6 +72,22 @@ function parseAddress(response) {
                 if (place.AddressDetails.Country.AdministrativeArea.Locality.PostalCode) {
                   zipCode = place.AddressDetails.Country.AdministrativeArea.Locality.PostalCode.PostalCodeNumber;
                 }
+              } else {
+                  //just found another address that has a sub administrative area.
+                  //what a nightmare to parse this crap
+                  if (place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality != null) {
+                      city = place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName;
+                  }
+                  //check for Thoroughfare
+                  if (place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare != null) {
+                    street = place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare.ThoroughfareName;
+                  }
+
+                  //check for Zip
+                  if (place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode) {
+                    zipCode = place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber;
+                  }
+
               }
               state = place.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName;
           }
