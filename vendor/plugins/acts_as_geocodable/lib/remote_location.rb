@@ -3,11 +3,11 @@ module CollectiveIdea #:nodoc:
     
     # Get the remote location of the request IP using http://hostip.info
     def remote_location
-      if request.remote_ip == '127.0.0.1'
+      if request.remote_ip == '127.0.0.1' || request.remote_ip == '::1'
         
         # otherwise people would complain that it doesn't work
         #Graticule::Location.new(:locality => 'localhost')
-        Graticule.service(:host_ip).new.locate("190.64.109.31")
+        Graticule.service(:host_ip).new.locate("24.8.173.112")
       else
         Graticule.service(:host_ip).new.locate(request.remote_ip)
       end
