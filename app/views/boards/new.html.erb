@@ -11,11 +11,17 @@
 <h3>You will then need to reply with pickup and payment instructions.</h3>
 <br>
 
+
 <%= render :partial => '/locations/new', :object => @location %>
 
 <% form_for(@board) do |f| %>
   <%= f.error_messages %>
 
+  <% if !@locations.nil? %>
+
+    <%= render :partial => '/locations/list', :object => @locations %>
+
+  <%  end %>
 
   <%= render :partial => '/locations/form', :object => @location %>
 

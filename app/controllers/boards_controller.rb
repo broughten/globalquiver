@@ -28,6 +28,10 @@ class BoardsController < ApplicationController
   # GET /boards/new.xml
   def new
 
+    # we pull up all the locations that the user has previously entered
+    # because he might want to use one of these for the board he's about to enter
+    @locations = Location.find_all_by_creator_id(current_user.id)
+    
     @location = Location.new
     
     @board = @location.boards.build
@@ -68,12 +72,16 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.xml
   def create
-    @location = Location.new(params[:location])
-    if @location.save
-      @board = Board.new(params[:board])
-      @board.location_id = @location.id
-    end
+    @board = Board.new(params[:board])
 
+    # if the location id is nill then we must be making a new location
+    if @board.location_id.nil?
+      @location = Location.new(params[:location])
+      if @location.save
+        @board.location_id = @location.id
+      end
+    end
+   
     respond_to do |format|
       if @board.save
         flash[:notice] = 'Board was successfully created.'
