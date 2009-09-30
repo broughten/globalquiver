@@ -1,34 +1,21 @@
-<h1>Listing boards</h1>
+<h1>Find boards to borrow or rent</h1>
+<br>
+<h3>On this page you can enter information about what type of board you're looking for</h3>
+<h3>along with where and when you'll be surfing.  We'll match these criteria with</h3>
+<h3>boards available for your trip.  You can also just browse if you want.</h3>
+<br>
 
-<table>
-  <tr>
-    <th>Maker</th>
-    <th>Model</th>
-    <th>Length</th>
-    <th>Width</th>
-    <th>Thickness</th>
-    <th>Style</th>
-    <th>User</th>
-    <th>Description</th>
-  </tr>
-
-<% @boards.each do |board| %>
-  <tr>
-    <td><%=h board.maker %></td>
-    <td><%=h board.model %></td>
-    <td><%=h board.length %></td>
-    <td><%=h board.width %></td>
-    <td><%=h board.thickness %></td>
-    <td><%=h board.style_id %></td>
-    <td><%=h board.user_id %></td>
-    <td><%=h board.description %></td>
-    <td><%= link_to 'Show', board %></td>
-    <td><%= link_to 'Edit', edit_board_path(board) %></td>
-    <td><%= link_to 'Destroy', board, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% form_tag boards_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search]%>
+    <%= submit_tag "Search by board maker", :name => nil %>
+  </p>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New board', new_board_path %>
+<ul>
+<% for board in @boards %>
+  <li>
+    <%= link_to board.maker, board_path(board) %> <span><%= board.model %> <%= board.style ? board.style.name : "" %>, <%= board.length_feet %>' <%= board.length_inches %>" </span>
+  </li>
+<% end %>
+</ul>

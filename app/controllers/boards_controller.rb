@@ -5,8 +5,7 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
-    @boards = Board.all
-
+    @boards = Board.search(params[:search])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @boards }

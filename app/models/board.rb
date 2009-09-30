@@ -30,7 +30,7 @@ class Board < ActiveRecord::Base
                }
 
   def length_feet
-    self.length div 12
+    self.length / 12
   end
 
   def length_feet=(feet)
@@ -42,7 +42,7 @@ class Board < ActiveRecord::Base
   end
 
   def length_inches
-    self.length - ((self.length div 12) * 12)
+    self.length - ((self.length / 12) * 12)
   end
 
   def length_inches=(inches)
@@ -112,6 +112,15 @@ class Board < ActiveRecord::Base
       self.thickness = fraction.to_f
     else
       self.thickness += fraction.to_f
+    end
+
+  end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['maker LIKE ?', "%#{search}%"])
+    else
+      find(:all)
     end
 
   end
