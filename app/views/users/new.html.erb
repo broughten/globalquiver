@@ -1,10 +1,27 @@
-<h2>Signup</h2>
+<h1>Signup</h1>
 
-<div id="login-signup">
+<h3>Already have an account?</h3>
+  <%= link_to 'Login', new_session_path %>
 <% form_for :user,
-            :url => users_url,
+            :url => users_url(:protocol => env_ssl_protocol),
             :html => { :method => 'POST',
-                       :id => 'signup_form' } do |form| %>
-  <%= render :partial => '/users/form', :object => form %>
-<% end %>
-</div>
+                       :id => 'signup_page' } do |form| %>
+<p><%= form.label :login, 'Login' %><br/>
+<%= form.text_field :login, :class => 'initial_value' %></p>
+
+<p><%= form.label :email %><br/>
+  <%= form.text_field :email %></p>
+
+<p><%= form.label :password %><br/>
+  <%= form.password_field :password %></p>
+
+<p><%= form.label :password_confirmation, 'Confirm' %><br/>
+  <%= form.password_field :password_confirmation %></p>
+
+<p><label for="user_terms_of_service">I have read TOS <!--TODO: Fix this%= link_to 'Terms of Service', page_url(:terms) %--></label>
+  <%= form.check_box :terms_of_service %>
+
+<p> <%= form.submit 'Sign Up', :class => 'submitBtn' %></p>
+<% end -%>
+
+
