@@ -5,7 +5,8 @@
 <% form_for :user,
             :url => users_url(:protocol => env_ssl_protocol),
             :html => { :method => 'POST',
-                       :id => 'signup_page' } do |form| %>
+                       :id => 'signup_page' } do |form| debugger%>
+<%= form.error_messages %>
 <p><%= form.label :login, 'Login' %><br/>
 <%= form.text_field :login, :class => 'initial_value' %></p>
 
