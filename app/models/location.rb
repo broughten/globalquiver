@@ -5,5 +5,4 @@ class Location < ActiveRecord::Base
   belongs_to :updater, :class_name => 'User'
 
   has_many :boards
-  
 end

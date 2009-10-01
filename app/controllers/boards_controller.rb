@@ -5,7 +5,32 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
+    # we pull up all the locations that the user has previously entered
+    # because he might want to use one of these for the board he's about to enter
+    @locations = Location.find_all_by_creator_id(current_user.id)
     @boards = Board.search(params[:search])
+    @location = Location.new
+
+        # Create a new map object, also defining the div ("map")
+    # where the map will be rendered in the view
+    @map = GMap.new("map")
+    # Use the larger pan/zoom control but disable the map type
+    # selector
+    @map.control_init(:large_map => true,:map_type => false)
+    # Center the map on specific coordinates and focus in fairly
+    # closely
+
+    if (remote_location.nil? || remote_location.latitude.nil?)
+      @map.center_zoom_init([25.165173,-158.203125], 1  )
+    else
+      @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
+
+      @location.region = remote_location.region
+      @location.street = remote_location.street
+      @location.postal_code = remote_location.postal_code
+      @location.country = remote_location.country
+      @location.locality = remote_location.city
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @boards }

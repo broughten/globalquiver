@@ -1,14 +1,13 @@
 <div id="locationPicker">
-  <h2>First, where is this board?</h2>
   <h3>Choose a location or enter a<a href="#" onclick="Effect.Grow('locationFields'); showAddress(this.address.value); return false;"> new one.</a><h3>
 
     <select id="board_location_id" name="board[location_id]" >
-      <% if @board.location_id == 0 or  @board.location_id == nil -%>
+      <% if @board.nil? or @board.location_id == 0 or  @board.location_id == nil -%>
         <option value="" selected="selected" >Select a location for your board</option>
       <% end -%>
       <% @locations.each do |location| %>
         <option value="<%= location.id %>"%>
-          <% if @board.location_id == location.id -%>selected="selected"<% end -%>
+          <% if !@board.nil? and @board.location_id == location.id -%>selected="selected"<% end -%>
           <%= location.street %> <%= location.locality %>, <%= location.region %>
         </option>
       <% end %>

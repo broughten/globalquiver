@@ -477,6 +477,11 @@ a:hover{
   font-size:1.4em;
 }
 
+#mainContent .new_board {
+   margin:0px;
+   padding:0px;
+}
+
 #map {
    margin-top:10px;
    margin-right:20px;
