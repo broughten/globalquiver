@@ -118,7 +118,7 @@ class Board < ActiveRecord::Base
 
   def self.search(search)
     if search
-      find(:all, :conditions => ['maker LIKE ?', "%#{search}%"])
+      maker_like(search)
     else
       find(:all)
     end
