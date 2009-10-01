@@ -4,15 +4,14 @@
  <%= link_to 'Sign up now!', new_user_path %>
  <h3>As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
 
-<% form_tag session_path do -%>
-<p><label for="login">Login</label><br/>
-<%= text_field_tag 'login' %></p>
+<% form_for :session,
+        :url => session_url(:protocol => env_ssl_protocol),
+        :html => { :method => 'POST' } do |form| %>
+  <%= form.label :login, 'Login' %>
+  <%= form.text_field :login %>
 
-<p><label for="password">Password</label><br/>
-<%= password_field_tag 'password' %></p>
-
-<p><label for="remember_me">Remember me:</label>
-<%= check_box_tag 'remember_me' %></p>
+  <%= form.label :password, 'Password' %>
+  <%= form.password_field :password %>
 
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>
