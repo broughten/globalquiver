@@ -11,6 +11,7 @@
 <h3>You will then need to reply with pickup and payment instructions.</h3>
 <br>
 <h2>First, where is this board?</h2>
+<p>We need to know where your boar is so that people looking to take surf trips in your area will be able to find it, pick it up, and use it<p>
 <%= render :partial => '/locations/new', :object => @location %>
 
 <% form_for(@board) do |f| %>
@@ -25,30 +26,31 @@
   <%= render :partial => '/locations/form', :object => @location %>
 
 
-  <div id="boardDetails">
+<div id="boardDetails">
+  <br>
+  <br>
 
-    <br>
-    <br>
-
-  <h2>List the details of this board.</h2>
+  <h2>Next, tell us about the board.</h2>
+  <p>Different surfers and different conditions require different boards.  Describe yours below:</p>
     <p>
-      <%= f.label :maker %><br />
+      <%= f.label "What is the maker?  (for example Channel Islands)" %><br />
       <%= f.text_field :maker %>
     </p>
     <p>
-      <%= f.label :model %><br />
+      <%= f.label "What is the model?  (for example Flyer)" %><br />
       <%= f.text_field :model %>
 
     </p>
     <p>
-      <%= f.label :length %><br />
-      <%= f.text_field :length_feet, :value => "feet"%>
-      <%= f.text_field :length_inches, :value => "inches" %>
+      <%= f.label "What is the lengh? (for example, mine is a 6'4\")" %><br />
+      <%= f.text_field :length_feet, :value => "feet", :size => 4 %>
+      <%= f.text_field :length_inches, :value => "inches", :size => 4 %>
     </p>
     <p>
-      <%= f.label :width %><br />
-      <%= f.text_field :width_inches, :value => "inches"%>
+      <%= f.label "How wide is this board?  (you can skip this question if you don't know)" %><br />
+      <%= f.text_field :width_inches, :value => "inches", :size => 4 %>
       <%= f.select :width_fraction, [
+                                  ['fractional inches', '0'],
                                   ['0'         , '0'],
                                   ['1/16'      , '0.0625'],
                                   ['1/8'       , '0.125'],
@@ -65,12 +67,13 @@
                                   ['13/16'     , '0.8125'],
                                   ['7/8'       , '0.875'],
                                   ['15/16'     , '0.9375']
-                                  ] %>
+                                  ], {}, :class => "fraction_dropdown" %>
     </p>
     <p>
-      <%= f.label :thickness %><br />
-      <%= f.text_field :thickness_inches, :value => "inches"  %>
+      <%= f.label "How thick is this board? (you can skip this if you don't know)" %><br />
+      <%= f.text_field :thickness_inches, :value => "inches", :size => 4 %>
       <%= f.select :thickness_fraction, [
+                                  ['fractional inches', '0'],
                                   ['0'         , '0'],
                                   ['1/16'      , '0.0625'],
                                   ['1/8'       , '0.125'],
@@ -87,21 +90,21 @@
                                   ['13/16'     , '0.8125'],
                                   ['7/8'       , '0.875'],
                                   ['15/16'     , '0.9375']
-                                  ] %>
+                                  ], {}, :class => "fraction_dropdown"  %>
     </p>
     <p>
-      <%= f.label :style_name %><br />
+      <%= f.label "What style is this board?  (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><br />
       <%= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
         { :url => formatted_styles_path(:js), :method => :get,
         :with => "'search=' + element.value" } %>
     </p>
     <p>
-      <%= f.label :construction %><br />
+      <%= f.label "What is the construction of this board? (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
       <%= f.text_field :construction %>
     </p>
     <p>
-      <%= f.label :description %><br />
-      <%= f.text_area :description %>
+      <%= f.label "Anything else you want to mention about this board?" %><br />
+      <%= f.text_area :description, :size => "60x2"%>
     </p>
   </div>
   <p>

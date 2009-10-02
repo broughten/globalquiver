@@ -464,6 +464,10 @@ a:hover{
     width:550px;
 }
 
+.fraction_dropdown {
+    width:123px;
+}
+
 #currentLocation dl {
     height:300px;
 }
