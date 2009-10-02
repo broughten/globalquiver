@@ -7,11 +7,11 @@ class BoardsController < ApplicationController
   def index
     # we pull up all the locations that the user has previously entered
     # because he might want to use one of these for the board he's about to enter
-    @locations = Location.find_all_by_creator_id(current_user.id)
+    @locations = Location.find_all_by_creator_id(current_user.id) unless current_user.nil?
     @boards = Board.search(params[:search])
     @location = Location.new
 
-        # Create a new map object, also defining the div ("map")
+    # Create a new map object, also defining the div ("map")
     # where the map will be rendered in the view
     @map = GMap.new("map")
     # Use the larger pan/zoom control but disable the map type
