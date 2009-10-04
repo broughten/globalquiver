@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090927231507) do
+ActiveRecord::Schema.define(:version => 20091004152022) do
 
   create_table "boards", :force => true do |t|
     t.string   "maker"
@@ -86,6 +86,9 @@ ActiveRecord::Schema.define(:version => 20090927231507) do
     t.datetime "updated_at"
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
+    t.string   "type"
+    t.string   "name"
+    t.boolean  "terms_of_service"
   end
 
 end

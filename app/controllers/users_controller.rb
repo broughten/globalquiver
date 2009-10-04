@@ -13,8 +13,13 @@ class UsersController < ApplicationController
     # request forgery protection.
     # uncomment at your own risk
     # reset_session
-    @user = User.new(params[:user])
-    debugger
+
+    #figure out what type of user we need to make    
+    if params[:is_shop] == 'yes'
+      @user = Shop.new(params[:user])
+    else
+      @user = User.new(params[:user])
+    end
     if @user.save
       self.current_user = @user
       redirect_back_or_default('/')

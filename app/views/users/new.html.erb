@@ -5,10 +5,12 @@
 <% form_for :user,
             :url => users_url(:protocol => env_ssl_protocol),
             :html => { :method => 'POST',
-                       :id => 'signup_page' } do |form| debugger%>
+                       :id => 'signup_page' } do |form| %>
 <%= form.error_messages %>
+<p><%= form.label :name, 'Name' %><br/>
+<%= form.text_field :name%></p>
 <p><%= form.label :login, 'Login' %><br/>
-<%= form.text_field :login, :class => 'initial_value' %></p>
+<%= form.text_field :login%></p>
 
 <p><%= form.label :email %><br/>
   <%= form.text_field :email %></p>
@@ -18,9 +20,9 @@
 
 <p><%= form.label :password_confirmation, 'Confirm' %><br/>
   <%= form.password_field :password_confirmation %></p>
+ <p><%=  check_box_tag 'is_shop', 'yes'%> I am a rental shop</p>
 
-<p><label for="user_terms_of_service">I have read TOS <!--TODO: Fix this%= link_to 'Terms of Service', page_url(:terms) %--></label>
-  <%= form.check_box :terms_of_service %>
+<p><%= form.check_box :terms_of_service %> I have read the TOS
 
 <p> <%= form.submit 'Sign Up', :class => 'submitBtn' %></p>
 <% end -%>

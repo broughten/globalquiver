@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
-  validates_presence_of     :login, :email
+  validates_presence_of     :login, :email, :name
   validates_format_of :email, :with => /.*@.*/, :allow_blank => true
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
 
-  validates_acceptance_of :terms_of_service
+  # since we are evaluating a db column we need to set the :accept option
+  validates_acceptance_of :terms_of_service, :accept => true
 
   before_save :encrypt_password
 
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service
+  attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service, :name
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
@@ -72,6 +73,16 @@ class User < ActiveRecord::Base
   # Returns true if the user has just been activated.
   def recently_activated?
     @activated
+  end
+
+  # This will give us a common way to display someone's name
+  # depending on what type of user they are.
+  def display_name
+    read_attribute(:name).split(" ")[0]
+  end
+
+  def is_rental_shop?
+    false
   end
 
   protected
