@@ -113,7 +113,7 @@ function addAddress() {
     '<b>Accuracy: </b>' + accuracy + '<br>' +
     'The higher the accuracy the better.<br>' +
     'An accuracy of 1 is bad and 8 good.<br>');
-
+    
     document.getElementById("location_street").removeAttribute("value");
     document.getElementById("location_locality").removeAttribute("value");
     document.getElementById("location_region").removeAttribute("value");
