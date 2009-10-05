@@ -3,7 +3,7 @@
 
     <select id="board_location_id" name="board[location_id]" >
       <% if @board.nil? or @board.location_id == 0 or  @board.location_id == nil -%>
-        <option value="" selected="selected" >Select a location for your board</option>
+        <option value="" selected="selected" >Previously entered locations</option>
       <% end -%>
       <% @locations.each do |location| %>
         <option value="<%= location.id %>"%>

@@ -1,6 +1,7 @@
 class Board < ActiveRecord::Base
 
   belongs_to :style
+  belongs_to :board
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
 
@@ -116,13 +117,18 @@ class Board < ActiveRecord::Base
 
   end
 
-  def self.search(search)
-    if search
-      maker_like(search)
+  def self.search(search_location)
+    if search_location
+      #this line gets the ids of all the locations within 50 miles
+      location_ids = Location.find(:all, :within => 50, :origin => search_location).map(&:id).join(',')
+      #this line takes those location ids and forms them into a where clause
+      conditions = "location_id IN (#{location_ids})" unless location_ids.empty?
+      if (conditions)
+        #if we have locations we search by them, otherwise this method will return nil
+        find(:all, { :conditions => conditions})
+      end
     else
       find(:all)
     end
-
   end
-
 end

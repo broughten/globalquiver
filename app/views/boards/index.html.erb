@@ -20,17 +20,27 @@
 
 <%  end %>
 
+
+
 <% form_tag boards_path, :method => 'get' do %>
+  <%= render :partial => '/locations/form', :object => @location %>
   <p>
-    <%= text_field_tag :search, params[:search]%>
-    <%= submit_tag "Search by board maker", :name => nil %>
+    <%= submit_tag "Search by location", :name => nil %>
   </p>
 <% end %>
 
-<ul>
-<% for board in @boards %>
-  <li>
-    <%= link_to board.maker, board_path(board) %> <span><%= board.model %> <%= board.style ? board.style.name : "" %>, <%= board.length_feet %>' <%= board.length_inches %>" </span>
-  </li>
-<% end %>
-</ul>
+
+  <% if @boards.empty? %>
+  <p>
+    We couldn't find any boards where you're planning on going.  Try a different search.
+  </p>
+  <%  else %>
+  <ul id="board_list">
+    <% for board in @boards %>
+      <li>
+        <%= link_to board.maker, board_path(board) %> <span><%= board.model %> <%= board.style ? board.style.name : "" %>, <%= board.length_feet %>' <%= board.length_inches %>" </span>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+

@@ -5,12 +5,19 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
-    # we pull up all the locations that the user has previously entered
-    # because he might want to use one of these for the board he's about to enter
-    @locations = Location.find_all_by_creator_id(current_user.id) unless current_user.nil?
-    @boards = Board.search(params[:search])
-    @location = Location.new
+    if params[:location]
+      @location = Location.new(params[:location])
+      #we have to save this search location in order for geocoding to work on it
+      @location.save
+    end
 
+    # we pull up all the locations that the user has previously entered
+    # because he might want to use one of these for the search he's about to perform
+    @locations = Location.find_all_by_creator_id(current_user.id) unless current_user.nil?
+
+    @boards = Board.search(@location)
+    #if we didn't get a location on the search params we need to make one
+    @location = Location.new
     # Create a new map object, also defining the div ("map")
     # where the map will be rendered in the view
     @map = GMap.new("map")
