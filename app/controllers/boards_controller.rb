@@ -5,10 +5,20 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
-    if params[:location]
-      @location = Location.new(params[:location])
-      #we have to save this search location in order for geocoding to work on it
-      @location.save
+    @board = Board.new(params[:board])
+
+    if @board.location_id
+        #if we're in here, that means someone searched by the dropdown list of locations
+        @location = Location.find(@board.location_id)
+    else
+      if params[:location]
+        @location = Location.new(params[:location])
+        #we have to save this search location in order for geocoding to work on it
+        @location.save
+      else
+        #if we didn't get a location on the search params we need to make one
+        @location = Location.new
+      end
     end
 
     # we pull up all the locations that the user has previously entered
@@ -16,8 +26,7 @@ class BoardsController < ApplicationController
     @locations = Location.find_all_by_creator_id(current_user.id) unless current_user.nil?
 
     @boards = Board.search(@location)
-    #if we didn't get a location on the search params we need to make one
-    @location = Location.new
+
     # Create a new map object, also defining the div ("map")
     # where the map will be rendered in the view
     @map = GMap.new("map")
@@ -119,6 +128,27 @@ class BoardsController < ApplicationController
         format.html { redirect_to(@board) }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
+        # Create a new map object, also defining the div ("map")
+        # where the map will be rendered in the view
+        @map = GMap.new("map")
+        # Use the larger pan/zoom control but disable the map type
+        # selector
+        @map.control_init(:large_map => true,:map_type => false)
+        # Center the map on specific coordinates and focus in fairly
+        # closely
+
+        if (remote_location.nil? || remote_location.latitude.nil?)
+          @map.center_zoom_init([25.165173,-158.203125], 1  )
+        else
+          @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
+          @location = Location.new unless @location
+          @board = @location.boards.build
+          @location.region = remote_location.region
+          @location.street = remote_location.street
+          @location.postal_code = remote_location.postal_code
+          @location.country = remote_location.country
+          @location.locality = remote_location.city
+        end
         format.html { render :action => "new" }
         format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end

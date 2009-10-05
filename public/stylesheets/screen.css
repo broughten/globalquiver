@@ -452,6 +452,10 @@ a:hover{
     padding-top:5px;
 }
 
+#searchForm {
+    width:70%;
+}
+
 
 /*Create board----------------------------------------*/
 

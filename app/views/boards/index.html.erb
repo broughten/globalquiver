@@ -13,24 +13,25 @@
 <h2>First, where are you planning on surfing?</h2>
 <%= render :partial => '/locations/new', :object => @location %>
 
+<div id="searchForm">
 
-<% if !@locations.nil? %>
+<% form_tag boards_path, :class => 'new_board', :method => 'get' do %>
+  <% if !@locations.nil? %>
 
-  <%= render :partial => '/locations/list', :object => @locations %>
+    <%= render :partial => '/locations/list', :object => @locations %>
 
-<%  end %>
-
-
-
-<% form_tag boards_path, :method => 'get' do %>
+  <%  end %>
   <%= render :partial => '/locations/form', :object => @location %>
   <p>
     <%= submit_tag "Search by location", :name => nil %>
   </p>
 <% end %>
 
+</div>
 
-  <% if @boards.empty? %>
+<div id="searchResults">
+
+  <% if !@boards or @boards.empty? %>
   <p>
     We couldn't find any boards where you're planning on going.  Try a different search.
   </p>
@@ -38,9 +39,11 @@
   <ul id="board_list">
     <% for board in @boards %>
       <li>
-        <%= link_to board.maker, board_path(board) %> <span><%= board.model %> <%= board.style ? board.style.name : "" %>, <%= board.length_feet %>' <%= board.length_inches %>" </span>
+        <span>Maker: </span><%= (board.maker.empty?)?"n/a":link_to(board.maker, board_path(board)) %> <span>Model: <%= (board.model.empty?)?"n/a":board.model %> Style: <%= board.style ? board.style.name : "n/a" %>, Length: <%= board.length_feet %>' <%= board.length_inches %>" <% if @location.geocode %>  Distance: <%= board.location.distance_to(@location).round(1) %>  miles <% end %> </span>
       </li>
     <% end %>
   </ul>
   <% end %>
 
+
+</div>
