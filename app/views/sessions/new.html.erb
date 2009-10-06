@@ -7,11 +7,7 @@
 <% form_for :session,
         :url => session_url(:protocol => env_ssl_protocol),
         :html => { :method => 'POST' } do |form| %>
-  <%= form.label :login, 'Login' %>
-  <%= form.text_field :login %>
-
-  <%= form.label :password, 'Password' %>
-  <%= form.password_field :password %>
+  <%= render :partial => '/sessions/new_fields', :object => form %>
 
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>

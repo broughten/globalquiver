@@ -6,24 +6,7 @@
 </p>
 
 <div class="user_fields">
-  <%= form.label :login, 'Login' %>
-  <%= form.text_field :login, :class => 'initial_value' %>
-
-  <%= form.label :email %>
-  <%= form.text_field :email %>
-
-  <%= form.label :password %>
-  <%= form.password_field :password %>
-
-  <%= form.label :password_confirmation, 'Confirm' %>
-  <%= form.password_field :password_confirmation %>
-  <%= form.label :is_rental_shop, 'I am a rental shop.' %><br/>
-  <%= form.check_box :is_rental_shop %>
-</div>
-
-<div id="tos_field" class="checkbox">
-  <label for="user_terms_of_service">I have read TOS <!--TODO: Fix this%= link_to 'Terms of Service', page_url(:terms) %--></label>
-  <%= form.check_box :terms_of_service %>
+  <%= render :partial => '/users/new_fields', :object => form %>
 </div>
 
 <div class="submit">
