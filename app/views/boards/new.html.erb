@@ -30,10 +30,10 @@
   <br>
   <br>
 
-  <h2>Next, tell us about the board.</h2>
+  <h2>Next, tell us about the board.</h2><span id="required_star">*</span> denotes required
   <p>Different surfers and different conditions require different boards.  Describe yours below:</p>
     <p>
-      <%= f.label "What is the maker?  (for example Channel Islands)" %><br />
+<%= f.label "What is the maker?  (for example Channel Islands)" %><span id="required_star">*</span><br />
       <%= f.text_field :maker %>
     </p>
     <p>
@@ -57,7 +57,7 @@
       <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
     </p>
     <p>
-      <%= f.label "What style is this board?  (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><br />
+      <%= f.label "What style is this board?  (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
       <%= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
         { :url => formatted_styles_path(:js), :method => :get,
         :with => "'search=' + element.value" } %>

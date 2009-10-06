@@ -395,6 +395,10 @@ a:hover{
 
 }
 
+#required_star{
+    color:red;
+}
+
 #reserve{
 
 }
@@ -507,6 +511,10 @@ a:hover{
 #mainContent .new_board {
    margin:0px;
    padding:0px;
+}
+
+#new_board .errorExplanation {
+    width:50%;
 }
 
 
