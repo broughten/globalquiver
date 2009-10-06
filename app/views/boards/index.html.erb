@@ -16,7 +16,7 @@
 <div id="searchForm">
 
 <% form_tag boards_path, :class => 'new_board', :method => 'get' do %>
-  <% if !@locations.nil? %>
+  <% if !@locations.nil? and !@locations.empty? %>
 
     <%= render :partial => '/locations/list', :object => @locations %>
 

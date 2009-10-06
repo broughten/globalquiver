@@ -17,7 +17,7 @@
 <% form_for(@board) do |f| %>
   <%= f.error_messages %>
 
-  <% if !@locations.nil? %>
+  <% if !@locations.nil? and !@locations.empty? %>
 
     <%= render :partial => '/locations/list', :object => @locations %>
 

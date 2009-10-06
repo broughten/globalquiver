@@ -27,26 +27,8 @@ class BoardsController < ApplicationController
 
     @boards = Board.search(@location)
 
-    # Create a new map object, also defining the div ("map")
-    # where the map will be rendered in the view
-    @map = GMap.new("map")
-    # Use the larger pan/zoom control but disable the map type
-    # selector
-    @map.control_init(:large_map => true,:map_type => false)
-    # Center the map on specific coordinates and focus in fairly
-    # closely
-
-    if (remote_location.nil? || remote_location.latitude.nil?)
-      @map.center_zoom_init([25.165173,-158.203125], 1  )
-    else
-      @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
-
-      @location.region = remote_location.region
-      @location.street = remote_location.street
-      @location.postal_code = remote_location.postal_code
-      @location.country = remote_location.country
-      @location.locality = remote_location.city
-    end
+    make_map_ready
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @boards }
@@ -75,28 +57,7 @@ class BoardsController < ApplicationController
     @location = Location.new
     
     @board = @location.boards.build
-
-    # Create a new map object, also defining the div ("map")
-    # where the map will be rendered in the view
-    @map = GMap.new("map")
-    # Use the larger pan/zoom control but disable the map type
-    # selector
-    @map.control_init(:large_map => true,:map_type => false)
-    # Center the map on specific coordinates and focus in fairly
-    # closely
-
-    if (remote_location.nil? || remote_location.latitude.nil?)
-      @map.center_zoom_init([25.165173,-158.203125], 1  )
-    else
-      @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
-
-      @location.region = remote_location.region
-      @location.street = remote_location.street
-      @location.postal_code = remote_location.postal_code
-      @location.country = remote_location.country
-      @location.locality = remote_location.city
-    end
-
+    make_map_ready
 
     respond_to do |format|
       format.html # new.html.erb
@@ -128,27 +89,7 @@ class BoardsController < ApplicationController
         format.html { redirect_to(@board) }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
-        # Create a new map object, also defining the div ("map")
-        # where the map will be rendered in the view
-        @map = GMap.new("map")
-        # Use the larger pan/zoom control but disable the map type
-        # selector
-        @map.control_init(:large_map => true,:map_type => false)
-        # Center the map on specific coordinates and focus in fairly
-        # closely
-
-        if (remote_location.nil? || remote_location.latitude.nil?)
-          @map.center_zoom_init([25.165173,-158.203125], 1  )
-        else
-          @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
-          @location = Location.new unless @location
-          @board = @location.boards.build
-          @location.region = remote_location.region
-          @location.street = remote_location.street
-          @location.postal_code = remote_location.postal_code
-          @location.country = remote_location.country
-          @location.locality = remote_location.city
-        end
+        make_map_ready
         format.html { render :action => "new" }
         format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end
@@ -184,15 +125,23 @@ class BoardsController < ApplicationController
     end
   end
 
-  def remap
-    @location = Location.new(params[:location])
+private
 
-    if (remote_location.latitude.nil?)
-      @map.center_zoom_init([25.165173,-158.203125], 1  )
-    else
-      @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 12  )
-    end
-    
+  def make_map_ready
+        # Create a new map object, also defining the div ("map")
+        # where the map will be rendered in the view
+        @map = GMap.new("map")
+        # Use the larger pan/zoom control but disable the map type
+        # selector
+        @map.control_init(:large_map => true,:map_type => false)
+        # Center the map on specific coordinates and focus in fairly
+        # closely
+
+        if (remote_location.nil? || remote_location.latitude.nil?)
+          @map.center_zoom_init([25.165173,-158.203125], 1  )
+        else
+          @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
+        end
   end
 
 end
