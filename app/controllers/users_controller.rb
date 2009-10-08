@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if params[:is_shop] == 'yes'
       @user = Shop.new(params[:user])
     else
-      @user = User.new(params[:user])
+      @user = Individual.new(params[:user])
     end
     if @user.save
       self.current_user = @user
