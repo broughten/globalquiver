@@ -25,11 +25,11 @@
                 <li id="user_link"><span>Hello, <%=h current_user.display_name %></span></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>
               <% else -%>
                 <li id="signup_link">
-                  <a href="#signup_form">
+                  <a href="#header_signup_form">
                     Join Global Quiver
                   </a>
                 </li><li id="login_link">
-                  <a href="#login_form">
+                  <a href="#header_login_form">
                     Login
                   </a>
                 </li><!-- inline-block
@@ -37,7 +37,7 @@
                 <% form_for :session,
                             :url => session_url(:protocol => env_ssl_protocol),
                             :html => { :method => 'POST',
-                                       :id => 'login_form',
+                                       :id => 'header_login_form',
                                        :style => 'display: none;' } do |form| %>
                   <%= render :partial => '/sessions/form', :object => form %>
                 <% end %>
@@ -45,7 +45,7 @@
                 <% form_for :user,
                             :url => users_url(:protocol => env_ssl_protocol),
                             :html => { :method => 'POST',
-                                       :id => 'signup_form',
+                                       :id => 'header_signup_form',
                                        :style => 'display: none;' } do |form| %>
                   <%= render :partial => '/users/form', :object => form %>
                 <% end %>

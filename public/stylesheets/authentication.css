@@ -15,6 +15,8 @@
 
 /* create authentication */
 
+/* these two are not needed for the header dropdown forms...we may need them
+as we flesh out the login and create user pages.
 #signup_form .fieldWithErrors,
 #login_form .fieldWithErrors {
   display: inline
@@ -24,62 +26,78 @@
 #application #login-signup #signup_form #tos_field .fieldWithErrors {
   display: inline;
 }
+*/
 
 
 /* new authentication */
-
-/*Sign-up link box----------------*/
-.signupLinkBox{
-  background-color: #b8e8ea;
-  padding: 15px;
-  border: 3px solid #a4cfd1;
+#header_login_form,
+#header_signup_form {
+  background: #494444;
+  padding: 0 20px 20px 20px;
+  position: absolute;
+  right: 0;
+  top: 62px;
+  width: 200px;
 }
 
-.signupLinkBox h3{
-  background-color: #b8e8ea;
-  padding: 15px;
+#header_signup_form .user_fields,
+#header_login_form .user_fields{
+    margin-top:10px;
 }
 
-#login_form a:link, #login_form a:visited,
-#signup_form a:link, #signup_form a:visited{
+#header_login_form a:link, #header_login_form a:visited,
+#header_signup_form a:link, #header_signup_form a:visited{
   color: #faf5bf;
-  text-decoration: none;
 }
 
-#login_form form,
-#signup_form form {
-  padding: 12px;
+#header_signup_form label a {
+  color: #faf5bf;
 }
 
-#login_form p,
-#signup_form p{
+#header_login_form a:hover,
+#header_signup_form a:hover{
+    text-decoration:underline;
+}
+
+#header_login_form p,
+#header_signup_form p{
   margin: 5px 0 5px 0;
   display: block;
   text-align: left;
 }
 
-#login_form a:hover,
-#signup_form a:hover{
-    text-decoration:underline;
-}
-
-#mainContent #login_form input,
-#mainContent #signup_form input {
-  width: 120px;
-  border: 3px solid #66a6b1;
-  padding: 3px;
-}
-
-#mainContent #login_form #login_formBtn{
-  width: 119px;
-  height: 39px;
-  background: transparent url(/images/home_login_btn.jpg) no-repeat;
+#header_login_form .submitBtn,
+#header_signup_form .submitBtn{
+  background: transparent url(/images/login-button.gif) no-repeat;
+  width: 59px;
+  height: 26px;
+  color: #fff;
+  font-weight: bold;
   border: none;
-  padding: none;
+  padding: 0 0 4px 0;
   cursor: pointer;
-  color: #7a785d;
-  font-size: 1.4em;
-  margin: 0 0 3px 0;
+}
+
+#header_login_form label {
+  display: block;
+  width: 60px;
+  float: left;
+  margin-top: 5px;
+  margin-right: 5px;
+  text-align: right;
+  font-size: 1.2em;
+}
+
+#header_login_form input {
+  display: block;
+  margin-bottom: 5px;
+  margin-left: 65px;
+  width: 125px;
+}
+
+/* Safari 3 layout hack */
+body:first-of-type #header_login_form input {
+  margin-left: 0;
 }
 
 #login-signup{
@@ -96,7 +114,7 @@
   font-size: 1.2em;
 }
 
-#header #login-signup ul li.active a {
+#login-signup ul li.active a {
   background: #494444;
   color: #FFF;
 }
@@ -117,11 +135,11 @@
 /* FF2 */ #header #login-signup ul li a, x:-moz-any-link { width: 100%;}
 /* FF3 */ #header #login-signup ul li a, x:-moz-any-link, x:default { width: auto;}
 
-#header #login-signup ul li a {
+#login-signup ul li a {
   color: #ffffff;
 }
 
-#header #login-signup ul li#user_link a {
+#login-signup ul li#user_link a {
   width: auto;
 }
 
@@ -131,111 +149,7 @@
   background: #494444;
 }
 
-#login-signup label {
-  display: block;
-  width: 60px;
-  float: left;
-  margin-top: 5px;
-  margin-right: 4px;
-  text-align: right;
-  font-size: 1.2em;
-}
 
-#login-signup select {
-  margin: 0 0 5px 0;
-}
-
-#login-signup input {
-  display: block;
-  margin-bottom: 5px;
-  margin-left: 65px;
-  width: 130px;
-}
-
-/* Safari 3 layout hack */
-body:first-of-type #login-signup input {
-  margin-left: 0;
-}
-
-#login_form,
-#signup_form {
-  background: #494444;
-  padding: 0 20px 10px 20px;
-  position: absolute;
-  right: 0;
-  top: 62px;
-}
-
-#login_form, #signup_form {
-  padding: 0 20px 20px 20px;
-  width: 200px;
-}
-
-#login_form .submitBtn,
-#signup_form .submitBtn{
-  background: transparent url(/images/login-button.gif) no-repeat;
-  width: 59px;
-  height: 26px;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  padding: 0 0 4px 0;
-  cursor: pointer;
-}
-
-#signup_form .submitBtn input {
-
-}
-
-#signup_form #signup_name_field input.initial_value {
-  color: #999;
-}
-
-#login-signup #signup_form #tos_field label a {
-  color: #f87321;
-}
-
-#login-signup #signup_form #tos_field label a:hover,
-#login-signup #signup_form #tos_field label a:focus,
-#login-signup #signup_form #tos_field label a:active {
-  text-decoration: underline;
-}
-
-#login-signup #signup_form #tos_field {
-  margin: 5px 0 10px 0;
-  padding: 0;
-  width: 200px;
-}
-
-
-#login-signup #signup_form #user_type {
-  margin: 5px 0;
-  width: 200px;
-}
-
-#login-signup #signup_form #tos_field.checkbox input,
-#login-signup #signup_form #tos_field.checkbox label,
-#login-signup #signup_form #user_type input,
-#login-signup #signup_form #user_type label {
-  float: none;
-  display: inline;
-  width: auto;
-  margin: 0;
-  padding: 0;
-  vertical-align: middle;
-}
-
-#signup_form #signup_name_field input{
-  display: inline;
-  width: 60px;
-  float: none;
-  margin: 0 0 5px 0;
-}
-
-#signup_form .user_fields,
-#login_form .user_fields{
-    margin-top:10px;
-}
 
 /* update authentication */
 

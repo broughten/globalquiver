@@ -5,27 +5,27 @@
 function showLoginForm(e)
 {
   e.stop();
-  $('signup_form').hide();
+  $('header_signup_form').hide();
   $('signup_link').removeClassName("active");
   $('login_link').addClassName("active");
-  $('login_form').show();
+  $('header_login_form').show();
 }
 
 function showSignupForm(e)
 {
   e.stop();
-  $('login_form').hide();
+  $('header_login_form').hide();
   $('login_link').removeClassName("active");
   $('signup_link').addClassName("active");
-  $('signup_form').show();
+  $('header_signup_form').show();
 }
 
 
 function closeModalForms()
 {
-  if ($('signup_form') && $('signup_link')) {
-    $('signup_form').hide();
-    $('login_form').hide();
+  if ($('header_signup_form') && $('signup_link')) {
+    $('header_signup_form').hide();
+    $('header_login_form').hide();
     $('signup_link').removeClassName("active");
     $('login_link').removeClassName("active");
   }
@@ -38,12 +38,12 @@ function cancelClick(e)
 
 
 Event.observe(document, 'dom:loaded',function() {
-  if ($('signup_form')) {
-    $('signup_form').observe('click', cancelClick);
+  if ($('header_signup_form')) {
+    $('header_signup_form').observe('click', cancelClick);
   }
 
-  if ($('login_form')) {
-    $('login_form').observe('click', cancelClick);
+  if ($('header_login_form')) {
+    $('header_login_form').observe('click', cancelClick);
   }
 
   if ($('login_link'))   $('login_link').down('a').observe('click', showLoginForm);

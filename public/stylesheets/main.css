@@ -141,11 +141,6 @@ a:hover{
   position: relative;
 }
 
-#header a:link, #header a:visited{
-  color: #fff;
-  text-decoration: none;
-}
-
 #logo{
   background: url(/images/logo.png) top left no-repeat;
   width: 275px;
@@ -275,9 +270,7 @@ a:hover{
 
 }
 
-#required_star{
-    color:red;
-}
+
 
 
 #questionButtons{

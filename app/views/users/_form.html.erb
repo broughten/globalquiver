@@ -1,9 +1,9 @@
-<p class="link">
-  Already have an account?
-  <%= link_to 'Login instead!', new_session_path %>
-</p>
 
 <div class="user_fields">
+  <p>
+    Already have an account?<br/>
+    <%= link_to 'Login instead!', new_session_path %>
+  </p>
   <%= render :partial => '/users/new_fields', :object => form %>
 </div>
 
