@@ -1,6 +1,7 @@
 <% content_for :head do %>
   <%= GMap.header %>
   <%= @map.to_html %>
+  <%= stylesheet_link_tag 'board', 'location', :media => 'screen' %>
   <%= javascript_include_tag 'newboard.js', 'json2.js' %>
 <% end %>
 
