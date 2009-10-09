@@ -38,6 +38,7 @@ function cancelClick(e)
 
 
 Event.observe(document, 'dom:loaded',function() {
+
   if ($('header_signup_form')) {
     $('header_signup_form').observe('click', cancelClick);
   }
@@ -50,6 +51,13 @@ Event.observe(document, 'dom:loaded',function() {
   if ($('signup_link'))  $('signup_link').down('a').observe('click', showSignupForm);
 
   Event.observe(document, 'click', closeModalForms);
+
+  if ($('is_shop')) {
+    // set up the initial state
+    toggleNames($('is_shop').checked);
+    // register the event handlers.
+    $('is_shop').observe('click', function(){toggleNames(this.checked)});
+  }
 
 });
 
@@ -74,4 +82,20 @@ function simple_format(text)
   text = text.gsub(/([^\n]\n)(?=[^\n])/, '<br />');
   newString += text + "</p>";
   return newString;
+}
+
+function toggleNames(checked){
+    if(checked){
+        // you are a shop so show the name field/label
+        // and hide the first name/last name field/label
+        $('user_first_name').up().hide();
+        $('user_last_name').up().hide();
+        $('user_name').up().show();
+    }else{
+        // you are an individual so hide name field/label
+        // and show first name/last name field/label
+        $('user_first_name').up().show();
+        $('user_last_name').up().show();
+        $('user_name').up().hide();
+    }
 }

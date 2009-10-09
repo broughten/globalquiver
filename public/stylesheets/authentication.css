@@ -28,6 +28,11 @@ as we flesh out the login and create user pages.
 }
 */
 
+.required_indicator{
+    color:red;
+    font-size:1.3em;
+}
+
 
 /* new authentication */
 #header_login_form,
@@ -98,6 +103,25 @@ as we flesh out the login and create user pages.
 /* Safari 3 layout hack */
 body:first-of-type #header_login_form input {
   margin-left: 0;
+}
+
+#header_signup_form div{
+    text-align: left;
+    margin-bottom:10px;
+}
+
+#header_signup_form label{
+    margin-bottom:5px;
+    font-size:1.2em;
+}
+
+#header_signup_form input[type=text],
+#header_signup_form input[type=password]{
+    width:100%;
+}
+
+#header_signup_form input[type=checkbox]{
+    margin-left:0px;
 }
 
 #login-signup{

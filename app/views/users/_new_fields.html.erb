@@ -1,20 +1,32 @@
-<%= check_box_tag 'is_shop', 'yes'%> I am a rental shop
-<%= new_fields.label :first_name, 'First Name' %>
-<%= new_fields.text_field :first_name%>
-<span class="#required_indicator">*</span>
-<%= new_fields.label :last_name, 'Last Name' %>
-<%= new_fields.text_field :last_name%>
-<%= new_fields.label :name, 'Name' %>
-<%= new_fields.text_field :name%>
-<span class="#required_indicator">*</span>
-<%= new_fields.label :email %>
-<%= new_fields.text_field :email %>
-<span class="#required_indicator">*</span>
-<%= new_fields.label :password %>
-<%= new_fields.password_field :password %>
-<span class="#required_indicator">*</span>
-<%= new_fields.label :password_confirmation, 'Confirm' %>
-<%= new_fields.password_field :password_confirmation %>
-<span class="#required_indicator">*</span>
-<%= new_fields.check_box :terms_of_service %>
-<%= new_fields.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>" %><span class="#required_indicator">*</span>
+<div>
+  <%= check_box_tag 'is_shop', 'yes'%>
+  <%=label_tag 'is_shop', 'I am a rental shop'%>
+</div>
+<div>
+  <%= new_fields.label :first_name, 'First Name' %>
+  <%= new_fields.text_field :first_name%>
+</div>
+<div>
+  <%= new_fields.label :last_name, 'Last Name' %>
+  <%= new_fields.text_field :last_name%>
+</div>
+<div>
+  <%= new_fields.label :name, 'Name' %>
+  <%= new_fields.text_field :name%>
+</div>
+<div>
+  <%= new_fields.label :email %>
+  <%= new_fields.text_field :email %>
+</div>
+<div>
+  <%= new_fields.label :password %>
+  <%= new_fields.password_field :password %>
+</div>
+<div>
+  <%= new_fields.label :password_confirmation, 'Password Confirm' %>
+  <%= new_fields.password_field :password_confirmation %>
+</div>
+<div>
+  <%= new_fields.check_box :terms_of_service %>
+  <%= new_fields.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>" %>
+</div>
