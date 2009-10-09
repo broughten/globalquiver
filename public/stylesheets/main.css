@@ -1,0 +1,479 @@
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* END of RESET */
+
+body {
+  font-size: .625em;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #555555;
+  text-align: center;
+  background: #86C9EF;
+  padding: 0px 0 50px 0;
+  margin: 0;
+  }
+
+h1, h2, h3{
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 1.4;
+  margin: 0;
+}
+
+
+pre {
+  font-size: 1.8em;
+  line-height: 1.4;
+  margin: 0;
+}
+td {
+  font-size: 1.2em;
+}
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+img{
+  border: none;
+}
+
+a:link, a:visited{
+  text-decoration: none;
+  color: #2797e6;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
+.clear{
+  clear: both;
+  overflow: hidden;
+  height: 1px;
+}
+
+.inside{
+  margin: 0px auto;
+}
+
+#container {
+  text-align: left;
+  width: 960px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+#header {
+  width: 100%;
+  color: #fff;
+  position: relative;
+}
+
+#header a:link, #header a:visited{
+  color: #fff;
+  text-decoration: none;
+}
+
+#logo{
+  background: url(/images/logo.png) top left no-repeat;
+  width: 275px;
+  height: 78px;
+  margin: 19px 0;
+}
+
+#logo span{
+  display: none;
+}
+
+#loginStatus{
+  margin: 20px 0 0 0;
+}
+
+#header .bottom{
+  clear: both;
+  padding: 0;
+}
+
+#header .right{
+  float: right;
+  text-align: right;
+}
+
+
+/*Topper---------------------*/
+
+#topper {
+    margin: 0px 0 -2px 0;
+}
+
+#divider {
+    margin-right:20px;
+    margin-bottom:-5px;
+    border-bottom: 1px dotted #969696;
+}
+
+/*Main content----------------*/
+
+#mainContent{
+  float: left;
+  width: 100%;
+  display: inline;
+  margin: 0px 0 0 0;
+  padding-left: 20px;
+  background:#ffffff;
+}
+
+
+#mainContent h1 {
+  font-size: 3.8em;
+}
+
+#mainContent h2{
+  margin: 0px 0 0px 0;
+  font-size: 2em;
+  font-weight: normal;
+}
+
+#mainContent h3{
+  margin: 10px 0 5px 0;
+  color: #969696;
+  font-size: 1.8em;
+}
+
+#mainContent h4{
+  margin: 0px 0 0px 0;
+  font-size: 2em;
+}
+
+#mainContent p{
+  margin: 0px 0 0 0;
+  line-height: 1.7em;
+}
+
+#mainContent img.left{
+  margin: 0 20px 10px 0;
+}
+
+/*Sidebar-------------------------------------*/
+#sideBar{
+  float: right;
+  margin: 20px 20px 0 0;
+  width: 223px;
+}
+#counter{
+  background: #dddddd;
+  width: 223px;
+  height: 63px;
+  padding: 24px 0;
+  text-align: center;
+  margin: 0 20px 10px 0;
+}
+
+#counter p{
+  margin: 0 0 0 0;
+}
+
+#counter .amount{
+  font-size: 3.6em;
+  font-weight: bold;
+}
+
+#counter .for{
+  font-size: 1.8em;
+  color: #ff560e;
+}
+
+
+/*Home----------------------------------------*/
+
+
+#homeBottom{
+  margin: 15px 0 0 0;
+}
+
+#buttonArea {
+    margin: 25px 0 0 40px;
+    float:left;
+    width:630px;
+}
+
+#rent{
+
+  margin: 0 60px 0 0;
+
+}
+
+#required_star{
+    color:red;
+}
+
+
+#questionButtons{
+  margin: 20px 0 0 0;
+  float:left;
+  width:630px;
+
+}
+
+#why{
+  margin: 0 60px 0 0;
+
+}
+
+
+/*How----------------------------------------*/
+#howText {
+   margin-top:20px;
+   width:690px;
+   float:left;
+}
+
+#whyText {
+  margin-top:20px;
+  width:690px;
+  float:left;
+}
+
+#whyText li {
+  font-size:1.7em;
+  
+}
+
+#whyText ul {
+  margin-left:30px;
+  list-style:disc;
+}
+
+
+
+/*---------Flash------------------*/
+
+.flash {
+  margin: 0px 2px 0 2px;
+  width: 200px;
+  background: url(/images/sub_flash.gif) bottom right no-repeat;
+  padding-bottom: 11px;
+}
+
+.flash p {
+  border: 1px solid #d6d6a2;
+  background: #fefcbf;
+  border-bottom: none;
+  color: #2a2829;
+  padding: 9px;
+}
+
+#app_main .flash p {
+  padding: 18px;
+}
+
+
+#flash #flash_notice {
+  font-size: 1.2em;
+  line-height: 1.5;
+  padding: 1em 0 0 0;
+}
+
+
+
+
+/*Footer--------------------------*/
+
+#footer {
+  padding: 0px 0 0 0;
+  font-size: 1.1em;
+  border-top: 1px solid #d5d0c1;
+  margin: 0 20px 0 0;
+}
+
+#footer ul{
+  list-style: none;
+  float: right;
+}
+
+#footer ul li{
+  float: left;
+  margin: 2px 0px 0px 0px;
+  font-size: 1.2em;
+}
+
+#footer ul li.last{
+  border: none;
+}
+
+#footer p {
+  float: left;
+}
+
+
+/*Forms----------------------------*/
+#mainContent form{
+  padding: 15px 0 0 0;
+}
+
+
+
+#mainContent form.left input {
+  width: 170px;
+}
+
+* html #mainContent form.left input {
+  width: 150px;  
+}
+
+#mainContent form.left .submit input{
+  margin-left: 85px;
+  background: transparent url(/images/btn_small.gif) no-repeat;
+  width: 102px;
+  height: 33px;
+  border: none;
+  font-weight: bold;
+  color: #555555;
+  cursor: pointer;
+}
+
+/*Link buttons---------------------*/
+.btnSmall{
+  display: block;
+  background: transparent url(/images/btn_small.gif) no-repeat;
+  width: 102px;
+  height: 33px;
+  color: #555555;
+  font-weight: bold;
+  line-height: 33px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+
+.btnSmall:hover{
+  color: #ff560e;
+  text-decoration: none;
+}
+
+.btnLgBlue{
+  display: block;
+  background: transparent url(/images/btn_lg_blue.gif) no-repeat;
+  width: 186px;
+  height: 33px;
+  color: #555555;
+  font-weight: bold;
+  line-height: 33px;
+  text-align: center;
+}
+
+.btnLgBlue:hover{
+  color: #ff560e;
+  text-decoration: none;
+}
+
+.btnMedBlueGrad{
+  display: block;
+  background: transparent url(/images/btn_med_blue_grad.gif) no-repeat;
+  width: 124px;
+  height: 33px;
+  color: #555555;
+  font-weight: bold;
+  line-height: 33px;
+  text-align: center;
+  font-size: 1.2em;
+
+}
+
+.btnMedBlueGrad:hover{
+  color: #ff560e;
+  text-decoration: none;
+}
+
+.btnLgTan{
+  display: block;
+  background: transparent url(/images/btn_lg_tan.gif) no-repeat;
+  width: 152px;
+  height: 33px;
+  color: #555555;
+  font-weight: bold;
+  line-height: 33px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.btnLgTan:hover{
+  color: #ff560e;
+  text-decoration: none;
+}
+
+
+
+

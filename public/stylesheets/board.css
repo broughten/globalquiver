@@ -1,0 +1,49 @@
+/* 
+    Document   : board.css
+    Created on : Oct 8, 2009, 11:23:38 PM
+    Author     : JC
+    Description:
+        All the css specific to the board model.
+*/
+
+
+/* index boards */
+#board_list {
+    font-size:1.2em;
+    padding-left:20px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+#board_list li {
+    padding-top:5px;
+}
+
+#searchForm {
+    width:70%;
+}
+
+/* show boards */
+
+/* create boards */
+
+/* new boards */
+
+#mainContent .new_board {
+   margin:0px;
+   padding:0px;
+}
+
+
+#new_board .errorExplanation {
+    width:50%;
+    color:red;
+}
+
+.fraction_dropdown {
+    width:123px;
+}
+
+/* update boards */
+
+/* destroy boards */

@@ -1,0 +1,64 @@
+/* 
+    Document   : location.css
+    Created on : Oct 8, 2009, 11:23:45 PM
+    Author     : JC
+    Description:
+        All the css specific to the location model.
+*/
+
+
+/* index location */
+
+/* show location */
+
+
+#currentLocation {
+    margin-left:40px;
+    padding-top:100px;
+    height:400px;
+}
+
+#currentLocation dl {
+    height:300px;
+}
+
+#currentLocation dt {
+  float:left;
+  font-size:1.4em;
+}
+
+#currentLocation dd {
+  font-size:1.4em;
+}
+
+/* create location */
+
+/* new location */
+
+#map {
+   margin-top:10px;
+   margin-right:20px;
+   font-size:1.3em;
+
+}
+
+#addressForm {
+    float:left;
+    height:500px;
+}
+
+#addresForm input {
+    float:right;
+}
+
+#addressInput {
+    width:550px;
+}
+
+
+
+
+
+/* update location */
+
+/* destroy location */
