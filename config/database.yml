@@ -39,7 +39,7 @@ test:
   encoding: unicode
   database: globalquiver_test
   pool: 5
-  username: globalquiver
+  username: JC
   password:
 
 production:

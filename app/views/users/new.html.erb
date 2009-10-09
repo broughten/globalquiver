@@ -7,22 +7,7 @@
             :html => { :method => 'POST',
                        :id => 'signup_page' } do |form| %>
 <%= form.error_messages %>
-<p><%= form.label :name, 'Name' %><br/>
-<%= form.text_field :name%></p>
-<p><%= form.label :login, 'Login' %><br/>
-<%= form.text_field :login%></p>
-
-<p><%= form.label :email %><br/>
-  <%= form.text_field :email %></p>
-
-<p><%= form.label :password %><br/>
-  <%= form.password_field :password %></p>
-
-<p><%= form.label :password_confirmation, 'Confirm' %><br/>
-  <%= form.password_field :password_confirmation %></p>
- <p><%=  check_box_tag 'is_shop', 'yes'%> I am a rental shop</p>
-
-<p><%= form.check_box :terms_of_service %> I have read the TOS
+<%= render :partial => '/users/new_fields', :object => form %>
 
 <p> <%= form.submit 'Sign Up', :class => 'submitBtn' %></p>
 <% end -%>

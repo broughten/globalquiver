@@ -1,17 +1,18 @@
 require 'digest/sha1'
+
+# This class serves as an abstratct base class for Inidvidual and Shop
 class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
-  validates_presence_of     :login, :email, :name
+  validates_presence_of     :email
   validates_format_of :email, :with => /.*@.*/, :allow_blank => true
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
-  validates_length_of       :login,    :within => 3..40
   validates_length_of       :email,    :within => 3..100
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
+  validates_uniqueness_of   :email, :case_sensitive => false
 
   # since we are evaluating a db column we need to set the :accept option
   validates_acceptance_of :terms_of_service, :accept => true
@@ -23,11 +24,11 @@ class User < ActiveRecord::Base
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :password, :password_confirmation, :terms_of_service, :name
+  attr_accessible :email, :password, :password_confirmation, :terms_of_service
 
-  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  def self.authenticate(login, password)
-    u = find_by_login(login) # need to get the salt
+  # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
+  def self.authenticate(email, password)
+    u = find_by_email(email) # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -75,12 +76,6 @@ class User < ActiveRecord::Base
     @activated
   end
 
-  # This will give us a common way to display someone's name
-  # depending on what type of user they are.
-  def display_name
-    read_attribute(:name).split(" ")[0]
-  end
-
   def is_rental_shop?
     false
   end
@@ -89,7 +84,7 @@ class User < ActiveRecord::Base
     # before filter 
     def encrypt_password
       return if password.blank?
-      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
+      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
       self.crypted_password = encrypt(password)
     end
       

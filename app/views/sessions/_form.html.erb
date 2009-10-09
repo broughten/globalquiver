@@ -5,15 +5,8 @@
     <%= link_to 'Sign up now!', new_user_path %>
   </p>
 
-  <%= form.label :login, 'Login' %>
-  <%= form.text_field :login %>
-
-  <%= form.label :password, 'Password' %>
-  <%= form.password_field :password %>
-  <div class="forgot_password">
-     <!--%= link_to "Forgot Password?", new_password_path %-->
-  </div>
-
+  <%= render :partial => '/sessions/new_fields', :object => form %>
+  
   <span style="display: none;">
   <%= form.check_box :remember_me %>
   <%= form.label :remember_me %>
