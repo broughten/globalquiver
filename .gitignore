@@ -1,4 +1,4 @@
 *.log
-database.yml
+config/database.yml
 nbproject
 .DS_Store

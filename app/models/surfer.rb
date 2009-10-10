@@ -1,4 +1,4 @@
-class Individual < User
+class Surfer < User
 
   validates_presence_of :first_name
 

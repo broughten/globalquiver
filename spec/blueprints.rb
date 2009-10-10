@@ -14,7 +14,7 @@ Sham.define do
   shop_name {Faker::Company.name}
 end
 
-Individual.blueprint() do
+Surfer.blueprint() do
   first_name
   last_name
   email

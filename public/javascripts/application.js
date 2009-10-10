@@ -92,7 +92,7 @@ function toggleNames(checked){
         $('user_last_name').up().hide();
         $('user_name').up().show();
     }else{
-        // you are an individual so hide name field/label
+        // you are a surfer so hide name field/label
         // and show first name/last name field/label
         $('user_first_name').up().show();
         $('user_last_name').up().show();
