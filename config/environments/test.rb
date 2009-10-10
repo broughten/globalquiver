@@ -31,3 +31,4 @@ config.gem "rspec", :lib => false
 config.gem "rspec-rails", :lib => false
 config.gem "notahat-machinist", :lib => false, :source => "http://gems.github.com"
 config.gem "faker", :lib => false
+config.gem 'mocha'

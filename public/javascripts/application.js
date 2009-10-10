@@ -38,7 +38,7 @@ function cancelClick(e)
 
 
 Event.observe(document, 'dom:loaded',function() {
-
+/* We may add this back in later when we add the header forms back in
   if ($('header_signup_form')) {
     $('header_signup_form').observe('click', cancelClick);
   }
@@ -48,9 +48,10 @@ Event.observe(document, 'dom:loaded',function() {
   }
 
   if ($('login_link'))   $('login_link').down('a').observe('click', showLoginForm);
-  if ($('signup_link'))  $('signup_link').down('a').observe('click', showSignupForm);
+  /*if ($('signup_link'))  $('signup_link').down('a').observe('click', showSignupForm);
 
   Event.observe(document, 'click', closeModalForms);
+  */
 
   if ($('is_shop')) {
     // set up the initial state

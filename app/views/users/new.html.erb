@@ -1,15 +1,19 @@
 <h1>Signup</h1>
 
 <h3>Already have an account?</h3>
-  <%= link_to 'Login', new_session_path %>
+  <%= link_to 'Login', new_session_path, :class=>'call_to_action' %>
 <% form_for :user,
             :url => users_url(:protocol => env_ssl_protocol),
             :html => { :method => 'POST',
-                       :id => 'signup_page' } do |form| %>
-<%= form.error_messages %>
-<%= render :partial => '/users/new_fields', :object => form %>
+            :id => 'signup_form' } do |form| %>
+  <%= form.error_messages %>
+  <div class="user_fields">
+    <%= render :partial => '/users/new_fields', :object => form %>
+  </div>
 
-<p> <%= form.submit 'Sign Up', :class => 'submitBtn' %></p>
+  <div class="submit">
+    <%= form.submit 'Sign Up', :class => 'submitBtn' %>
+  </div>
 <% end -%>
 
 
