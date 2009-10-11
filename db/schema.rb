@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(:version => 20091008204741) do
     t.integer  "updater_id"
   end
 
+  create_table "boards_days", :force => true do |t|
+    t.integer  "board_id",   :null => false
+    t.date     "day",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "boards_days", ["board_id", "day"], :name => "index_boards_days_on_board_id_and_day", :unique => true
+
   create_table "geocodes", :force => true do |t|
     t.decimal "latitude",    :precision => 15, :scale => 12
     t.decimal "longitude",   :precision => 15, :scale => 12

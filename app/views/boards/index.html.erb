@@ -40,7 +40,7 @@
   <ul id="board_list">
     <% for board in @boards %>
       <li>
-        <span>Maker: </span><%= (board.maker.empty?)?"n/a":link_to(board.maker, board_path(board)) %> <span>Model: <%= (board.model.empty?)?"n/a":board.model %> Style: <%= board.style ? board.style.name : "n/a" %>, Length: <%= board.length_feet %>' <%= board.length_inches %>" <% if @location.geocode %>  Distance: <%= board.location.distance_to(@location).round(1) %>  miles <% end %> </span>
+        <span>Maker: </span><%= (board.maker.blank?)?"n/a":link_to(board.maker, board_path(board)) %> <span>Model: <%= (board.model.blank?)?"n/a":board.model %> Style: <%= board.style ? board.style.name : "n/a" %>, Length: <%= board.length_feet %>' <%= board.length_inches %>" <% if @location.geocode %>  Distance: <%= board.location.distance_to(@location).round(1) %>  miles <% end %> </span>
       </li>
     <% end %>
   </ul>

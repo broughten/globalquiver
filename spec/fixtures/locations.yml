@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+my_house:
+  street: 604 Crazy Horse Cir
+  locality: Edwards
+  region: CO
+  postal_code: 81632
+  country: US
+  creator_id: 1
+  updater_id: 1
+
+two:
+  street: MyString
+  locality: MyString
+  region: MyString
+  postal_code: MyString
+  country: MyString
+  created_at: 2009-10-10 22:59:40
+  updated_at: 
+  creator_id: 
+  updater_id: 
