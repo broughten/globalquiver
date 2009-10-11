@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     end
     if @user.save
       self.current_user = @user
-      redirect_back_or_default('/')
+      redirect_back_or_default(root_url)
       flash[:notice] = "Thanks for signing up!"
     else
       # we need to render the form here so we get the error

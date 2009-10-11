@@ -17,9 +17,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   vertical-align: baseline;
   background: transparent;
 }
-body {
-  line-height: 1;
-}
+
 ol, ul {
   list-style: none;
 }
@@ -62,6 +60,7 @@ body {
   background: #86C9EF;
   padding: 0px 0 50px 0;
   margin: 0;
+  line-height: 1;
   }
 
 h1, h2, h3{
@@ -107,6 +106,10 @@ a:link, a:visited{
 
 a:hover{
   text-decoration: underline;
+}
+
+a.call_to_action{
+  font-size:1.5em;
 }
 
 

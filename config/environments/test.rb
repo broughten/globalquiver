@@ -33,3 +33,4 @@ config.gem "webrat", :lib => false
 config.gem "cucumber", :libe => false
 config.gem "notahat-machinist", :lib => false, :source => "http://gems.github.com"
 config.gem "faker", :lib => false
+config.gem 'mocha'

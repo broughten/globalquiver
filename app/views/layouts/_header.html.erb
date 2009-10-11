@@ -25,30 +25,34 @@
                 <li id="user_link"><span>Hello, <%=h current_user.display_name %></span></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>
               <% else -%>
                 <li id="signup_link">
-                  <a href="#header_signup_form">
+                  <%=link_to "Join Global Quiver", new_user_url%>
+                 <%# We may add these back in later <a href="#header_signup_form">
                     Join Global Quiver
-                  </a>
+                  </a>%>
                 </li><li id="login_link">
-                  <a href="#header_login_form">
+                  <%=link_to "Login", new_session_url%>
+                  <%# We may add these back in later <a href="#header_login_form">
                     Login
-                  </a>
+                  </a>%>
                 </li><!-- inline-block
                 -->
-                <% form_for :session,
+                <%# We may want to add these back in later but for right now (9/8)
+                  # we are going to leave them out.%>
+                <%# form_for :session,
                             :url => session_url(:protocol => env_ssl_protocol),
                             :html => { :method => 'POST',
                                        :id => 'header_login_form',
                                        :style => 'display: none;' } do |form| %>
-                  <%= render :partial => '/sessions/form', :object => form %>
-                <% end %>
+                  <%#= render :partial => '/sessions/form', :object => form %>
+                <%# end %>
 
-                <% form_for :user,
+                <%# form_for :user,
                             :url => users_url(:protocol => env_ssl_protocol),
                             :html => { :method => 'POST',
                                        :id => 'header_signup_form',
                                        :style => 'display: none;' } do |form| %>
-                  <%= render :partial => '/users/form', :object => form %>
-                <% end %>
+                  <%#= render :partial => '/users/form', :object => form %>
+                <%# end %>
               <% end -%>
             </ul>
           </div>
