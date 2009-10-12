@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
     false
   end
 
+  def display_name
+    "" # placeholder...will be redefined in sub classes.
+  end
+
   protected
     # before filter 
     def encrypt_password
