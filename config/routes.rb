@@ -9,6 +9,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
+  map.resources  :overviews,  :only => :index
+
   map.resources :pages
 
   map.signup '/signup', :controller => 'users', :action => 'new'

@@ -4,6 +4,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environment'))
 require 'spec/autorun'
 require 'spec/rails'
+require 'webrat'
 
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
@@ -14,6 +15,10 @@ require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
+
+# go out an load up all of the spec_helper files
+Dir[File.dirname(__FILE__) + "/spec_helpers/**/*.rb"].each {|file| require file}
+
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
@@ -26,6 +31,11 @@ Spec::Runner.configure do |config|
   # machinist setup for sham
   config.before(:all)    { Sham.reset(:before_all)  }
   config.before(:each)   { Sham.reset(:before_each) }
+
+  # include the controller helpers from spec/spec_helpers/controllers
+  # they are all part of the ControllerHelpers module but
+  # can be broken up into different files.
+  config.include ControllerHelpers, :type => :controller
 
   # == Fixtures
   #

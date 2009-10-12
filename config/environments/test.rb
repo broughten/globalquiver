@@ -35,3 +35,5 @@ config.gem "notahat-machinist", :lib => false, :source => "http://gems.github.co
 config.gem "faker", :lib => false
 config.gem 'mocha'
 config.gem 'launchy', :lib => false
+config.gem "ZenTest" #Gives us access to autospec.
+#See http://www.nateclark.com/articles/2008/09/17/_autotest_-is-now-_autospec_-how-to-set-up-autospec-for-rspec-and-rails-with-zentest

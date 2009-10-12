@@ -86,7 +86,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.save
         flash[:notice] = 'Board was successfully created.'
-        format.html { redirect_to(@board) }
+        format.html { redirect_to(overviews_path) }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
         make_map_ready
@@ -104,7 +104,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.update_attributes(params[:board])
         flash[:notice] = 'Board was successfully updated.'
-        format.html { redirect_to(@board) }
+        format.html { redirect_to(overviews_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
