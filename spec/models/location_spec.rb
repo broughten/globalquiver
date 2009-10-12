@@ -9,7 +9,7 @@ describe Location do
       :postal_code => "value for postal_code",
       :country => "value for country",
       :created_at => Time.now,
-      :updated_at => ,
+      :updated_at => Time.now,
       :creator_id => 1,
       :updater_id => 1
     }

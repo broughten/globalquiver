@@ -34,41 +34,41 @@
   <h2>Next, tell us about the board.</h2><span id="required_star">*</span> denotes required
   <p>Different surfers and different conditions require different boards.  Describe yours below:</p>
     <p>
-<%= f.label "What is the maker?  (for example Channel Islands)" %><span id="required_star">*</span><br />
+<%= f.label :maker, "Maker: (for example Channel Islands)" %><span id="required_star">*</span><br />
       <%= f.text_field :maker %>
     </p>
     <p>
-      <%= f.label "What is the model?  (for example Flyer)" %><br />
+      <%= f.label :model, "Model: (for example Flyer)" %><br />
       <%= f.text_field :model %>
 
     </p>
     <p>
-      <%= f.label "What is the lengh? (for example, mine is a 6'4\")" %><br />
+      <%= f.label :length, "Length: (for example, mine is a 6'4\")" %><br />
       <%= f.text_field :length_feet, :value => "feet", :size => 4 %>
       <%= f.text_field :length_inches, :value => "inches", :size => 4 %>
     </p>
     <p>
-      <%= f.label "How wide is this board?  (you can skip this question if you don't know)" %><br />
+      <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
       <%= f.text_field :width_inches, :value => "inches", :size => 4 %>
       <%= f.select :width_fraction, fractions, {}, :class => "fraction_dropdown" %>
     </p>
     <p>
-      <%= f.label "How thick is this board? (you can skip this if you don't know)" %><br />
+      <%= f.label :thickness, "Thickness: (you can skip this if you don't know)" %><br />
       <%= f.text_field :thickness_inches, :value => "inches", :size => 4 %>
       <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
     </p>
     <p>
-      <%= f.label "What style is this board?  (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
+      <%= f.label :style, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
       <%= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
         { :url => formatted_styles_path(:js), :method => :get,
         :with => "'search=' + element.value" } %>
     </p>
     <p>
-      <%= f.label "What is the construction of this board? (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
+      <%= f.label :construction, "Construction: (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
       <%= f.text_field :construction %>
     </p>
     <p>
-      <%= f.label "Anything else you want to mention about this board?" %><br />
+      <%= f.label :description, "Anything else you want to mention about this board?" %><br />
       <%= f.text_area :description, :size => "60x2"%>
     </p>
   </div>
