@@ -12,14 +12,6 @@ describe Surfer do
     Surfer.make_unsaved(:first_name=>"",:last_name=>"").should_not be_valid
   end
 
-  it "should authenticate with matching email and password" do
-    surfer = Surfer.make(:first_name => 'Kelly', :last_name => 'slater', :email => 'sl8ter@domain.com')
-    User.authenticate('sl8ter@domain.com', 'good_password').should == surfer
-  end
-
-  it "should not authenticate with incorrect password" do
-    surfer = Surfer.make(:first_name => 'Kelly', :last_name => 'slater', :email => 'sl8ter@domain.com')
-    User.authenticate('sl8ter@domain.com', 'boogieboardforever!').should be_nil
-  end
+  
 
 end
