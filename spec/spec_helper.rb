@@ -32,10 +32,13 @@ Spec::Runner.configure do |config|
   config.before(:all)    { Sham.reset(:before_all)  }
   config.before(:each)   { Sham.reset(:before_each) }
 
+  config.include Webrat::Matchers, :type => :views
   # include the controller helpers from spec/spec_helpers/controllers
   # they are all part of the ControllerHelpers module but
   # can be broken up into different files.
   config.include ControllerHelpers, :type => :controller
+  # do the same for the view helpers
+  config.include ViewHelpers, :type => :view
 
   # == Fixtures
   #
