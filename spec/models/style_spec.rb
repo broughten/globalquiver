@@ -1,15 +1,8 @@
 require 'spec_helper'
 
 describe Style do
-  before(:each) do
-    @valid_attributes = {
-      :name => "value for name",
-      :created_at => Time.now,
-      :updated_at => Time.now
-    }
-  end
 
-  it "should create a new instance given valid attributes" do
-    Style.create!(@valid_attributes)
+  it "should create a new instance from blueprint" do
+    Style.make().should be_valid
   end
 end
