@@ -16,7 +16,7 @@
     <div id="container">
       <div id="header">
         <div class="left">
-          <%= link_to '<h1 id="logo"><span>GlobalQuiver</span></h1>', root_url %>
+          <%= link_to '<h1 id="logo"><span>GlobalQuiver</span></h1>', current_user ? overview_path : root_path %>
         </div>
         <div class="right">
           <div id="login-signup">
