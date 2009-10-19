@@ -2,7 +2,6 @@
   <h3>Choose a location or enter a<a href="#" onclick="Effect.toggle('locationFields', 'appear', {afterFinish:function(){map.checkResize();}}); Effect.toggle('locationPicker', 'appear'); document.getElementById('board_location_id').selectedIndex = null; showAddress(this.address.value);  return false;"> new one.</a><h3>
 
     <select id="board_location_id" name="board[location_id]" >
-      <option value="" selected="selected" >Previously entered locations</option>
       <% @locations.each do |location| %>
         <option value="<%= location.id %>"
           <% if !@board.nil? and @board.location_id == location.id -%> selected="selected"<% end -%>>
