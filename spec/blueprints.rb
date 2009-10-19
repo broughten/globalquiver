@@ -14,18 +14,6 @@ Sham.define do
   shop_name {Faker::Company.name}
   board_maker {Faker::Company.name}
   board_model {Faker::Lorem.words(1)}
-  board_length do
-    the_array = (6..10).to_a
-    the_array[Kernel.rand(the_array.length)]
-  end
-  board_width do
-    the_array = (2..4).to_a
-    the_array[Kernel.rand(the_array.length)]
-  end
-  board_thickness do
-    the_array = (1..3).to_a
-    the_array[Kernel.rand(the_array.length)]
-  end
   board_description {Faker::Lorem.words(10)}
   board_construction {Faker::Lorem.words(1)}
   location_street {Faker::Address.street_address()}
@@ -69,9 +57,9 @@ Board.blueprint() do
   user = User.make()
   maker {Sham.board_maker}
   model {Sham.board_model}
-  length {Sham.board_length}
-  width {Sham.board_width}
-  thickness {Sham.board_thickness}
+  length {7}
+  width {2}
+  thickness {5}
   style {Style.make()}
   description {Sham.board_description}
   location {Location.make()}
