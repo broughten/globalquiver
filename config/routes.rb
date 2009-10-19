@@ -9,9 +9,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
-  map.resources  :overviews,  :only => :index
-
   map.resources :pages
+  
+  map.overview "/overview", :controller => 'overviews', :action => 'index'
 
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.with_options :controller => 'sessions'  do |m|
