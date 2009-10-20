@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
+  before_filter :login_required, :except => [:new, :create]
 
   # render new.rhtml
   def new
@@ -29,6 +30,23 @@ class UsersController < ApplicationController
       # messages to display.  If we do a redirect, then the
       # error messages dissapear.
       render :action => :new
+    end
+  end
+  
+  def edit
+    @user = current_user
+  end
+  
+  def update
+    @user = current_user
+    #need to figure out what type of object you are dealing with
+    # since the form will populate the params based on that
+    class_string = @user.class.to_s.downcase   
+    if @user.update_attributes(params[class_string])
+      flash[:notice] = 'Profile was successfully updated.'
+      redirect_to(overview_path)
+    else
+      render :action => "edit"
     end
   end
 
