@@ -12,11 +12,7 @@ describe BoardsController do
     before(:each) do
       login_as_user
     end
-    it "should redirect to overview page upon successful create" do
-      Board.any_instance.stubs(:valid?).returns(true)
-      post :create
-      response.should redirect_to(overview_path)
-    end
+    it "should redirect to overview page upon successful create" 
 
   end
 
