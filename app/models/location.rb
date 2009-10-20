@@ -5,4 +5,6 @@ class Location < ActiveRecord::Base
   belongs_to :updater, :class_name => 'User'
   validates_presence_of :locality, :country
   has_many :boards
+  
+  named_scope :ordered_by_desc_creation, :order => 'created_at desc'
 end
