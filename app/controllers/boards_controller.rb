@@ -86,7 +86,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.save
         flash[:notice] = 'Board was successfully created.'
-        format.html { redirect_to(overviews_path) }
+        format.html { redirect_to(overview_path) }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
         make_map_ready

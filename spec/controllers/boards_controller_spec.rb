@@ -15,7 +15,7 @@ describe BoardsController do
     it "should redirect to overview page upon successful create" do
       Board.any_instance.stubs(:valid?).returns(true)
       post :create
-      response.should redirect_to(overviews_path)
+      response.should redirect_to(overview_path)
     end
 
   end
