@@ -3,6 +3,7 @@ require 'digest/sha1'
 # This class serves as an abstratct base class for Surfer and Shop
 class User < ActiveRecord::Base
   has_many :boards, :foreign_key =>"creator_id", :dependent=> :delete_all
+  has_many :locations, :foreign_key =>"creator_id", :dependent=> :delete_all
 
 
   # Virtual attribute for the unencrypted password

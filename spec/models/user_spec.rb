@@ -7,12 +7,17 @@ describe User do
   end
 
   it "should have many boards" do
-    # need to figure out how to use machinist with inheritance hierarchies
-    # posted question to Google group.
     user = User.make()
     Board.make(:creator=>user)
     Board.make(:creator=>user)
     user.boards.length.should == 2
+  end
+  
+  it "should have many locations" do
+    user = User.make()
+    Location.make(:creator=>user)
+    Location.make(:creator=>user)
+    user.locations.length.should == 2
   end
 
   it "should authenticate with matching email and password" do
