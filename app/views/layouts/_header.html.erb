@@ -22,7 +22,8 @@
           <div id="login-signup">
             <ul>
               <% if current_user -%>
-                <li id="user_link"><span>Hello, <%=h current_user.display_name %></span></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>
+				<!-- Need to be all on one line to make sure they display properly.-->
+                <li id="user_link"><span>Hello, <%=h current_user.display_name %></span></li><li id="logout_link"><%= link_to 'My Profile', edit_user_path(current_user)%></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>				
               <% else -%>
                 <li id="signup_link">
                   <%=link_to "Join Global Quiver", new_user_url%>
