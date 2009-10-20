@@ -17,6 +17,7 @@
 
 <% form_for(@board) do |f| %>
   <%= f.error_messages %>
+	<%= f.hidden_field :location_id %>
 
   <% if !@locations.nil? and !@locations.empty? %>
 
@@ -34,7 +35,7 @@
   <h2>Next, tell us about the board.</h2><span id="required_star">*</span> denotes required
   <p>Different surfers and different conditions require different boards.  Describe yours below:</p>
     <p>
-<%= f.label :maker, "Maker: (for example Channel Islands)" %><span id="required_star">*</span><br />
+		<%= f.label :maker, "Maker: (for example Channel Islands)" %><span id="required_star">*</span><br />
       <%= f.text_field :maker %>
     </p>
     <p>

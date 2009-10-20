@@ -52,7 +52,8 @@ class BoardsController < ApplicationController
 
     # we pull up all the locations that the user has previously entered
     # because he might want to use one of these for the board he's about to enter
-    @locations = Location.find_all_by_creator_id(current_user.id)
+    debugger
+    @locations = current_user.locations.ordered_by_desc_creation
     
     @location = Location.new
     
@@ -74,9 +75,9 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
-
-    # if the location id is nill then we must be making a new location
-    if @board.location_id.nil?
+    
+    if (@board.location_id < 0)
+      # let's create a new location because we don't have an existing one
       @location = Location.new(params[:location])
       if @location.save
         @board.location_id = @location.id

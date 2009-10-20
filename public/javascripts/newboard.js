@@ -150,6 +150,19 @@ function writeObj(obj, message) {
   console.log(details);
 }
 
+function set_board_location_id(new_id){
+	$("board_location_id").value = new_id;
+}
+
+Event.observe(document, 'dom:loaded',function() {
+	// set up the initial state of the form from the selected location.
+	var new_id = $("board_location_selector").value;
+	if(new_id > 0){
+		set_board_location_id(new_id);
+	}
+});
+
+
 
 
 
