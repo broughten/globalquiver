@@ -71,10 +71,7 @@ as we flesh out the login and create user pages.
   text-align: left;
 }
 
-#header_login_form .submitBtn,
-#header_signup_form .submitBtn,
-#login_form .submitBtn,
-#signup_form .submitBtn{
+.submitBtn{
   background: transparent url(/images/login-button.gif) no-repeat;
   width: 59px;
   height: 26px;
