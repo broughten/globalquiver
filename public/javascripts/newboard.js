@@ -1,166 +1,199 @@
-var geocoder;
-var street = '';
-var city = '';
-var state = '';
-var zipCode = '';
-var country = '';
-var point = null;
-var address = null;
-var accuracy = null;
+var geocoder = null;
+
+/* Definition of the class to hold the address information */
+function Address(){
+	this.street = "";
+	this.city = "";
+	this.stats = "";
+	this.zipCode = "";
+	this.country = "";
+	this.accuracy = -1;
+	this.latLng = null;
+	this.addressString = "";
+}
+Address.prototype.isValid = function() {
+	return this.accuracy > 0;
+}
+Address.MIN_ACCURACY = 7;
+
+/* Code to set initial states of the page once the DOM is ready to go. */
+Event.observe(document, 'dom:loaded',function() {
+	// set up the initial state of the form from the selected location.
+	var new_id = $("board_location_selector").value;
+	if(new_id > 0){
+		set_board_location_id(new_id);
+	}else{
+		set_board_location_id(-1);
+	}
+});
 
 window.onload = addCodeToFunction(window.onload,function() {
   GEvent.addListener(map, "click", getAddress);
   geocoder = new GClientGeocoder();
-
+ 
 });
 
-function showAddress(address) {
+function showAddress(addressString) {
   if (geocoder) {
-    geocoder.getLocations(
-      address,
-      parseAddress);
+    geocoder.getLocations(addressString, processGetLocationsResponse);
   }
+	else{
+		alert("Unable to show address.");
+	}
 }
 
 function getAddress(overlay, latlng) {
-  if (latlng != null) {
-    address = latlng;
-    geocoder.getLocations(latlng, parseAddress);
-  }
+	if (geocoder && latlng != null) {
+		geocoder.getLocations(latlng, processGetLocationsResponse);
+	}
 }
 
-function parseAddress(response) {
+function processGetLocationsResponse(response) {
   if (!response || response.Status.code != 200) {
-    alert("Sorry, we were unable to geocode that address");
+    alert("Sorry, we were unable to process that address. Please try again.");
   } else {
-    street = '';
-    city = '';
-    state = '';
-    zipCode = '';
-    country = '';
-    point = null;
-    address = null;
-    accuracy = null;
+	var ourAddress = null;
+    var currentAccuracy = -1;
+    var newPlacemark = null;
+	var newAccuracy = -1;
+	var numberOfPlacemarks = response.Placemark.length;
+
     //we do a for-loop here because if the address is generic enough it may bring back more than
     //one result. which in the JSON return would be multiple Placemarks.
-    var i;
-    var currentAccuracy = -1;
-    var newAccuracy;
-    for (i = 0; i < response.Placemark.length; i++) {
-      place = response.Placemark[i];
-      newAccuracy = place.AddressDetails.Accuracy;
-      if (newAccuracy > currentAccuracy) {
-          currentAccuracy = newAccuracy;
-          //some addresses have Locality and Thoroughfare under an admin area
-          //while others have them directly under country
-          if (place.AddressDetails.Country.Locality != null) {
-              if (place.AddressDetails.Country.Locality.Thoroughfare != null) {
-                 street = place.AddressDetails.Country.Locality.Thoroughfare.ThoroughfareName;
-              }
-              city = place.AddressDetails.Country.Locality.LocalityName;
-          } else {
-              //depending on the given address we may not have Locality and we may not have Thoroughfare
-              if (place.AddressDetails.Country.AdministrativeArea.Locality != null) {
-                city = place.AddressDetails.Country.AdministrativeArea.Locality.LocalityName;
-
-                //check for Thoroughfare
-                if (place.AddressDetails.Country.AdministrativeArea.Locality.Thoroughfare != null) {
-                  street = place.AddressDetails.Country.AdministrativeArea.Locality.Thoroughfare.ThoroughfareName;
-                }
-
-                //check for Zip
-                if (place.AddressDetails.Country.AdministrativeArea.Locality.PostalCode) {
-                  zipCode = place.AddressDetails.Country.AdministrativeArea.Locality.PostalCode.PostalCodeNumber;
-                }
-              } else {
-                  //just found another address that has a sub administrative area.
-                  //what a nightmare to parse this crap
-                  if (place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality != null) {
-                      city = place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName;
-                  }
-                  //check for Thoroughfare
-                  if (place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare != null) {
-                    street = place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare.ThoroughfareName;
-                  }
-
-                  //check for Zip
-                  if (place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode) {
-                    zipCode = place.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber;
-                  }
-
-              }
-              state = place.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName;
-          }
-          country = place.AddressDetails.Country.CountryName;
-          xCoord = place.Point.coordinates[0];
-          yCoord = place.Point.coordinates[1];
-          point = new GLatLng(yCoord, xCoord);
-          address = place.address;
-          accuracy = currentAccuracy;
-      }
-    }
-    addAddress(response);
-  }
-}
-
-
-function addAddress() {
-    map.clearOverlays();
-    marker = new GMarker(point);
-    map.addOverlay(marker);
-    marker.openInfoWindowHtml(
-    '<b>Address: </b>' + address + '<br>' +
-    '<b>Accuracy: </b>' + accuracy + '<br>' +
-    'The higher the accuracy the better.<br>' +
-    'An accuracy of 1 is bad and 8 good.<br>');
+	for (var i = 0; i < numberOfPlacemarks; i++) {
+		newPlacemark = response.Placemark[i];
+		newAccuracy = newPlacemark.AddressDetails.Accuracy;
+		if (newAccuracy > currentAccuracy) {
+			// we care about this placemark because it is more accurate 
+			// than the last one
+			ourAddress = getAddressFromPlacemark(newPlacemark);
+			currentAccuracy = newAccuracy;
+		}
+	}
+	if(ourAddress && ourAddress.isValid){
+		if(ourAddress.accuracy > Address.MIN_ACCURACY){
+			addAddressToMap(ourAddress);
+			populateFormFields(ourAddress);
+			showBoardDetailsFields();
+		}else{
+			hideBoardDetailsFields();
+			alert ("Address isn't exact enough.  Please try again.");
+		}
+	}else{
+		alert ("We couldn't find that address.  Please try again.");
+	}
     
-    document.getElementById("location_street").removeAttribute("value");
-    document.getElementById("location_locality").removeAttribute("value");
-    document.getElementById("location_region").removeAttribute("value");
-    document.getElementById("location_postal_code").removeAttribute("value");
-    document.getElementById("location_country").removeAttribute("value");
-    document.getElementById("location_street").setAttribute("value", street);
-    document.getElementById("location_locality").setAttribute("value", city);
-    document.getElementById("location_region").setAttribute("value", state);
-    document.getElementById("location_postal_code").setAttribute("value", zipCode);
-    document.getElementById("location_country").setAttribute("value", country);
-    document.getElementById("street").innerHTML = "&nbsp;";
-    document.getElementById("locality").innerHTML = "&nbsp;";
-    document.getElementById("region").innerHTML = "&nbsp;";
-    document.getElementById("postal_code").innerHTML = "&nbsp;";
-    document.getElementById("country").innerHTML = "&nbsp;";
-    document.getElementById("street").innerHTML = (street!='')?"&nbsp;" + street:'&nbsp;';
-    document.getElementById("locality").innerHTML = (city!='')?"&nbsp;" + city:'&nbsp;';
-    document.getElementById("region").innerHTML = (state!='')?"&nbsp;" + state:'&nbsp;';
-    document.getElementById("postal_code").innerHTML = (zipCode!='')?"&nbsp;" + zipCode:'&nbsp;';
-    document.getElementById("country").innerHTML = (country!='')?"&nbsp;" + country:'&nbsp;';
-
-}
-function writeObj(obj, message) {
-  if (!message) { message = obj; }
-  var details = "*****************" + "\n" + message + "\n";
-  var fieldContents;
-  for (var field in obj) {
-    fieldContents = obj[field];
-    if (typeof(fieldContents) == "function") {
-      fieldContents = "(function)";
-    }
-    details += "  " + field + ": " + fieldContents + "\n";
   }
-  console.log(details);
+}
+
+function addAddressToMap(currentAddress) {
+    map.clearOverlays();
+	var marker = new GMarker(currentAddress.latLng);
+    map.addOverlay(marker);
+	map.setCenter(currentAddress.latLng);
+}
+
+function populateFormFields(currentAddress){
+	$("location_street").value = currentAddress.street;    
+    $("location_locality").value = currentAddress.city;
+    $("location_region").value = currentAddress.state;
+    $("location_postal_code").value = currentAddress.zipCode;
+    $("location_country").value = currentAddress.country;
+    
+    $("street").innerHTML = currentAddress.street;
+    $("locality").innerHTML = currentAddress.city;
+    $("region").innerHTML = currentAddress.state;
+    $("postal_code").innerHTML = currentAddress.zipCode;
+    $("country").innerHTML = currentAddress.country;
+	$("accuracy").innerHTML = currentAddress.accuracy;
+}
+
+function getAddressFromPlacemark(ourPlacemark){
+	var ourAddress = new Address();
+	ourAddress.accuracy = ourPlacemark.AddressDetails.Accuracy;
+	//some addresses have Locality and Thoroughfare under an admin area
+	//while others have them directly under country
+	
+	if (ourPlacemark.AddressDetails.Country.Locality != null) {
+		if (ourPlacemark.AddressDetails.Country.Locality.Thoroughfare != null) {
+ 			ourAddress.street = ourPlacemark.AddressDetails.Country.Locality.Thoroughfare.ThoroughfareName;
+		}
+		ourAddress.city = ourPlacemark.AddressDetails.Country.Locality.LocalityName;
+	} else {
+		//depending on the given address we may not have Locality and we may not have Thoroughfare
+		if (ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality != null) {
+			ourAddress.city = ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.LocalityName;
+
+			//check for Thoroughfare
+			if (ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.Thoroughfare != null) {
+				ourAddress.street = ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.Thoroughfare.ThoroughfareName;
+            }
+
+            //check for Zip
+            if (ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.PostalCode) {
+				ourAddress.zipCode = ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.PostalCode.PostalCodeNumber;
+			}
+		} else {
+			//just found another address that has a sub administrative area.
+			//what a nightmare to parse this crap
+			if (ourPlacemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality != null) {
+				ourAddress.city = ourPlacemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName;
+			}
+			//check for Thoroughfare
+			if (ourPlacemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare != null) {
+				ourAddress.street = ourPlacemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare.ThoroughfareName;
+			}
+
+			//check for Zip
+			if (ourPlacemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode) {
+				ourAddress.zipCode = ourPlacemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber;
+			}
+
+		}
+		ourAddress.state = ourPlacemark.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName;
+	}
+	ourAddress.country = ourPlacemark.AddressDetails.Country.CountryName;
+	ourAddress.latLng = new GLatLng(ourPlacemark.Point.coordinates[1], ourPlacemark.Point.coordinates[0]);
+	ourAddress.addressString = ourPlacemark.address;
+	return ourAddress;
 }
 
 function set_board_location_id(new_id){
 	$("board_location_id").value = new_id;
 }
 
-Event.observe(document, 'dom:loaded',function() {
-	// set up the initial state of the form from the selected location.
-	var new_id = $("board_location_selector").value;
-	if(new_id > 0){
-		set_board_location_id(new_id);
+function enableNewLocationEntry(){
+	Effect.Appear('locationFields', {afterFinish:function(){map.checkResize();}});
+	Effect.Fade('locationPicker');
+	if(haveExistingLocation()){
+		showBoardDetailsFields();
+	}else{
+		hideBoardDetailsFields();
 	}
-});
+	
+	set_board_location_id(-1); 
+}
+
+function cancelNewLocationEntry(){
+	Effect.Fade('locationFields');
+	Effect.Appear('locationPicker');
+	showBoardDetailsFields();
+	set_board_location_id($("board_location_selector").value);
+}
+
+function showBoardDetailsFields(){
+	Effect.Appear('boardDetails', 'appear');
+}
+
+function hideBoardDetailsFields(){
+	Effect.Fade('boardDetails', 'appear');
+}
+
+function haveExistingLocation(){
+	return $("location_street").value != "";
+}
+
+
 
 
 

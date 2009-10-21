@@ -13,22 +13,18 @@
 <br>
 <h2>First, where is this board?</h2>
 <p>We need to know where your boar is so that people looking to take surf trips in your area will be able to find it, pick it up, and use it<p>
-<%= render :partial => '/locations/new', :object => @location %>
+<%= render :partial => '/locations/new' %>
+<%= render :partial => '/locations/list' %>
 
 <% form_for(@board) do |f| %>
   <%= f.error_messages %>
 	<%= f.hidden_field :location_id %>
 
-  <% if !@locations.nil? and !@locations.empty? %>
-
-    <%= render :partial => '/locations/list', :object => @locations %>
-
-  <%  end %>
-
   <%= render :partial => '/locations/form', :object => @location %>
 
+<% @board_details_style = (!@existing_locations.nil? and @existing_locations.length > 0) ? '' : 'display:none'%>
 
-<div id="boardDetails">
+<div id="boardDetails" style="<%=@board_details_style%>">
   <br>
   <br>
 
@@ -72,8 +68,9 @@
       <%= f.label :description, "Anything else you want to mention about this board?" %><br />
       <%= f.text_area :description, :size => "60x2"%>
     </p>
+	<p>
+	    <%= f.submit 'Create' %>
+	  </p>
   </div>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+  
 <% end %>

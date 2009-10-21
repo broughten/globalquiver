@@ -52,11 +52,9 @@ class BoardsController < ApplicationController
 
     # we pull up all the locations that the user has previously entered
     # because he might want to use one of these for the board he's about to enter
-    debugger
-    @locations = current_user.locations.ordered_by_desc_creation
-    
+    @existing_locations = current_user.locations.ordered_by_desc_creation
+    # create a new location here to hold the info if the user enters a new location
     @location = Location.new
-    
     @board = @location.boards.build
     make_map_ready
 
@@ -76,7 +74,7 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(params[:board])
     
-    if (@board.location_id < 0)
+    if (@board.location_id == nil || @board.location_id < 0)
       # let's create a new location because we don't have an existing one
       @location = Location.new(params[:location])
       if @location.save
