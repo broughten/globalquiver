@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   validates_format_of       :email, :with => /.*@.*/
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
+  # This is needed to make sure that the validates_confirmation_of :password is run.
+  # Without this, if :password_confirmation is nil the confirmation check
+  # will not run. 
+  validates_presence_of     :password_confirmation
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false
 
