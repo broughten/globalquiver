@@ -76,6 +76,7 @@ function processGetLocationsResponse(response) {
 			populateFormFields(ourAddress);
 			showBoardDetailsFields();
 		}else{
+                        addAddressToMap(ourAddress);
 			hideBoardDetailsFields();
 			alert ("Address isn't exact enough.  Please try again.");
 		}
@@ -88,13 +89,14 @@ function processGetLocationsResponse(response) {
 
 function addAddressToMap(currentAddress) {
     map.clearOverlays();
-	var marker = new GMarker(currentAddress.latLng);
+    var marker = new GMarker(currentAddress.latLng);
     map.addOverlay(marker);
-	map.setCenter(currentAddress.latLng);
+    marker.openInfoWindowHtml('<b>Address: </b>' + currentAddress.addressString + '<br>');
+    map.setCenter(currentAddress.latLng);
 }
 
 function populateFormFields(currentAddress){
-	$("location_street").value = currentAddress.street;    
+    $("location_street").value = currentAddress.street;
     $("location_locality").value = currentAddress.city;
     $("location_region").value = currentAddress.state;
     $("location_postal_code").value = currentAddress.zipCode;
@@ -105,7 +107,7 @@ function populateFormFields(currentAddress){
     $("region").innerHTML = currentAddress.state;
     $("postal_code").innerHTML = currentAddress.zipCode;
     $("country").innerHTML = currentAddress.country;
-	$("accuracy").innerHTML = currentAddress.accuracy;
+    $("accuracy").innerHTML = currentAddress.accuracy;
 }
 
 function getAddressFromPlacemark(ourPlacemark){
