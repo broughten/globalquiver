@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'users/new' %>
+<% end %>
+
+
 <h1>Signup</h1>
 
 <h3>Already have an account?</h3>
@@ -8,7 +13,38 @@
             :id => 'signup_form' } do |form| %>
   <%= form.error_messages %>
   <div class="user_fields">
-    <%= render :partial => '/users/new_fields', :object => form %>
+    <div>
+	  <%= check_box_tag 'is_shop', 'yes'%>
+	  <%=label_tag 'is_shop', 'I am a rental shop'%>
+	</div>
+	<div>
+	  <%= form.label :first_name, 'First Name' %>
+	  <%= form.text_field :first_name%>
+	</div>
+	<div>
+	  <%= form.label :last_name, 'Last Name' %>
+	  <%= form.text_field :last_name%>
+	</div>
+	<div>
+	  <%= form.label :name, 'Name' %>
+	  <%= form.text_field :name%>
+	</div>
+	<div>
+	  <%= form.label :email %>
+	  <%= form.text_field :email %>
+	</div>
+	<div>
+	  <%= form.label :password %>
+	  <%= form.password_field :password %>
+	</div>
+	<div>
+	  <%= form.label :password_confirmation, 'Password Confirm' %>
+	  <%= form.password_field :password_confirmation %>
+	</div>
+	<div>
+	  <%= form.check_box :terms_of_service %>
+	  <%= form.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>" %>
+	</div>
   </div>
 
   <div class="submit">
