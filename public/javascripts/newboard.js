@@ -1,4 +1,5 @@
 var geocoder = null;
+var map = null;
 
 /* Definition of the class to hold the address information */
 function Address(){
@@ -16,22 +17,23 @@ Address.prototype.isValid = function() {
 }
 Address.MIN_ACCURACY = 7;
 
-/* Code to set initial states of the page once the DOM is ready to go. */
-Event.observe(document, 'dom:loaded',function() {
-	// set up the initial state of the form from the selected location.
-	var new_id = $("board_location_selector").value;
+/* Do all of the things that you need to do 
+	once the page is ready to go. */
+$(document).ready(function(){
+   	var new_id = $("#board_location_selector").val();
 	if(new_id > 0){
 		set_board_location_id(new_id);
-	}else{
-		set_board_location_id(-1);
 	}
+	
+ });
+
+/* This should stay in the window.onload event.  Not sure why
+	but don't change it! */
+window.onload = addCodeToFunction(window.onload,function() {
+	GEvent.addListener(map, "click", getAddress);
+	geocoder = new GClientGeocoder();
 });
 
-window.onload = addCodeToFunction(window.onload,function() {
-  GEvent.addListener(map, "click", getAddress);
-  geocoder = new GClientGeocoder();
- 
-});
 
 function showAddress(addressString) {
   if (geocoder) {
@@ -76,7 +78,7 @@ function processGetLocationsResponse(response) {
 			populateFormFields(ourAddress);
 			showBoardDetailsFields();
 		}else{
-                        addAddressToMap(ourAddress);
+            addAddressToMap(ourAddress);
 			hideBoardDetailsFields();
 			alert ("Address isn't exact enough.  Please try again.");
 		}
@@ -96,18 +98,18 @@ function addAddressToMap(currentAddress) {
 }
 
 function populateFormFields(currentAddress){
-    $("location_street").value = currentAddress.street;
-    $("location_locality").value = currentAddress.city;
-    $("location_region").value = currentAddress.state;
-    $("location_postal_code").value = currentAddress.zipCode;
-    $("location_country").value = currentAddress.country;
+    $("#location_street").val(currentAddress.street);
+    $("#location_locality").val(currentAddress.city);
+    $("#location_region").val(currentAddress.state);
+    $("#location_postal_code").val(currentAddress.zipCode);
+    $("#location_country").val(currentAddress.country);
     
-    $("street").innerHTML = currentAddress.street;
-    $("locality").innerHTML = currentAddress.city;
-    $("region").innerHTML = currentAddress.state;
-    $("postal_code").innerHTML = currentAddress.zipCode;
-    $("country").innerHTML = currentAddress.country;
-    $("accuracy").innerHTML = currentAddress.accuracy;
+    $("#street").innerHTML = currentAddress.street;
+    $("#locality").innerHTML = currentAddress.city;
+    $("#region").innerHTML = currentAddress.state;
+    $("#postal_code").innerHTML = currentAddress.zipCode;
+    $("#country").innerHTML = currentAddress.country;
+    $("#accuracy").innerHTML = currentAddress.accuracy;
 }
 
 function getAddressFromPlacemark(ourPlacemark){
@@ -161,38 +163,39 @@ function getAddressFromPlacemark(ourPlacemark){
 }
 
 function set_board_location_id(new_id){
-	$("board_location_id").value = new_id;
+	$("#board_location_id").val(new_id);
 }
 
 function enableNewLocationEntry(){
-	Effect.Appear('locationFields', {afterFinish:function(){map.checkResize();}});
-	Effect.Fade('locationPicker');
+	$('#locationFields').show()
+	map.checkResize();
+	$('#locationPicker').hide();
 	if(haveExistingLocation()){
 		showBoardDetailsFields();
 	}else{
 		hideBoardDetailsFields();
 	}
-	
 	set_board_location_id(-1); 
 }
 
 function cancelNewLocationEntry(){
-	Effect.Fade('locationFields');
-	Effect.Appear('locationPicker');
+	$('#locationFields').hide();
+	$('#locationPicker').show();
 	showBoardDetailsFields();
-	set_board_location_id($("board_location_selector").value);
+	set_board_location_id($("#board_location_selector").val());
 }
 
 function showBoardDetailsFields(){
-	Effect.Appear('boardDetails', 'appear');
+	$('#boardDetails').show();
+	$("#board_maker").focus();
 }
 
 function hideBoardDetailsFields(){
-	Effect.Fade('boardDetails', 'appear');
+	$('#boardDetails').hide();
 }
 
 function haveExistingLocation(){
-	return $("location_street").value != "";
+	return $("#location_street").val() != "";
 }
 
 
