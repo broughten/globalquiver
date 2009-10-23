@@ -1,8 +1,10 @@
 <% content_for :head do %>
   <%= GMap.header %>
   <%= @map.to_html %>
-  <%= stylesheet_link_tag 'board', 'location', :media => 'screen' %>
-  <%= javascript_include_tag 'newboard.js', 'json2.js' %>
+  <%= stylesheet_link_tag 'board', 'location', 'datePicker', 'availability', :media => 'screen' %>
+  <%= javascript_include_tag 'jquery', 'date', 'jquery.datePicker', 'datePickerMultiMonth', 'availability' %>
+  <%= javascript_include_tag 'newboard', 'json2' %>
+
 <% end %>
 
 <h1>List a board for borrow or rent</h1>
@@ -68,9 +70,12 @@
       <%= f.label :description, "Anything else you want to mention about this board?" %><br />
       <%= f.text_area :description, :size => "60x2"%>
     </p>
-	<p>
-	    <%= f.submit 'Create' %>
-	  </p>
+    <%= render :partial => '/black_out_day/form' %>
+    <br>
+    <p>
+      <%= f.submit 'Create' %>
+    </p>
   </div>
   
 <% end %>
+
