@@ -12,7 +12,6 @@ class StylesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @style }
     end
   end
 
@@ -23,7 +22,6 @@ class StylesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @style }
     end
   end
 
@@ -41,10 +39,8 @@ class StylesController < ApplicationController
       if @style.save
         flash[:notice] = 'Style was successfully created.'
         format.html { redirect_to(@style) }
-        format.xml  { render :xml => @style, :status => :created, :location => @style }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @style.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -58,10 +54,8 @@ class StylesController < ApplicationController
       if @style.update_attributes(params[:style])
         flash[:notice] = 'Style was successfully updated.'
         format.html { redirect_to(@style) }
-        format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @style.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -74,7 +68,6 @@ class StylesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(styles_url) }
-      format.xml  { head :ok }
     end
   end
 end
