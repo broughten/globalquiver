@@ -14,10 +14,6 @@ describe UsersController do
       login_as_user
     end
     
-    it "should properly update user based on type of user" 
-    
-    it "should assign @user instance variable" 
-    
     it "should redirect to overview page with a flash notice on successful update" do
       User.any_instance.stubs(:update_attributes).returns(true)
       post :update
