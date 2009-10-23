@@ -74,7 +74,7 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(params[:board])
     
-    if (@board.location_id == nil || @board.location_id < 0)
+    if (!@board.has_location?)
       # let's create a new location because we don't have an existing one
       @location = Location.new(params[:location])
       if @location.save
@@ -127,20 +127,19 @@ class BoardsController < ApplicationController
 private
 
   def make_map_ready
-        # Create a new map object, also defining the div ("map")
-        # where the map will be rendered in the view
-        @map = GMap.new("map")
-        # Use the larger pan/zoom control but disable the map type
-        # selector
-        @map.control_init(:large_map => true,:map_type => false)
-        # Center the map on specific coordinates and focus in fairly
-        # closely
-
-        if (remote_location.nil? || remote_location.latitude.nil?)
-          @map.center_zoom_init([25.165173,-158.203125], 1  )
-        else
-          @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
-        end
+    # Create a new map object, also defining the div ("map")
+    # where the map will be rendered in the view
+    @map = GMap.new("map")
+    # Use the larger pan/zoom control but disable the map type
+    # selector
+    @map.control_init(:large_map => true,:map_type => false)
+    # Center the map on specific coordinates and focus in fairly
+    # closely
+    if (remote_location.nil? || remote_location.latitude.nil?)
+      @map.center_zoom_init([25.165173,-158.203125], 1  )
+    else
+      @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
+    end
   end
 
 end

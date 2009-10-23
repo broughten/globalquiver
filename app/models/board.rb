@@ -122,6 +122,10 @@ class Board < ActiveRecord::Base
     end
 
   end
+  
+  def has_location?
+    return self.location != nil;
+  end
 
   def self.search(search_location)
     if search_location.locality
