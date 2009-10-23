@@ -9,9 +9,12 @@ describe Surfer do
   it "should fail if first name is blank" do
     # use make_unsaved here so the validation doesn't kick in until you
     # ask the object if it is valid or not
-    Surfer.make_unsaved(:first_name=>"",:last_name=>"").should_not be_valid
+    Surfer.make_unsaved(:first_name=>"").should_not be_valid
   end
 
-  
+  it "should return it's first name as it's display name" do
+    surfer = Surfer.make()
+    surfer.display_name.should == surfer.first_name
+  end
 
 end

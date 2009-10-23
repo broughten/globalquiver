@@ -11,5 +11,15 @@ describe Shop do
     # ask the object if it is valid or not
     Shop.make_unsaved(:name=>"").should_not be_valid
   end
+  
+  it "should return it's name as the display name" do
+    shop = Shop.make()
+    shop.display_name.should == shop.name
+  end
+  
+  it "should think that it is a shop" do
+    is_shop = Shop.make().is_rental_shop?
+    is_shop.should == true
+  end
 
 end
