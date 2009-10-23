@@ -2,7 +2,8 @@
   <%= GMap.header %>
   <%= @map.to_html %>
   <%= stylesheet_link_tag 'board', 'location', 'datePicker', 'availability', :media => 'screen' %>
-  <%= javascript_include_tag 'jquery', 'date', 'jquery.datePicker', 'datePickerMultiMonth', 'availability' %>
+	<%# Javascript for the date picker%>
+  <%= javascript_include_tag 'date', 'jquery.datePicker', 'datePickerMultiMonth', 'availability' %>
   <%= javascript_include_tag 'newboard', 'json2' %>
 
 <% end %>
@@ -57,8 +58,10 @@
       <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
     </p>
     <p>
-      <%= f.label :style, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
-      <%= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
+      <%= f.label :style_name, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
+      <%= f.text_field :style_name %>
+	<%# This only works with prototyle/scriptaculous...which we are not using any longer.%>
+	<%#= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
         { :url => formatted_styles_path(:js), :method => :get,
         :with => "'search=' + element.value" } %>
     </p>

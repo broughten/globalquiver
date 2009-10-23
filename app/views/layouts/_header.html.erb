@@ -8,9 +8,14 @@
     <!--[if IE]>
       <%= stylesheet_link_tag 'ie', :media => 'screen' %>      
     <![endif]-->
-    <%= javascript_include_tag :defaults%>
+	<%# Load up the various javascript libraries from Google %>
+	<script src="http://www.google.com/jsapi"></script>
+	<script>
+		// Load jQuery
+		google.load("jquery", "1.3.2");
+	</script>
+	<%= javascript_include_tag "application" %>
     <%= yield :head %>
-    <!--%= calendar_date_select_includes %-->
   </head>
   <body class="<%= body_class %>">
     <div id="container">
@@ -22,38 +27,11 @@
           <div id="login-signup">
             <ul>
               <% if current_user -%>
-				<!-- Need to be all on one line to make sure they display properly.-->
+				<%# Need to be all on one line to make sure they display properly.%>
                 <li id="user_link"><span>Hello, <%=h current_user.display_name %></span></li><li id="logout_link"><%= link_to 'My Profile', edit_user_path(current_user)%></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>				
               <% else -%>
-                <li id="signup_link">
-                  <%=link_to "Join Global Quiver", new_user_url%>
-                 <%# We may add these back in later <a href="#header_signup_form">
-                    Join Global Quiver
-                  </a>%>
-                </li><li id="login_link">
-                  <%=link_to "Login", new_session_url%>
-                  <%# We may add these back in later <a href="#header_login_form">
-                    Login
-                  </a>%>
-                </li><!-- inline-block
-                -->
-                <%# We may want to add these back in later but for right now (9/8)
-                  # we are going to leave them out.%>
-                <%# form_for :session,
-                            :url => session_url(:protocol => env_ssl_protocol),
-                            :html => { :method => 'POST',
-                                       :id => 'header_login_form',
-                                       :style => 'display: none;' } do |form| %>
-                  <%#= render :partial => '/sessions/form', :object => form %>
-                <%# end %>
-
-                <%# form_for :user,
-                            :url => users_url(:protocol => env_ssl_protocol),
-                            :html => { :method => 'POST',
-                                       :id => 'header_signup_form',
-                                       :style => 'display: none;' } do |form| %>
-                  <%#= render :partial => '/users/form', :object => form %>
-                <%# end %>
+				<%# Need to be all on one line to make sure they display properly.%>
+                <li id="signup_link"><%=link_to "Join Global Quiver", new_user_url%></li><li id="login_link"><%=link_to "Login", new_session_url%></li>
               <% end -%>
             </ul>
           </div>
