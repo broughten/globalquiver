@@ -3,7 +3,6 @@ class BoardsController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
 
   # GET /boards
-  # GET /boards.xml
   def index
     @board = Board.new(params[:board])
 
@@ -31,23 +30,19 @@ class BoardsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @boards }
     end
   end
 
   # GET /boards/1
-  # GET /boards/1.xml
   def show
     @board = Board.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @board }
     end
   end
 
   # GET /boards/new
-  # GET /boards/new.xml
   def new
 
     # we pull up all the locations that the user has previously entered
@@ -60,7 +55,6 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @board }
     end
   end
 
@@ -86,17 +80,14 @@ class BoardsController < ApplicationController
       if @board.save
         flash[:notice] = 'Board was successfully created.'
         format.html { redirect_to(overview_path) }
-        format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
         make_map_ready
         format.html { render :action => "new" }
-        format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   # PUT /boards/1
-  # PUT /boards/1.xml
   def update
     @board = Board.find(params[:id])
 
@@ -104,23 +95,19 @@ class BoardsController < ApplicationController
       if @board.update_attributes(params[:board])
         flash[:notice] = 'Board was successfully updated.'
         format.html { redirect_to(overviews_path) }
-        format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   # DELETE /boards/1
-  # DELETE /boards/1.xml
   def destroy
     @board = Board.find(params[:id])
     @board.destroy
 
     respond_to do |format|
       format.html { redirect_to(overviews_path) }
-      format.xml  { head :ok }
     end
   end
 

@@ -6,7 +6,6 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @locations }
     end
   end
 
@@ -17,7 +16,6 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @location }
     end
   end
 
@@ -28,7 +26,6 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @location }
     end
   end
 
@@ -60,7 +57,6 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @board }
     end
 
   end
@@ -74,10 +70,8 @@ class LocationsController < ApplicationController
       if @location.update_attributes(params[:location])
         flash[:notice] = 'Location was successfully updated.'
         format.html { redirect_to(@location) }
-        format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @location.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -90,7 +84,6 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(locations_url) }
-      format.xml  { head :ok }
     end
   end
 
