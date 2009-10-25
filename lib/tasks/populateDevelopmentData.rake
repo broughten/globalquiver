@@ -13,7 +13,7 @@ namespace :db do
     require 'faker'
     
     #Clear out the tables
-    [User, Board, Location, Style].each(&:delete_all)
+    [User, Board, Location, Style, Image, Geocode, Geocoding].each(&:delete_all)
     
     #Set up User data
     surfer = Surfer.create(:first_name=>"Dev", :last_name=>"Surfer", :password=>"testing", 
