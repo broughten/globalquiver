@@ -2,8 +2,9 @@ require 'digest/sha1'
 
 # This class serves as an abstratct base class for Surfer and Shop
 class User < ActiveRecord::Base
-  has_many :boards, :foreign_key =>"creator_id", :dependent=> :delete_all
-  has_many :locations, :foreign_key =>"creator_id", :dependent=> :delete_all
+  has_many  :boards, :foreign_key =>"creator_id", :dependent=> :delete_all
+  has_many  :locations, :foreign_key =>"creator_id", :dependent=> :delete_all
+  has_one   :image, :as => :owner
 
 
   # Virtual attribute for the unencrypted password
@@ -29,7 +30,10 @@ class User < ActiveRecord::Base
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :password, :password_confirmation, :terms_of_service
+  attr_accessible :email, :password, :password_confirmation, :terms_of_service, :image_attributes
+  # allows for the image assocation to be created by auto assignment but you still have to 
+  # add image_attributes to attr_accessible above.
+  accepts_nested_attributes_for :image
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
