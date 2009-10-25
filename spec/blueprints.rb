@@ -39,6 +39,7 @@ User.blueprint() do
   password {"good_password"}
   password_confirmation {password}
   terms_of_service {true}
+  image {Image.make()}
 end
 # End of user hierarchy blueprints
 
@@ -70,4 +71,8 @@ end
 
 Style.blueprint() do
   name {Sham.style_name}
+end
+
+Image.blueprint() do
+
 end
