@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # This is needed to make sure that the validates_confirmation_of :password is run.
   # Without this, if :password_confirmation is nil the confirmation check
   # will not run. 
-  validates_presence_of     :password_confirmation
+  validates_presence_of     :password_confirmation,        :if => :password_required?
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false
 
