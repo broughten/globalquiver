@@ -4,7 +4,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many  :boards, :foreign_key =>"creator_id"
   has_many  :locations, :foreign_key =>"creator_id"
-  has_one   :image, :as => :owner
+  has_one   :image, :as => :owner, :dependent => :destroy
 
 
   # Virtual attribute for the unencrypted password
