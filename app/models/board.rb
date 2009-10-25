@@ -4,8 +4,11 @@ class Board < ActiveRecord::Base
   belongs_to :location
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
+  has_many :images, :as => :owner, :dependent => :destroy
 
   validates_presence_of :maker, :style, :length, :location
+  
+  accepts_nested_attributes_for :images
 
   def style_name
     style.name if style

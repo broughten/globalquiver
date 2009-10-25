@@ -44,13 +44,15 @@ class BoardsController < ApplicationController
 
   # GET /boards/new
   def new
-
     # we pull up all the locations that the user has previously entered
     # because he might want to use one of these for the board he's about to enter
     @existing_locations = current_user.locations.ordered_by_desc_creation
     # create a new location here to hold the info if the user enters a new location
     @location = Location.new
     @board = @location.boards.build
+    
+    # allow for 4 pictures on each board
+    4.times {@board.images.build}
     make_map_ready
 
     respond_to do |format|

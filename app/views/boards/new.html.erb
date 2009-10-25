@@ -19,7 +19,7 @@
 <%= render :partial => '/locations/new' %>
 <%= render :partial => '/locations/list' %>
 
-<% form_for(@board) do |f| %>
+<% form_for @board, :html => {:multipart => true } do |f| %>
   <%= f.error_messages %>
 	<%= f.hidden_field :location_id %>
 
@@ -73,6 +73,15 @@
       <%= f.label :description, "Anything else you want to mention about this board?" %><br />
       <%= f.text_area :description, :size => "60x2"%>
     </p>
+	
+	<%for image in @board.images%>
+	<p>
+		<% f.fields_for :images, image do |image_fields| -%>
+			<%= image_fields.label :data, 'Your image' -%>
+			<%= image_fields.file_field :data -%>
+		<% end -%>
+	</p>
+		<%end%>
     <%= render :partial => '/black_out_day/form' %>
     <br>
     <p>
