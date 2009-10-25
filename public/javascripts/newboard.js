@@ -104,12 +104,12 @@ function populateFormFields(currentAddress){
     $("#location_postal_code").val(currentAddress.zipCode);
     $("#location_country").val(currentAddress.country);
     
-    $("#street").innerHTML = currentAddress.street;
-    $("#locality").innerHTML = currentAddress.city;
-    $("#region").innerHTML = currentAddress.state;
-    $("#postal_code").innerHTML = currentAddress.zipCode;
-    $("#country").innerHTML = currentAddress.country;
-    $("#accuracy").innerHTML = currentAddress.accuracy;
+    $("#street").text(currentAddress.street);
+    $("#locality").text(currentAddress.city);
+    $("#region").text(currentAddress.state);
+    $("#postal_code").text(currentAddress.zipCode);
+    $("#country").text(currentAddress.country);
+    $("#accuracy").text(currentAddress.accuracy);
 }
 
 function getAddressFromPlacemark(ourPlacemark){
