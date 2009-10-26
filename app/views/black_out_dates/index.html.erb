@@ -1,0 +1,22 @@
+<h1>Listing black_out_dates</h1>
+
+<table>
+  <tr>
+    <th>Board</th>
+    <th>Date</th>
+  </tr>
+
+<% @black_out_dates.each do |black_out_date| %>
+  <tr>
+    <td><%=h black_out_date.board_id %></td>
+    <td><%=h black_out_date.date %></td>
+    <td><%= link_to 'Show', black_out_date %></td>
+    <td><%= link_to 'Edit', edit_black_out_date_path(black_out_date) %></td>
+    <td><%= link_to 'Destroy', black_out_date, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New black_out_date', new_black_out_date_path %>

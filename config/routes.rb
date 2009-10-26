@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :black_out_dates
+
   map.resources :locations
 
   map.resources :styles

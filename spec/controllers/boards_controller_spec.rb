@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe BoardsController do
+  integrate_views
 
 
   #Delete these examples and add some real ones

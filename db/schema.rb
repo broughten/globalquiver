@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091023200923) do
+ActiveRecord::Schema.define(:version => 20091026031700) do
+
+  create_table "black_out_dates", :force => true do |t|
+    t.integer  "board_id"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "black_out_dates", ["board_id", "date"], :name => "index_black_out_dates_on_board_id_and_date", :unique => true
 
   create_table "boards", :force => true do |t|
     t.string   "maker"
@@ -26,15 +35,6 @@ ActiveRecord::Schema.define(:version => 20091023200923) do
     t.integer  "creator_id"
     t.integer  "updater_id"
   end
-
-  create_table "boards_days", :force => true do |t|
-    t.integer  "board_id",   :null => false
-    t.date     "day",        :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "boards_days", ["board_id", "day"], :name => "index_boards_days_on_board_id_and_day", :unique => true
 
   create_table "geocodes", :force => true do |t|
     t.decimal "latitude",    :precision => 15, :scale => 12

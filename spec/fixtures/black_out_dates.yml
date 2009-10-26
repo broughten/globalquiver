@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  board_id: 
+  date: 2009-10-25
+
+two:
+  board_id: 
+  date: 2009-10-25
