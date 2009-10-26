@@ -22,6 +22,12 @@ Sham.define do
   style_name {Faker::Lorem.words(1)}
 end
 
+Sham.near_future_date do
+  Date.civil((Date.today.year...Date.today.year+1).to_a.rand,
+             (1..12).to_a.rand,
+             (1..28).to_a.rand)
+end
+
 # Start of blueprints for user hierarchy.
 # Subclass blueprints will first populate their attributes
 # And then look to their parent blueprint for the missing attributes
@@ -75,4 +81,9 @@ end
 
 Image.blueprint() do
 
+end
+
+BlackOutDate.blueprint() do
+  board {Board.make()}
+  date Sham.near_future_date
 end

@@ -39,6 +39,8 @@ Spec::Runner.configure do |config|
   config.include ControllerHelpers, :type => :controller
   # do the same for the view helpers
   config.include ViewHelpers, :type => :view
+  # and the model helpers
+  config.include ModelHelpers, :type => :model
 
   # == Fixtures
   #

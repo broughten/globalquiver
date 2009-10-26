@@ -1,3 +1,5 @@
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+
 require 'spec_helper'
 
 describe Board do
@@ -23,8 +25,12 @@ describe Board do
       Board.make().should respond_to(:updater)
     end
     
-    it "should have many locations" do
+    it "should have many images" do
       Board.make().should respond_to(:images)
+    end
+    
+    it "should have many black_out_dates" do
+      make_board_with_black_out_dates.should respond_to(:black_out_dates)
     end
   end
   

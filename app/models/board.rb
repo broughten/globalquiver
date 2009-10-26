@@ -5,6 +5,7 @@ class Board < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
   has_many :images, :as => :owner, :dependent => :destroy
+  has_many :black_out_dates
 
   validates_presence_of :maker, :style, :length, :location
   

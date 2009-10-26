@@ -1,14 +1,12 @@
 require 'spec_helper'
 
 describe BlackOutDate do
-  before(:each) do
-    @valid_attributes = {
-      :board_id => 1,
-      :date => Date.today
-    }
+
+  it "should create a new instance from blueprint" do
+    BlackOutDate.make().should be_valid
   end
 
-  it "should create a new instance given valid attributes" do
-    BlackOutDate.create!(@valid_attributes)
-  end
+  
+  it "should not allow two entries with the same date and board id"
+
 end
