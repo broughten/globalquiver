@@ -20,14 +20,14 @@ class LocationsController < ApplicationController
   # POST /locations
   def create
     @location = Location.new(params[:location])
-
-    # Create a new map object, also defining the div ("map")
-    # where the map will be rendered in the view
-    
-    
-
+        
     respond_to do |format|
-      format.html # new.html.erb
+      if @location.save
+        flash[:notice] = 'Location was successfully created.'
+        format.html { redirect_to new_board_path }
+      else
+        format.html { render :action => "new" }
+      end
     end
 
   end
