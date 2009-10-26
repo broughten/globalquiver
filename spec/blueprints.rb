@@ -22,10 +22,8 @@ Sham.define do
   style_name {Faker::Lorem.words(1)}
 end
 
-Sham.near_future_date do
-  Date.civil((Date.today.year...Date.today.year+1).to_a.rand,
-             (1..12).to_a.rand,
-             (1..28).to_a.rand)
+Sham.future_date do
+  (1..100).to_a.rand.days.from_now
 end
 
 # Start of blueprints for user hierarchy.
@@ -85,5 +83,5 @@ end
 
 BlackOutDate.blueprint() do
   board {Board.make()}
-  date Sham.near_future_date
+  date Sham.future_date
 end
