@@ -1,5 +1,5 @@
 var geocoder = null;
-var DEFAULT_ZOOM = 10;
+var DEFAULT_ZOOM = 13;
 
 /* Definition of the class to hold the address information */
 function Address(){
@@ -16,8 +16,6 @@ Address.prototype.isValid = function() {
 	return this.accuracy > 0;
 }
 Address.MIN_ACCURACY = 7;
-
-
 
 /* Do all of the things that you need to do 
 	once the page is ready to go. */
