@@ -85,10 +85,6 @@ as we flesh out the login and create user pages.
   font-weight:bold;
 }
 
-#login-signup ul li a {
-  color: #ffffff;
-}
-
 #login-signup ul li a:hover,
 #login-signup ul li a:focus,
 #login-signup ul li a:active {
