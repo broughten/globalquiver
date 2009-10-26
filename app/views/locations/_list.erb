@@ -1,6 +1,6 @@
-<% if !@existing_locations.nil? and !@existing_locations.empty? %>
+
 <div id="locationPicker">
-  <h3>Choose a location or enter a <a href="javascript:void(0);" onclick="enableNewLocationEntry(); return false;">new one.</a><h3>
+  <h3>Choose a location or enter a <%=link_to "new one", new_location_path%>.<h3>
 
     <select id="board_location_selector" onchange="set_board_location_id(this.value)" >
       <% @existing_locations.each do |location| %>
@@ -10,4 +10,3 @@
       <% end %>
     </select>
 </div>
-<%  end %>
