@@ -27,7 +27,7 @@
             <ul>
               <% if current_user -%>
 				<%# Need to be all on one line to make sure they display properly.%>
-                <li id="user_link"><span>Hello, <%=h current_user.display_name %></span></li><li id="logout_link"><%= link_to 'My Profile', edit_user_path(current_user)%></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>				
+                <li id="user_link"><%= link_to "Hello, #{current_user.display_name}", overview_url %></li><li id="my_profile_link"><%= link_to 'My Profile', edit_user_path(current_user)%></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>				
               <% else -%>
 				<%# Need to be all on one line to make sure they display properly.%>
                 <li id="signup_link"><%=link_to "Join Global Quiver", new_user_url%></li><li id="login_link"><%=link_to "Login", new_session_url%></li>
