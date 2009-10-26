@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091008204741) do
+ActiveRecord::Schema.define(:version => 20091023200923) do
 
   create_table "boards", :force => true do |t|
     t.string   "maker"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(:version => 20091008204741) do
     t.float    "width"
     t.float    "thickness"
     t.integer  "style_id"
-    t.integer  "user_id"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -67,6 +66,17 @@ ActiveRecord::Schema.define(:version => 20091008204741) do
   add_index "geocodings", ["geocodable_id"], :name => "geocodings_geocodable_id_index"
   add_index "geocodings", ["geocodable_type"], :name => "geocodings_geocodable_type_index"
   add_index "geocodings", ["geocode_id"], :name => "geocodings_geocode_id_index"
+
+  create_table "images", :force => true do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+  end
 
   create_table "locations", :force => true do |t|
     t.string   "street"

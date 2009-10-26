@@ -28,48 +28,6 @@ as we flesh out the login and create user pages.
 }
 */
 
-.required_indicator{
-    color:red;
-    font-size:1.3em;
-}
-
-
-/* new authentication */
-#header_login_form,
-#header_signup_form {
-  background: #494444;
-  padding: 0 20px 20px 20px;
-  position: absolute;
-  right: 0;
-  top: 62px;
-  width: 200px;
-}
-
-#header_signup_form .user_fields,
-#header_login_form .user_fields{
-    margin-top:10px;
-}
-
-#header_login_form a:link, #header_login_form a:visited,
-#header_signup_form a:link, #header_signup_form a:visited{
-  color: #faf5bf;
-}
-
-#header_signup_form label a {
-  color: #faf5bf;
-}
-
-#header_login_form a:hover,
-#header_signup_form a:hover{
-    text-decoration:underline;
-}
-
-#header_login_form p,
-#header_signup_form p{
-  margin: 5px 0 5px 0;
-  display: block;
-  text-align: left;
-}
 
 .submitBtn{
   background: transparent url(/images/login-button.gif) no-repeat;
@@ -82,46 +40,6 @@ as we flesh out the login and create user pages.
   cursor: pointer;
 }
 
-#header_login_form label {
-  display: block;
-  width: 60px;
-  float: left;
-  margin-top: 5px;
-  margin-right: 5px;
-  text-align: right;
-  font-size: 1.2em;
-}
-
-#header_login_form input {
-  display: block;
-  margin-bottom: 5px;
-  margin-left: 65px;
-  width: 125px;
-}
-
-/* Safari 3 layout hack */
-body:first-of-type #header_login_form input {
-  margin-left: 0;
-}
-
-#header_signup_form div{
-    text-align: left;
-    margin-bottom:10px;
-}
-
-#header_signup_form label{
-    margin-bottom:5px;
-    font-size:1.2em;
-}
-
-#header_signup_form input[type=text],
-#header_signup_form input[type=password]{
-    width:100%;
-}
-
-#header_signup_form input[type=checkbox]{
-    margin-left:0px;
-}
 
 #signup_form{
     width:100%;
@@ -153,12 +71,8 @@ body:first-of-type #header_login_form input {
   font-size: 1.2em;
 }
 
-#login-signup ul li.active a {
-  background: #494444;
-  color: #FFF;
-}
 
-#login-signup ul li a, #login-signup ul li span {
+#login-signup ul li a {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -171,15 +85,8 @@ body:first-of-type #header_login_form input {
   font-weight:bold;
 }
 
-/* FF2 */ #header #login-signup ul li a, x:-moz-any-link { width: 100%;}
-/* FF3 */ #header #login-signup ul li a, x:-moz-any-link, x:default { width: auto;}
-
 #login-signup ul li a {
   color: #ffffff;
-}
-
-#login-signup ul li#user_link a {
-  width: auto;
 }
 
 #login-signup ul li a:hover,
