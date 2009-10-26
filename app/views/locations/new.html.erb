@@ -1,31 +1,33 @@
-<h1>New location</h1>
-
-<% form_for(@location) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :street %><br />
-    <%= f.text_field :street %>
-  </p>
-  <p>
-    <%= f.label :locality %><br />
-    <%= f.text_field :locality %>
-  </p>
-  <p>
-    <%= f.label :region %><br />
-    <%= f.text_field :region %>
-  </p>
-  <p>
-    <%= f.label :postal_code %><br />
-    <%= f.text_field :postal_code %>
-  </p>
-  <p>
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+<% content_for :head do %>
+  <%= GMap.header %>
+  <%= @map.to_html %>
+<%= javascript_include_tag 'locations/new' %>
 <% end %>
 
-<%= link_to 'Back', locations_path %>
+
+<h1>Enter in a little verbiage here about new locations </h1>
+
+<div id="locationFields">
+  <form id="addressForm"action="#" onsubmit="showAddress(this.address.value); return false;">
+    <h3>Enter an address below, or click a location on the map.</h3>
+    <br>
+    <input id="addressInput" type="text" name="address" value="" />
+    <input id="addressLookup" type="submit" value="Find" />
+<% if !@existing_locations.empty? %>
+	<%= link_to 'Use Existing Location', new_board_path, :class=>'call_to_action' %>
+<%end%>
+    <%= @map.div(:width => 700, :height => 400) %>
+
+  </form>
+
+
+<% form_for @new_location do |f| -%>
+	  	<%= f.hidden_field :street %>
+    	<%= f.hidden_field :locality %>
+    	<%= f.hidden_field :region %>
+    	<%= f.hidden_field :postal_code %>
+    	<%= f.hidden_field :country %>
+		<%= f.submit "Use this location."%>
+	<% end -%>
+  
+</div>
