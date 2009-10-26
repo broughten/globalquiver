@@ -37,6 +37,8 @@ Spec::Runner.configure do |config|
   # they are all part of the ControllerHelpers module but
   # can be broken up into different files.
   config.include ControllerHelpers, :type => :controller
+  # include the module ControllerMacros
+  config.include ControllerMacros, :type => :controller
   # do the same for the view helpers
   config.include ViewHelpers, :type => :view
   # and the model helpers
