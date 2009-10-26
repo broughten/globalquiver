@@ -3,10 +3,6 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  # render new.rhtml
-  def new
-  end
-
   def create
     session = params[:session]
     self.current_user = User.authenticate(session[:email], session[:password])
@@ -16,7 +12,7 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       redirect_back_or_default(overview_path)
-      flash[:notice] = "Logged in successfully"
+      flash[:notice] = "Logged in successfully."
     else
      flash[:error] = "Invalid username or password.  Please try again."
       render :action => 'new'
@@ -28,6 +24,6 @@ class SessionsController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default('/')
+    redirect_back_or_default(root_path)
   end
 end

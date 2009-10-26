@@ -5,10 +5,14 @@
  <h3>As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
 
 <% form_for :session,
-        :url => session_url(:protocol => env_ssl_protocol),
-        :html => { :method => 'POST',:id => 'login_form' } do |form| %>
+        :url => session_path(),
+        :html => {:id => 'login_form' } do |form| %>
   <div class="user_fields">
-    <%= render :partial => '/sessions/new_fields', :object => form %>
+	<%= form.label :email, 'Email' %>
+	<%= form.text_field :email %>
+
+	<%= form.label :password, 'Password' %>
+	<%= form.password_field :password %>
   </div>
 
   <div class="submit">
