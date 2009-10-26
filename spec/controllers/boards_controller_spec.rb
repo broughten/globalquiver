@@ -83,6 +83,38 @@ describe BoardsController do
         
       end
     end
+    
+    describe "edit board" do
+      before(:each) do
+        @temp_board = Board.make()
+      end
+      it "should attempt to find the board in question and allow the view to use it" do
+        Board.expects(:find).returns(@temp_board)
+        post 'edit', :id=>@temp_board.id
+        assigns[:board].should == @temp_board
+      end
+      
+      it "should render the edit view" do
+        post 'edit', :id=>@temp_board.id
+        response.should render_template("edit")
+      end
+    end
+    
+    describe "show board" do
+      before(:each) do
+        @temp_board = Board.make()
+      end
+      it "should attempt to find the board in question" do
+        Board.expects(:find).returns(@temp_board)
+        post 'show', :id=>@temp_board.id
+        assigns[:board].should == @temp_board
+      end
+      
+      it "should ender the show view" do
+        post 'show', :id=>@temp_board.id
+        response.should render_template("show")
+      end
+    end
   end
 
   describe "anonymous user" do
