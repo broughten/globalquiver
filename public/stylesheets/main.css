@@ -1,14 +1,10 @@
 /* v1.0 | 20080212 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+html, body, div, span,
+h1, h2, h3, p,
+a, img, dl, dt, dd, ul, li,
+form, label,
+table, tr, th, td {
   margin: 0;
   padding: 0;
   border: 0;
@@ -18,30 +14,17 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   background: transparent;
 }
 
-ol, ul {
+ul {
   list-style: none;
 }
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
+
 
 /* remember to define focus styles! */
 :focus {
   outline: 0;
 }
 
-/* remember to highlight inserts somehow! */
-ins {
-  text-decoration: none;
-}
-del {
-  text-decoration: line-through;
-}
+
 
 /* tables still need 'cellspacing="0"' in the markup */
 table {
@@ -75,11 +58,6 @@ p {
 }
 
 
-pre {
-  font-size: 1.8em;
-  line-height: 1.4;
-  margin: 0;
-}
 td {
   font-size: 1.2em;
 }
@@ -127,10 +105,6 @@ a.call_to_action{
   height: 1px;
 }
 
-.inside{
-  margin: 0px auto;
-}
-
 #container {
   text-align: left;
   width: 960px;
@@ -155,14 +129,6 @@ a.call_to_action{
   display: none;
 }
 
-#loginStatus{
-  margin: 20px 0 0 0;
-}
-
-#header .bottom{
-  clear: both;
-  padding: 0;
-}
 
 #header .right{
   float: right;
@@ -210,19 +176,12 @@ a.call_to_action{
   font-size: 1.8em;
 }
 
-#mainContent h4{
-  margin: 0px 0 0px 0;
-  font-size: 2em;
-}
 
 #mainContent p{
   margin: 0px 0 0 0;
   line-height: 1.7em;
 }
 
-#mainContent img.left{
-  margin: 0 20px 10px 0;
-}
 
 /*Sidebar-------------------------------------*/
 #sideBar{
@@ -239,9 +198,6 @@ a.call_to_action{
   margin: 0 20px 10px 0;
 }
 
-#counter p{
-  margin: 0 0 0 0;
-}
 
 #counter .amount{
   font-size: 3.6em;
@@ -257,9 +213,6 @@ a.call_to_action{
 /*Home----------------------------------------*/
 
 
-#homeBottom{
-  margin: 15px 0 0 0;
-}
 
 #buttonArea {
     margin: 25px 0 0 40px;
@@ -379,96 +332,6 @@ a.call_to_action{
   padding: 15px 0 0 0;
 }
 
-
-
-#mainContent form.left input {
-  width: 170px;
-}
-
-* html #mainContent form.left input {
-  width: 150px;  
-}
-
-#mainContent form.left .submit input{
-  margin-left: 85px;
-  background: transparent url(/images/btn_small.gif) no-repeat;
-  width: 102px;
-  height: 33px;
-  border: none;
-  font-weight: bold;
-  color: #555555;
-  cursor: pointer;
-}
-
-/*Link buttons---------------------*/
-.btnSmall{
-  display: block;
-  background: transparent url(/images/btn_small.gif) no-repeat;
-  width: 102px;
-  height: 33px;
-  color: #555555;
-  font-weight: bold;
-  line-height: 33px;
-  text-align: center;
-  font-size: 1.2em;
-}
-
-
-.btnSmall:hover{
-  color: #ff560e;
-  text-decoration: none;
-}
-
-.btnLgBlue{
-  display: block;
-  background: transparent url(/images/btn_lg_blue.gif) no-repeat;
-  width: 186px;
-  height: 33px;
-  color: #555555;
-  font-weight: bold;
-  line-height: 33px;
-  text-align: center;
-}
-
-.btnLgBlue:hover{
-  color: #ff560e;
-  text-decoration: none;
-}
-
-.btnMedBlueGrad{
-  display: block;
-  background: transparent url(/images/btn_med_blue_grad.gif) no-repeat;
-  width: 124px;
-  height: 33px;
-  color: #555555;
-  font-weight: bold;
-  line-height: 33px;
-  text-align: center;
-  font-size: 1.2em;
-
-}
-
-.btnMedBlueGrad:hover{
-  color: #ff560e;
-  text-decoration: none;
-}
-
-.btnLgTan{
-  display: block;
-  background: transparent url(/images/btn_lg_tan.gif) no-repeat;
-  width: 152px;
-  height: 33px;
-  color: #555555;
-  font-weight: bold;
-  line-height: 33px;
-  text-align: center;
-  font-size: 1.2em;
-}
-
-.btnLgTan:hover{
-  color: #ff560e;
-  text-decoration: none;
-}
 
 
 
