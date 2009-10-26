@@ -6,8 +6,8 @@ describe "/user/new" do
     render "users/new.html.erb"
   end
 
-  it "should have a form with text fields for the required fields" do
-    response.should have_selector("form[method=post]", :action => users_url) do |form|
+  it "should have a multipart form with fields for the required fields" do
+    response.should have_selector("form[method=post][enctype='multipart/form-data']", :action => users_url) do |form|
       form.should have_selector("input[type=checkbox]", :name=>"is_shop")
       form.should have_selector("input[type=text]", :name=>"user[first_name]")
       form.should have_selector("input[type=text]", :name=>"user[last_name]")
