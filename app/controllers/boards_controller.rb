@@ -25,9 +25,6 @@ class BoardsController < ApplicationController
     @locations = Location.find_all_by_creator_id(current_user.id) unless current_user.nil?
 
     @boards = Board.search(@location)
-
-    make_map_ready
-    
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -44,20 +41,23 @@ class BoardsController < ApplicationController
 
   # GET /boards/new
   def new
-    # we pull up all the locations that the user has previously entered
-    # because he might want to use one of these for the board he's about to enter
-    @existing_locations = current_user.locations.ordered_by_desc_creation
-    # create a new location here to hold the info if the user enters a new location
-    @location = Location.new
-    @board = @location.boards.build
-    
-    # allow for 4 pictures on each board
-    4.times {@board.images.build}
-    make_map_ready
+    if current_user.locations.empty?
+      # we need a location before we can create a board so
+      # go out and get one.
+      redirect_to new_location_path
+    else
+      # we pull up all the locations that the user has previously entered
+      # because he might want to use one of these for the board he's about to enter
+      @existing_locations = current_user.locations.ordered_by_desc_creation
+      @board = Board.new
 
-    respond_to do |format|
-      format.html # new.html.erb
+      # allow for 4 pictures on each board
+      4.times {@board.images.build}
+      respond_to do |format|
+        format.html # new.html.erb
+      end
     end
+    
   end
 
   # GET /boards/1/edit
@@ -69,21 +69,12 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
-    
-    if (!@board.has_location?)
-      # let's create a new location because we don't have an existing one
-      @location = Location.new(params[:location])
-      if @location.save
-        @board.location_id = @location.id
-      end
-    end
-   
+
     respond_to do |format|
       if @board.save
         flash[:notice] = 'Board was successfully created.'
         format.html { redirect_to(overview_path) }
       else
-        make_map_ready
         format.html { render :action => "new" }
       end
     end
@@ -96,7 +87,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.update_attributes(params[:board])
         flash[:notice] = 'Board was successfully updated.'
-        format.html { redirect_to(overviews_path) }
+        format.html { redirect_to(overview_path) }
       else
         format.html { render :action => "edit" }
       end
@@ -109,26 +100,7 @@ class BoardsController < ApplicationController
     @board.destroy
 
     respond_to do |format|
-      format.html { redirect_to(overviews_path) }
+      format.html { redirect_to(overview_path) }
     end
   end
-
-private
-
-  def make_map_ready
-    # Create a new map object, also defining the div ("map")
-    # where the map will be rendered in the view
-    @map = GMap.new("map")
-    # Use the larger pan/zoom control but disable the map type
-    # selector
-    @map.control_init(:large_map => true,:map_type => false)
-    # Center the map on specific coordinates and focus in fairly
-    # closely
-    if (remote_location.nil? || remote_location.latitude.nil?)
-      @map.center_zoom_init([25.165173,-158.203125], 1  )
-    else
-      @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11  )
-    end
-  end
-
 end

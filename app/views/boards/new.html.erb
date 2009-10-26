@@ -1,10 +1,8 @@
 <% content_for :head do %>
-  <%= GMap.header %>
-  <%= @map.to_html %>
   <%= stylesheet_link_tag 'board', 'location', 'datePicker', 'availability', :media => 'screen' %>
 	<%# Javascript for the date picker%>
   <%= javascript_include_tag 'date', 'jquery.datePicker', 'datePickerMultiMonth', 'availability' %>
-  <%= javascript_include_tag 'newboard', 'json2' %>
+  <%= javascript_include_tag 'boards/new', 'json2' %>
 
 <% end %>
 
@@ -16,21 +14,14 @@
 <br>
 <h2>First, where is this board?</h2>
 <p>We need to know where your boar is so that people looking to take surf trips in your area will be able to find it, pick it up, and use it<p>
-<%= render :partial => '/locations/new' %>
+
 <%= render :partial => '/locations/list' %>
 
 <% form_for @board, :html => {:multipart => true } do |f| %>
   <%= f.error_messages %>
 	<%= f.hidden_field :location_id %>
 
-  <%= render :partial => '/locations/form', :object => @location %>
-
-<% @board_details_style = (!@existing_locations.nil? and @existing_locations.length > 0) ? '' : 'display:none'%>
-
-<div id="boardDetails" style="<%=@board_details_style%>">
-  <br>
-  <br>
-
+<div id="boardDetails">
   <h2>Next, tell us about the board.</h2><span id="required_star">*</span> denotes required
   <p>Different surfers and different conditions require different boards.  Describe yours below:</p>
     <p>
@@ -47,6 +38,16 @@
       <%= f.text_field :length_feet, :value => "feet", :size => 4 %>
       <%= f.text_field :length_inches, :value => "inches", :size => 4 %>
     </p>
+	<p>
+      <%= f.label :style_name, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
+      <%= f.text_field :style_name %>
+	<%# This only works with prototyle/scriptaculous...which we are not using any longer.%>
+	<%#= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
+        { :url => formatted_styles_path(:js), :method => :get,
+        :with => "'search=' + element.value" } %>
+    </p>
+	<p><a id='hide_show_optional_fields' href="javascript:void(0)"><span id='visibility_indicator'>Show</span> Optional Fields</a>
+	<div id="optional_fields">
     <p>
       <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
       <%= f.text_field :width_inches, :value => "inches", :size => 4 %>
@@ -57,14 +58,7 @@
       <%= f.text_field :thickness_inches, :value => "inches", :size => 4 %>
       <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
     </p>
-    <p>
-      <%= f.label :style_name, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
-      <%= f.text_field :style_name %>
-	<%# This only works with prototyle/scriptaculous...which we are not using any longer.%>
-	<%#= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
-        { :url => formatted_styles_path(:js), :method => :get,
-        :with => "'search=' + element.value" } %>
-    </p>
+    
     <p>
       <%= f.label :construction, "Construction: (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
       <%= f.text_field :construction %>
@@ -73,6 +67,7 @@
       <%= f.label :description, "Anything else you want to mention about this board?" %><br />
       <%= f.text_area :description, :size => "60x2"%>
     </p>
+	</div>
 	
 	<%for image in @board.images%>
 	<p>
