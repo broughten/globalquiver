@@ -316,9 +316,8 @@ Date.fullYearStart = '20';
 	 * @type Date
 	 * @cat Plugins/Methods/Date
 	 */
-	add("addDays", function(num) {
-		//this.setDate(this.getDate() + num);
-		this.setTime(this.getTime() + (num*86400000) );
+        add("addDays", function(num) {
+		this.setDate(this.getDate() + num);
 		return this;
 	});
 	

@@ -1,4 +1,8 @@
 class BlackOutDatesController < ApplicationController
+
+  before_filter :login_required, :except => [:index, :show]
+
+
   # GET /black_out_dates
   # GET /black_out_dates.xml
   def index
