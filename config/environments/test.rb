@@ -37,3 +37,5 @@ config.gem 'mocha'
 config.gem 'launchy', :lib => false
 config.gem "ZenTest" #Gives us access to autospec.
 #See http://www.nateclark.com/articles/2008/09/17/_autotest_-is-now-_autospec_-how-to-set-up-autospec-for-rspec-and-rails-with-zentest
+#rack-test is used for testing rack based apps.  See http://github.com/brynary/rack-test for details.
+config.gem 'rack-test', :lib => false
