@@ -23,6 +23,9 @@ Rails::Initializer.run do |config|
     config.gem 'justinfrench-formtastic', :lib => 'formtastic', :source => 'http://gems.github.com'
     config.gem 'thoughtbot-paperclip', :lib => 'paperclip', :source => 'http://gems.github.com'
     config.gem 'sinatra'
+    # The next two gems are used for geocoding
+    config.gem 'graticule'
+    config.gem 'acts_as_geocodable'
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
