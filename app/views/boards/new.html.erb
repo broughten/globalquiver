@@ -1,8 +1,12 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'board', 'location', 'datePicker', 'availability', :media => 'screen' %>
-	<%# Javascript for the date picker%>
-  <%= javascript_include_tag 'date', 'jquery.datePicker', 'datePickerMultiMonth', 'black_out_days/new' %>
-  <%= javascript_include_tag 'boards/new', 'json2' %>
+	<%# All of the javascript for the date picker.  Cache these all up so they are served as one file.%>
+  <%= javascript_include_tag 'jquery/date_picker/date', 
+		'jquery/date_picker/jquery.datePicker', 
+		'jquery/date_picker/datePickerMultiMonth', 
+		:cache=> "cache/date_picker"%>
+  <%= javascript_include_tag 'boards/new'%>
+	<%= javascript_include_tag 'black_out_days/new'%>
 
 <% end %>
 
