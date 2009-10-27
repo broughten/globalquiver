@@ -36,16 +36,6 @@ describe BlackOutDate do
       blackoutdate.should_not be_valid
     end
 
-    it "should not allow you to create a black out date without a board" do
-      blackoutdate = BlackOutDate.make_unsaved(:board => nil)
-
-      blackoutdate.should_not be_valid
-    end
- 
-    it "should not allow you to create a blackout date for a board_id that doesn't exist" do
-      blackoutdate = BlackOutDate.make_unsaved(:board_id => 49)
-      blackoutdate.should_not be_valid
-    end
   end
 
 

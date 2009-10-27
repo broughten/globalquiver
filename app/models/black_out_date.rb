@@ -6,8 +6,6 @@ class BlackOutDate < ActiveRecord::Base
 
   validates_is_after :date
 
-  validates_presence_of :board_id, :date
-
-  validates_existence_of :board
-
+  validates_presence_of :date
+  
 end

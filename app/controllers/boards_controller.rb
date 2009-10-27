@@ -70,6 +70,8 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(params[:board])
 
+
+
     respond_to do |format|
       if @board.save
         flash[:notice] = 'Board was successfully created.'

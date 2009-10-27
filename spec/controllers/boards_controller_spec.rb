@@ -110,7 +110,7 @@ describe BoardsController do
         assigns[:board].should == @temp_board
       end
       
-      it "should ender the show view" do
+      it "should render the show view" do
         post 'show', :id=>@temp_board.id
         response.should render_template("show")
       end

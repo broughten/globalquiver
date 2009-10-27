@@ -11,6 +11,12 @@ class Board < ActiveRecord::Base
   
   accepts_nested_attributes_for :images
 
+  def black_out_date_attributes=(black_out_date_attributes)
+    black_out_date_attributes.each do |attributes|
+      black_out_dates.build(attributes)
+    end
+  end
+
   def style_name
     style.name if style
   end
