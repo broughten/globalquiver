@@ -1,3 +1,14 @@
+#require 'paperclip'
+
+def create_images_for_board(board,photo_path)
+  Dir.glob(photo_path).entries.each do |e|
+    image = Image.new
+    image.owner = board
+    image.data = File.open(e)
+    image.save!
+  end
+end
+
 # this associates the task into the db: namespace
 namespace :db do
   # Always use one of these to allow a taks list to show this task
@@ -11,9 +22,13 @@ namespace :db do
     # of how to do this
     require 'populator'
     require 'faker'
+    require 'fileutils'
     
     #Clear out the tables
     [User, Board, Location, Style, Image, Geocode, Geocoding].each(&:delete_all)
+    
+    #Clear out the images folder to remove old images
+   FileUtils.rm_rf RAILS_ROOT + '/public/system/datas/'
     
     #Set up User data
     surfer = Surfer.create(:first_name=>"Dev", :last_name=>"Surfer", :password=>"testing", 
@@ -33,7 +48,7 @@ namespace :db do
       :region=>"CA", :postal_code=>"93101", :country=>"USA", :creator=>surfer, :updater=>surfer)
     shopLocation = Location.create(:street=>"13005 Lowell Blvd", :locality=>"Westminster", 
         :region=>"CO", :postal_code=>"80031", :country=>"USA", :creator=>shop, :updater=>shop)
-        
+    
     #Set up boards for surfer
     Board.populate 3 do |board|
       board.maker = Faker::Company.name
@@ -57,5 +72,13 @@ namespace :db do
       board.updater_id = shop.id
       board.location_id = shopLocation.id
     end
+    
+    counter = 0
+    Board.find(:all).each do |board|
+      create_images_for_board(board,'./spec/fixtures/images/boards/*') if (counter % 4 == 0)
+      counter += 1
+    end
+    
+    
   end
 end
