@@ -25,12 +25,12 @@
 
 <p>
   <b>Style:</b>
-  <%=h @board.style_id %>
+  <%=h @board.style.name%>
 </p>
 
 <p>
-  <b>User:</b>
-  <%=h @board.user_id %>
+  <b>Construction:</b>
+  <%=h @board.description %>
 </p>
 
 <p>
@@ -38,6 +38,25 @@
   <%=h @board.description %>
 </p>
 
+<p>
+  <b>Board Owner:</b>
+  <%=h @board.creator.full_name %>
+</p>
+
+
+<p>
+  <b>Location:</b>
+  <%=h @board.location.locality %>, <%=h @board.location.region %> <%=h @board.location.country %>
+</p>
+
+<p>
+  <b>Photos:</b>
+<% @board.images.each do |image| %>
+  <%= image_tag image.data.url()%>
+<%end%>
+</p>
+
+
 
 <%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>
+<%= link_to 'Back to Overview', overview_path %>
