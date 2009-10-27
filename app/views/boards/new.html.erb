@@ -1,13 +1,23 @@
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'board', 'location', 'datePicker', 'availability', :media => 'screen' %>
+  <%= stylesheet_link_tag 'board',
+ 	'location',
+ 	'datePicker',
+ 	'availability',
+ 	'jquery/auto_complete/jquery.autocomplete',
+ 	:media => 'screen' %>
 	<%# All of the javascript for the date picker.  Cache these all up so they are served as one file.%>
   <%= javascript_include_tag 'jquery/date_picker/date', 
 		'jquery/date_picker/jquery.datePicker', 
 		'jquery/date_picker/datePickerMultiMonth', 
 		:cache=> "cache/date_picker"%>
-  <%= javascript_include_tag 'boards/new'%>
-	<%= javascript_include_tag 'black_out_days/new'%>
+  <%= javascript_include_tag 'boards/new', 'black_out_days/new', 'jquery/auto_complete/jquery.autocomplete.pack'%>
 
+<% end %>
+
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $("input#board_style_name").autocomplete("/autocomplete/style/name")
+  });
 <% end %>
 
 <h1>List a board for borrow or rent</h1>
@@ -44,11 +54,7 @@
     </p>
 	<p>
       <%= f.label :style_name, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
-      <%= f.text_field :style_name %>
-	<%# This only works with prototyle/scriptaculous...which we are not using any longer.%>
-	<%#= text_field_with_auto_complete :board, :style_name, { :size => 30}, 
-        { :url => formatted_styles_path(:js), :method => :get,
-        :with => "'search=' + element.value" } %>
+      <%= f.text_field :style_name, :autocomplete =>"off" %>
     </p>
 	<p><a id='hide_show_optional_fields' href="javascript:void(0)"><span id='visibility_indicator'>Show</span> Optional Fields</a>
 	<div id="optional_fields">
