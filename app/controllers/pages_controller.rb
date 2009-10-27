@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   PAGE_KEYWORDS = %w(home why how)
 
-  helper_method :total_user_count, :recent_users
+  helper_method :total_user_count, :recent_users, :total_board_count
 
   def show
     render :template => current_page
@@ -20,6 +20,10 @@ class PagesController < ApplicationController
 
   def total_user_count
     @total_user_count ||= User.count
+  end
+  
+  def total_board_count
+    @total_board_count ||= Board.count
   end
 
 end
