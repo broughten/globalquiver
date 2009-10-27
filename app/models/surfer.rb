@@ -9,5 +9,9 @@ class Surfer < User
   def display_name
     read_attribute(:first_name)
   end
+  
+  def full_name
+    "#{read_attribute(:first_name)} #{read_attribute(:last_name)}"
+  end
 
 end

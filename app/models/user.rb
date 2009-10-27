@@ -92,6 +92,10 @@ class User < ActiveRecord::Base
   def display_name
     "" # placeholder...will be redefined in sub classes.
   end
+  
+  def full_name
+    "" # placeholder...will be redefined in sub classes.
+  end
 
   protected
     # before filter 

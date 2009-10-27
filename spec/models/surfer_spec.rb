@@ -16,5 +16,10 @@ describe Surfer do
     surfer = Surfer.make()
     surfer.display_name.should == surfer.first_name
   end
+  
+  it "should return first name and last name separated by space for full name" do
+    surfer = Surfer.make()
+    surfer.full_name.should == "#{surfer.first_name} #{surfer.last_name}"
+  end
 
 end

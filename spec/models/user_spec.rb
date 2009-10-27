@@ -77,4 +77,9 @@ describe User do
     display_name = user.display_name
     display_name.should == ""
   end
+  
+  it "should should return an empty string for full_name" do
+    user = User.make()
+    user.full_name.should == ""
+  end
 end

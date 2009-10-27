@@ -17,6 +17,11 @@ describe Shop do
     shop.display_name.should == shop.name
   end
   
+  it "should return it's name as the full name" do
+    shop = Shop.make()
+    shop.full_name.should == shop.name
+  end
+  
   it "should think that it is a shop" do
     is_shop = Shop.make().is_rental_shop?
     is_shop.should == true
