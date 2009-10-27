@@ -23,14 +23,14 @@ $(function()
       function(event, displayedMonth, displayedYear)
       {
         // uncomment if you have firebug and want to confirm this works as expected...
-        console.log('dpMonthChanged', arguments);
+        //console.log('dpMonthChanged', arguments);
       }
     ).bind(
       'dateSelected',
       function(event, date, $td, status)
       {
         // uncomment if you have firebug and want to confirm this works as expected...
-        console.log('dateSelected', arguments);
+        //console.log('dateSelected', arguments);
         addFormField(date, status)
       }
     );
@@ -47,6 +47,17 @@ $(function()
 
 
 function addFormField(date, status) {
-  $("#multimonth").append(
-  "<input type='hidden' id='board[black_out_date_attributes]_date' name='board[black_out_date_attributes][][date]' value='" + date.asString() + "'>");
-}
+  //this adds a hidden input field containing the selected
+  //date to the form.
+  if (status) {
+    $("#multimonth").append(
+      "<input type='hidden' " +
+      "id='board[black_out_date_attributes]_date' " +
+      "name='board[black_out_date_attributes][][date]' " +
+      "value='" + date.asString() + "'>");
+  } else {
+    //and if the date is ever unselected, this will remove
+    //the hidden field from the form.
+    $('input[value="' + date.asString() + '"]').remove();
+  }
+ }
