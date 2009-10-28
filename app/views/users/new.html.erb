@@ -9,7 +9,7 @@
   <%= link_to 'Login', new_session_path, :class=>'call_to_action' %>
 <% form_for :user,
             :url => users_url(:protocol => env_ssl_protocol),
-            :html => {:id => 'signup_form', :multipart => true } do |form| %>
+            :html => {:id => 'signup_form'} do |form| %>
   <%= form.error_messages %>
   <div class="user_fields">
     <div>

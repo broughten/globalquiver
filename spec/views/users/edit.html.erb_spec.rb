@@ -15,7 +15,6 @@ describe "/user/edit" do
           form.should have_selector("input[type=text]", :name=>"shop[email]")
           form.should have_selector("input[type=password]", :name=>"shop[password]")
           form.should have_selector("input[type=password]", :name=>"shop[password_confirmation]")
-          form.should have_selector("input[type=file]", :name=>"shop[image_attributes][data]")
           form.should have_selector("input[type=submit]")
       end
     end
@@ -36,7 +35,6 @@ describe "/user/edit" do
           form.should have_selector("input[type=text]", :name=>"surfer[email]")
           form.should have_selector("input[type=password]", :name=>"surfer[password]")
           form.should have_selector("input[type=password]", :name=>"surfer[password_confirmation]")
-          form.should have_selector("input[type=file]", :name=>"surfer[image_attributes][data]")
           form.should have_selector("input[type=submit]")
       end
     end
