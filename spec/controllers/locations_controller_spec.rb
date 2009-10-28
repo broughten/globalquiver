@@ -37,7 +37,17 @@ describe LocationsController do
         flash[:notice].should_not be_nil
         response.should redirect_to(new_board_path)
       end
-
+      
+      it "should redirect to new board path with a flash message and a unsaved new location if new location matches location in logged in user's locations" do
+        location = mock()
+        location.stubs(:matches?).returns(true)
+        User.any_instance.stubs(:locations).returns([location])
+        post 'create'
+        assigns[:location].should be_new_record # because we should never get to the save
+        flash[:notice].should_not be_nil
+        response.should redirect_to(new_board_path)
+      end
+      
       it "should render new template without a flash message on unsuccessful save" do
         Location.any_instance.stubs(:valid?).returns(false)
         post 'create'
