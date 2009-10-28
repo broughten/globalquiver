@@ -29,8 +29,8 @@ describe Board do
       Board.make().should respond_to(:images)
     end
     
-    it "should have many black_out_dates" do
-      make_board_with_black_out_dates.should respond_to(:black_out_dates)
+    it "should have many unavailable_dates" do
+      make_board_with_unavailable_dates.should respond_to(:unavailable_dates)
     end
   end
   
@@ -38,7 +38,7 @@ describe Board do
     it "should validate location" do
       board = Board.make_unsaved(:location=>Location.make())
       board.should be_valid
-      
+       
       board.location = nil
       board.should_not be_valid
     end
@@ -68,7 +68,18 @@ describe Board do
       board.should_not be_valid
     end
   end
-  
+
+  describe "nested attributes" do
+    it 'should should accept nested attributes for unavailable dates' do
+      Board.make().should respond_to(:unavailable_dates_attributes=)
+    end
+
+    it 'should should accept nested attributes for images' do
+      Board.make().should respond_to(:images_attributes=)
+    end
+
+  end
+
   it "should determine if it has an existing location" do
     board = Board.make()
     board.has_location?.should be_true

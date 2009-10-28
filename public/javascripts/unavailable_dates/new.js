@@ -52,8 +52,7 @@ function addFormField(date, status) {
   if (status) {
     $("#multimonth").append(
       "<input type='hidden' " +
-      "id='board[black_out_date_attributes]_date' " +
-      "name='board[black_out_date_attributes][][date]' " +
+      "name='board[unavailable_dates_attributes][][date]' " +
       "value='" + date.asString() + "'>");
   } else {
     //and if the date is ever unselected, this will remove

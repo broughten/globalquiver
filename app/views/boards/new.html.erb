@@ -10,7 +10,7 @@
 		'jquery/date_picker/jquery.datePicker', 
 		'jquery/date_picker/datePickerMultiMonth', 
 		:cache=> "cache/date_picker"%>
-  <%= javascript_include_tag 'boards/new', 'black_out_days/new', 'jquery/auto_complete/jquery.autocomplete.pack'%>
+  <%= javascript_include_tag 'boards/new', 'unavailable_dates/new', 'jquery/auto_complete/jquery.autocomplete.pack'%>
 
 <% end %>
 
@@ -87,7 +87,7 @@
 		<% end -%>
 	</p>
 		<%end%>
-    <%= render :partial => '/black_out_day/form' %>
+    <%= render :partial => '/unavailable_dates/form' %>
     <br>
     <p>
       <%= f.submit 'Create' %>

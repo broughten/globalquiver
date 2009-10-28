@@ -4,7 +4,9 @@
 
     <select id="board_location_selector" onchange="set_board_location_id(this.value)" >
       <% @existing_locations.each do |location| %>
-        <option value="<%= location.id %>">
+        <option value="<%= location.id %>"
+0
+           <% if !@board.nil? and @board.location_id == location.id -%> selected="selected"<% end -%>>
           <%= location.street %> <%= location.locality %>, <%= location.region %>
         </option>
       <% end %>
