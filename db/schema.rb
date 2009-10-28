@@ -9,16 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091026031700) do
-
-  create_table "black_out_dates", :force => true do |t|
-    t.integer  "board_id"
-    t.date     "date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "black_out_dates", ["board_id", "date"], :name => "index_black_out_dates_on_board_id_and_date", :unique => true
+ActiveRecord::Schema.define(:version => 20091028173904) do
 
   create_table "boards", :force => true do |t|
     t.string   "maker"
@@ -95,6 +86,17 @@ ActiveRecord::Schema.define(:version => 20091026031700) do
     t.datetime "updated_at"
     t.string   "name"
   end
+
+  create_table "unavailable_dates", :force => true do |t|
+    t.integer  "board_id"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  add_index "unavailable_dates", ["board_id", "date"], :name => "index_black_out_dates_on_board_id_and_date", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

@@ -50,7 +50,6 @@ class BoardsController < ApplicationController
       # because he might want to use one of these for the board he's about to enter
       @existing_locations = current_user.locations.ordered_by_desc_creation
       @board = Board.new
-
       # allow for 4 pictures on each board
       4.times {@board.images.build}
       respond_to do |format|
@@ -70,13 +69,12 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(params[:board])
 
-
-
     respond_to do |format|
       if @board.save
         flash[:notice] = 'Board was successfully created.'
         format.html { redirect_to(overview_path) }
       else
+        @existing_locations = current_user.locations.ordered_by_desc_creation
         format.html { render :action => "new" }
       end
     end
@@ -105,4 +103,5 @@ class BoardsController < ApplicationController
       format.html { redirect_to(overview_path) }
     end
   end
+
 end

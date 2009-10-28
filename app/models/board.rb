@@ -5,17 +5,11 @@ class Board < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
   has_many :images, :as => :owner, :dependent => :destroy
-  has_many :black_out_dates
+  has_many :unavailable_dates
 
   validates_presence_of :maker, :style, :length, :location
   
-  accepts_nested_attributes_for :images
-
-  def black_out_date_attributes=(black_out_date_attributes)
-    black_out_date_attributes.each do |attributes|
-      black_out_dates.build(attributes)
-    end
-  end
+  accepts_nested_attributes_for :images, :unavailable_dates
 
   def style_name
     style.name if style

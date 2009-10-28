@@ -1,8 +1,8 @@
 module ModelHelpers
 
-  def make_board_with_black_out_dates(attributes = {})
+  def make_board_with_unavailable_dates(attributes = {})
     board = Board.make(attributes)
-    3.times { board.black_out_dates.make }
+    3.times { board.unavailable_dates.make }
     board
   end
 

@@ -81,7 +81,8 @@ Image.blueprint() do
 
 end
 
-BlackOutDate.blueprint() do
+UnavailableDate.blueprint() do
   board {Board.make()}
   date Sham.future_date
+  user {User.make()}
 end
