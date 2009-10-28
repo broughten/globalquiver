@@ -10,10 +10,6 @@
 	<%= form.input :email %>
 	<%= form.input :password, :required=>false %>
 	<%= form.input :password_confirmation, :required=>false %>
-	<%= image_tag(@user.image.data.url(:thumb)) if @user.image != nil %>
-	<% form.fields_for :image_attributes do |image_fields| %>
-		<%= image_fields.file_field :data %>
-	<% end %>
   </div>
 
   <div class="submit">

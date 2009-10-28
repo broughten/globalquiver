@@ -41,12 +41,6 @@
 	  <%= form.password_field :password_confirmation %>
 	</div>
 	<div>
-		<% form.fields_for :image_attributes do |image_fields| -%>
-			<%= image_fields.label :data, 'Your image' -%>
-			<%= image_fields.file_field :data -%>
-		<% end -%>
-	</div>
-	<div>
 	  <%= form.check_box :terms_of_service %>
 	  <%= form.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>" %>
 	</div>
