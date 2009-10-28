@@ -82,7 +82,9 @@ Image.blueprint() do
 end
 
 UnavailableDate.blueprint() do
+  user = User.make()
   board {Board.make()}
   date Sham.future_date
-  user {User.make()}
+  creator {user}
+  updater {user}
 end
