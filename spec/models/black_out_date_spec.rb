@@ -26,7 +26,7 @@ describe BlackOutDate do
     end
 
     it "should not allow you to make a new black out date that is in the past" do
-      blackoutdate = BlackOutDate.make_unsaved(:date => 1.day.ago)
+      blackoutdate = BlackOutDate.make_unsaved(:date => 2.days.ago)
       blackoutdate.should_not be_valid
     end
 
