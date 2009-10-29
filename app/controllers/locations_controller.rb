@@ -22,7 +22,7 @@ class LocationsController < ApplicationController
     @location = Location.new(params[:location])
         
     respond_to do |format|
-      if @location.save
+      if (current_user.locations.any? { |existing_location| existing_location.matches?(@location)} || @location.save)
         flash[:notice] = 'Location was successfully created.'
         format.html { redirect_to new_board_path }
       else

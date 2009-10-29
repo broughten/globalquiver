@@ -43,6 +43,8 @@ Spec::Runner.configure do |config|
   config.include ViewHelpers, :type => :view
   # and the model helpers
   config.include ModelHelpers, :type => :model
+  # include the module ModelMacros
+  config.include ModelMacros, :type => :model
 
   # == Fixtures
   #
