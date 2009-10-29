@@ -6,6 +6,7 @@ class Board < ActiveRecord::Base
   belongs_to :updater, :class_name => 'User'
   has_many :images, :as => :owner, :dependent => :destroy
   has_many :unavailable_dates
+  #note: learned out to create associations below from http://www.dweebd.com/ruby/has_many-with-arguments/
   has_many :reserved_dates, :class_name=>'UnavailableDate', :conditions=> 'creator_id != #{creator.id}'
   has_many :black_out_dates, :class_name=>'UnavailableDate', :conditions=>'creator_id = #{creator.id}'
 
