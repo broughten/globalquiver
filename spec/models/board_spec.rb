@@ -32,6 +32,33 @@ describe Board do
     it "should have many unavailable_dates" do
       make_board_with_unavailable_dates.should respond_to(:unavailable_dates)
     end
+
+    it "should have many reserved dates" do
+      make_board_with_unavailable_dates.should respond_to(:reserved_dates)
+    end
+
+    it "should have many black out dates" do
+      make_board_with_unavailable_dates.should respond_to(:black_out_dates)
+    end
+
+    it "reserved dates should only contain dates assigned to board renters" do
+      owner = User.make()
+      renter = User.make()
+      board = Board.make(:creator=>owner)
+      1.times {board.unavailable_dates << UnavailableDate.make(:creator=>owner)}
+      2.times {board.unavailable_dates << UnavailableDate.make(:creator=>renter)}
+      board.reserved_dates.length.should == 2
+    end
+
+    it "black out dates should only contain dates assigned to board owner" do
+      owner = User.make()
+      renter = User.make()
+      board = Board.make(:creator=>owner)
+      1.times {board.unavailable_dates << UnavailableDate.make(:creator=>owner)}
+      2.times {board.unavailable_dates << UnavailableDate.make(:creator=>renter)}
+      board.black_out_dates.length.should == 1
+    end
+
   end
   
   describe "validations" do

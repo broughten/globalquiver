@@ -6,6 +6,8 @@ class Board < ActiveRecord::Base
   belongs_to :updater, :class_name => 'User'
   has_many :images, :as => :owner, :dependent => :destroy
   has_many :unavailable_dates
+  has_many :reserved_dates, :class_name=>'UnavailableDate', :conditions=> 'creator_id != #{creator.id}'
+  has_many :black_out_dates, :class_name=>'UnavailableDate', :conditions=>'creator_id = #{creator.id}'
 
   validates_presence_of :maker, :style, :length, :location
   
