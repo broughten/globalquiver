@@ -1,5 +1,13 @@
 <h1>Board Search Results</h1>
 
+<% if @found_boards.empty? %>
+  <p>
+    We couldn't find any boards where you're planning on going.  Try a different search.
+  </p>
+  <%  else %>
 <ul id="board_list">
     <%= render :partial => "board", :collection => @found_boards %>
   </ul>
+  
+  <% end %>
+
