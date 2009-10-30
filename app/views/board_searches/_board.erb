@@ -1,0 +1,9 @@
+<li>
+    <span>Maker:<%=link_to(board.maker, board_path(board)) %> </span>
+	
+	<span>Model:<%=board.model%></span>
+	<span>
+		Style: <%= board.style%>, 
+		Length: <%= board.length_feet %>' <%= board.length_inches %>" 
+	 </span>
+  </li>

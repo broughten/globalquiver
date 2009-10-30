@@ -1,0 +1,16 @@
+<h1>New Board Search</h1>
+
+<% form_for @board_search do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :geocode_id %><br />
+    <%= f.text_field :geocode_id %>
+  </p>
+  <p>
+    <%= f.label :board_type %><br />
+    <%= f.text_field :board_type %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+
+

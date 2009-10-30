@@ -88,3 +88,7 @@ UnavailableDate.blueprint() do
   creator {user}
   updater {user}
 end
+
+BoardSearch.blueprint() do
+  
+end
