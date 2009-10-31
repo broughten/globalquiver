@@ -3,7 +3,6 @@ class CreateBoardSearches < ActiveRecord::Migration
     create_table :board_searches do |t|
       t.integer :geocode_id
       t.string :board_type
-      t.integer :count, 1
       t.timestamps
     end
   end
