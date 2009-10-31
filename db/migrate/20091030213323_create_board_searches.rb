@@ -2,7 +2,7 @@ class CreateBoardSearches < ActiveRecord::Migration
   def self.up
     create_table :board_searches do |t|
       t.integer :geocode_id
-      t.string :board_type
+      t.integer :style_id
       t.timestamps
     end
   end
