@@ -1,3 +1,6 @@
 class BoardSearch < ActiveRecord::Base
-  attr_accessible :geocode_id, :board_type
+  belongs_to :style
+  belongs_to :geocode
+  
+  validates_presence_of :geocode, :message => "must be selected"
 end
