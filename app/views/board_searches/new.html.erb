@@ -8,11 +8,11 @@
   <%= f.error_messages %>
   <p>
     <%= f.label :geocode_id %><br />
-    <%= f.text_field :geocode_id %>
+	<%= f.collection_select :geocode_id, @geocodes, :id, :locality, :include_blank => true %>
   </p>
   <p>
-    <%= f.label :board_type %><br />
-    <%= f.text_field :board_type %>
+    <%= f.label :style_id %><br />
+	<%= f.collection_select :style_id, Style.all, :id, :name, :include_blank => true %>
   </p>
   <p><%= f.submit "Submit" %></p>
 <% end %>
