@@ -117,4 +117,5 @@ describe Board do
     board.location_id = -1
     board.has_location?.should be_false
   end
+  
 end

@@ -41,67 +41,29 @@ describe BoardSearchesController do
     
     describe "show action" do
       before(:each) do
-        
+        @board_search = BoardSearch.make()
+        BoardSearch.any_instance.stubs(:execute).returns(Array.new)
       end
       
       it "should find the saved board search" do
-        board_search = BoardSearch.make()
-        get "show", :id=>board_search.id
+        get "show", :id=>@board_search.id
         assigns[:board_search].should_not be_nil
       end
   
       it "should assign a non-nil array of boards for the view" do
-        @board_search = BoardSearch.make()
         get "show", :id=>@board_search.id
         assigns[:found_boards].should_not be_nil
       end
       
       it "should render the show view" do
-        @board_search = BoardSearch.make()
         get "show", :id=>@board_search.id
         response.should render_template('show')
       end
       
-      it "should filter boards based on location geocode" do
-        board1 = Board.make(:geocodable)
-        board2 = Board.make(:geocodable)
-        # now they have the same location
-        board1.location = board2.location
-        board_search = BoardSearch.make(:geocode=>board1.location.geocode)
-        get "show", :id=>board_search.id
-        assigns[:found_boards].include?(board1).should == true
-        assigns[:found_boards].include?(board2).should == true
-        
-        #create a new location for the board
-        board2.location = Location.make()
-        get "show", :id=>board_search.id
-        assigns[:found_boards].include?(board1).should == true
-        assigns[:found_boards].include?(board2).should == false
-        
+      it "should perform the search" do
+        BoardSearch.any_instance.expects(:execute)
+        get "show", :id=>@board_search.id
       end
-      
-      it "should filter found boards by style name for non-empty style" do
-        board1 = Board.make(:geocodable)
-        board2 = Board.make(:geocodable)
-        # same location so only style should be different
-        board2.location = board1.location
-        board_search = BoardSearch.make(:geocode=>board1.location.geocode, :style=>board1.style)
-        get "show", :id=>board_search.id
-        assigns[:found_boards].include?(board1).should == true
-        assigns[:found_boards].include?(board2).should == false
-      end
-      
-      it "should not filter found boards by style name for an empty style" do
-        board1 = Board.make(:geocodable)
-        board2 = Board.make(:geocodable)
-        # same location so only style should be different
-        board2.location = board1.location
-        board_search = BoardSearch.make(:geocode=>board1.location.geocode, :style=>nil)
-        get "show", :id=>board_search.id
-        assigns[:found_boards].include?(board1).should == true
-        assigns[:found_boards].include?(board2).should == true
-      end
-      
     end
   end
 end

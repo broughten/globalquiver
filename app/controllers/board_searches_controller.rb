@@ -16,7 +16,7 @@ class BoardSearchesController < ApplicationController
   
   def show
     @board_search = BoardSearch.find(params[:id])
-    @found_boards = Board.all
+    @found_boards = @board_search.execute
   end
   
   private

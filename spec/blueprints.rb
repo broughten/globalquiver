@@ -59,12 +59,25 @@ Location.blueprint() do
   updater {user}
 end
 
+#Use the next two locations to get geocodable locaitons
+# needed to test the searching by geocode since
+# if a board location geocode is nil it will show
+# up in the searches
 Location.blueprint(:geocodable) do
   user = User.make()
   street {"2164 Westview Drive"}
   locality {"Des Plaines"}
   region {"IL"}
   postal_code {"60018"}
+  country {"USA"}
+end
+
+Location.blueprint(:geocodable2) do
+  user = User.make()
+  street {"233 W Micheltorena St"}
+  locality {"Santa Barbara"}
+  region {"CA"}
+  postal_code {"93101"}
   country {"USA"}
 end
 
@@ -83,6 +96,8 @@ Board.blueprint() do
   updater {user}
 end
 
+# use this blueprint to make sure your 
+# board is geocodable
 Board.blueprint(:geocodable) do
   location {Location.make(:geocodable)}
 end
@@ -109,5 +124,5 @@ BoardSearch.blueprint() do
   location = Location.make(:geocodable)
   location.save
   geocode {location.geocode}
-  style
+  style {nil}
 end
