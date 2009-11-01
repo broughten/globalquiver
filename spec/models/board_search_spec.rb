@@ -41,15 +41,18 @@ describe BoardSearch do
       board1 = Board.make(:geocodable)
       board2 = Board.make(:geocodable)
       board2.location = board1.location
+      board2.save
       board_search = BoardSearch.make(:geocode=>board1.location.geocode)
       result = board_search.execute
       result.include?(board1).should be_true
       result.include?(board2).should be_true
       #change location
-      board2.location = Location.make(:geocodable2) 
+      board2.location = Location.make(:geocodable2)
+      # make sure you save the new state away into the db.
+      board2.save 
       result = board_search.execute
       result.include?(board1).should be_true
-      result.include?(board2).should be_false
+      result.include?(board2).should be_false 
     end
 
     it "execute should filter results based on style" do
