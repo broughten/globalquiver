@@ -44,19 +44,20 @@ function unavailableDates($td, thisDate, month, year)
 
   for (i = 0; i < blackOutDates.length; i++) {
     if (thisDate.asString() == blackOutDates[i]) {
-    // the disabled class prevents the user from being able to select the element.
-    // the disallowed-day class provides a hook for different CSS styling of cells which are disabled
-    // by this rule vs cells which are disabled because e.g. they fall outside the startDate - endDate range.
-    $td.addClass('disabled blackout');
+      // the disabled class prevents the user from being able to select the element.
+      $td.addClass('disabled blackout');
     }
   }
 
-    for (i = 0; i < reservedDates.length; i++) {
+  for (i = 0; i < reservedDates.length; i++) {
     if (thisDate.asString() == reservedDates[i]) {
-    // the disabled class prevents the user from being able to select the element.
-    // the disallowed-day class provides a hook for different CSS styling of cells which are disabled
-    // by this rule vs cells which are disabled because e.g. they fall outside the startDate - endDate range.
-    $td.addClass('disabled reserved');
+      $td.addClass('selected');
+    }
+  }
+
+    for (i = 0; i < takenDates.length; i++) {
+    if (thisDate.asString() == takenDates[i]) {
+      $td.addClass('disabled reserved');
     }
   }
   

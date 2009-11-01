@@ -12,8 +12,9 @@
 
 <script language="javascript">
 
+  var takenDates    = <%= actual_dates(@board.reserved_dates.find(:all, :conditions => ['creator_id != ?', current_user.id])).inspect %>
   var blackOutDates = <%= actual_dates(@board.black_out_dates).inspect %>;
-  var reservedDates = <%= actual_dates(@board.reserved_dates).inspect %>;
+  var reservedDates = <%= actual_dates(@board.reserved_dates.find(:all, :conditions => ['creator_id = ?', current_user.id])).inspect %>;
 
 </script>
 

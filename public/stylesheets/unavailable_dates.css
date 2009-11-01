@@ -59,6 +59,14 @@ table.jCalendar td.blackout, table.jCalendar td.blackout:hover {
 	color: #555;
 }
 
+table.jCalendar td.selected {
+  background: #4F985C;
+}
+
+table.jCalendar td.selected.dp-hover {
+  background: #22D04A;
+}
+
 
 /* update availability */
 
