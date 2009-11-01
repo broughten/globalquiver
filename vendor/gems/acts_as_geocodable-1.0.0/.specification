@@ -1,0 +1,86 @@
+--- !ruby/object:Gem::Specification 
+name: acts_as_geocodable
+version: !ruby/object:Gem::Version 
+  version: 1.0.0
+platform: ruby
+authors: 
+- Daniel Morrison
+- Brandon Keepers
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-10-20 00:00:00 -06:00
+default_executable: 
+dependencies: []
+
+description: Simple geocoding for Rails ActiveRecord models. See the README for more details.
+email: info@collectiveidea.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- .gitignore
+- CHANGELOG
+- MIT-LICENSE
+- README
+- Rakefile
+- VERSION
+- about.yml
+- acts_as_geocodable.gemspec
+- generators/geocodable_migration/USAGE
+- generators/geocodable_migration/geocodable_migration_generator.rb
+- generators/geocodable_migration/templates/migration.rb
+- install.rb
+- lib/acts_as_geocodable.rb
+- lib/acts_as_geocodable/geocode.rb
+- lib/acts_as_geocodable/geocoding.rb
+- lib/acts_as_geocodable/remote_location.rb
+- lib/acts_as_geocodable/tasks/acts_as_geocodable_tasks.rake
+- rails/init.rb
+- test/acts_as_geocodable_test.rb
+- test/db/database.yml
+- test/db/schema.rb
+- test/fixtures/cities.yml
+- test/fixtures/geocodes.yml
+- test/fixtures/geocodings.yml
+- test/fixtures/vacations.yml
+- test/geocode_test.rb
+- test/test_helper.rb
+- uninstall.rb
+has_rdoc: true
+homepage: http://github.com/collectiveidea/acts_as_geocodable
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: Simple geocoding for Rails ActiveRecord models
+test_files: 
+- test/acts_as_geocodable_test.rb
+- test/db/schema.rb
+- test/geocode_test.rb
+- test/test_helper.rb
