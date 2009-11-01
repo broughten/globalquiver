@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'Profile was successfully updated.'
       redirect_to(overview_path)
     else
-      render :action => "edit"
+      render :action => "show"
     end
   end
 
