@@ -1,0 +1,20 @@
+<h1>Find boards to borrow or rent</h1>
+<br>
+<h3>On this page you can enter information about what type of board you're looking for</h3>
+<h3>along with where you'll be surfing.  We'll match these criteria with</h3>
+<h3>boards available for your trip.</h3>
+
+<% form_for @board_search do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :geocode_id %><br />
+	<%= f.collection_select :geocode_id, @geocodes, :id, :locality, :include_blank => true %>
+  </p>
+  <p>
+    <%= f.label :style_id %><br />
+	<%= f.collection_select :style_id, Style.all, :id, :name, :include_blank => true %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+
+

@@ -17,7 +17,8 @@ Sham.define do
   board_description {Faker::Lorem.words(10)}
   board_construction {Faker::Lorem.words(1)}
   location_street {Faker::Address.street_address()}
-  location_locality {Faker::Address.us_state()}
+  location_city {Faker::Address.city()}
+  location_state {Faker::Address.us_state()}
   location_postal_code {Faker::Address.zip_code()}
   style_name {Faker::Lorem.words(1)}
 end
@@ -50,12 +51,21 @@ end
 Location.blueprint() do
   user = User.make()
   street {Sham.location_street}
-  locality {Sham.location_locality}
-  region {"Region"}
+  locality {Sham.location_city}
+  region {Sham.location_state}
   postal_code {Sham.location_postal_code}
   country {"USA"}
   creator {user}
   updater {user}
+end
+
+Location.blueprint(:geocodable) do
+  user = User.make()
+  street {"2164 Westview Drive"}
+  locality {"Des Plaines"}
+  region {"IL"}
+  postal_code {"60018"}
+  country {"USA"}
 end
 
 Board.blueprint() do
@@ -73,6 +83,10 @@ Board.blueprint() do
   updater {user}
 end
 
+Board.blueprint(:geocodable) do
+  location {Location.make(:geocodable)}
+end
+
 Style.blueprint() do
   name {Sham.style_name}
 end
@@ -87,4 +101,13 @@ UnavailableDate.blueprint() do
   date Sham.future_date
   creator {user}
   updater {user}
+end
+
+BoardSearch.blueprint() do
+  # we need to save the location so we have
+  # a valid geocode
+  location = Location.make(:geocodable)
+  location.save
+  geocode {location.geocode}
+  style
 end
