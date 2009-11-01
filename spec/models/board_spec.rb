@@ -117,4 +117,49 @@ describe Board do
     board.location_id = -1
     board.has_location?.should be_false
   end
+  
+  describe "class methods" do
+    it "should respond to a perform_search method" do
+      Board.should respond_to(:perform_search)
+    end
+    
+    it "perform_search should return an array" do
+      board_search = BoardSearch.make()
+      results = Board.perform_search(board_search)
+      results.class.should ==  Array.new.class
+    end
+    
+    # it "perform_search should filter results based on board_search.geocode" do
+    #               board1 = Board.make(:geocodable)
+    #               board2 = Board.make(:geocodable)
+    #               board2.location = board1.location
+    #               board_search = BoardSearch.make(:geocode=>board1.location.geocode)
+    #               result = Board.perform_search(board_search)
+    #               result.include?(board1).should be_true
+    #               result.include?(board2).should be_true
+    #               
+    #               #change location
+    #               board2.location = Location.make(:geocodable2) 
+    #               debugger
+    #               result = Board.perform_search(board_search)
+    #               result.include?(board1).should be_true
+    #               result.include?(board2).should be_false
+    #             end
+    #     
+    it "perform_search should filter results based on board_search.style" do
+      board1 = Board.make()
+      board2 = Board.make()
+      board_search = BoardSearch.make(:style=>nil)
+      result = Board.perform_search(board_search)
+      debugger
+      result.include?(board1).should be_true
+      result.include?(board2).should be_true
+      
+      #change board_search style to something 
+      board_search.style = board1.style
+      result = Board.perform_search(board_search)
+      result.include?(board1).should be_true
+      result.include?(board2).should be_false
+      end
+    end
 end
