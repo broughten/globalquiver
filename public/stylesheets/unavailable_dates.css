@@ -48,6 +48,18 @@ table.jCalendar {
 #multimonth {
   text-align:center;
 }
+
+table.jCalendar td.reserved, table.jCalendar td.reserved:hover {
+	background: #CB7132;
+	color: #555;
+}
+
+table.jCalendar td.blackout, table.jCalendar td.blackout:hover {
+	background: #777;
+	color: #555;
+}
+
+
 /* update availability */
 
 /* destroy availability */

@@ -47,7 +47,7 @@ function unavailableDates($td, thisDate, month, year)
     // the disabled class prevents the user from being able to select the element.
     // the disallowed-day class provides a hook for different CSS styling of cells which are disabled
     // by this rule vs cells which are disabled because e.g. they fall outside the startDate - endDate range.
-    $td.addClass('disabled disallowed-day');
+    $td.addClass('disabled blackout');
     }
   }
 
@@ -56,7 +56,7 @@ function unavailableDates($td, thisDate, month, year)
     // the disabled class prevents the user from being able to select the element.
     // the disallowed-day class provides a hook for different CSS styling of cells which are disabled
     // by this rule vs cells which are disabled because e.g. they fall outside the startDate - endDate range.
-    $td.addClass('disabled disallowed-day');
+    $td.addClass('disabled reserved');
     }
   }
   
