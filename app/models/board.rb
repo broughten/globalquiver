@@ -133,16 +133,4 @@ class Board < ActiveRecord::Base
   def has_location?
     return self.location != nil;
   end
-  
-  ########### Class methods
-  def self.perform_search(board_search)
-    if(board_search.style != nil)
-      search = style_id_equals(board_search.style_id)
-      search.all
-    else
-      all
-    end
-  end
-  
-  ############ End class methods
 end

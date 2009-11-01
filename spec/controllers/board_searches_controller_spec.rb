@@ -42,7 +42,7 @@ describe BoardSearchesController do
     describe "show action" do
       before(:each) do
         @board_search = BoardSearch.make()
-        Board.stubs(:perform_search).returns(Array.new)
+        BoardSearch.any_instance.stubs(:execute).returns(Array.new)
       end
       
       it "should find the saved board search" do
@@ -60,8 +60,8 @@ describe BoardSearchesController do
         response.should render_template('show')
       end
       
-      it "should ask the board class to perform the search" do
-        Board.expects(:perform_search)
+      it "should perform the search" do
+        BoardSearch.any_instance.expects(:execute)
         get "show", :id=>@board_search.id
       end
     end

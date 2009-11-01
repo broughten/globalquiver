@@ -124,5 +124,5 @@ BoardSearch.blueprint() do
   location = Location.make(:geocodable)
   location.save
   geocode {location.geocode}
-  style
+  style {nil}
 end

@@ -25,5 +25,48 @@ describe BoardSearch do
     
   end
   
+  describe "methods" do
+    it "should respond to an execute method" do
+      board_search = BoardSearch.make()
+      board_search.should respond_to(:execute)
+    end
+    
+    it "execute should return an array" do
+      board_search = BoardSearch.make()
+      results = board_search.execute
+      results.class.should ==  Array.new.class
+    end
+    
+    it "execute should filter results based on geocode" do
+      board1 = Board.make(:geocodable)
+      board2 = Board.make(:geocodable)
+      board2.location = board1.location
+      board_search = BoardSearch.make(:geocode=>board1.location.geocode)
+      result = board_search.execute
+      result.include?(board1).should be_true
+      result.include?(board2).should be_true
+      #change location
+      board2.location = Location.make(:geocodable2) 
+      result = board_search.execute
+      result.include?(board1).should be_true
+      result.include?(board2).should be_false
+    end
+
+    it "execute should filter results based on style" do
+      board1 = Board.make(:geocodable)
+      board2 = Board.make(:geocodable)
+      board_search = BoardSearch.make(:geocode=>board1.location.geocode,:style=>nil)
+      result = board_search.execute
+      result.include?(board1).should be_true
+      result.include?(board2).should be_true
+      
+      #change board_search style to something 
+      board_search.style = board1.style
+      result = board_search.execute
+      result.include?(board1).should be_true
+      result.include?(board2).should be_false
+      end
+    end
+  
   
 end
