@@ -1,4 +1,4 @@
-module BlackOutDatesHelper
+module UnavailableDatesHelper
   def actual_dates(unavailable_dates)
     dates = []
     unavailable_dates.each do |date|
