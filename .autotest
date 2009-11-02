@@ -1,0 +1,13 @@
+#The code below tells autospec to run the specs in the metal file.
+# In order for this to work, your ~/.autospec file must look like this
+#
+# Autotest.add_hook :initialize do |at|
+#   %w{.svn .hg .git vendor}.each {|exception| at.add_exception(exception)}
+#   nil # This nil is the key to make autospec recognize the code below.
+# end
+#
+Autotest.add_hook :initialize do |at|      
+  at.add_mapping(%r%^spec/metal/.*_spec\.rb$%) do
+    at.files_matching(%r%^spec/metal/.*_spec\.rb$%)
+  end
+end
