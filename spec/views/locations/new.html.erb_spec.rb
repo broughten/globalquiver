@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "/locations/new" do
   
   before(:each) do
-    assigns[:new_location] = Location.make_unsaved()
+    assigns[:location] = Location.make_unsaved()
     @existing_locations = mock()
     assigns[:existing_locations] = @existing_locations
     @existing_locations.stubs(:empty?).returns(true)

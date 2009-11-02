@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe LocationsController do
-  #don't integrate views here as we'll separately test them.
-  #integrate_views
+  # make sure that the views actually get rendered instead of mocked
+  # this will catch errors in the views.
+  integrate_views
 
   #Delete these examples and add some real ones
   it "should use LocationsController" do
@@ -17,7 +18,7 @@ describe LocationsController do
     describe "GET /location/new" do
       it "should assign needed variables for view" do
         get "new"
-        assigns[:new_location].should_not be_nil
+        assigns[:location].should_not be_nil
         assigns[:existing_locations].should_not be_nil
         assigns[:map].should_not be_nil
       end
