@@ -13,9 +13,7 @@ ActiveRecord::Schema.define(:version => 20091030213323) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "geocode_id"
-    t.string   "board_type"
-    t.integer  "count"
-    t.integer  "1"
+    t.integer  "style_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

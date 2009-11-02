@@ -49,12 +49,4 @@ production:
   pool: 5
   username: globalquiver
   password:
-
-cucumber: &CUCUMBER
-  <<: *TEST
-culerity_development:
-  <<: *CUCUMBER
-culerity_continuousintegration:
-  <<: *CUCUMBER
-cucumber:
-  <<: *TEST
+    

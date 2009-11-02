@@ -42,40 +42,57 @@ $(function()
 function unavailableDates($td, thisDate, month, year)
 {
 
-  for (i = 0; i < blackOutDates.length; i++) {
-    if (thisDate.asString() == blackOutDates[i]) {
-      // the disabled class prevents the user from being able to select the element.
-      $td.addClass('disabled blackout');
+  if ((blackOutDates != null) && (reservedDates != null) && (takenDates != null))
+  {
+    for (i = 0; i < blackOutDates.length; i++) {
+      if (thisDate.asString() == blackOutDates[i]) {
+        // the disabled class prevents the user from being able to select the element.
+        $td.addClass('disabled blackout');
+      }
+    }
+
+    for (i = 0; i < reservedDates.length; i++) {
+      if (thisDate.asString() == reservedDates[i]) {
+        $td.addClass('selected');
+      }
+    }
+
+      for (i = 0; i < takenDates.length; i++) {
+      if (thisDate.asString() == takenDates[i]) {
+        $td.addClass('disabled reserved');
+      }
     }
   }
 
-  for (i = 0; i < reservedDates.length; i++) {
-    if (thisDate.asString() == reservedDates[i]) {
-      $td.addClass('selected');
-    }
-  }
-
-    for (i = 0; i < takenDates.length; i++) {
-    if (thisDate.asString() == takenDates[i]) {
-      $td.addClass('disabled reserved');
-    }
-  }
   
  }
 
 
 
 function addFormField(date, status) {
-  //this adds a hidden input field containing the selected
-  //date to the form.
   if (status) {
-    $("#multimonth").append(
+    if ((reservedDates !=null) && ($.inArray(date.asString(), reservedDates) > -1)) {
+      //do nothing... it is already reserved, and the user is just adding it back in
+    } else {
+      //this adds a hidden input field containing the selected
+      //date to the form.
+      $("#multimonth").append(
       "<input type='hidden' " +
       "name='board[unavailable_dates_attributes][][date]' " +
       "value='" + date.asString() + "'>");
+    }
   } else {
-    //and if the date is ever unselected, this will remove
-    //the hidden field from the form.
-    $('input[value="' + date.asString() + '"]').remove();
+    if ((reservedDates != null) && ($.inArray(date.asString(), reservedDates) > -1)) {
+      //this creates an hidden input with the date marked for removal
+      $("#multimonth").append(
+      "<input type='hidden' " +
+      "name='board[unavailable_dates_attributes][][date][_delete]' " +
+      "value='" + date.asString() + "'>");
+    } else {
+      //and if the date was just chosen during this session and later
+      //unselected, this will remove
+      //the hidden field from the form.
+      $('input[value="' + date.asString() + '"]').remove();
+    }
   }
  }

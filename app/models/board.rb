@@ -7,8 +7,8 @@ class Board < ActiveRecord::Base
   has_many :images, :as => :owner, :dependent => :destroy
   has_many :unavailable_dates
   #note: learned out to create associations below from http://www.dweebd.com/ruby/has_many-with-arguments/
-  has_many :reserved_dates, :class_name=>'UnavailableDate', :conditions=> 'creator_id != #{creator.id}'
-  has_many :black_out_dates, :class_name=>'UnavailableDate', :conditions=>'creator_id = #{creator.id}'
+  has_many :reserved_dates, :class_name=>'UnavailableDate', :conditions=> 'creator_id != #{(creator.nil?)?-1:creator.id}'
+  has_many :black_out_dates, :class_name=>'UnavailableDate', :conditions=>'creator_id = #{(creator.nil?)?-1:creator.id}'
 
   validates_presence_of :maker, :style, :length, :location
   

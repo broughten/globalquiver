@@ -37,6 +37,16 @@ describe Board do
       make_board_with_unavailable_dates.should respond_to(:reserved_dates)
     end
 
+    it "should be ok to do an empty check on blackout dates" do
+      testboard = Board.make();
+      testboard.black_out_dates.empty?.should be_true
+    end
+
+    it "should be ok to do an empty check on reserved dates" do
+      testboard = Board.make();
+      testboard.reserved_dates.empty?.should be_true
+    end
+
     it "should have many black out dates" do
       make_board_with_unavailable_dates.should respond_to(:black_out_dates)
     end
