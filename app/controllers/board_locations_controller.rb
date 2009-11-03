@@ -1,9 +1,9 @@
-class LocationsController < ApplicationController
+class BoardLocationsController < ApplicationController
   before_filter :login_required
   
   # GET /locations/new
   def new
-    @location = Location.new    
+    @board_location = BoardLocation.new    
     respond_to do |format|
       format.html {init_data_for_new_view}
     end
@@ -11,14 +11,15 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
-    @location = Location.new(params[:location])
+    @board_location = BoardLocation.new(params[:board_location])
         
     respond_to do |format|
-      if (current_user.locations.any? { |existing_location| existing_location.matches?(@location)} || @location.save)
+      if (current_user.locations.any? { |existing_location| existing_location.matches?(@board_location)} || @board_location.save)
         flash[:notice] = 'Location was successfully created.'
         format.html { redirect_to new_board_path }
       else
         format.html do 
+          flash[:error] = 'Location was invalid. Please try again.'
           init_data_for_new_view
           render :action => "new" 
         end

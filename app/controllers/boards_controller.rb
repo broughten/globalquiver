@@ -16,7 +16,7 @@ class BoardsController < ApplicationController
     if current_user.locations.empty?
       # we need a location before we can create a board so
       # go out and get one.
-      redirect_to new_location_path
+      redirect_to new_board_location_path
     else
       # we pull up all the locations that the user has previously entered
       # because he might want to use one of these for the board he's about to enter

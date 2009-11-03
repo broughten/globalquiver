@@ -35,7 +35,7 @@ describe BoardsController do
       describe "user without locations" do
         it "should redirect to the new location path if the logged in user doesn't have any locations" do
           get "new"
-          response.should redirect_to new_location_path
+          response.should redirect_to new_board_location_path
         end
       end
     end

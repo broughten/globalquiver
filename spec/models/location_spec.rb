@@ -7,7 +7,17 @@ describe Location do
   end
   
   describe "validations" do
-    it_should_validate_presence_for_attributes Location.make_unsaved(), :street, :locality, :region, :postal_code, :country
+    it_should_validate_presence_for_attributes Location.make_unsaved(), :locality, :region, :country
+  end
+  
+  describe "associations" do
+    it "should belong to a creator" do
+      Location.make_unsaved().should belong_to(:creator)
+    end
+    
+    it "should belong to a updater" do
+      Location.make_unsaved().should belong_to(:updater)
+    end
   end
   
   it "should have a named scope that allows you to get locations ordered by descending created_at date" do
@@ -18,7 +28,7 @@ describe Location do
     locations[0].should == location2
   end
   
-  it "should determine if the current location matches another location based on street, locality, region, postal code and country" do
+  it "should determine if the current location matches another location" do
     # all of the attributes should be different
     location1 = Location.make_unsaved()
     location2 = Location.make_unsaved()

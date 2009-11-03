@@ -73,7 +73,7 @@ describe Board do
   
   describe "validations" do
     it "should validate location" do
-      board = Board.make_unsaved(:location=>Location.make())
+      board = Board.make_unsaved()
       board.should be_valid
        
       board.location = nil

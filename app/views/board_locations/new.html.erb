@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <%= GMap.header %>
   <%= @map.to_html %>
-<%= javascript_include_tag 'locations/new' %>
+<%= javascript_include_tag 'board_locations/new' %>
 <% end %>
 
 
@@ -21,7 +21,7 @@
   </form>
 
 
-<% form_for @location do |f| -%>
+<% form_for @board_location do |f| -%>
 	  	<%= f.hidden_field :street %>
     	<%= f.hidden_field :locality %>
     	<%= f.hidden_field :region %>

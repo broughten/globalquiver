@@ -1,7 +1,7 @@
 class BoardSearchesController < ApplicationController
   def new
     @board_search = BoardSearch.new
-    @geocodes = get_search_geocodes_for_view
+    @geocodes = get_search_locations_for_view
   end
   
   def create
@@ -9,7 +9,7 @@ class BoardSearchesController < ApplicationController
     if @board_search.save
       redirect_to board_search_path(@board_search)
     else
-      @geocodes = get_search_geocodes_for_view
+      @geocodes = get_search_locations_for_view
       render :action => 'new'
     end
   end
@@ -20,7 +20,7 @@ class BoardSearchesController < ApplicationController
   end
   
   private
-  def get_search_geocodes_for_view
-    Geocode.all
+  def get_search_locations_for_view
+    SearchLocation.all
   end
 end
