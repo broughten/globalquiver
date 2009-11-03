@@ -26,5 +26,9 @@ describe Shop do
     is_shop = Shop.make().is_rental_shop?
     is_shop.should == true
   end
+  
+  it "should inherit from User" do
+    Shop.make_unsaved().should be_a_kind_of(User)
+  end
 
 end
