@@ -21,5 +21,10 @@ describe Surfer do
     surfer = Surfer.make()
     surfer.full_name.should == "#{surfer.first_name} #{surfer.last_name}"
   end
+  
+  it "should inherit from User" do
+    Surfer.make_unsaved().should be_a_kind_of(User)
+  end
+  
 
 end

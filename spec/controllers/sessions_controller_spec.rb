@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe SessionsController do
+   # make sure that the views actually get rendered instead of mocked
+   # this will catch errors in the views.
    integrate_views
   it "should use SessionsController" do
     controller.should be_an_instance_of(SessionsController)

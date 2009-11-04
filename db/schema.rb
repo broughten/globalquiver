@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091030213323) do
+ActiveRecord::Schema.define(:version => 20091102233736) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "geocode_id"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20091030213323) do
     t.datetime "updated_at"
     t.integer  "creator_id"
     t.integer  "updater_id"
+    t.string   "object_type"
+    t.integer  "search_radius"
   end
 
   create_table "styles", :force => true do |t|

@@ -1,6 +1,10 @@
 require File.dirname(__FILE__) + '/../spec_helper'
  
 describe BoardSearchesController do
+  # make sure that the views actually get rendered instead of mocked
+  # this will catch errors in the views.
+  integrate_views
+  
   describe "anonymous user" do
     
     describe "new action" do
@@ -61,7 +65,7 @@ describe BoardSearchesController do
       end
       
       it "should perform the search" do
-        BoardSearch.any_instance.expects(:execute)
+        BoardSearch.any_instance.expects(:execute).returns(Array.new)
         get "show", :id=>@board_search.id
       end
     end

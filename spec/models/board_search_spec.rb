@@ -10,19 +10,13 @@ describe BoardSearch do
       BoardSearch.make_unsaved().should respond_to(:style)
     end
     
-    it "should have a geocode" do
-      BoardSearch.make_unsaved().should respond_to(:geocode)
+    it "should have a location" do
+      BoardSearch.make_unsaved().should respond_to(:location)
     end
   end
   
   describe "validations" do
-    it "should validate the presence of a geocode" do
-      board_search = BoardSearch.make()
-       
-      board_search.geocode = nil
-      board_search.should_not be_valid
-    end
-    
+    it_should_validate_presence_for_attributes BoardSearch.make_unsaved(), :location
   end
   
   describe "methods" do
@@ -37,17 +31,18 @@ describe BoardSearch do
       results.class.should ==  Array.new.class
     end
     
-    it "execute should filter results based on geocode" do
-      board1 = Board.make(:geocodable)
-      board2 = Board.make(:geocodable)
+    it "execute should filter results based on location" do
+      board1 = Board.make(:location=>BoardLocation.make(:geocodable))
+      board2 = Board.make(:location=>board1.location)
       board2.location = board1.location
       board2.save
-      board_search = BoardSearch.make(:geocode=>board1.location.geocode)
+      search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
+      board_search = BoardSearch.make(:location=>search_location)
       result = board_search.execute
       result.include?(board1).should be_true
       result.include?(board2).should be_true
       #change location
-      board2.location = Location.make(:geocodable2)
+      board2.location = BoardLocation.make(:geocodable2)
       # make sure you save the new state away into the db.
       board2.save 
       result = board_search.execute
@@ -56,9 +51,10 @@ describe BoardSearch do
     end
 
     it "execute should filter results based on style" do
-      board1 = Board.make(:geocodable)
-      board2 = Board.make(:geocodable)
-      board_search = BoardSearch.make(:geocode=>board1.location.geocode,:style=>nil)
+      board1 = Board.make(:location=>BoardLocation.make(:geocodable))
+      board2 = Board.make(:location=>board1.location)
+      search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
+      board_search = BoardSearch.make(:location=>search_location,:style=>nil)
       result = board_search.execute
       result.include?(board1).should be_true
       result.include?(board2).should be_true

@@ -1,7 +1,7 @@
 class Board < ActiveRecord::Base
 
   belongs_to :style
-  belongs_to :location
+  belongs_to :location, :class_name => 'BoardLocation'
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
   has_many :images, :as => :owner, :dependent => :destroy

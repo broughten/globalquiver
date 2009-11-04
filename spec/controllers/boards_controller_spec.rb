@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe BoardsController do
-  #integrate_views
+  # make sure that the views actually get rendered instead of mocked
+  # this will catch errors in the views.
+  integrate_views
 
   #Delete these examples and add some real ones
   it "should use BoardsController" do
@@ -33,7 +35,7 @@ describe BoardsController do
       describe "user without locations" do
         it "should redirect to the new location path if the logged in user doesn't have any locations" do
           get "new"
-          response.should redirect_to new_location_path
+          response.should redirect_to new_board_location_path
         end
       end
     end

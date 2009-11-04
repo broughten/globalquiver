@@ -7,7 +7,7 @@ require 'faker' #http://faker.rubyforge.org/
 #Set up the shams
 # The ones without a block will look for sham definitions of the same name
 Sham.define do
-  email { Faker::Internet.email }
+  #email { Faker::Internet.email }
   first_name  { Faker::Name.first_name }
   last_name  { Faker::Name.last_name }
   group_name {Faker::Lorem.words(2)}
@@ -22,7 +22,10 @@ Sham.define do
   location_postal_code {Faker::Address.zip_code()}
   style_name {Faker::Lorem.words(1)}
 end
-
+Sham.email do
+  number = (1..100).to_a.rand
+  "user#{number}@test.com"
+end
 Sham.future_date do
   (1..100).to_a.rand.days.from_now
 end
@@ -49,14 +52,21 @@ end
 # End of user hierarchy blueprints
 
 Location.blueprint() do
-  user = User.make()
-  street {Sham.location_street}
   locality {Sham.location_city}
   region {Sham.location_state}
-  postal_code {Sham.location_postal_code}
   country {"USA"}
+  user = User.make()
   creator {user}
   updater {user}
+end
+
+BoardLocation.blueprint() do
+  street {Sham.location_street}
+  postal_code {Sham.location_postal_code}
+end
+
+SearchLocation.blueprint() do
+  search_radius {100}
 end
 
 #Use the next two locations to get geocodable locaitons
@@ -64,7 +74,6 @@ end
 # if a board location geocode is nil it will show
 # up in the searches
 Location.blueprint(:geocodable) do
-  user = User.make()
   street {"2164 Westview Drive"}
   locality {"Des Plaines"}
   region {"IL"}
@@ -73,7 +82,6 @@ Location.blueprint(:geocodable) do
 end
 
 Location.blueprint(:geocodable2) do
-  user = User.make()
   street {"233 W Micheltorena St"}
   locality {"Santa Barbara"}
   region {"CA"}
@@ -82,7 +90,6 @@ Location.blueprint(:geocodable2) do
 end
 
 Board.blueprint() do
-  user = User.make()
   maker {Sham.board_maker}
   model {Sham.board_model}
   length {7}
@@ -90,8 +97,9 @@ Board.blueprint() do
   thickness {5}
   style {Style.make()}
   description {Sham.board_description}
-  location {Location.make()}
+  location {BoardLocation.make()}
   construction {Sham.board_construction}
+  user = User.make()
   creator {user}
   updater {user}
 end
@@ -99,7 +107,7 @@ end
 # use this blueprint to make sure your 
 # board is geocodable
 Board.blueprint(:geocodable) do
-  location {Location.make(:geocodable)}
+  location {BoardLocation.make(:geocodable)}
 end
 
 Style.blueprint() do
@@ -111,9 +119,9 @@ Image.blueprint() do
 end
 
 UnavailableDate.blueprint() do
-  user = User.make()
   board {Board.make()}
   date Sham.future_date
+  user = User.make()
   creator {user}
   updater {user}
 end
@@ -121,8 +129,8 @@ end
 BoardSearch.blueprint() do
   # we need to save the location so we have
   # a valid geocode
-  location = Location.make(:geocodable)
+  location = SearchLocation.make()
   location.save
-  geocode {location.geocode}
+  location {location}
   style {nil}
 end

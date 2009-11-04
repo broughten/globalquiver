@@ -37,6 +37,8 @@ namespace :db do
         :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true")
     emptySurfer = Surfer.create(:first_name=>"Empty", :last_name=>"Surfer", :password=>"testing", 
           :password_confirmation=>"testing", :email=>"emptysurfer@test.com", :terms_of_service=>"true")
+    adminSurfer = Surfer.create(:first_name=>"Admin", :last_name=>"Surfer", :password=>"testing", 
+                :password_confirmation=>"testing", :email=>"adminsurfer@test.com", :terms_of_service=>"true")
           
     # Set up Style data
     longboard = Style.create(:name=>"longboard")
@@ -44,10 +46,14 @@ namespace :db do
     fish = Style.create(:name=>"Fish")
     
     #Set up location data
-    surferLocation = Location.create(:street=>"233 W Micheltorena St", :locality=>"Santa Barbara", 
+    surferLocation = BoardLocation.create(:street=>"233 W Micheltorena St", :locality=>"Santa Barbara", 
       :region=>"CA", :postal_code=>"93101", :country=>"USA", :creator=>surfer, :updater=>surfer)
-    shopLocation = Location.create(:street=>"13005 Lowell Blvd", :locality=>"Westminster", 
+    shopLocation = BoardLocation.create(:street=>"13005 Lowell Blvd", :locality=>"Westminster", 
         :region=>"CO", :postal_code=>"80031", :country=>"USA", :creator=>shop, :updater=>shop)
+        
+    # Set up some search locations
+    SearchLocation.create(:locality=>"Santa Barbara", :region=>"CA", :country=>"USA", :creator=>adminSurfer, :updater=>adminSurfer)
+    SearchLocation.create(:locality=>"Westminster", :region=>"CO", :country=>"USA", :creator=>adminSurfer, :updater=>adminSurfer)
     
     #Set up boards for surfer
     Board.populate 3 do |board|

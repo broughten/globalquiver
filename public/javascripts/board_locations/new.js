@@ -94,19 +94,19 @@ function addAddressToMap(currentAddress) {
 }
 
 function populateFormFields(currentAddress){
-    $("#location_street").val(currentAddress.street);
-    $("#location_locality").val(currentAddress.city);
-    $("#location_region").val(currentAddress.state);
-    $("#location_postal_code").val(currentAddress.zipCode);
-    $("#location_country").val(currentAddress.country);
-    $("#location_accuracy").val(currentAddress.accuracy);
+    $("#board_location_street").val(currentAddress.street);
+    $("#board_location_locality").val(currentAddress.city);
+    $("#board_location_region").val(currentAddress.state);
+    $("#board_location_postal_code").val(currentAddress.zipCode);
+    $("#board_location_country").val(currentAddress.country);
+    $("#board_location_accuracy").val(currentAddress.accuracy);
 }
 
 function toggleLocationSubmitButton(show){
 	if(show){
-		$("#location_submit").show();
+		$("#board_location_submit").show();
 	}else{
-		$("#location_submit").hide();
+		$("#board_location_submit").hide();
 	}
 }
 

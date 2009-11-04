@@ -1,10 +1,11 @@
 class Location < ActiveRecord::Base
 
   acts_as_geocodable
+  # tells the db what column to put the object type into
+  set_inheritance_column 'object_type'
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
-  validates_presence_of :street, :locality, :region, :postal_code, :country
-  has_many :boards
+  validates_presence_of :locality, :region, :country 
   
   named_scope :ordered_by_desc_creation, :order => 'created_at desc'
   
