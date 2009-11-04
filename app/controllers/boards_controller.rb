@@ -61,7 +61,7 @@ class BoardsController < ApplicationController
         flash[:notice] = 'Board was successfully updated.'
         format.html { redirect_to(overview_path) }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "show" }
       end
     end
   end

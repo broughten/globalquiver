@@ -86,8 +86,12 @@ function addFormField(date, status) {
       //this creates an hidden input with the date marked for removal
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[unavailable_dates_attributes][][date][_delete]' " +
-      "value='" + date.asString() + "'>");
+      "name='board[unavailable_dates_attributes][][id]' " +
+      "value='54'>");
+      $("#multimonth").append(
+      "<input type='hidden' " +
+      "name='board[unavailable_dates_attributes][][_delete]' " +
+      "value='1'>");
     } else {
       //and if the date was just chosen during this session and later
       //unselected, this will remove

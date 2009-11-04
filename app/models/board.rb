@@ -12,7 +12,7 @@ class Board < ActiveRecord::Base
 
   validates_presence_of :maker, :style, :length, :location
   
-  accepts_nested_attributes_for :images, :unavailable_dates
+  accepts_nested_attributes_for :images, :unavailable_dates, :allow_destroy => true
 
   def style_name
     style.name if style
