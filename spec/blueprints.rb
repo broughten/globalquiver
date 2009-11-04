@@ -127,10 +127,6 @@ UnavailableDate.blueprint() do
 end
 
 BoardSearch.blueprint() do
-  # we need to save the location so we have
-  # a valid geocode
-  location = SearchLocation.make()
-  location.save
-  location {location}
+  location {SearchLocation.make}
   style {nil}
 end
