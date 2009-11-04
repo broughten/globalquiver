@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   # will not run. 
   validates_presence_of     :password_confirmation,        :if => :password_required?
   validates_length_of       :email,    :within => 3..100
-  #validates_uniqueness_of   :email, :case_sensitive => false
+  validates_uniqueness_of   :email, :case_sensitive => false
 
   # since we are evaluating a db column we need to set the :accept option
   validates_acceptance_of :terms_of_service, :accept => true

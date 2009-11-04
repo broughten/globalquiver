@@ -45,7 +45,7 @@ describe BoardSearchesController do
     
     describe "show action" do
       before(:each) do
-        @board_search = BoardSearch.make()
+        @board_search = make_board_search
         BoardSearch.any_instance.stubs(:execute).returns(Array.new)
       end
       

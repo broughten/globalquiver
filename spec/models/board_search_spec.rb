@@ -26,7 +26,7 @@ describe BoardSearch do
     end
     
     it "execute should return an array" do
-      board_search = BoardSearch.make()
+      board_search = make_board_search()
       results = board_search.execute
       results.class.should ==  Array.new.class
     end
