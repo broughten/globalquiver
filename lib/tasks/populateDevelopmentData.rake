@@ -52,8 +52,8 @@ namespace :db do
         :region=>"CO", :postal_code=>"80031", :country=>"USA", :creator=>shop, :updater=>shop)
         
     # Set up some search locations
-    SearchLocation.create(:locality=>"Santa Barbara", :region=>"CA", :country=>"USA", :creator=>adminSurfer, :updater=>adminSurfer)
-    SearchLocation.create(:locality=>"Westminster", :region=>"CO", :country=>"USA", :creator=>adminSurfer, :updater=>adminSurfer)
+    SearchLocation.create(:locality=>"Santa Barbara", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
+    SearchLocation.create(:locality=>"Westminster", :region=>"CO", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
     
     #Set up boards for surfer
     Board.populate 3 do |board|
