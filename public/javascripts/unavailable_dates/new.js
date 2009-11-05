@@ -32,7 +32,7 @@ $(function()
       {
         // uncomment if you have firebug and want to confirm this works as expected...
         //console.log('dateSelected', arguments);
-        addFormField(date, status)
+        addFormField(date, event.currentTarget, status)
       }
     );
   });
@@ -41,24 +41,33 @@ $(function()
 
 function unavailableDates($td, thisDate, month, year)
 {
-
-  if ((blackOutDates != null) && (reservedDates != null) && (takenDates != null))
-  {
+  checkDate = thisDate.asString('yyyy-mm-dd');
+  if (ownerDates != null) {
+    for (i = 0; i < ownerDates.length; i++) {
+      if (checkDate == ownerDates[i].unavailable_date.date) {
+        // the disabled class prevents the user from being able to select the element.
+        $td.addClass('selected');
+      }
+    }
+  }
+  if (reservedDates != null) {
+    for (i = 0; i < reservedDates.length; i++) {
+      if (checkDate == reservedDates[i].unavailable_date.date) {
+        $td.addClass('selected');
+      }
+    }
+  }
+  if (blackOutDates != null) {
     for (i = 0; i < blackOutDates.length; i++) {
-      if (thisDate.asString() == blackOutDates[i]) {
+      if (checkDate == blackOutDates[i].unavailable_date.date) {
         // the disabled class prevents the user from being able to select the element.
         $td.addClass('disabled blackout');
       }
     }
-
-    for (i = 0; i < reservedDates.length; i++) {
-      if (thisDate.asString() == reservedDates[i]) {
-        $td.addClass('selected');
-      }
-    }
-
+  }
+  if (takenDates != null) {
       for (i = 0; i < takenDates.length; i++) {
-      if (thisDate.asString() == takenDates[i]) {
+      if (checkDate == takenDates[i].unavailable_date.date) {
         $td.addClass('disabled reserved');
       }
     }
@@ -69,25 +78,39 @@ function unavailableDates($td, thisDate, month, year)
 
 
 
-function addFormField(date, status) {
+function addFormField(date, td, status) {
   if (status) {
-    if ((reservedDates !=null) && ($.inArray(date.asString(), reservedDates) > -1)) {
-      //do nothing... it is already reserved, and the user is just adding it back in
+    //A date has been selected in the calendar
+    if (dateIsAlredyUnavailable(date.asString('yyyy-mm-dd'))) {
+      //and if the date was just chosen during this session and later
+      //unselected, this will remove
+      //the hidden field from the form.
+      tagToRemove = $('input[value="' + getUnavailableDateId(date.asString('yyyy-mm-dd')) + '"]');
+      if (tagToRemove) {
+        otherTagToRemove = tagToRemove.next();
+        otherTagToRemove.remove();
+        tagToRemove.remove();
+      }
+     
     } else {
       //this adds a hidden input field containing the selected
       //date to the form.
+      $("#multimonth").append(
+      "<input type='hidden' " +
+      "name='board[unavailable_dates_attributes][][id]");
       $("#multimonth").append(
       "<input type='hidden' " +
       "name='board[unavailable_dates_attributes][][date]' " +
       "value='" + date.asString() + "'>");
     }
   } else {
-    if ((reservedDates != null) && ($.inArray(date.asString(), reservedDates) > -1)) {
+    //A date has been unselected in the calendar
+    if (dateIsAlredyUnavailable(date.asString('yyyy-mm-dd'))) {
       //this creates an hidden input with the date marked for removal
       $("#multimonth").append(
       "<input type='hidden' " +
       "name='board[unavailable_dates_attributes][][id]' " +
-      "value='54'>");
+      "value='" + getUnavailableDateId(date.asString('yyyy-mm-dd')) +"'>");
       $("#multimonth").append(
       "<input type='hidden' " +
       "name='board[unavailable_dates_attributes][][_delete]' " +
@@ -96,7 +119,48 @@ function addFormField(date, status) {
       //and if the date was just chosen during this session and later
       //unselected, this will remove
       //the hidden field from the form.
-      $('input[value="' + date.asString() + '"]').remove();
+      tagToRemove = $('input[value="' + date.asString() + '"]');
+      otherTagToRemove = tagToRemove.prev();
+      otherTagToRemove.remove();
+      tagToRemove.remove();
     }
   }
+ }
+
+ function getUnavailableDateId(unavailableDate) {
+   if (reservedDates != null) {
+     for (var i = 0; i < reservedDates.length; i++) {
+       if (reservedDates[i].unavailable_date.date == unavailableDate) {
+         return reservedDates[i].unavailable_date.id;
+       }
+     }
+   }
+   if (ownerDates != null) {
+     for (var i = 0; i < ownerDates.length; i++) {
+       if (ownerDates[i].unavailable_date.date == unavailableDate) {
+         return ownerDates[i].unavailable_date.id;
+       }
+     } 
+   }
+
+   return null;
+ }
+
+ function dateIsAlredyUnavailable(possiblyAlreadyUnavailableDate) {
+   if (reservedDates != null) {
+     for (var i = 0; i < reservedDates.length; i++) {
+       if (reservedDates[i].unavailable_date.date == possiblyAlreadyUnavailableDate) {
+         return true;
+       }
+     }
+   }
+   if (ownerDates != null) {
+     for (var i = 0; i < ownerDates.length; i++) {
+       if (ownerDates[i].unavailable_date.date == possiblyAlreadyUnavailableDate) {
+         return true;
+       }
+     }
+   }
+   return false;
+
  }

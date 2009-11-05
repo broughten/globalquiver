@@ -12,9 +12,10 @@
 <div id="multimonth">This will be replaced with the multimonth select</div>
 <script language="javascript">
   
-  var takenDates    = <%= (@board.reserved_dates.blank?)?'null':actual_dates(@board.reserved_dates.find(:all, :conditions => ['creator_id != ?', current_user.id])).inspect %>;
-  var blackOutDates = <%= (@board.black_out_dates.blank?)?'null':actual_dates(@board.black_out_dates).inspect %>;
-  var reservedDates = <%= (@board.reserved_dates.blank?)?'null':actual_dates(@board.reserved_dates.find(:all, :conditions => ['creator_id = ?', current_user.id])).inspect %>;
+  var takenDates    = <%= taken_dates_json %>;
+  var blackOutDates = <%= black_out_dates_json %>;
+  var ownerDates    = <%= owner_dates_json %>;
+  var reservedDates = <%= reserved_dates_json %>;
 
  
 </script>
