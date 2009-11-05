@@ -73,20 +73,34 @@ end
 # needed to test the searching by geocode since
 # if a board location geocode is nil it will show
 # up in the searches
-Location.blueprint(:geocodable) do
-  street {"2164 Westview Drive"}
+Location.blueprint(:des_plaines_il) do
   locality {"Des Plaines"}
   region {"IL"}
-  postal_code {"60018"}
   country {"USA"}
 end
 
-Location.blueprint(:geocodable2) do
-  street {"233 W Micheltorena St"}
+Location.blueprint(:santa_barbara_ca) do
   locality {"Santa Barbara"}
   region {"CA"}
-  postal_code {"93101"}
   country {"USA"}
+end
+
+BoardLocation.blueprint(:des_plaines_il) do
+  street {"2164 Westview Drive"}
+  postal_code {"60018"}
+end
+
+BoardLocation.blueprint(:santa_barbara_ca) do
+  street {"233 W Micheltorena St"}
+  postal_code {"93101"}
+end
+
+SearchLocation.blueprint(:des_plaines_il) do
+  search_radius {100}
+end
+
+SearchLocation.blueprint(:santa_barbara_ca) do
+  search_radius {100}
 end
 
 Board.blueprint() do

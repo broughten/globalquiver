@@ -6,14 +6,16 @@
 
 <% form_for @board_search do |f| %>
   <%= f.error_messages %>
+
   <p>
-    <%= f.label :geocode_id, "Location" %><br />
-	<%= f.collection_select :geocode_id, @geocodes, :id, :locality, {:prompt => true} %>
+    <%= f.label :location_id %><br />
+	<%= f.collection_select :location_id, @search_locations, :id, :to_s, {:prompt => true} %>
   </p>
-  <p>
+	<p>
     <%= f.label :style_id %><br />
 	<%= f.collection_select :style_id, Style.all, :id, :name, {:prompt => "All"} %>
   </p>
+  
   <p><%= f.submit "Submit" %></p>
 <% end %>
 

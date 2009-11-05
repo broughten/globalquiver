@@ -8,10 +8,14 @@ describe BoardSearch do
   describe "associations" do
     it "should have a style" do
       BoardSearch.make_unsaved().should respond_to(:style)
+      # confirm the db columns are right
+      BoardSearch.make_unsaved().should respond_to(:style_id)
     end
     
     it "should have a location" do
       BoardSearch.make_unsaved().should respond_to(:location)
+      # confirm the db columns are right
+      BoardSearch.make_unsaved().should respond_to(:location_id)
     end
   end
   
@@ -20,6 +24,7 @@ describe BoardSearch do
   end
   
   describe "methods" do
+    
     it "should respond to an execute method" do
       board_search = BoardSearch.make()
       board_search.should respond_to(:execute)
@@ -31,8 +36,18 @@ describe BoardSearch do
       results.class.should ==  Array.new.class
     end
     
+    it "execute should return Board objects" do
+      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+      search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
+      board_search = BoardSearch.make(:location=>search_location)
+      result = board_search.execute
+      result.first.should be_instance_of(Board)
+    end
+    
     it "execute should filter results based on location" do
-      board1 = Board.make(:location=>BoardLocation.make(:geocodable))
+      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+      # this board comes back with a location that is a mix of the BoardLocation.make(:santa_barbara_ca)
+      # blueprint and the Location.make() blueprint.  This is why the geocoding is failing.
       board2 = Board.make(:location=>board1.location)
       board2.location = board1.location
       board2.save
@@ -41,8 +56,9 @@ describe BoardSearch do
       result = board_search.execute
       result.include?(board1).should be_true
       result.include?(board2).should be_true
+      
       #change location
-      board2.location = BoardLocation.make(:geocodable2)
+      board2.location = BoardLocation.make(:des_plaines_il)
       # make sure you save the new state away into the db.
       board2.save 
       result = board_search.execute
@@ -51,7 +67,9 @@ describe BoardSearch do
     end
 
     it "execute should filter results based on style" do
-      board1 = Board.make(:location=>BoardLocation.make(:geocodable))
+      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+      # this board comes back with a location that is a mix of the BoardLocation.make(:santa_barbara_ca)
+      # blueprint and the Location.make() blueprint.  This is why the geocoding is failing.
       board2 = Board.make(:location=>board1.location)
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
       board_search = BoardSearch.make(:location=>search_location,:style=>nil)
@@ -64,8 +82,6 @@ describe BoardSearch do
       result = board_search.execute
       result.include?(board1).should be_true
       result.include?(board2).should be_false
-      end
     end
-  
-  
+  end  
 end

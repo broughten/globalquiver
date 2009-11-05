@@ -5,10 +5,7 @@ class BoardSearch < ActiveRecord::Base
   validates_presence_of :location, :message => "must be selected"
   
   def execute
-    # search = Board.location_geocoding_geocode_id_equals(geocode.id)
-    #     #further refine the search for board.style
-    #     search = search.style_id_equals(style.id) if style != nil
-    #     search.all
-    Array.new()
+    board_locations = BoardLocation.find(:all, :within => self.location.search_radius, :origin => self.location.to_s)
+    Board.all
   end
 end

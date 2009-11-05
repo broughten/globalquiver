@@ -9,13 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091102233736) do
+ActiveRecord::Schema.define(:version => 20091105135517) do
 
   create_table "board_searches", :force => true do |t|
-    t.integer  "geocode_id"
-    t.integer  "style_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "style_id"
+    t.integer  "location_id"
   end
 
   create_table "boards", :force => true do |t|

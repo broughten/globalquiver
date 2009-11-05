@@ -12,9 +12,9 @@ describe BoardSearchesController do
         get "new"
         assigns[:board_search].should be_new_record
       end
-      it "should assign a collection of geocodes for the view " do
+      it "should assign a collection of search locations for the view " do
         get "new"
-        assigns[:geocodes].should_not be_nil
+        assigns[:search_locations].should_not be_nil
       end
     end
     
@@ -25,8 +25,8 @@ describe BoardSearchesController do
       end
       
       it "should pass parameters to board search" do
-        post "create", :board_search =>{:geocode_id =>1}
-        assigns[:board_search].geocode_id.should == 1
+        post "create", :board_search =>{:location_id =>1}
+        assigns[:board_search].location_id.should == 1 
       end
       
       it "should redirect to show action on successful save" do
@@ -35,10 +35,10 @@ describe BoardSearchesController do
         response.should redirect_to board_search_path(assigns[:board_search])
       end
       
-      it "should render the new view with some geocodes to display on an unsuccessful save" do
+      it "should render the new view with some search locations to display on an unsuccessful save" do
         BoardSearch.any_instance.stubs(:valid?).returns(false)
         post "create"
-        assigns[:geocodes].should_not be_nil
+        assigns[:search_locations].should_not be_nil
         response.should render_template('new')
       end
     end
