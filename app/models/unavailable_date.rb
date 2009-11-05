@@ -6,7 +6,7 @@ class UnavailableDate < ActiveRecord::Base
 
 
   validates_uniqueness_of :date, :scope => :board_id,
-    :message => 'There unavailable date was already set for this board.'
+    :message => 'This board was already unavailable on the selected date.'
 
 
   validates_is_after :date
