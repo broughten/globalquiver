@@ -21,7 +21,16 @@ module UnavailableDatesHelper
     if (@board.black_out_dates.blank?)
       return 'null'
     else
-      black_outs = @board.black_out_dates
+      black_outs = @board.black_out_dates.find(:all, :conditions => ['creator_id != ?', current_user.id])
+      black_outs.to_json
+    end
+  end
+
+  def owner_dates_json
+    if (@board.black_out_dates.blank?)
+      return 'null'
+    else
+      black_outs = @board.black_out_dates.find(:all, :conditions => ['creator_id = ?', current_user.id])
       black_outs.to_json
     end
   end
