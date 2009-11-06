@@ -33,7 +33,7 @@ describe BoardSearch do
     it "execute should return an array" do
       board_search = make_board_search()
       results = board_search.execute
-      results.class.should ==  Array.new.class
+      results.should be_instance_of(Array)
     end
     
     it "execute should return Board objects" do
@@ -54,16 +54,17 @@ describe BoardSearch do
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
       board_search = BoardSearch.make(:location=>search_location)
       result = board_search.execute
-      result.include?(board1).should be_true
-      result.include?(board2).should be_true
+      result.should include(board1)
+      result.should include(board2)
       
       #change location
       board2.location = BoardLocation.make(:des_plaines_il)
       # make sure you save the new state away into the db.
       board2.save 
       result = board_search.execute
-      result.include?(board1).should be_true
-      result.include?(board2).should be_false 
+      #result.include?(board1).should be_true
+      result.should include(board1)
+      result.should_not include(board2)
     end
 
     it "execute should filter results based on style" do
@@ -74,14 +75,14 @@ describe BoardSearch do
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
       board_search = BoardSearch.make(:location=>search_location,:style=>nil)
       result = board_search.execute
-      result.include?(board1).should be_true
-      result.include?(board2).should be_true
+      result.should include(board1)
+      result.should include(board2)
       
       #change board_search style to something 
       board_search.style = board1.style
       result = board_search.execute
-      result.include?(board1).should be_true
-      result.include?(board2).should be_false
+      result.should include(board1)
+      result.should_not include(board2)
     end
   end  
 end

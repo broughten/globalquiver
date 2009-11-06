@@ -5,7 +5,12 @@ class BoardSearch < ActiveRecord::Base
   validates_presence_of :location, :message => "must be selected"
   
   def execute
-    board_locations = BoardLocation.find(:all, :within => self.location.search_radius, :origin => self.location.to_s)
-    Board.all
+    boards = Array.new
+    BoardLocation.find(:all, :within => self.location.search_radius, :origin => self.location.to_s).each do |board_location|
+      board_location.boards.each do |board|
+        boards << board if (self.style == nil || board.style == self.style)
+      end
+    end
+    return boards.uniq
   end
 end
