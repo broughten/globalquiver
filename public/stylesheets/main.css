@@ -40,7 +40,7 @@ body {
   background-color: #000;
   color: #555555;
   text-align: center;
-  background: #86C9EF;
+  background: #A5D2F1;
   padding: 0px 0 50px 0;
   margin: 0;
   line-height: 1;
@@ -52,7 +52,7 @@ h1, h2, h3{
 }
 
 p {
-  font-size: 1.2em;
+  font-size: 1.5em;
   line-height: 1.4;
   margin: 0;
 }
@@ -107,7 +107,7 @@ a.call_to_action{
 
 #container {
   text-align: left;
-  width: 960px;
+  width: 830px;
   margin: 0 auto;
   padding: 0;
 }
@@ -215,14 +215,14 @@ a.call_to_action{
 
 
 #buttonArea {
-    margin: 25px 0 0 40px;
+    margin: 25px 0 0 0px;
     float:left;
-    width:630px;
+    width:580px;
 }
 
 #rent{
 
-  margin: 0 60px 0 0;
+  margin: 0 20px 0 0;
 
 }
 
@@ -232,12 +232,12 @@ a.call_to_action{
 #questionButtons{
   margin: 20px 0 0 0;
   float:left;
-  width:630px;
+  width:580px;
 
 }
 
 #why{
-  margin: 0 60px 0 0;
+  margin: 0 20px 0 0;
 
 }
 

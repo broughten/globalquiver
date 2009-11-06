@@ -7,14 +7,13 @@
 <% form_for :session,
         :url => session_path(),
         :html => {:id => 'login_form' } do |form| %>
-  <div class="user_fields">
+  <div class="user-fields">
 	<%= form.label :email, 'Email' %>
 	<%= form.text_field :email %>
-
+    <br/>
 	<%= form.label :password, 'Password' %>
 	<%= form.password_field :password %>
   </div>
-
   <div class="submit">
     <%= form.submit 'Login', :class => 'submitBtn' %>
   </div>

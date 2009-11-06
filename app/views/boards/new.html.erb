@@ -21,13 +21,15 @@
 <% end %>
 
 <h1>List a board for borrow or rent</h1>
-<br>
-<h3>When you enter one of your extra surfboards below, it will be added to your quiver.</h3>
-<h3>If someone wants to borrow or rent it, we'll send you an email.</h3>
-<h3>You will then need to reply with pickup and payment instructions.</h3>
-<br>
+
+<div class="owners-instructions">
+  <h3>When you enter one of your extra surfboards below, it will be added to your quiver.</h3>
+  <h3>If someone wants to borrow or rent it, we'll send you an email.</h3>
+  <h3>You will then need to reply with pickup and payment instructions.</h3>
+</div>
+
 <h2>First, where is this board?</h2>
-<p>We need to know where your boar is so that people looking to take surf trips in your area will be able to find it, pick it up, and use it<p>
+<p>We need to know where your board is so that whoever rents or borrows it will be able to find it, pick it up, and use it<p>
 
 <%= render :partial => '/board_locations/list' %>
 
@@ -35,11 +37,13 @@
   <%= f.error_messages %>
 	<%= f.hidden_field :location_id %>
 
+<hr/>
 <div id="boardDetails">
-  <h2>Next, tell us about the board.</h2><span id="required_star">*</span> denotes required
+  <h2>Next, tell us about the board.</h2>
   <p>Different surfers and different conditions require different boards.  Describe yours below:</p>
+  <div class="form-fields">
     <p>
-		<%= f.label :maker, "Maker: (for example Channel Islands)" %><span id="required_star">*</span><br />
+      <%= f.label :maker, "Maker: (for example Channel Islands)" %><span id="required_star">*</span><br />
       <%= f.text_field :maker %>
     </p>
     <p>
@@ -56,42 +60,49 @@
       <%= f.label :style_name, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
       <%= f.text_field :style_name, :autocomplete =>"off" %>
     </p>
-	<p><a id='hide_show_optional_fields' href="javascript:void(0)"><span id='visibility_indicator'>Show</span> Optional Fields</a>
-	<div id="optional_fields">
-    <p>
-      <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
-      <%= f.text_field :width_inches, :value => "inches", :size => 4 %>
-      <%= f.select :width_fraction, fractions, {}, :class => "fraction_dropdown" %>
-    </p>
-    <p>
-      <%= f.label :thickness, "Thickness: (you can skip this if you don't know)" %><br />
-      <%= f.text_field :thickness_inches, :value => "inches", :size => 4 %>
-      <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
-    </p>
-    
-    <p>
-      <%= f.label :construction, "Construction: (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
-      <%= f.text_field :construction %>
-    </p>
-    <p>
-      <%= f.label :description, "Anything else you want to mention about this board?" %><br />
-      <%= f.text_area :description, :size => "60x2"%>
-    </p>
-	</div>
-	
-	<%for image in @board.images%>
-	<p>
-		<% f.fields_for :images, image do |image_fields| -%>
-			<%= image_fields.label :data, 'Your image' -%>
-			<%= image_fields.file_field :data -%>
-		<% end -%>
-	</p>
-		<%end%>
-    <%= render :partial => '/unavailable_dates/form' %>
-    <br>
-    <p>
-      <%= f.submit 'Create' %>
-    </p>
+    <p><a id='hide_show_optional_fields' href="javascript:void(0)"><span id='visibility_indicator'>Show</span> Optional Fields</a>
+    <div id="optional_fields">
+      <p>
+        <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
+        <%= f.text_field :width_inches, :value => "inches", :size => 4 %>
+        <%= f.select :width_fraction, fractions, {}, :class => "fraction_dropdown" %>
+      </p>
+      <p>
+        <%= f.label :thickness, "Thickness: (you can skip this if you don't know)" %><br />
+        <%= f.text_field :thickness_inches, :value => "inches", :size => 4 %>
+        <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
+      </p>
+
+      <p>
+        <%= f.label :construction, "Construction: (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
+        <%= f.text_field :construction %>
+      </p>
+      <p>
+        <%= f.label :description, "Anything else you want to mention about this board?" %><br />
+        <%= f.text_area :description, :size => "60x2"%>
+      </p>
+    </div>
+  </div>
+  <br/>
+  <hr/>
+  <h2>Upload some pictures</h2>
+  <p>Please try and demonstrate the real condition of the board in your pictures.</p>
+
+  <%for image in @board.images%>
+  <p>
+          <% f.fields_for :images, image do |image_fields| -%>
+                  <%= image_fields.label :data, 'Your image' -%>
+                  <%= image_fields.file_field :data -%>
+          <% end -%>
+  </p>
+          <%end%>
+  <br/>
+  <hr/>
+  <%= render :partial => '/unavailable_dates/form' %>
+  <br>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
   </div>
   
 <% end %>

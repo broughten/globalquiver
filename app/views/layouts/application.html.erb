@@ -1,10 +1,13 @@
 <%# This template will get rendered for all of the application pages.%>
 
 <%= render :partial => 'layouts/header' %>
-      <div id="topper">
-        <img class="topper" alt="" src="/images/topper.png"/>
-      </div>
-      <div id="mainContent">
-        <%= render :partial => 'layouts/flashes' %>
-        <%= yield %>
+<div id="topper">
+  <img class="topper" alt="" src="/images/topper.png"/>
+</div>
+<div id="mainContent">
+<%= render :partial => 'layouts/flashes' %>
+<%= yield %>
 <%= render :partial => 'layouts/footer' %>
+<div id="bottomer">
+  <img class="bottomer" alt="" src="/images/bottomer.png"/>
+</div>

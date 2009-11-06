@@ -34,6 +34,31 @@
    padding:0px;
 }
 
+.form-fields {
+  width:720px;
+  background:#FDFAE7;
+  padding-left:10px;
+  padding-top:10px;
+  padding-bottom:10px;
+
+}
+
+.form-fields label {
+  font-size:0.8em;
+}
+
+.optional-fields {
+  width:720px;
+  background:#FDFAE7;
+  padding-left:10px;
+  padding-top:10px;
+  padding-bottom:10px;
+  
+}
+
+.optional-fields label {
+  font-size:0.8em;
+}
 
 #new_board .errorExplanation {
     width:50%;
@@ -42,6 +67,16 @@
 
 .fraction_dropdown {
     width:123px;
+}
+
+.owners-instructions {
+  width:720px;
+  margin-top:10px;
+  margin-bottom:10px;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  background:#FDFAE7;
 }
 
 /* update boards */

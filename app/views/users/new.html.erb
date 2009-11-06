@@ -6,15 +6,17 @@
 <h1>Signup</h1>
 
 <h3>Already have an account?</h3>
-  <%= link_to 'Login', new_session_path, :class=>'call_to_action' %>
+ <%= link_to 'Login', new_session_path, :class=>'call_to_action' %>
+<h3>As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
+
 <% form_for :user,
             :url => users_url(:protocol => env_ssl_protocol),
             :html => {:id => 'signup_form'} do |form| %>
   <%= form.error_messages %>
-  <div class="user_fields">
+  <div class="user-fields">
     <div>
-	  <%= check_box_tag 'is_shop', 'yes'%>
-	  <%=label_tag 'is_shop', 'I am a rental shop'%>
+	  <%= check_box_tag 'is_shop', 'yes', false, :class=>'checkbox'%>
+	  <%=label_tag 'is_shop', 'I am a rental shop', :class => 'big-label'%>
 	</div>
 	<div>
 	  <%= form.label :first_name, 'First Name' %>
@@ -40,9 +42,9 @@
 	  <%= form.label :password_confirmation, 'Password Confirm' %>
 	  <%= form.password_field :password_confirmation %>
 	</div>
-	<div>
-	  <%= form.check_box :terms_of_service %>
-	  <%= form.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>" %>
+	<div class="big-label">
+	  <%= form.check_box :terms_of_service, :class=>'checkbox'%>
+	  <%= form.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>", :class => 'big-label' %>
 	</div>
   </div>
 

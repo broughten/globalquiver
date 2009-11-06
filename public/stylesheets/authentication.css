@@ -6,7 +6,28 @@
         All the css specific to the session and user.
 */
 
+/* overall label css for form alignment */
+.user-fields label {
+  width:5em;
+  float: left;
+  text-align: left;
+  margin-right: 0.5em;
+  display: block
+}
 
+.checkbox {
+  margin-bottom:13px;
+  margin-top:0px;
+}
+
+.user-fields .big-label {
+  width:8em;
+  margin-bottom:1em;
+}
+
+.user-fields input {
+  margin-bottom:1em;
+}
 
 
 /* index authentication */
@@ -14,19 +35,6 @@
 /* show authentication */
 
 /* create authentication */
-
-/* these two are not needed for the header dropdown forms...we may need them
-as we flesh out the login and create user pages.
-#signup_form .fieldWithErrors,
-#login_form .fieldWithErrors {
-  display: inline
-}
-
-
-#application #login-signup #signup_form #tos_field .fieldWithErrors {
-  display: inline;
-}
-*/
 
 
 .submitBtn{
@@ -46,15 +54,12 @@ as we flesh out the login and create user pages.
 }
 
 #signup_form div{
-    margin-bottom: 10px;
     width:100%;
 }
 
 #signup_form label,
 #login_form label{
     font-size:1.2em;
-    width:150px;
-    display: inline-block;
 }
 
 #login-signup{
