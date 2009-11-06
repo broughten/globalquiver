@@ -12,4 +12,8 @@ class Location < ActiveRecord::Base
   def matches?(other_location)
     street == other_location.street && locality == other_location.locality && region == other_location.region && postal_code == other_location.postal_code && country == other_location.country
   end
+  
+  def to_s
+     "#{self.locality}, #{self.region} #{self.country}"
+   end
 end

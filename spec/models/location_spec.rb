@@ -20,6 +20,14 @@ describe Location do
     end
   end
   
+  describe "methods" do
+    it "should respond to a to_s method that returns 'locality, region country'" do
+      location = SearchLocation.make_unsaved()
+      location.to_s.should == "#{location.locality}, #{location.region} #{location.country}"
+    end
+    
+  end
+  
   it "should have a named scope that allows you to get locations ordered by descending created_at date" do
     location1 = Location.make()
     location2 = Location.make()
