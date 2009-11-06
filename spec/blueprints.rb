@@ -55,9 +55,8 @@ Location.blueprint() do
   locality {Sham.location_city}
   region {Sham.location_state}
   country {"USA"}
-  user = User.make()
-  creator {user}
-  updater {user}
+  creator {User.make()}
+  updater {creator}
 end
 
 BoardLocation.blueprint() do
@@ -85,22 +84,41 @@ Location.blueprint(:santa_barbara_ca) do
   country {"USA"}
 end
 
+# The information from the above named blueprints needs to 
+# be duplicated as per:
+# http://groups.google.com:80/group/machinist-users/browse_thread/thread/e4e393701903b778
 BoardLocation.blueprint(:des_plaines_il) do
   street {"2164 Westview Drive"}
   postal_code {"60018"}
+  # duped stuff from above
+  locality {"Des Plaines"}
+  region {"IL"}
+  country {"USA"}
 end
 
 BoardLocation.blueprint(:santa_barbara_ca) do
   street {"233 W Micheltorena St"}
   postal_code {"93101"}
+  # duped stuff from above
+  locality {"Santa Barbara"}
+  region {"CA"}
+  country {"USA"}
 end
 
 SearchLocation.blueprint(:des_plaines_il) do
   search_radius {100}
+  # duped stuff from above
+  locality {"Des Plaines"}
+  region {"IL"}
+  country {"USA"}
 end
 
 SearchLocation.blueprint(:santa_barbara_ca) do
   search_radius {100}
+  # duped stuff from above
+  locality {"Santa Barbara"}
+  region {"CA"}
+  country {"USA"}
 end
 
 Board.blueprint() do
@@ -113,9 +131,8 @@ Board.blueprint() do
   description {Sham.board_description}
   location {BoardLocation.make()}
   construction {Sham.board_construction}
-  user = User.make()
-  creator {user}
-  updater {user}
+  creator {User.make()}
+  updater {creator}
 end
 
 # use this blueprint to make sure your 
@@ -135,9 +152,8 @@ end
 UnavailableDate.blueprint() do
   board {Board.make()}
   date Sham.future_date
-  user = User.make()
-  creator {user}
-  updater {user}
+  creator {User.make()}
+  updater {creator}
 end
 
 BoardSearch.blueprint() do
