@@ -31,7 +31,7 @@ describe SessionsController do
       controller.stubs(:logged_in?).returns(false)
       post "create", :session=>{"email"=>"test@test.com", "password"=>"password"}
       response.should render_template("new")
-      flash[:error].should_not be_nil
+      assigns[:error_messages].should_not be_nil
     end
   end
   
