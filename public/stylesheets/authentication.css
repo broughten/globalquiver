@@ -52,10 +52,6 @@
     width:100%;
 }
 
-#signup_form div{
-    width:100%;
-}
-
 #signup_form label,
 #login_form label{
     font-size:1.2em;
@@ -103,17 +99,28 @@
   margin-bottom:15px;
 }
 
-.error-messages {
+#errorExplanation {
   margin-bottom:10px;
   padding-top:10px;
   padding-bottom:10px;
   padding-left:10px;
   background:#FFC2C3;
   font-size:1.3em;
-  font-weight:bold;
-  width:24em;
+  width:800px;
   border-top: solid #EB6756;
   border-bottom: solid #EB6756;
+}
+
+#errorExplanation h2 {
+  font-size: 1.5em;
+}
+
+#errorExplanation p {
+  font-size:1.2em;
+}
+
+#errorExplanation li {
+  font-size:1em;
 }
 
 /* update authentication */
