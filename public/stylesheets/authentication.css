@@ -36,7 +36,6 @@
 
 /* create authentication */
 
-
 .submitBtn{
   background: transparent url(/images/login-button.gif) no-repeat;
   width: 59px;
@@ -96,7 +95,26 @@
   background: #494444;
 }
 
+#login-form {
+  padding-top:0px;
+}
 
+.login-header {
+  margin-bottom:15px;
+}
+
+.error-messages {
+  margin-bottom:10px;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  background:#FFC2C3;
+  font-size:1.3em;
+  font-weight:bold;
+  width:24em;
+  border-top: solid #EB6756;
+  border-bottom: solid #EB6756;
+}
 
 /* update authentication */
 

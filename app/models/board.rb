@@ -80,7 +80,6 @@ class Board < ActiveRecord::Base
 
   def width_fraction
     if (!self.width.nil?)
-      logger.warn("HI JC!!! here it is " + (self.width - self.width.floor).to_s)
       fraction_value = FRACTIONS[(self.width - self.width.floor).to_s]
       if (fraction_value == nil)
         return '0'

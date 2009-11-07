@@ -302,7 +302,6 @@ a.call_to_action{
 
 #footer {
   padding: 0px 0 0 0;
-  font-size: 1.1em;
   border-top: 1px solid #d5d0c1;
   margin: 0 20px 0 0;
 }
@@ -323,13 +322,8 @@ a.call_to_action{
 }
 
 #footer p {
+  font-size:1.2em;
   float: left;
-}
-
-
-/*Forms----------------------------*/
-#mainContent form{
-  padding: 15px 0 0 0;
 }
 
 
