@@ -42,10 +42,10 @@
 	  <%= form.label :password_confirmation, 'Password Confirm' %>
 	  <%= form.password_field :password_confirmation %>
 	</div>
-	<div class="big-label">
-	  <%= form.check_box :terms_of_service, :class=>'checkbox'%>
+	<div class="terms-checkbox">
 	  <%= form.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>", :class => 'big-label' %>
-	</div>
+          <%= form.check_box :terms_of_service, :class=>'checkbox'%>
+        </div>
   </div>
 
   <div class="submit">

@@ -21,7 +21,7 @@
 }
 
 .user-fields .big-label {
-  width:8em;
+  width:9em;
   margin-bottom:1em;
 }
 
@@ -37,14 +37,19 @@
 /* create authentication */
 
 .submitBtn{
-  background: transparent url(/images/login-button.gif) no-repeat;
-  width: 59px;
-  height: 26px;
-  color: #fff;
+  background: transparent url(/images/login-button.png) no-repeat;
+  width: 55px;
+  height: 30px;
+  color: #494444;
   font-weight: bold;
   border: none;
   padding: 0 0 4px 0;
   cursor: pointer;
+}
+
+.terms-checkbox {
+  float:left;
+  padding-right:102px;
 }
 
 
