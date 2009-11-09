@@ -326,6 +326,17 @@ a.call_to_action{
   float: left;
 }
 
+#grass {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background: url(/images/polonio.png) repeat;
+  height:208px;
+  z-index:-1;
+ 
+}
+
 
 
 
