@@ -86,13 +86,21 @@ describe User do
   it "should allow you to find all users with boards that have reservation dates created in the past day" do
     board_owner = User.make()
     board1 = Board.make(:creator=>board_owner)
+    another_board_owner = User.make()
+    board2 = make_board_with_unavailable_dates(:creator=>another_board_owner)
     reservation1 = UnavailableDate.make()
     board1.unavailable_dates << reservation1
     User.has_boards_with_new_reservation_dates(1.day.ago).should include(board_owner)
+    User.has_boards_with_new_reservation_dates(1.day.ago).should_not include(another_board_owner)
+    User.all.should include(board_owner)
+     User.all.should include(another_board_owner)
     
     reservation1.created_at = 2.days.ago
     reservation1.save
     User.has_boards_with_new_reservation_dates(1.day.ago).should_not include(board_owner)
+  end
+  
+  it "should allow you to send an email to all users who have boards with new " do
     
   end
 end
