@@ -122,7 +122,7 @@ a.call_to_action{
   background: url(/images/logo.png) top left no-repeat;
   width: 275px;
   height: 78px;
-  margin: 19px 48px;
+  margin: 19px 0px;
 }
 
 #logo span{
