@@ -53,6 +53,21 @@ class User < ActiveRecord::Base
     end
     return users
   end
+  
+  def self.send_reservation_status_change_update
+    time = 1.day.ago
+    users = has_boards_with_new_reservation_dates(time)
+    users.each do |user|
+      new_board_reservation_dates = Hash.new
+      boards_with_new_reservations = user.boards.with_new_reservations(time)
+      boards_with_new_reservations.each do |board|
+        new_reservation_dates = board.reserved_dates.recently_created(time)
+        new_board_reservation_dates[board] = new_reservation_dates
+      end
+      UserMailer.deliver_board_owner_board_reservation_change_notification(user, new_board_reservation_dates, {})
+    end
+    
+  end
 
   # Encrypts the password with the user salt
   def encrypt(password)

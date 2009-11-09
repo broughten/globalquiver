@@ -100,7 +100,15 @@ describe User do
     User.has_boards_with_new_reservation_dates(1.day.ago).should_not include(board_owner)
   end
   
-  it "should allow you to send an email to all users who have boards with new " do
-    
+  it "should allow you to send an email to all users who have boards with new reservations" do
+    board_owner = User.make()
+    board1 = Board.make(:creator=>board_owner)
+    another_board_owner = User.make()
+    board2 = make_board_with_unavailable_dates(:creator=>another_board_owner)
+    reservation1 = UnavailableDate.make()
+    board1.unavailable_dates << reservation1
+    ActionMailer::Base.deliveries.clear
+    User.send_reservation_status_change_update
+    ActionMailer::Base.deliveries.length.should == 1
   end
 end
