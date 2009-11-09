@@ -1,5 +1,5 @@
 
-		<%@date_additions.each do |board, dates|%>
+		<%@board_date_additions.each do |board, dates|%>
 	New reservation dates for <%=h board.model%> by <%=h board.maker%>
 
 	
@@ -8,7 +8,7 @@
 			<% end %>
 		
 		<%end%>
-		<%@date_removals.each do |board, dates|%>
+		<%@board_date_removals.each do |board, dates|%>
 		Removed reservation dates for <%=h board.model%> by <%=h board.maker%>
 
 		

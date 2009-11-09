@@ -4,7 +4,7 @@
     	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   	</head>
   	<body>
-		<%@date_additions.each do |board, dates|%>
+		<%@board_date_additions.each do |board, dates|%>
 		<h1>New reservation dates for <%=h board.model%> by <%=h board.maker%></h1>
 
 		<ul>
@@ -13,7 +13,7 @@
 			<% end %>
 		</ul>
 		<%end%>
-		<%@date_removals.each do |board, dates|%>
+		<%@board_date_removals.each do |board, dates|%>
 		<h1>Removed reservation dates for <%=h board.model%> by <%=h board.maker%></h1>
 
 		<ul>

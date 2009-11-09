@@ -12,7 +12,7 @@ class UserMailer < ActionMailer::Base
     from("GlobalQuiver <info@globalquiver.com>")
     subject("Board Status Update")
     sent_on(Time.now)    
-    body({:date_additions => board_date_additions, :date_removals => board_date_removals})
+    body({:board_date_additions => board_date_additions, :board_date_removals => board_date_removals})
   end
   
   # This method will send out an email to the board_renter that will
