@@ -1,0 +1,10 @@
+
+	<%@board_rental_dates.each do |board, dates|%>
+Upcoming reservation dates for <%=h board.model%> by <%=h board.maker%>
+
+
+		<% for date in dates %>
+			<%=h date%>
+		<% end %>
+	
+	<%end%>

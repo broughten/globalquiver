@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  	<head>
+    	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  	</head>
+  	<body>
+		<%@date_additions.each do |board, dates|%>
+		<h1>New reservation dates for <%=h board.model%> by <%=h board.maker%></h1>
+
+		<ul>
+			<% for date in dates %>
+				<li><%=h date%></li>
+			<% end %>
+		</ul>
+		<%end%>
+		<%@date_removals.each do |board, dates|%>
+		<h1>Removed reservation dates for <%=h board.model%> by <%=h board.maker%></h1>
+
+		<ul>
+			<% for date in dates %>
+				<li><%=h date%></li>
+			<% end %>
+		</ul>
+		<%end%>
+	</body>
+</html>
