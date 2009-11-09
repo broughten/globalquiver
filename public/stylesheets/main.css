@@ -326,26 +326,24 @@ a.call_to_action{
   float: left;
 }
 
-#grass {
-  position:fixed;
+#surftown {
+  position:absolute;
   bottom:0;
   left:0;
   width:100%;
-  background: url(/images/polonio.png) repeat;
-  height:208px;
+  height:100%;
   z-index:-1;
  
 }
-#sunsurfer {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background: url(/images/sunsurfer.png) no-repeat;
-  height:200px;
-  z-index:-1;
 
+#surftownpic {
+  position:absolute;
+  height:auto;
+  width:100%;
+  bottom:0;
+  
 }
+
 
 
 
