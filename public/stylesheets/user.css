@@ -6,13 +6,37 @@
         Purpose of the stylesheet follows.
 */
 
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
-*/
 
 root { 
     display: block;
+}
+
+/* new user */
+
+/* create user */
+
+/* edit user */
+
+.user-fields label {
+  margin-top:10px;
+  width:6em;
+ 
+}
+
+.user-fields input {
+  margin-bottom:0px;
+  margin-top:10px;
+  width:20em;
+}
+
+.user-fields .inline-errors {
+  color:red;
+  font-size:1.2em;
+  padding-left:66px;
+}
+
+.submit {
+  margin-top:10px;
 }
 
 

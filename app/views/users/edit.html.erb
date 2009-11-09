@@ -1,9 +1,12 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'user', :media => 'screen' %>
+<% end %>
 <h1>Edit My Information</h1>
 
 <p>Leave password fields blank to leave password unchanged.</p>
 
 <% semantic_form_for @user, :url => {:action => "update" }  do |form| %>
-  <div class="user_fields">
+  <div class="user-fields">
  	<%= form.input :first_name if !@user.is_rental_shop?%>
 	<%= form.input :last_name, :required=>false if !@user.is_rental_shop?%>
 	<%= form.input :name if @user.is_rental_shop? %>
@@ -13,8 +16,6 @@
   </div>
 
   <div class="submit">
-    <% form.buttons do %>
-	  <%= form.commit_button "Save", :button_html => { :class => "submitBtn" } %>
-	<% end %>
+    <%= form.submit 'Save', :class => 'submitBtn' %>
   </div>
 <% end -%>
