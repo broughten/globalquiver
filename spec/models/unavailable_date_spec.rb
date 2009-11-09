@@ -43,7 +43,21 @@ describe UnavailableDate do
 
       unavailabledate.should_not be_valid
     end
-
+  end
+  
+  describe "named scopes" do
+    it "should contain recently_created that filters dates based on a passed in range" do
+      unavailable_date1 = UnavailableDate.make()
+      unavailable_date2 = UnavailableDate.make()
+      UnavailableDate.recently_created(2.days.ago).should include(unavailable_date1)
+      UnavailableDate.recently_created(2.days.ago).length.should == 2
+      
+      unavailable_date1.created_at = 4.days.ago
+      unavailable_date1.save
+      UnavailableDate.recently_created(2.days.ago).should_not include(unavailable_date1)
+      UnavailableDate.recently_created(2.days.ago).length.should == 1
+      
+    end
   end
 
 

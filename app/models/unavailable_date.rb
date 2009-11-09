@@ -8,9 +8,10 @@ class UnavailableDate < ActiveRecord::Base
   validates_uniqueness_of :date, :scope => :board_id,
     :message => 'This board was already unavailable on the selected date.'
 
-
   validates_is_after :date
 
   validates_presence_of :date
+  
+  named_scope :recently_created, lambda { |time| {:conditions => ["created_at > ?", time]} }
   
 end

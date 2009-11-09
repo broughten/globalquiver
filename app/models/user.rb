@@ -45,6 +45,14 @@ class User < ActiveRecord::Base
   def self.encrypt(password, salt)
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
   end
+  
+  def self.has_boards_with_new_reservation_dates(time)
+    users = Array.new
+    User.all.each do |user|
+      users << user if user.boards.with_new_reservations(time).length > 0
+    end
+    return users
+  end
 
   # Encrypts the password with the user salt
   def encrypt(password)
@@ -96,6 +104,8 @@ class User < ActiveRecord::Base
   def full_name
     "" # placeholder...will be redefined in sub classes.
   end
+  
+  
 
   protected
     # before filter 

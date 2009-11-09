@@ -128,4 +128,15 @@ describe Board do
     board.has_location?.should be_false
   end
   
+  it "should be able to find boards with new reservation dates" do
+    board1 = make_board_with_unavailable_dates
+    reservation_date = UnavailableDate.make()
+    board1.unavailable_dates << reservation_date
+    Board.with_new_reservations(1.day.ago).should include(board1)
+    
+    reservation_date.created_at = 2.days.ago
+    reservation_date.save
+    Board.with_new_reservations(1.day.ago).should_not include(board1)    
+  end
+  
 end

@@ -13,6 +13,15 @@ class Board < ActiveRecord::Base
   validates_presence_of :maker, :style, :length, :location
   
   accepts_nested_attributes_for :images, :unavailable_dates, :allow_destroy => true
+  
+  def self.with_new_reservations(time)
+    boards = Array.new
+    Board.all.each do |board|
+      boards << board if board.reserved_dates.recently_created(time).length > 0
+    end
+    
+    return boards
+  end
 
   def style_name
     style.name if style
