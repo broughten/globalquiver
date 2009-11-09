@@ -3,4 +3,6 @@ database.yml
 nbproject
 .DS_Store
 public/system/datas
+public/.DS_Store
+public/images/.DS_Store
 public/javascripts/cache
