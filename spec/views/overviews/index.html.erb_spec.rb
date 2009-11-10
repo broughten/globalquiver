@@ -15,7 +15,7 @@ describe "overviews/index.html.erb" do
     end
   
     it "should display a delete link for each board" do
-      @user.boards.each {|board| response.should have_selector("a", :href=>"/boards/#{board.id}")}
+      @user.owned_boards.each {|board| response.should have_selector("a", :href=>"/boards/#{board.id}")}
     end
     
   end

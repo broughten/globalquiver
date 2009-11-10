@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 # This class serves as an abstratct base class for Surfer and Shop
 class User < ActiveRecord::Base
-  has_many  :boards, :foreign_key =>"creator_id"
+  has_many  :owned_boards, :class_name => 'Board', :foreign_key =>"creator_id"
   has_many  :locations, :foreign_key =>"creator_id"
   has_one   :image, :as => :owner, :dependent => :destroy
 
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   def self.has_boards_with_new_reservation_dates(time)
     users = Array.new
     User.all.each do |user|
-      users << user if user.boards.with_new_reservations(time).length > 0
+      users << user if user.owned_boards.with_new_reservations(time).length > 0
     end
     return users
   end
@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     users = has_boards_with_new_reservation_dates(time)
     users.each do |user|
       new_board_reservation_dates = Hash.new
-      boards_with_new_reservations = user.boards.with_new_reservations(time)
+      boards_with_new_reservations = user.owned_boards.with_new_reservations(time)
       boards_with_new_reservations.each do |board|
         new_reservation_dates = board.reserved_dates.recently_created(time)
         new_board_reservation_dates[board] = new_reservation_dates

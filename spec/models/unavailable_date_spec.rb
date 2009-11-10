@@ -55,8 +55,7 @@ describe UnavailableDate do
       unavailable_date1.created_at = 4.days.ago
       unavailable_date1.save
       UnavailableDate.recently_created(2.days.ago).should_not include(unavailable_date1)
-      UnavailableDate.recently_created(2.days.ago).length.should == 1
-      
+      UnavailableDate.recently_created(2.days.ago).length.should == 1      
     end
   end
 
