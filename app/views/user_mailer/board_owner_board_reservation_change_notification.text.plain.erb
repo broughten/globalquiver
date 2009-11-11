@@ -1,19 +1,19 @@
 
-		<%@board_date_additions.each do |board, dates|%>
+		<%@board_date_additions.each do |board, reservation_dates|%>
 	New reservation dates for <%=h board.model%> by <%=h board.maker%>
 
 	
-			<% for date in dates %>
-				<%=h date%>
+			<% for reservation_date in reservation_dates %>
+				<%=h reservation_date.date%>
 			<% end %>
 		
 		<%end%>
-		<%@board_date_removals.each do |board, dates|%>
+		<%@board_date_removals.each do |board, reservation_dates|%>
 		Removed reservation dates for <%=h board.model%> by <%=h board.maker%>
 
 		
-			<% for date in dates %>
-				<%=h date%>
+			<% for reservation_date in reservation_dates %>
+				<%=h reservation_date.date%>
 			<% end %>
 	
 		<%end%>

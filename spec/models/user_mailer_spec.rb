@@ -4,7 +4,7 @@ describe UserMailer do
   it "should send out an email to board owners about reservation changes" do
     board = Board.make()
     dates = Array.new
-    3.times{dates << UnavailableDate.make_unsaved.date}
+    3.times{dates << UnavailableDate.make_unsaved}
 
     # Send the email, then test that it got queued
     ActionMailer::Base.deliveries.clear
@@ -17,7 +17,7 @@ describe UserMailer do
   it "should send out an email to board renters about upcoming reservations" do
     board = Board.make()
     dates = Array.new
-    3.times{dates << UnavailableDate.make_unsaved.date}
+    3.times{dates << UnavailableDate.make_unsaved}
 
     # Send the email, then test that it got queued
     ActionMailer::Base.deliveries.clear
