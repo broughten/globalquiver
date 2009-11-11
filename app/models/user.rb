@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   def self.has_boards_with_new_reservation_dates(time)
     users = Array.new
     User.all.each do |user|
-      users << user if user.owned_boards.with_new_reservations(time).length > 0
+      users << user if user.owned_boards.with_new_reserved_dates(time).length > 0
     end
     return users
   end
@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     users = has_boards_with_new_reservation_dates(time)
     users.each do |user|
       new_board_reservation_dates = Hash.new
-      boards_with_new_reservations = user.owned_boards.with_new_reservations(time)
+      boards_with_new_reservations = user.owned_boards.with_new_reserved_dates(time)
       boards_with_new_reservations.each do |board|
         new_reservation_dates = board.reserved_dates.recently_created(time)
         new_board_reservation_dates[board] = new_reservation_dates

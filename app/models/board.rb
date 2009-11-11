@@ -14,15 +14,9 @@ class Board < ActiveRecord::Base
   
   accepts_nested_attributes_for :images, :unavailable_dates, :allow_destroy => true
   
-  def self.with_new_reservations(time)
-    boards = Array.new
-    Board.all.each do |board|
-      boards << board if board.reserved_dates.recently_created(time).length > 0
-    end
-    
-    return boards
-  end
-
+  # put all of the options for the named_scope in the lambda so they get evaluated at runtime.
+  named_scope :with_new_reserved_dates, lambda { |time| {:joins => :unavailable_dates, :conditions => ['unavailable_dates.created_at > ? AND unavailable_dates.creator_id != boards.creator_id', time]} }
+  
   def style_name
     style.name if style
   end
