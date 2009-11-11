@@ -8,7 +8,7 @@
 	<h2>Your local quiver</h2>
 	<%= link_to "Create New Board", new_board_path%>
 	<table id="my_board_overview">
-	<%for board in @user.boards %>
+	<%for board in @user.owned_boards %>
 	 <tr>
 		<td>
 			<%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>

@@ -13,7 +13,10 @@ class Board < ActiveRecord::Base
   validates_presence_of :maker, :style, :length, :location
   
   accepts_nested_attributes_for :images, :unavailable_dates, :allow_destroy => true
-
+  
+  # put all of the options for the named_scope in the lambda so they get evaluated at runtime.
+  named_scope :with_new_reserved_dates, lambda { |time| {:joins => :unavailable_dates, :conditions => ['unavailable_dates.created_at > ? AND unavailable_dates.creator_id != boards.creator_id', time]} }
+  
   def style_name
     style.name if style
   end
