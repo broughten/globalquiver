@@ -21,8 +21,7 @@
 	</script>
   </head>
   <body class="<%= body_class %>">
-    <div id="sunsurfer"></div>
-    <div id="container">
+    <div id="outer-container">
       <div id="header">
         <div class="left">
           <%= link_to '<h1 id="logo"><span>GlobalQuiver</span></h1>', current_user ? overview_path : root_path %>
@@ -41,3 +40,4 @@
           </div>
         </div>
       </div>
+    <div id="container">
