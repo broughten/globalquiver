@@ -28,3 +28,8 @@ function displayOptionalBoardFields(show){
 	}
 	return show;
 }
+
+$(function(){
+  // find all the input elements with title attributes
+  $('input[title!=""]').hint();
+});

@@ -10,7 +10,10 @@
 		'jquery/date_picker/jquery.datePicker', 
 		'jquery/date_picker/datePickerMultiMonth', 
 		:cache=> "cache/date_picker"%>
-  <%= javascript_include_tag 'boards/new', 'unavailable_dates/new', 'jquery/auto_complete/jquery.autocomplete.pack'%>
+  <%= javascript_include_tag 'jquery/hint/jquery.hint',
+                'boards/new',
+                'unavailable_dates/new',
+                'jquery/auto_complete/jquery.autocomplete.pack'%>
 
 <% end %>
 
@@ -53,10 +56,10 @@
     </p>
     <p>
       <%= f.label :length, "Length: (for example, mine is a 6'4\")" %><br />
-      <%= f.text_field :length_feet, :value => "feet", :size => 4 %>
-      <%= f.text_field :length_inches, :value => "inches", :size => 4 %>
+      <input id="board_length_feet" name="board[length_feet]" size="4" type="text" title="feet" />
+      <input id="board_length_inches" name="board[length_inches]" size="4" type="text" title="inches" />
     </p>
-	<p>
+    <p>
       <%= f.label :style_name, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
       <%= f.text_field :style_name, :autocomplete =>"off" %>
     </p>
@@ -65,12 +68,12 @@
     <div id="optional_fields">
       <p>
         <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
-        <%= f.text_field :width_inches, :value => "inches", :size => 4 %>
+        <input id="board_width_inches" name="board[width_inches]" size="4" type="text" title="inches" />
         <%= f.select :width_fraction, fractions, {}, :class => "fraction_dropdown" %>
       </p>
       <p>
         <%= f.label :thickness, "Thickness: (you can skip this if you don't know)" %><br />
-        <%= f.text_field :thickness_inches, :value => "inches", :size => 4 %>
+        <input id="board_thickness_inches" name="board[thickness_inches]" size="4" type="text" title="inches" />
         <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
       </p>
 
