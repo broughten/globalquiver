@@ -35,6 +35,16 @@ class BoardLocationsController < ApplicationController
     # Use the larger pan/zoom control but disable the map type
     # selector
     @map.control_init(:large_map => true,:map_type => false)
-    @map.center_zoom_init([25.165173,-158.203125],1)
+    
+    if !@existing_locations.blank?
+      @map.center_zoom_init([@existing_locations.first.geocode.latitude.to_f, @existing_locations.first.geocode.longitude.to_f], 11)
+    else
+      if (remote_location.nil? || remote_location.latitude.nil?)
+        @map.center_zoom_init([33.01802,-117.27828], 8 )
+      else
+        @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11 )
+      end
+    end
   end
 end
+
