@@ -40,7 +40,7 @@ body {
   background-color: #000;
   color: #555555;
   text-align: center;
-  background: #A5D2F1;
+  background: #6A9EC1;
   padding: 0px 0 50px 0;
   margin: 0;
   line-height: 1;
@@ -118,17 +118,18 @@ a.call_to_action{
 }
 
 #header {
-  height:125px;
-  color: #fff;
+  width:850px;
+  height:70px;
+  margin-left:97px;
+  margin-bottom:15px;
+  margin-top:15px;
+  background-color: #fff;
 }
 
 #logo{
-
-  position:absolute;
-  top:5px;
   background: url(/images/logo.png) no-repeat;
-  width: 379px;
-  height: 170px;
+  width: 287px;
+  height: 61px;
 }
 
 #logo span{
@@ -138,8 +139,14 @@ a.call_to_action{
 
 #header .right{
   float: right;
-  margin-top:25px;
-  margin-right:75px;
+  margin-top:-10px;
+  margin-right:20px;
+  text-align: right;
+}
+
+#header .left{
+  margin-top:3px;
+  margin-left:20px;
   text-align: right;
 }
 
@@ -168,7 +175,9 @@ a.call_to_action{
   display: inline;
   margin: 0px 0 0 0;
   padding-left: 20px;
+  padding-top:15px;
   background:#ffffff;
+  border: solid 3px;
 }
 
 
@@ -202,7 +211,7 @@ a.call_to_action{
   width: 223px;
 }
 #counter{
-  background: #dddddd;
+  background: #333333;
   width: 223px;
   height: 63px;
   padding: 24px 0;
@@ -214,11 +223,12 @@ a.call_to_action{
 #counter .amount{
   font-size: 3.6em;
   font-weight: bold;
+  color:#5ACBF9;
 }
 
 #counter .for{
   font-size: 1.8em;
-  color: #ff560e;
+  color: #ffffff;
 }
 
 
