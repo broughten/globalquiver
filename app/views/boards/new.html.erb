@@ -19,7 +19,8 @@
 
 <% content_for :javascript do %>
   $(document).ready(function() {
-    $("input#board_style_name").autocomplete("/autocomplete/style/name")
+    $("input#board_style_name").autocomplete("/autocomplete/style/name");
+	$('input[title!=""]').hint();
   });
 <% end %>
 
