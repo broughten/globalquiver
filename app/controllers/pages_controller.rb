@@ -5,8 +5,13 @@ class PagesController < ApplicationController
   helper_method :total_user_count, :recent_users, :total_board_count
 
   def show
-    @title = "Global Quiver / #{current_page}"
-    render :template => current_page
+    @title = "Global Quiver / #{:id}"
+    if (params[:id] == 'home') && (logged_in?)
+      @user = current_user
+      render :template => "pages/overview"
+    else
+      render :template => current_page
+    end
   end
 
   protected

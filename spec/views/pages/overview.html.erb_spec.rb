@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe "overviews/index.html.erb" do
+describe "pages/overview.html.erb" do
   
   describe "user has boards in their quiver" do
     before(:each) do
       @user = User.make
       build_boards(10,@user)
       assigns[:user] = @user
-      render "overviews/index.html.erb"
+      render "pages/overview.html.erb"
     end
   
     it "should have a create board link" do

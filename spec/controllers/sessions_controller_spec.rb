@@ -20,10 +20,10 @@ describe SessionsController do
       post "create", :session=>{"email"=>"test@test.com", "password"=>"password"}
     end
     
-    it "should redirect to the overview path with a notice if successfully logged in" do
+    it "should redirect to the root path with a notice if successfully logged in" do
       controller.stubs(:logged_in?).returns(true)
       post "create", :session=>{"email"=>"test@test.com", "password"=>"password"}
-      response.should redirect_to(overview_path)
+      response.should redirect_to(root_path)
       flash[:notice].should_not be_nil
     end
     
