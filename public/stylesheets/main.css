@@ -40,7 +40,7 @@ body {
   background-color: #000;
   color: #555555;
   text-align: center;
-  background: #6A9EC1;
+  background: #191C1C;
   padding: 0px 0 50px 0;
   margin: 0;
   line-height: 1;
@@ -113,14 +113,14 @@ a.call_to_action{
 }
 
 #outer-container {
-  width:1020px;
+  width:1170px;
   margin:0 auto;
 }
 
 #header {
   width:850px;
   height:70px;
-  margin-left:97px;
+  margin-left:173px;
   margin-bottom:15px;
   margin-top:15px;
   background-color: #fff;
@@ -146,25 +146,74 @@ a.call_to_action{
 
 #header .left{
   margin-top:3px;
-  margin-left:20px;
+  margin-left:13px;
   text-align: right;
 }
 
-
-/*Topper---------------------*/
-
-#topper {
-    margin: 0px 0 -2px 0;
-}
-
-.bottomer {
-    margin: 0 0 0 20px;
-}
 
 #divider {
     margin-right:20px;
     margin-bottom:-5px;
     border-bottom: 1px dotted #969696;
+}
+
+/*Tabs------------------------*/
+.tabs {
+  margin-left:173px;
+  font-size:25px;
+
+}
+.tabs li {
+  height:30px;
+  width:110px;
+  background-color:#5ACBF9;
+  float:left;
+  margin-right:8px;
+  margin-bottom:3px;
+  padding-top:5px;
+  cursor:pointer;
+}
+
+.tabs li:hover {
+  background-color:#58CFFF;
+}
+
+.active {
+  color:#ffffff;
+}
+
+.tabs li.active:hover  {
+  background-color:#5ACBF9;
+}
+
+/*Right nav-------------------*/
+.right-nav {
+  float:left;
+  margin-top:20px;
+  width:160px;
+  font-size:26px;
+  font-family:impact;
+}
+
+.right-nav a {
+  color:#ffffff;
+}
+
+.right-nav img {
+  width:15px;
+}
+.right-nav-button {
+  float:left;
+  vertical-align:middle;
+  text-align:left;
+  height:40px;
+}
+
+.right-link {
+  margin-left:10px;
+  margin-top:5px;
+  float:right;
+  height:40px;
 }
 
 /*Main content----------------*/
@@ -173,7 +222,7 @@ a.call_to_action{
   float: left;
   width: 100%;
   display: inline;
-  margin: 0px 0 0 0;
+  margin: 0px 0 302px 0;
   padding-left: 20px;
   padding-top:15px;
   background:#ffffff;
@@ -236,32 +285,86 @@ a.call_to_action{
 
 
 
-#buttonArea {
+#button-area {
     margin: 25px 0 0 0px;
     float:left;
     width:580px;
+    font-size:25px;
+    text-align:center;    
 }
 
-#rent{
+#button-area a {
+  color:#333333;
+}
 
-  margin: 0 20px 0 0;
+.home-page-button {
+  width:250px;
+  cursor:pointer;
+}
 
+
+#new-board-button {
+  display:block;
+  height:94px;
+  background-color:#DDDDDD;
+  border:solid 1px;
+  float:left;
+  padding-top:40px;
+  
+}
+
+#new-board-button:hover {
+  background-color:#EEEEEE;
+}
+
+#board-search-button {
+  height:94px;
+  background-color:#DDDDDD;
+  border:solid 1px;
+  margin: 0 35px 0 0;
+  float:right;
+  padding-top:40px;
+}
+
+#board-search-button:hover {
+  background-color:#EEEEEE;
+}
+
+
+#why-button {
+  display:block;
+  height:57px;
+  background-color:#5ACBF9;
+  float:left;
+  padding-top:8px;
+}
+
+#why-button:hover {
+  background-color:#58CFFF;
+}
+
+
+#how-button {
+  height:48px;
+  background-color:#5ACBF9;
+  margin: 0 35px 0 0;
+  float:right;
+  padding-top:17px;
+}
+
+#how-button:hover {
+  background-color:#58CFFF;
 }
 
 
 
-
-#questionButtons{
+#question-buttons{
   margin: 20px 0 0 0;
   float:left;
   width:580px;
 
 }
 
-#why{
-  margin: 0 20px 0 0;
-
-}
 
 
 /*Static Content----------------------------------------*/
@@ -342,7 +445,8 @@ float:left;
   float: left;
 }
 
-#surftown {
+
+#surfer-pic-bottom {
   position:fixed;
   bottom:0;
   left:0;
@@ -352,7 +456,7 @@ float:left;
  
 }
 
-#surftownpic {
+#taj-burrow-pic {
   position:absolute;
   height:auto;
   width:100%;

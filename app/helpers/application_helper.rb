@@ -13,5 +13,23 @@ module ApplicationHelper
     end
   end
 
+  def static_page_keywords
+    PagesController::PAGE_KEYWORDS
+  end
+
+  def active_class_if_current_tab(keyword)
+    current_tab?(keyword) ? 'class="active"' : ''
+  end
+
+  def current_tab?(keyword)
+    current_page?(page_path(keyword)) || tab_conditions(keyword).any?(&:call)
+  end
+
+  def tab_conditions(keyword)
+    {
+      :Home => [ lambda { current_page?(root_path) } ]
+    }[keyword.to_sym] || []
+  end
+
   
 end

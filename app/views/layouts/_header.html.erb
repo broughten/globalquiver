@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>GlobalQuiver</title>
+    <title><%= @title %> </title>
     <%= stylesheet_link_tag 'main', 'authentication', :media => 'screen' %>
     <!--[if IE]>
       <%= stylesheet_link_tag 'ie', :media => 'screen' %>      
@@ -30,14 +30,37 @@
           <div id="login-signup">
             <ul>
               <% if current_user -%>
-				<%# Need to be all on one line to make sure they display properly.%>
+		<%# Need to be all on one line to make sure they display properly.%>
                 <li id="user_link"><%= link_to "Hello, #{current_user.display_name}", overview_url %></li><li id="my_profile_link"><%= link_to 'My Profile', edit_user_path(current_user)%></li><li id="logout_link"><%= link_to 'Logout', logout_url %></li>				
               <% else -%>
-				<%# Need to be all on one line to make sure they display properly.%>
+		<%# Need to be all on one line to make sure they display properly.%>
                 <li id="signup_link"><%=link_to "Join Global Quiver", new_user_url%></li><li id="login_link"><%=link_to "Login", new_session_url%></li>
               <% end -%>
             </ul>
           </div>
         </div>
       </div>
-    <div id="container">
+      <div class="tabs">
+        <ul>
+          <% static_page_keywords.each do |keyword| %>
+            <li <%= active_class_if_current_tab(keyword) %> ><%= keyword %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <div class="right-nav">
+        <div class="right-nav-button">
+          <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+          <div class="right-link">
+            <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
+          </div>
+        </div>
+        <div class="right-nav-button">
+          <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+          <div class="right-link">
+            <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
+          </div>
+        </div>
+      </div>
+      <div id="container">
+      

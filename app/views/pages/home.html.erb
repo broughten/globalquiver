@@ -4,14 +4,22 @@
   <div id="divider"></div>
   <h3>Here you can reserve boards for your next surf trip.  If you have an extra board, loan it or rent it.</h3>
 </div>
-<div id="buttonArea">
-  <div id="mainButtons">
-     <%= link_to image_tag("/images/lendbtn.png", :border=>0), new_board_url, :id=>"rent", :alt => "Rent Your Board"%>
-     <%= link_to image_tag("/images/reservebtn.png", :border=>0), new_board_search_url, :id=>"boards" %>
+<div id="button-area">
+  <div id="main-buttons">
+    <div id="new-board-button" class="home-page-button">
+      <%= link_to "Add your boards to the Global Quiver", new_board_url, :id=>"rent" %>
+    </div>
+    <div id="board-search-button" class="home-page-button">
+      <a id="boards" href="http://localhost:3000/board_searches/new">Reserve boards in<br/>the Global Quiver</a>
+    </div>
   </div>
-  <div id="questionButtons">
-     <%= link_to image_tag("/images/why.png", :border=>0), page_url('why'), :id=>"why"%>
-     <%= link_to image_tag("/images/how.png", :border=>0), page_url('how'), :id=>"how" %>
+  <div id="question-buttons">
+    <div id="why-button" class="home-page-button">
+      <a id="why" href="http://localhost:3000/pages/why">Why would I lend<br/>my board?</a>
+    </div>
+    <div id="how-button" class="home-page-button">
+      <%= link_to "How does this work?", page_url('how'), :id=>"how" %>
+    </div>
   </div>  
 </div>
 

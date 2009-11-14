@@ -1,10 +1,11 @@
 class PagesController < ApplicationController
 
-  PAGE_KEYWORDS = %w(home why how)
+  PAGE_KEYWORDS = %w(Home Blog About FAQ)
 
   helper_method :total_user_count, :recent_users, :total_board_count
 
   def show
+    @title = "Global Quiver / #{current_page}"
     render :template => current_page
   end
 

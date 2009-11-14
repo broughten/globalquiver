@@ -1,0 +1,28 @@
+<%
+   # This assumes that in your layout, the title in the head is output like:
+   # <title><%= @title %></title>
+   # Change this line to how you set the title for your layout and remember
+   # *not* to html escape this.
+   @title = "<?php wp_title(&laquo;, true, ight); ?>
+             <?php bloginfo( ame); ?>"
+%>
+<?php if ( have_posts() ) : ?>
+  <?php while (have_posts()) : the_post(); ?>
+    <h1><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
+      <?php the_content(); ?>
+      <p>
+        <a href="<?php the_permalink() ?>">Link to post</a> |
+          Posted by <?php the_author(); ?> on <?php the_time(F jS, Y) ?> |
+          Categorized as <?php the_category(, ); ?> <?php edit_post_link(); ?>
+      </p>
+        <?php comments_template(); ?>
+        <?php endwhile; ?>
+      <p>
+        <?php posts_nav_link() ?>
+        <?php previous_post_link(); ?><br />
+        <?php next_post_link(); ?><br />
+      </p>
+      <?php else : ?>
+        <p>Sorry, no posts matched your criteria</p>
+      <?php endif; ?>
+    <?php get_search_form(); ?>

@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.resources :pages
+
+  map.resource :blog_theme
   
   map.overview "/overview", :controller => 'overviews', :action => 'index'
 
