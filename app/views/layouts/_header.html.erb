@@ -48,19 +48,21 @@
         </ul>
       </div>
       <div class="clear"></div>
-      <div class="right-nav">
-        <div class="right-nav-button">
-          <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-          <div class="right-link">
-            <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
+      <% if show_right_nav %>
+        <div class="right-nav">
+          <div class="right-nav-button">
+            <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+            <div class="right-link">
+              <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
+            </div>
+          </div>
+          <div class="right-nav-button">
+            <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+            <div class="right-link">
+              <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
+            </div>
           </div>
         </div>
-        <div class="right-nav-button">
-          <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-          <div class="right-link">
-            <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
-          </div>
-        </div>
-      </div>
+      <% end %>
       <div id="container">
       
