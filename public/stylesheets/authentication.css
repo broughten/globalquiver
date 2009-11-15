@@ -36,19 +36,25 @@
 /* create authentication */
 
 .submitBtn{
-  background: transparent url(/images/login-button.png) no-repeat;
-  width: 55px;
+  background-color:#5ACBF9;
+  width: 65px;
   height: 30px;
   color: #494444;
   font-weight: bold;
+  font-size:15px;
   border: none;
   padding: 0 0 4px 0;
   cursor: pointer;
+  margin-bottom:10px;
+}
+
+.submitBtn:hover {
+  background-color:#58CFFF;
 }
 
 .terms-checkbox {
   float:left;
-  padding-right:102px;
+  padding-right:91px;
 }
 
 
