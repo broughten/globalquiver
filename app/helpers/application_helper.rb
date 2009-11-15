@@ -32,7 +32,7 @@ module ApplicationHelper
   end
 
   def show_right_nav
-    !((current_tab?('Home') && !logged_in?) || current_page?(new_session_path) || current_page?(new_user_path))
+    !((current_tab?('Home') && !logged_in?) || current_page?(login_path) || current_page?(new_session_path) || current_page?(new_user_path))
   end
 
   
