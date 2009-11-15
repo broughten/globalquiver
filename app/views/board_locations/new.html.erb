@@ -11,9 +11,14 @@
 <div id="locationFields">
   <form id="addressForm"action="#" onsubmit="showAddress(this.address.value); return false;">
     <div class="location-instructions">
-      <h2>Put in the address where you would want someone to come and pick up this</h2>
-      <h2> board. If you're a rental shop, it will be your shop address. If not, it can be your</h2>
-      <h2>house or a public beach, or anywhere else that makes the most sense for you</h2>
+      <% if current_user.is_a?(Shop) %>
+        <h2>Put in your shop address unless you want people to pick up rental boards at</h2>
+        <h2>some other location, in which case, put in the address of that location.</h2>
+      <% else %>
+        <h2>Put in the address where you would want someone to come and pick up this</h2>
+        <h2>board. It can be your house or a public beach, or anywhere else that makes</h2>
+        <h2>the most sense for you.</h2>
+      <%  end %>
     </div>
     <h3>Enter an address below or click a location on the map to select a location.</h3>
     <br>
