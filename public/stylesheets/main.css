@@ -193,31 +193,38 @@ a.call_to_action{
 }
 
 /*Right nav-------------------*/
-.right-nav {
+#right-nav {
   float:left;
   margin-top:20px;
-  width:160px;
+  width:170px;
   font-size:26px;
   font-family:impact;
 }
 
-.right-nav a {
+#right-nav a {
   color:#ffffff;
 }
 
-.right-nav img {
+#right-nav img {
   width:15px;
+  margin-top:5px;
 }
 .right-nav-button {
   float:left;
   vertical-align:middle;
   text-align:left;
   height:40px;
+  padding-left:5px;
+  padding-right:5px;
+}
+
+#right-nav .active {
+  border: 1px solid #ffffff;
 }
 
 .right-link {
   margin-left:10px;
-  margin-top:5px;
+  margin-top:7px;
   float:right;
   height:40px;
 }

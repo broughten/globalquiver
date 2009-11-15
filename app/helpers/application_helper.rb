@@ -21,13 +21,19 @@ module ApplicationHelper
     current_tab?(keyword) ? 'class="active"' : ''
   end
 
+  def active_if_current_tab(keyword)
+    current_tab?(keyword) ? ' active' : ''
+  end
+
   def current_tab?(keyword)
     current_page?(page_path(keyword)) || tab_conditions(keyword).any?(&:call)
   end
 
   def tab_conditions(keyword)
     {
-      :Home => [ lambda { current_page?(root_path) } ]
+      :Home => [ lambda { current_page?(root_path)         } ],
+      :Find => [ lambda { current_page?(new_board_search_path) } ],
+      :Add  => [ lambda { current_page?(new_board_path)    } ]
     }[keyword.to_sym] || []
   end
 
