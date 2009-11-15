@@ -174,11 +174,17 @@ a.call_to_action{
   cursor:pointer;
 }
 
+.tabs a {
+  color:#333333;
+  text-decoration:none;
+}
+
+
 .tabs li:hover {
   background-color:#58CFFF;
 }
 
-.active {
+.tabs li.active a {
   color:#ffffff;
 }
 

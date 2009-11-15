@@ -43,7 +43,7 @@
       <div class="tabs">
         <ul>
           <% static_page_keywords.each do |keyword| %>
-            <li <%= active_class_if_current_tab(keyword) %> ><%= keyword %></li>
+            <li <%= active_class_if_current_tab(keyword) %> ><%= link_to h(keyword.titleize), page_path(keyword) %></li>
           <% end %>
         </ul>
       </div>
