@@ -2,32 +2,38 @@
   <%= GMap.header %>
   <%= @map.to_html %>
 <%= javascript_include_tag 'board_locations/new' %>
+<%= stylesheet_link_tag 'location', :media => 'screen' %>
 <% end %>
 
 
-<h1>Enter in a little verbiage here about new locations </h1>
+<h1>First, where is this board?</h1>
 
 <div id="locationFields">
   <form id="addressForm"action="#" onsubmit="showAddress(this.address.value); return false;">
+    <div class="location-instructions">
+      <h2>Put in the address where you would want someone to come and pick up this</h2>
+      <h2> board. If you're a rental shop, it will be your shop address. If not, it can be your</h2>
+      <h2>house or a public beach, or anywhere else that makes the most sense for you</h2>
+    </div>
     <h3>Enter an address below or click a location on the map to select a location.</h3>
     <br>
     <input id="addressInput" type="text" name="address" value="" />
     <input id="addressLookup" type="submit" value="Find" />
 <% if !@existing_locations.empty? %>
-	<%= link_to 'Use Existing Location', new_board_path, :class=>'call_to_action' %>
+    <%= link_to 'Use Existing Location', new_board_path, :class=>'call_to_action' %>
 <%end%>
-    <%= @map.div(:width => 700, :height => 400) %>
+    <%= @map.div(:width => 710, :height => 400) %>
 
   </form>
 
 
-<% form_for @board_location do |f| -%>
-	  	<%= f.hidden_field :street %>
-    	<%= f.hidden_field :locality %>
-    	<%= f.hidden_field :region %>
-    	<%= f.hidden_field :postal_code %>
-    	<%= f.hidden_field :country %>
-		<%= f.submit "Use this location."%>
-	<% end -%>
+  <% form_for @board_location do |f| -%>
+    <%= f.hidden_field :street %>
+    <%= f.hidden_field :locality %>
+    <%= f.hidden_field :region %>
+    <%= f.hidden_field :postal_code %>
+    <%= f.hidden_field :country %>
+    <%= f.submit 'Use this location', :class => 'submitBtn' %>
+  <% end -%>
   
 </div>

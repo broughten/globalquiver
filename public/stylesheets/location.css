@@ -37,14 +37,10 @@
 
 #map {
    margin-top:10px;
+   margin-bottom:10px;
    margin-right:20px;
    font-size:1.3em;
 
-}
-
-#addressForm {
-    float:left;
-    height:500px;
 }
 
 #addresForm input {
@@ -52,9 +48,24 @@
 }
 
 #addressInput {
-    width:550px;
+    width:510px;
 }
 
+.location-instructions {
+  color:#333333;
+  margin-top:10px;
+  width:705px;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  background-color:#dddddd;
+}
+
+.submitBtn {
+  width:140px;
+  float:right;
+  margin-right:120px
+}
 
 
 
