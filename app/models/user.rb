@@ -3,6 +3,7 @@ require 'digest/sha1'
 # This class serves as an abstratct base class for Surfer and Shop
 class User < ActiveRecord::Base
   has_many  :owned_boards, :class_name => 'Board', :foreign_key =>"creator_id"
+  has_many  :unavailable_dates
   has_many  :locations, :foreign_key =>"creator_id"
   has_one   :image, :as => :owner, :dependent => :destroy
 

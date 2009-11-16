@@ -48,17 +48,17 @@
         </ul>
       </div>
       <div class="clear"></div>
-      <% if show_right_nav %>
-        <div id="right-nav">
-          <div class="right-nav-button<%= active_if_current_tab('Add') %>">
+      <% if show_left_nav %>
+        <div id="left-nav">
+          <div class="left-nav-button<%= active_if_current_tab('Add') %>">
             <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-            <div class="right-link">
+            <div class="left-link">
               <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
             </div>
           </div>
-          <div class="right-nav-button<%= active_if_current_tab('Find') %>">
+          <div class="left-nav-button<%= active_if_current_tab('Find') %>">
             <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-            <div class="right-link">
+            <div class="left-link">
               <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
             </div>
           </div>

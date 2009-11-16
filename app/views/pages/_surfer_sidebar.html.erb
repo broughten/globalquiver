@@ -1,0 +1,12 @@
+<div id="sideBar">
+  <div id="surfer-sidebar-spacer"></div>
+  <div id="counter">
+    <% if days_until_next_reservation == -1 %>
+      <span class="for">You have no upcoming reservations</span>
+    <% else %>
+      <span class="amount"><%= days_until_next_reservation %></span><br/>
+      <span class="for">days until next reservation</span>
+    <% end %>
+  </div>
+</div><!-- #sideBar -->
+
