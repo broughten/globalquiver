@@ -17,7 +17,7 @@
       <%= link_to "adding one", new_board_url %>
       <% end %>
     <% else %>
-      <h2>Below are the boards you are tracking and renting via Global Quiver:</h2>
+      <h2>Below are the boards you are tracking via Global Quiver:</h2>
       <%if current_user.owned_boards.empty? %>
       <p>You haven't set up your shop on Global Quiver yet.  Get started by </p>
       <%= link_to "adding a board.", new_board_url %>
@@ -43,7 +43,7 @@
           <%=h board.model %> by <%=h board.maker%>
         </li>
         <li>
-          <%=h board.type%>
+          <%=h board.style.name%>
         </li>
         <li>
           <%= link_to "Details", board_path(board)%><br/>
