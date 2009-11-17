@@ -25,7 +25,11 @@
 
 /* show board */
 h1 {
-  margin-bottom:10px;
+  margin-bottom:5px;
+}
+
+#mainContent h2 {
+  margin-bottom:5px;
 }
 ul {
   margin-bottom:6px;

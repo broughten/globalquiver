@@ -14,6 +14,7 @@
 <h1>Board Details</h1>
 
 <div id="info-table">
+  <h2>Info</h2>
   <ul>
     <li class="attr-name">Maker</li>
     <li class="value">
@@ -90,11 +91,13 @@
   </ul>
   <div class="clear"></div>
   <% if !@board.description.nil? %>
+  <h2>Description</h2>
   <p class="description"><%= h @board.description %></p>
   <% end %>
 </div>
 
 <div id="photos">
+  <h2>Photos</h2>
 
   <div class="photo">
     <% if @board.images[0].nil? %>
@@ -137,6 +140,3 @@
     </p>
 
 <%end%>
-
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back to Overview', overview_path %>
