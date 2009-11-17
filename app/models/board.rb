@@ -70,7 +70,12 @@ class Board < ActiveRecord::Base
   end
 
   def width_inches
-    self.width.floor
+    if (self.width.nil?)
+      return nil
+    else
+      return self.width.floor
+    end
+    
   end
 
   def width_inches=(inches)
@@ -84,7 +89,7 @@ class Board < ActiveRecord::Base
   def width_fraction
     if (!self.width.nil?)
       fraction_value = FRACTIONS[(self.width - self.width.floor).to_s]
-      if (fraction_value == nil)
+      if (fraction_value.nil?)
         return '0'
       else
         return fraction_value
@@ -101,7 +106,12 @@ class Board < ActiveRecord::Base
   end
 
   def thickness_inches
-    self.thickness.floor
+    if (self.thickness.nil?)
+      return nil
+    else
+      return self.thickness.floor
+    end
+
   end
 
   def thickness_inches=(inches)

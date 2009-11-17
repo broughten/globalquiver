@@ -23,7 +23,67 @@
     width:70%;
 }
 
-/* show boards */
+/* show board */
+h1 {
+  margin-bottom:10px;
+}
+ul {
+  margin-bottom:6px;
+}
+
+#info-table {
+  float:left;
+}
+.attr-name {
+  font-size:1.5em;
+  display:table-cell;
+  vertical-align:middle;
+  padding-left:10px;
+  height:40px;
+  width:100px;
+  background-color:#888888;
+  color:white;
+  border-right:6px solid white;
+}
+
+.description {
+  width:230px;
+}
+
+.value {
+  font-size:1.5em;
+  display:table-cell;
+  vertical-align:middle;
+  height:40px;
+  padding-left:10px;
+  padding-right:10px;
+  width:100px;
+  background-color:#eeeeee;
+}
+
+#photos {
+  float:right;
+  margin-right:20px;
+}
+
+.photo {
+  height:260px;
+  width:270px;
+  background-color:#eeeeee;
+  display:table-cell;
+  text-align:center;
+  vertical-align:middle;
+  font-size:5em;
+  color:#aaaaaa;
+  border-right:6px solid white;
+  border-bottom:6px solid white;
+}
+
+img {
+  height:270px;
+  margin-bottom:-7px;
+}
+
 
 /* create boards */
 

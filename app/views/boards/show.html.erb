@@ -11,63 +11,122 @@
   <%= javascript_include_tag 'unavailable_dates/new'%>
 
 <% end %>
-<p>
-  <b>Maker:</b>
-  <%=h @board.maker %>
-</p>
+<h1>Board Details</h1>
 
-<p>
-  <b>Model:</b>
-  <%=h @board.model %>
-</p>
+<div id="info-table">
+  <ul>
+    <li class="attr-name">Maker</li>
+    <li class="value">
+      <%=h @board.maker %>
+    </li>
+  </ul>
+  <div class="clear"></div>
 
-<p>
-  <b>Length:</b>
-  <%=h @board.length %>
-</p>
+  <ul>
+    <li class="attr-name">Model</li>
+    <li class="value">
+      <%=h @board.model %>
+    </li>
+  </ul>
+  <div class="clear"></div>
 
-<p>
-  <b>Width:</b>
-  <%=h @board.width %>
-</p>
+  <ul>
+    <li class="attr-name">Length</li>
+    <li class="value">
+      <%=h @board.length_feet %>' <%=h @board.length_inches %>"
+    </li>
+  </ul>
+  <div class="clear"></div>
 
-<p>
-  <b>Thickness:</b>
-  <%=h @board.thickness %>
-</p>
+  <ul>
+    <li class="attr-name">Width</li>
+    <li class="value">
+      <% if !@board.width.nil? %>
+        <%=h @board.width_inches %> <%=h @board.width_fraction %>"
+      <% end %>
+    </li>
+  </ul>
+  <div class="clear"></div>
 
-<p>
-  <b>Style:</b>
-  <%=h @board.style.name%>
-</p>
+  <ul>
+    <li class="attr-name">Thickness</li>
+    <li class="value">
+      <% if !@board.thickness.nil? %>
+        <%=h @board.thickness_inches %> <%=h @board.thickness_fraction %>"
+      <% end %>
+    </li>
+  </ul>
+  <div class="clear"></div>
 
-<p>
-  <b>Construction:</b>
-  <%=h @board.description %>
-</p>
+  <ul>
+    <li class="attr-name">Style</li>
+    <li class="value">
+      <%=h @board.style.name%>
+    </li>
+  </ul>
+  <div class="clear"></div>
 
-<p>
-  <b>Description:</b>
-  <%=h @board.description %>
-</p>
+  <ul>
+    <li class="attr-name">Construction</li>
+    <li class="value">
+      <%=h @board.description %>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  
+  <ul>
+    <li class="attr-name">Board Owner</li>
+    <li class="value">
+      <%=h @board.creator.full_name %>
+    </li>
+  </ul>
+  <div class="clear"></div>
 
-<p>
-  <b>Board Owner:</b>
-  <%=h @board.creator.full_name %>
-</p>
+  <ul>
+    <li class="attr-name">Location</li>
+    <li class="value">
+      <%=h @board.location%>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <% if !@board.description.nil? %>
+  <p class="description"><%= h @board.description %></p>
+  <% end %>
+</div>
 
+<div id="photos">
 
-<p>
-  <b>Location:</b>
-<%=h @board.location%>
-  </p>
-
-<p>
-  <b>Photos:</b>
-<% @board.images.each do |image| %>
-  <%= image_tag image.data.url()%>
-<%end%>
-</p>
+  <div class="photo">
+    <% if @board.images[0].nil? %>
+      No Photo
+    <% else %>
+      <%= image_tag @board.images[0].data.url(:show_page), :alt => "image1" %>
+    <% end %>
+  </div>
+  <div class="photo">
+    <% if @board.images[1].nil? %>
+      No Photo
+    <% else %>
+      <%= image_tag @board.images[1].data.url(:show_page), :alt => "Image 2" %>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+  <div class="photo">
+    <% if @board.images[2].nil? %>
+      No Photo
+    <% else %>
+      <%= image_tag @board.images[2].data.url(:show_page), :alt => "Image 3" %>
+    <% end %>
+  </div>
+  <div class="photo">
+    <% if @board.images[3].nil? %>
+      No Photo
+    <% else %>
+      <%= image_tag @board.images[3].data.url(:show_page), :alt => "Image 4" %>
+    <% end %>
+  </div>
+</div>
+<div class="clear"></div>
 
 <% form_for @board, :html => {:multipart => true } do |f| %>
   <%= f.error_messages %>
