@@ -20,8 +20,7 @@
 <% content_for :javascript do %>
   $(document).ready(function() {
     $("input#board_style_name").autocomplete("/autocomplete/style/name");
-	$('input[title!=""]').hint();
-  });
+    $('input[title!=""]').hint();
 <% end %>
 
 <h1>List a board for borrow or rent</h1>
@@ -37,7 +36,7 @@
 
 <%= render :partial => '/board_locations/list' %>
 
-<% form_for @board, :html => {:multipart => true } do |f| %>
+<% form_for @board, :html => {:name => "new_board_form", :multipart => true } do |f| %>
   <%= f.error_messages %>
 	<%= f.hidden_field :location_id %>
 
