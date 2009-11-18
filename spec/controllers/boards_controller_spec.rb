@@ -45,12 +45,12 @@ describe BoardsController do
         post "create", :board =>{:maker =>"Test Maker"}
         assigns[:board].maker.should == "Test Maker"
       end
-      it "should redirect to overview path with a flash message on successful save" do
+      it "should redirect to root path with a flash message on successful save" do
         Board.any_instance.stubs(:valid?).returns(true)
         post 'create'
         assigns[:board].should_not be_new_record
         flash[:notice].should_not be_nil
-        response.should redirect_to(overview_path)
+        response.should redirect_to(root_path)
       end
 
       it "should render new template without a flash message on unsuccessful save" do
@@ -74,9 +74,9 @@ describe BoardsController do
         Board.any_instance.expects(:destroy)
        post 'destroy', :id=>@temp_board.id
       end
-      it "should redirect to the overview path" do
+      it "should redirect to the root path" do
         post 'destroy', :id=>@temp_board.id
-        response.should redirect_to overview_path
+        response.should redirect_to root_path
       end
     end
     

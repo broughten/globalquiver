@@ -44,7 +44,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.save
         flash[:notice] = 'Board was successfully created.'
-        format.html { redirect_to(overview_path) }
+        format.html { redirect_to(root_path) }
       else
         @existing_locations = current_user.locations.ordered_by_desc_creation
         format.html { render :action => "new" }
@@ -59,7 +59,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.update_attributes(params[:board])
         flash[:notice] = 'Board was successfully updated.'
-        format.html { redirect_to(overview_path) }
+        format.html { redirect_to(root_path) }
       else
         format.html { render :action => "show" }
       end
@@ -72,7 +72,7 @@ class BoardsController < ApplicationController
     @board.destroy
 
     respond_to do |format|
-      format.html { redirect_to(overview_path) }
+      format.html { redirect_to(root_path) }
     end
   end
 
