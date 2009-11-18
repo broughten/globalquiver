@@ -35,30 +35,63 @@
         <li>Actions</li>
       </ul>
       <%for board in @user.owned_boards %>
-      <ul id="owned-board-table">
-        <li>
-          <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
-        </li>
-        <li>
-          <%=h board.model %> by <%=h board.maker%>
-        </li>
-        <li>
-          <%=h board.style.name%>
-        </li>
-        <li>
-          <%= link_to "Details", board_path(board)%><br/>
-          <%= link_to "Edit", board, :method=>:edit%><br/>
-          <%= link_to "Delete", board, :confirm => "Are you sure?", :method=>:delete%>
+        <ul id="owned-board-table">
+          <li>
+            <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
           </li>
-      </ul>
-      <div class="clear"></div>
+          <li>
+            <%=h board.model %> by <%=h board.maker%>
+          </li>
+          <li>
+            <%=h board.style.name%>
+          </li>
+          <li>
+            <%= link_to "Details", board_path(board)%><br/>
+            <%= link_to "Edit", board, :method=>:edit%><br/>
+            <%= link_to "Delete", board, :confirm => "Are you sure?", :method=>:delete%>
+            </li>
+        </ul>
+        <div class="clear"></div>
       <%end%>
     <% end %>
   </div>
   <% if current_user.is_a?(Surfer) %>
   <div id="my_board_reservations">
-          <h2>Boards you've reserved in the Global Quiver</h2>
-          <h2>Not yet implemented</h2>
+    <h2>Boards you've reserved in the Global Quiver</h2>
+    <%if current_user.reserved_boards.empty? %>
+      <p>You don't have any board reservations yet.  Get started by <%= link_to "finding a board.", new_board_search_url %></p>
+    <% end %>
+    <% if !current_user.reserved_boards.empty? %>
+      <div class="view-tabs">
+        <%= link_to "Board View" %> |
+        <%= link_to "Calendar View" %>
+      </div>
+      <ul id="owned-board-headings">
+        <li>Pic</li>
+        <li>Model</li>
+        <li>Type</li>
+        <li>Actions</li>
+      </ul>
+      <%for board in @user.reserved_boards %>
+        <ul id="owned-board-table">
+          <li>
+            <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
+          </li>
+          <li>
+            <%=h board.model %> by <%=h board.maker%>
+          </li>
+          <li>
+            <%=h board.style.name%>
+          </li>
+          <li>
+            <%= link_to "Details", board_path(board)%><br/>
+            <%= link_to "Edit", board, :method=>:edit%><br/>
+            <%= link_to "Delete", board, :confirm => "Are you sure?", :method=>:delete%>
+            </li>
+        </ul>
+        <div class="clear"></div>
+      <%end%>
+    <% end %>
   </div>
   <% end %>
 

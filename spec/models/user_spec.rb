@@ -18,6 +18,56 @@ describe User do
       user.owned_boards.length.should == 2
     end
 
+    it "should have many reserved boards" do
+      renter = User.make()
+      owner1 = User.make()
+      owner2 = User.make()
+      board1 = Board.make(:creator => owner1)
+      board2 = Board.make(:creator => owner2)
+      board3 = Board.make(:creator => owner2)
+      #make one board of our own just to make sure it doesn't get included
+      trickBoard = Board.make(:creator => renter)
+      trickReservation  = UnavailableDate.make(:creator => renter, :board => trickBoard)
+      trickReservation2 = UnavailableDate.make(:creator => renter, :board => trickBoard)
+      trickReservation3 = UnavailableDate.make(:creator => renter, :board => trickBoard)
+
+      #make more than one reservation on a couple of the boards to make sure
+      #we only get back actual boards and not one item for each reserved day
+      reservation1 = UnavailableDate.make(:creator => renter, :board => board1)
+      reservation2 = UnavailableDate.make(:creator => renter, :board => board1)
+      reservation3 = UnavailableDate.make(:creator => renter, :board => board2)
+      reservation4 = UnavailableDate.make(:creator => renter, :board => board3)
+      reservation5 = UnavailableDate.make(:creator => renter, :board => board3)
+      reservation6 = UnavailableDate.make(:creator => renter, :board => board3)
+      #so after all that, my renter should have three different boards he reserved.
+      renter.reserved_boards.length.should == 3
+    end
+
+    it "should have many board reservations" do
+      renter = User.make()
+      owner1 = User.make()
+      owner2 = User.make()
+      board1 = Board.make(:creator => owner1)
+      board2 = Board.make(:creator => owner2)
+      board3 = Board.make(:creator => owner2)
+      #make one board of our own just to make sure it doesn't get included
+      trickBoard = Board.make(:creator => renter)
+      trickReservation  = UnavailableDate.make(:creator => renter, :board => trickBoard)
+      trickReservation2 = UnavailableDate.make(:creator => renter, :board => trickBoard)
+      trickReservation3 = UnavailableDate.make(:creator => renter, :board => trickBoard)
+
+      #make more than one reservation on a couple of the boards to make sure
+      #we get back one item for each reserved day
+      reservation1 = UnavailableDate.make(:creator => renter, :board => board1)
+      reservation2 = UnavailableDate.make(:creator => renter, :board => board1)
+      reservation3 = UnavailableDate.make(:creator => renter, :board => board2)
+      reservation4 = UnavailableDate.make(:creator => renter, :board => board3)
+      reservation5 = UnavailableDate.make(:creator => renter, :board => board3)
+      reservation6 = UnavailableDate.make(:creator => renter, :board => board3)
+      #so after all that, my renter should have 6 days worth or reserved boards.
+      renter.reserved_boards.length.should == 3
+    end
+
     it "should have many locations" do
       user = User.make()
       Location.make(:creator=>user)

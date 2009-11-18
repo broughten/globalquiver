@@ -4,6 +4,22 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many  :owned_boards, :class_name => 'Board', :foreign_key =>"creator_id"
   has_many  :unavailable_dates
+  # from the Rails API spec on 'has_many': "finder_sql is a good way to go for
+  # complex associations that depend on multiple tables."
+  has_many  :reserved_boards, :class_name => 'Board', :finder_sql =>
+    'SELECT DISTINCT b.* ' +
+    'FROM boards b, unavailable_dates ud, user u ' +
+    'WHERE b.id = ud.board_id ' +
+    'AND ud.creator_id = #{id} ' +
+    'AND b.creator_id != ud.creator_id'
+  has_many  :board_reservations, :class_name => 'Board', :finder_sql =>
+    'SELECT DISTINCT b.*, ud.* ' +
+    'FROM boards b, unavailable_dates ud, user u ' +
+    'WHERE b.id = ud.board_id ' +
+    'AND ud.creator_id = #{id} ' +
+    'AND b.creator_id != ud.creator_id ' +
+    'ORDER BY ud.date'
+  
   has_many  :locations, :foreign_key =>"creator_id"
   has_one   :image, :as => :owner, :dependent => :destroy
 
