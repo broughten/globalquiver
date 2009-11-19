@@ -17,7 +17,12 @@
     <%= yield :head %>
 	<%#A place where you can write out simple javascript that doesn't warrant it's own .js file.%>
 	<script>
-	<%= yield :javascript %>
+          <%= yield :javascript %>
+          $(document).ready(function() {
+            setTimeout(function() {
+              $("div.flash").fadeOut('fast');
+            }, 3000);
+          });
 	</script>
   </head>
   <body class="<%= body_class %>">

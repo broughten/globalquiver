@@ -407,30 +407,20 @@ float:left;
 /*---------Flash------------------*/
 
 .flash {
-  margin: 0px 2px 0 2px;
+  margin-bottom:5px;
   width: 200px;
-  background: url(/images/sub_flash.gif) bottom right no-repeat;
-  padding-bottom: 11px;
 }
 
 .flash p {
-  border: 1px solid #d6d6a2;
-  background: #fefcbf;
-  border-bottom: none;
+  background: #AEFF4B;
+  border-top: 1px solid #6AA02D;
+  border-bottom: 1px solid #6AA02D;
   color: #2a2829;
-  padding: 9px;
-}
-
-#app_main .flash p {
-  padding: 18px;
+  padding: 4px;
+  text-align:center;
 }
 
 
-#flash #flash_notice {
-  font-size: 1.2em;
-  line-height: 1.5;
-  padding: 1em 0 0 0;
-}
 
 
 
