@@ -48,8 +48,6 @@ module UnavailableDatesHelper
     next_day_someone_reserves_my_board = UnavailableDate.find(:first, :joins => :board, :conditions => ["date > ? AND unavailable_dates.creator_id = ? AND boards.creator_id != ?", Date.today, current_user.id, current_user.id])
     next_day_one_of_my_boards_is_reserved = UnavailableDate.find(:first, :joins => :board, :conditions => ["date > ? AND unavailable_dates.creator_id != ? AND boards.creator_id =?", Date.today, current_user.id, current_user.id])
 
-    logger.debug("HI JC heres #{next_day_someone_reserves_my_board.date.to_s}")
-
     days_until_theirs = next_day_someone_reserves_my_board.date - Date.today unless next_day_someone_reserves_my_board.nil?
     days_until_mine = next_day_one_of_my_boards_is_reserved.date - Date.today unless next_day_one_of_my_boards_is_reserved.nil?
 
@@ -65,8 +63,4 @@ module UnavailableDatesHelper
     
     (days_until_theirs > days_until_mine) ? days_until_mine : days_until_theirs
   end
-end
-
-def ymd(date)
-  date.to_s.gsub("-", "").to_i
 end
