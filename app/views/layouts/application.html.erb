@@ -2,16 +2,6 @@
 
 <%= render :partial => 'layouts/header' %>
 
-<% content_for :javascript do %>
-  $(document).ready(function() {
-    setTimeout(function() {
-      $("div.flash").fadeOut('fast');
-    }, 1000);
-  });
-
-
-<% end %>
-
 <div id="mainContent">
 <%= render :partial => 'layouts/flashes' %>
 <%= yield %>
