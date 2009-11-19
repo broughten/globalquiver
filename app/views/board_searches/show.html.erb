@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'board', :media => 'screen' %>
+<% end %>
+
 <h1>Board Search Results</h1>
 
 <% if @found_boards.empty? %>
@@ -5,8 +9,14 @@
     We couldn't find any boards where you're planning on going.  Try a different search.
   </p>
   <%  else %>
-<ul id="board_list">
-    <%= render :partial => "board", :collection => @found_boards %>
+  <ul id="board_list">
+    <ul id="list-headings">
+      <li>Pic</li>
+      <li>Model</li>
+      <li class="medium">Type</li>
+      <li class="short">Length</li>
+    </ul>
+    <%= render :partial => "boards/board", :collection => @found_boards %>
   </ul>
   
   <% end %>

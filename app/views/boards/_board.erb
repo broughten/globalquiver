@@ -1,0 +1,46 @@
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $(".board-link<%=board.id%>").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+
+    $(".board-link<%=board.id%>").mouseover(function() {
+      $(".board-link<%=board.id%>").css("background-color","#5ACBF9");
+    });
+
+        $(".board-link<%=board.id%>").mouseout(function() {
+      $(".board-link<%=board.id%>").css("background-color","#eeeeee");
+    });
+    
+  });
+
+<% end %>
+  
+<ul id="list-table">
+  <li class="board-link<%=board.id%>">
+    <%= link_to "", board_path(board)%>
+    <% if board.images.first.nil? %>
+      <span class="muted-text">No Photo</span>
+    <% else %>
+      <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
+    <% end %>
+  </li>
+  <li class="board-link<%=board.id%>">
+    <%= link_to "", board_path(board)%>
+    <%=h board.model %> by <%=h board.maker%>
+  </li>
+  <li class="board-link<%=board.id%> medium">
+    <%= link_to "", board_path(board)%>
+    <%=h board.style.name%>
+  </li>
+  <li class="board-link<%=board.id%> short">
+    <%= link_to "", board_path(board)%>
+    <%=h board.length_feet%>' <%=h board.length_inches%>"
+  </li>
+  <% if board.creator == current_user %>
+    <li class="board-delete short">
+      <%= link_to "X", board, :confirm => "Are you sure? Can't be undone.", :method=>:delete%>
+    </li>
+  <%  end %>
+</ul>
+<div class="clear"></div>

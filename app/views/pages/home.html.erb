@@ -1,3 +1,21 @@
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $("div#new-board-button").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+    $("div#board-search-button").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+    $("div#why-button").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+    $("div#how-button").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+  });
+
+<% end %>
+
 <div id="welcome">
   <h1>Time for a surf trip?</h1>
   <h3>Global Quiver is a community of surfers that travel without shlepping boards around the planet.</h3>

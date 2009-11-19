@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'overview', :media => 'screen' %>
+  <%= stylesheet_link_tag 'board', 'overview', :media => 'screen' %>
 <% end %>
 
 <% if current_user.is_a?(Surfer) %>
@@ -28,31 +28,14 @@
         <%= link_to "Board View" %> |
         <%= link_to "Calendar View" %>
       </div>
-      <ul id="owned-board-headings">
+      <ul id="list-headings">
         <li>Pic</li>
         <li>Model</li>
-        <li>Type</li>
-        <li>Actions</li>
+        <li class="medium">Type</li>
+        <li class="short">Length</li>
+        <li class="short">Delete</li>
       </ul>
-      <%for board in @user.owned_boards %>
-        <ul id="owned-board-table">
-          <li>
-            <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
-          </li>
-          <li>
-            <%=h board.model %> by <%=h board.maker%>
-          </li>
-          <li>
-            <%=h board.style.name%>
-          </li>
-          <li>
-            <%= link_to "Details", board_path(board)%><br/>
-            <%= link_to "Edit", board, :method=>:edit%><br/>
-            <%= link_to "Delete", board, :confirm => "Are you sure?", :method=>:delete%>
-            </li>
-        </ul>
-        <div class="clear"></div>
-      <%end%>
+      <%= render :partial => "boards/board", :collection => @user.owned_boards %>
     <% end %>
   </div>
   <% if current_user.is_a?(Surfer) %>
@@ -66,31 +49,13 @@
         <%= link_to "Board View" %> |
         <%= link_to "Calendar View" %>
       </div>
-      <ul id="owned-board-headings">
+      <ul id="list-headings">
         <li>Pic</li>
         <li>Model</li>
-        <li>Type</li>
-        <li>Actions</li>
+        <li class="medium">Type</li>
+        <li class="short">Length</li>
       </ul>
-      <%for board in @user.reserved_boards %>
-        <ul id="owned-board-table">
-          <li>
-            <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
-          </li>
-          <li>
-            <%=h board.model %> by <%=h board.maker%>
-          </li>
-          <li>
-            <%=h board.style.name%>
-          </li>
-          <li>
-            <%= link_to "Details", board_path(board)%><br/>
-            <%= link_to "Edit", board, :method=>:edit%><br/>
-            <%= link_to "Delete", board, :confirm => "Are you sure?", :method=>:delete%>
-            </li>
-        </ul>
-        <div class="clear"></div>
-      <%end%>
+      <%= render :partial => "boards/board", :collection => @user.reserved_boards %>
     <% end %>
   </div>
   <% end %>
