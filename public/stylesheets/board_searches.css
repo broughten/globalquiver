@@ -12,8 +12,42 @@ h1 {
   width:705px;
   padding-top:10px;
   padding-bottom:10px;
+  margin-bottom:10px;
   padding-left:10px;
   background-color:#dddddd;
 }
+
+#search-form {
+  float:left;
+  height:250px;
+  padding-right:10px;
+  width:240px;
+  border-right:dotted 1px;
+}
+
+#twitter-help {
+  width:515px;
+  float:right;
+  padding-right:40px;
+  padding-left:10px;
+}
+
+#twitter-link {
+  margin-left:105px;
+  text-align:center;
+  vertical-align:middle;
+  padding-bottom:10px;
+  padding-top:10px;
+  width:220px;
+}
+
+#desired-location {
+  float:left;
+}
+
+#twitter-link a {
+  font-size:16px;
+}
+
 
 

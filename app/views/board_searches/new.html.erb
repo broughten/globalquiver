@@ -1,26 +1,58 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'board_searches', :media => 'screen' %>
+  <%= javascript_include_tag 'jquery/hint/jquery.hint' %>
 <% end %>
 
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $('input[title!=""]').hint();
+    $('#tweet').click(function() {
+      locale = $('#desired-location').val();
+      twitter_link = "http://twitter.com/home?status=";
+      window.open(twitter_link + "I'm looking to rent a surfboard in " + locale + ". If you have an extra, please put it on Global Quiver: http://is.gd/50vUQ");
+      return false;
+    });
+    
+  });
+
+<% end %>
 <h1>Find boards to borrow or rent</h1>
 <div class="search-instructions">
   <h2>Search for a board by location and the style of board you want.</h2>
   <h2>We'll match these criteria with boards available for your trip.</h2>
 </div>
 
-<% form_for @board_search, :html => {:id => 'search_form' } do |f| %>
-  <%= f.error_messages %>
+<div id="search-form">
+  <% form_for @board_search, :html => {:id => 'search_form' } do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.label :location_id, "Location:" %>
+      <%= f.collection_select :location_id, @search_locations, :id, :to_s, {:prompt => true} %>
+    </p>
+    <p>
+      <%= f.label :style_id, "Style:" %>
+      <%= f.collection_select :style_id, Style.all, :id, :name, {:prompt => "All"} %>
+    </p>
 
-  <p>
-    <%= f.label :location_id, "Location:" %>
-	<%= f.collection_select :location_id, @search_locations, :id, :to_s, {:prompt => true} %>
+    <p>
+      <%= f.submit "Search", :class => 'submitBtn'  %>
+    </p>
+  <% end %>
+</div>
+<div id="twitter-help">
+  <h3>The location you want isn't included?</h3>
+  <p>Help Global Quiver grow by asking your Twitter followers to consider putting their
+     extra boards on here.  We'll also retweet you to make sure that your request receives
+     a wide audience.  To do this, type in where you want a board and click the link below:
+  </P>
+  <div id="twitter-link">
+    <input id="desired-location" type="text" title="Board Location"/>
+    <p><%= link_to "Tweet!","http://twitter.com/home?status=",:id => "tweet" %></p>
+    <div class="clear"></div>
+  </div>
+  <p>You'll be taken to Twitter where
+     you will be able to login and modify the message to be how you want it.  The only
+     part of the message you shouldn't modify is the url it contains.  That's how people will
+     be able to get to Global Quiver to share their boards with you.
   </p>
-	<p>
-    <%= f.label :style_id, "Style:" %>
-	<%= f.collection_select :style_id, Style.all, :id, :name, {:prompt => "All"} %>
-  </p>
-  
-  <p><%= f.submit "Search", :class => 'submitBtn'  %></p>
-<% end %>
-
-
+</div>
