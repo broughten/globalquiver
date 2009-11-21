@@ -6,4 +6,14 @@ h1 {
   margin-bottom:10px;
 }
 
+.search-instructions {
+  color:#333333;
+  margin-top:10px;
+  width:705px;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  background-color:#dddddd;
+}
+
 
