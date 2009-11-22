@@ -15,8 +15,10 @@ class BoardSearchesController < ApplicationController
   end
   
   def show
+    @search_locations = get_search_locations_for_view
     @board_search = BoardSearch.find(params[:id])
     @found_boards = @board_search.execute
+    @board_search = BoardSearch.new
   end
   
   private

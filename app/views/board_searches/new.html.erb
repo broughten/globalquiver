@@ -22,23 +22,7 @@
   <h2>We'll match these criteria with boards available for your trip.</h2>
 </div>
 
-<div id="search-form">
-  <% form_for @board_search, :html => {:id => 'search_form' } do |f| %>
-    <%= f.error_messages %>
-    <p>
-      <%= f.label :location_id, "Location:" %>
-      <%= f.collection_select :location_id, @search_locations, :id, :to_s, {:prompt => true} %>
-    </p>
-    <p>
-      <%= f.label :style_id, "Style:" %>
-      <%= f.collection_select :style_id, Style.all, :id, :name, {:prompt => "All"} %>
-    </p>
-
-    <p>
-      <%= f.submit "Search", :class => 'submitBtn'  %>
-    </p>
-  <% end %>
-</div>
+<%= render :partial => 'form' %>
 <div id="twitter-help">
   <h3>The location you want isn't included?</h3>
   <p>Help Global Quiver grow by asking your Twitter followers to consider putting their

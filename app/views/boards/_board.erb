@@ -37,7 +37,7 @@
     <%= link_to "", board_path(board)%>
     <%=h board.length_feet%>' <%=h board.length_inches%>"
   </li>
-  <% if board.creator == current_user %>
+  <% if board.creator == current_user && !current_page?(:controller => 'board_searches', :action => 'show') %>
     <li class="board-delete short">
       <%= link_to "X", board, :confirm => "Are you sure? Can't be undone.", :method=>:delete%>
     </li>

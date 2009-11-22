@@ -1,7 +1,7 @@
 h1 {
   margin-bottom:10px;
 }
-#search_form p{
+#search_form p {
   margin-top:10px;
   margin-bottom:10px;
 }
@@ -17,12 +17,20 @@ h1 {
   background-color:#dddddd;
 }
 
-#search-form {
+.search-form-div {
+  margin-top:0px;
+  padding-top:0px;
+  margin-bottom:10px;
   float:left;
-  height:250px;
+  height:290px;
   padding-right:10px;
   width:240px;
   border-right:dotted 1px;
+}
+
+#search_form {
+  padding-top:0px;
+  margin-top:-5px;
 }
 
 #twitter-help {
@@ -49,5 +57,19 @@ h1 {
   font-size:16px;
 }
 
+#search-results .board-list {
+  float:left;
+}
+
+#search-results .search-form-div {
+  border-right:none;
+  
+}
+
+#redo-search {
+  float:right;
+  width:300px;
+  margin-right:20px;
+}
 
 
