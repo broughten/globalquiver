@@ -10,6 +10,7 @@ Sham.define do
   #email { Faker::Internet.email }
   first_name  { Faker::Name.first_name }
   last_name  { Faker::Name.last_name }
+  name  { Faker::Lorem.words(1) }
   group_name {Faker::Lorem.words(2)}
   shop_name {Faker::Company.name}
   board_maker {Faker::Company.name}
@@ -159,4 +160,8 @@ end
 BoardSearch.blueprint() do
   location {SearchLocation.make}
   style {nil}
+end
+
+PickupTime.blueprint() do
+  name {Sham.name}
 end

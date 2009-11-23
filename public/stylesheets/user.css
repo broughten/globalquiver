@@ -12,6 +12,9 @@ root {
 }
 
 /* show user profile */
+h1 {
+  margin-bottom:10px;
+}
 .user-photo {
   float:left;
   height:400px;
@@ -19,6 +22,7 @@ root {
   background-color:#eeeeee;
   vertical-align:middle;
   text-align:center;
+  margin-bottom:10px;
 }
 
 .no-photo {
@@ -27,16 +31,30 @@ root {
   color:#999999;
 }
 
+.user-desc {
+  margin-top:10px;
+}
 
-#info-table {
+.user-desc p {
+  background-color:#eeeeee;
+  height:126px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.user-boards {
+  margin-bottom:10px;
+}
+
+#user-info-table {
   float:right;
   margin-right:100px;
 }
-#info-table h2 {
+#user-info-table h2 {
   padding-bottom:5px;
 }
 
-.attr-name {
+#user-info-table .attr-name {
   font-size:1.5em;
   display:table-cell;
   vertical-align:middle;
@@ -48,7 +66,7 @@ root {
   border-right:3px solid white;
 }
 
-.value {
+#user-info-table .value {
   font-size:1.5em;
   display:table-cell;
   vertical-align:middle;

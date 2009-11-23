@@ -18,6 +18,7 @@ describe Location do
     it "should belong to a updater" do
       Location.make_unsaved().should belong_to(:updater)
     end
+
   end
   
   describe "methods" do

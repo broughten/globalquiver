@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
   has_many  :locations, :foreign_key =>"creator_id"
   has_one   :image, :as => :owner, :dependent => :destroy
 
+  has_one :main_location, :class_name => 'Location', :foreign_key => "creator_id", :conditions => {"locations.main = ?" => true}
+ 
+  has_and_belongs_to_many :pickup_times
+
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password

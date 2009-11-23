@@ -18,6 +18,14 @@ describe User do
       user.owned_boards.length.should == 2
     end
 
+    it "should allow one main_location" do
+      User.make().should respond_to(:main_location)
+    end
+    
+    it "should have many pickup_times" do
+      User.make().should respond_to(:pickup_times)
+    end
+
     it "should have many reserved boards" do
       renter = User.make()
       owner1 = User.make()

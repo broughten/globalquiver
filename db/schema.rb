@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091105135517) do
+ActiveRecord::Schema.define(:version => 20091123170708) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -88,6 +88,18 @@ ActiveRecord::Schema.define(:version => 20091105135517) do
     t.integer  "updater_id"
     t.string   "object_type"
     t.integer  "search_radius"
+    t.boolean  "main"
+  end
+
+  create_table "pickup_times", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pickup_times_users", :id => false, :force => true do |t|
+    t.integer "pickup_time_id"
+    t.integer "user_id"
   end
 
   create_table "styles", :force => true do |t|
@@ -120,6 +132,9 @@ ActiveRecord::Schema.define(:version => 20091105135517) do
     t.boolean  "terms_of_service"
     t.string   "first_name"
     t.string   "last_name"
+    t.text     "description"
+    t.boolean  "friendly"
+    t.string   "url"
   end
 
 end
