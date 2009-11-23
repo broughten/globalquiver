@@ -2,6 +2,15 @@
   <%= stylesheet_link_tag 'board','board_searches', :media => 'screen' %>
 <% end %>
 
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $(".board-owner").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+  });
+
+<% end %>
+
 <h1>Board Search Results</h1>
 
 <% if @found_boards.empty? %>
@@ -17,7 +26,12 @@
         <li class="medium">Type</li>
         <li class="short">Length</li>
       </ul>
-      <%= render :partial => "boards/board", :collection => @found_boards %>
+      <% @found_boards.group_by(&:creator).each do |owner, boards|  %>
+        <div class="board-owner">
+          <p><span>Available from: </span><%= link_to "#{owner.full_name}", user_path(:id => owner.id) %></p>
+        </div>
+        <%= render :partial => "boards/board", :collection => boards %>
+      <% end %>
     </div>
     <div id="redo-search">
       <h2>New Search</h2>

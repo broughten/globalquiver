@@ -33,8 +33,16 @@ namespace :db do
     #Set up User data
     surfer = Surfer.create(:first_name=>"Dev", :last_name=>"Surfer", :password=>"testing", 
       :password_confirmation=>"testing", :email=>"devsurfer@test.com", :terms_of_service=>"true")
+    slater = Surfer.create(:first_name=>"Kelly", :last_name=>"Slater", :password=>"testing",
+      :password_confirmation=>"testing", :email=>"slater@test.com", :terms_of_service=>"true")
+    jordy  = Surfer.create(:first_name=>"Jordy", :last_name=>"Smith", :password=>"testing",
+      :password_confirmation=>"testing", :email=>"jordy@test.com", :terms_of_service=>"true")
     shop = Shop.create(:name=>"Dev Shop",   :password=>"testing", 
         :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true")
+    hansens = Shop.create(:name=>"Hansen's Surf Shop",   :password=>"testing",
+        :password_confirmation=>"testing", :email=>"hansens@test.com", :terms_of_service=>"true")
+    killerdana = Shop.create(:name=>"Killer Dana Surf Shop",   :password=>"testing",
+        :password_confirmation=>"testing", :email=>"killerdana@test.com", :terms_of_service=>"true")
     emptySurfer = Surfer.create(:first_name=>"Empty", :last_name=>"Surfer", :password=>"testing", 
           :password_confirmation=>"testing", :email=>"emptysurfer@test.com", :terms_of_service=>"true")
     adminSurfer = Surfer.create(:first_name=>"Admin", :last_name=>"Surfer", :password=>"testing", 
@@ -43,21 +51,32 @@ namespace :db do
     # Set up Style data
     longboard = Style.create(:name=>"longboard")
     shortboard = Style.create(:name=>"shortboard")
-    fish = Style.create(:name=>"Fish")
+    fish = Style.create(:name=>"fish")
     
     #Set up location data
     surferLocation = BoardLocation.create(:street=>"233 W Micheltorena St", :locality=>"Santa Barbara", 
       :region=>"CA", :postal_code=>"93101", :country=>"USA", :creator=>surfer, :updater=>surfer)
-    shopLocation = BoardLocation.create(:street=>"13005 Lowell Blvd", :locality=>"Westminster", 
+    slaterLocation = BoardLocation.create(:street=>"108 Zamora St", :locality=>"St Augustine",
+        :region=>"FL", :postal_code=>"32084", :country=>"USA", :creator=>slater, :updater=>slater)
+    jordyLocation = BoardLocation.create(:street=>"5283 Los Robles Dr", :locality=>"Carlsbad",
+        :region=>"CA", :postal_code=>"92008", :country=>"USA", :creator=>jordy, :updater=>jordy)
+    shopLocation = BoardLocation.create(:street=>"13005 Lowell Blvd", :locality=>"Westminster",
         :region=>"CO", :postal_code=>"80031", :country=>"USA", :creator=>shop, :updater=>shop)
-        
+    killerdanaLocation = BoardLocation.create(:street=>"24470 Del Prado", :locality=>"Dana Point",
+        :region=>"CA", :postal_code=>"92629", :country=>"USA", :creator=>killerdana, :updater=>killerdana)
+    hansensLocation = BoardLocation.create(:street=>"1105 So Coast Highway 101", :locality=>"Encinitas",
+        :region=>"CA", :postal_code=>"92024", :country=>"USA", :creator=>hansens, :updater=>hansens)
+
     # Set up some search locations
     SearchLocation.create(:locality=>"Santa Barbara", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
     SearchLocation.create(:locality=>"Westminster", :region=>"CO", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
-    
+    SearchLocation.create(:locality=>"San Diego", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
+    SearchLocation.create(:locality=>"St Augustine", :region=>"FL", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
+    SearchLocation.create(:locality=>"Dana Point", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
+
     #Set up boards for surfer
     Board.populate 3 do |board|
-      board.maker = Faker::Company.name
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley']
       board.model = Faker::Lorem.words(1)
       board.length = [100, 120, 200]
       board.style_id = [longboard.id, shortboard.id, fish.id]
@@ -66,10 +85,34 @@ namespace :db do
       board.updater_id = surfer.id
       board.location_id = surferLocation.id
     end
+
+    #Set up 4 boards for slater
+    Board.populate 4 do |board|
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley', 'Hobie']
+      board.model = Faker::Lorem.words(1)
+      board.length = [72, 70, 100, 74]
+      board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.description = Faker::Lorem.sentences(4)
+      board.creator_id = slater.id
+      board.updater_id = slater.id
+      board.location_id = slaterLocation.id
+    end
+
+    #Set up 2 boards for jordy
+    Board.populate 2 do |board|
+      board.maker = ['Channel Islands', 'Firewire']
+      board.model = Faker::Lorem.words(1)
+      board.length = [72, 70]
+      board.style_id = [shortboard.id, fish.id]
+      board.description = Faker::Lorem.sentences(4)
+      board.creator_id = jordy.id
+      board.updater_id = jordy.id
+      board.location_id = jordyLocation.id
+    end
     
     #Set up boards for shop
     Board.populate 10 do |board|
-      board.maker = Faker::Company.name
+      board.maker = ['Hobie', 'Gordon & Smith', 'T&C Surf Designs', 'BIC Sport', 'Wave Riding Vehicles', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
       board.model = Faker::Lorem.words(1)
       board.length = [100, 120, 200]
       board.style_id = [longboard.id, shortboard.id, fish.id]
@@ -77,6 +120,30 @@ namespace :db do
       board.creator_id = shop.id
       board.updater_id = shop.id
       board.location_id = shopLocation.id
+    end
+
+    #Set up 50 boards for killer dana
+    Board.populate 50 do |board|
+      board.maker = ['Hobie', 'Gordon & Smith', 'T&C Surf Designs', 'BIC Sport', 'Wave Riding Vehicles', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
+      board.model = Faker::Lorem.words(1)
+      board.length = [72, 73, 71, 70, 100, 74, 75, 76, 77, 78, 79, 80]
+      board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.description = Faker::Lorem.sentences(4)
+      board.creator_id = killerdana.id
+      board.updater_id = killerdana.id
+      board.location_id = killerdanaLocation.id
+    end
+
+    #Set up 7 boards for hansens
+    Board.populate 7 do |board|
+      board.maker = ['Hobie', 'Gordon & Smith', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
+      board.model = Faker::Lorem.words(1)
+      board.length = [72, 73, 71, 70, 100, 74, 75]
+      board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.description = Faker::Lorem.sentences(4)
+      board.creator_id = hansens.id
+      board.updater_id = hansens.id
+      board.location_id = hansensLocation.id
     end
     
     counter = 0
