@@ -11,6 +11,54 @@ root {
     display: block;
 }
 
+/* show user profile */
+.user-photo {
+  float:left;
+  height:400px;
+  width:400px;
+  background-color:#eeeeee;
+  vertical-align:middle;
+  text-align:center;
+}
+
+.no-photo {
+  padding-top:140px;
+  font-size:60px;
+  color:#999999;
+}
+
+
+#info-table {
+  float:right;
+  margin-right:100px;
+}
+#info-table h2 {
+  padding-bottom:5px;
+}
+
+.attr-name {
+  font-size:1.5em;
+  display:table-cell;
+  vertical-align:middle;
+  padding-left:10px;
+  height:40px;
+  width:120px;
+  background-color:#888888;
+  color:white;
+  border-right:3px solid white;
+}
+
+.value {
+  font-size:1.5em;
+  display:table-cell;
+  vertical-align:middle;
+  height:40px;
+  padding-left:10px;
+  padding-right:10px;
+  width:150px;
+  background-color:#eeeeee;
+}
+
 /* new user */
 
 /* create user */
@@ -38,6 +86,5 @@ root {
 .submit {
   margin-top:10px;
 }
-
 
 

@@ -9,7 +9,7 @@ describe UsersController do
     controller.should be_an_instance_of(UsersController)
   end
   
-  describe "authenticated user" do
+  describe "for authenticated user" do
     before(:each) do
       login_as_user
     end
@@ -28,6 +28,23 @@ describe UsersController do
       flash[:notice].should be_nil
       response.should render_template("edit")
     end
+
+    describe "when showing user" do
+      before(:each) do
+        @temp_user = Surfer.make()
+      end
+      it "should attempt to find the surfer in question" do
+        User.expects(:find).returns(@temp_user)
+        get 'show', :id=>@temp_user.id
+        assigns[:user].should == @temp_user
+      end
+
+      it "should render the show view" do
+        get 'show', :id=>@temp_user.id
+        response.should render_template("show")
+      end
+    end
+
   end
   
   describe "anonymous user" do
@@ -40,7 +57,12 @@ describe UsersController do
       post :update
       response.should redirect_to(login_path)
     end
-    
+
+    it "should redirect to login screen on show" do
+      get :show
+      response.should redirect_to(login_path)
+    end
+
     describe "creating a new user" do
       it "should create a new Shop instance if the is_shop param is yes" do
         post :create, :is_shop => 'yes'

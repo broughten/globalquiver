@@ -1,0 +1,32 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'user', :media => 'screen' %>
+<% end %>
+<h1><%= @user.full_name %></h1>
+<div class  ="user-photo">
+  <% if @user.image.nil? %>
+  <p class="no-photo">No Photo</p>
+  <% else %>
+    <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
+  <% end %>
+</div>
+
+<div id="info-table">
+  <h2>Info</h2>
+  <ul>
+    <li class="attr-name">Email</li>
+    <li class="value">
+      <%=h @user.email %>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <% if @user.is_a?(Surfer) %>
+    <ul>
+      <li class="attr-name">Member Since</li>
+      <li class="value">
+        <%=h @user.created_at.to_date.strftime("%m/%d/%Y") %>
+      </li>
+    </ul>
+    <div class="clear"></div>
+  <% end %>
+</div>
+

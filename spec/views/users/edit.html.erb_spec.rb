@@ -28,7 +28,7 @@ describe "/user/edit" do
       assigns[:user] = @user
       render "users/edit.html.erb"
     end
-    it "should render the shop specific fields" do
+    it "should render the surfer specific fields" do
       response.should have_selector("form[method=post]") do |form|
           form.should have_selector("input[type=text]", :name=>"surfer[first_name]")
           form.should have_selector("input[type=text]", :name=>"surfer[first_name]")

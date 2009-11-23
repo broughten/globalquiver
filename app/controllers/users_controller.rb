@@ -8,6 +8,14 @@ class UsersController < ApplicationController
   def new
   end
 
+  def show
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+    end
+  end
+
   def create
     cookies.delete :auth_token
 
