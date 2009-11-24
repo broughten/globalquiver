@@ -1,6 +1,8 @@
 class BoardSearch < ActiveRecord::Base
   belongs_to :style
   belongs_to :location, :class_name => 'SearchLocation'
+  belongs_to :creator, :class_name => 'User'
+  belongs_to :updater, :class_name => 'User'
   
   validates_presence_of :location, :message => "must be selected"
   
@@ -8,7 +10,7 @@ class BoardSearch < ActiveRecord::Base
     boards = Array.new
     BoardLocation.find(:all, :within => self.location.search_radius, :origin => self.location.to_s).each do |board_location|
       board_location.boards.each do |board|
-        boards << board if (self.style == nil || board.style == self.style)
+        boards << board if ((self.style == nil || board.style == self.style) && self.creator != board.creator)
       end
     end
     return boards.uniq
