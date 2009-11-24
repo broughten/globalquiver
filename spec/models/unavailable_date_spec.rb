@@ -49,15 +49,43 @@ describe UnavailableDate do
     it "should contain recently_created that filters dates based on a passed in range" do
       unavailable_date1 = UnavailableDate.make()
       unavailable_date2 = UnavailableDate.make()
-      UnavailableDate.recently_created(2.days.ago).should include(unavailable_date1)
-      UnavailableDate.recently_created(2.days.ago).length.should == 2
+      result = UnavailableDate.recently_created(2.days.ago)
+      result.should include(unavailable_date1)
+      result.length.should == 2
       
       unavailable_date1.created_at = 4.days.ago
       unavailable_date1.save
-      UnavailableDate.recently_created(2.days.ago).should_not include(unavailable_date1)
-      UnavailableDate.recently_created(2.days.ago).length.should == 1      
+      result = UnavailableDate.recently_created(2.days.ago)
+      result.should_not include(unavailable_date1)
+      result.length.should == 1      
+    end
+    
+    it "should contain inactive that only returns the inactive records" do
+      unavailable_date1 = UnavailableDate.make()
+      unavailable_date2 = UnavailableDate.make()
+      unavailable_date2.destroy()
+      debugger
+      results = UnavailableDate.inactive
+      results.should_not include(unavailable_date1)
+      results.should include(unavailable_date2)     
+    end
+    
+    it "should contain active that only returns the deleted records" do
+      unavailable_date1 = UnavailableDate.make()
+      unavailable_date2 = UnavailableDate.make()
+      unavailable_date2.destroy()
+      results = UnavailableDate.active
+      results.should include(unavailable_date1)
+      results.should_not include(unavailable_date2)     
     end
   end
 
+  it "should soft delete a record by setting deleted_at" do
+    date = UnavailableDate.make()
+    date.deleted_at.should be_nil
+    
+    date.destroy
+    date.deleted_at.should_not be_nil
+  end
 
 end
