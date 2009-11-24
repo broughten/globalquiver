@@ -72,7 +72,8 @@ class User < ActiveRecord::Base
   def self.has_boards_with_reservation_date_changes_since(time)
     users = Array.new
     User.find_each do |user|
-      users << user if (user.owned_boards.with_new_reserved_dates_since(time).length > 0 || user.owned_boards.with_deleted_reserved_dates_since(time).length > 0)
+      users << user if (!user.owned_boards.with_new_reserved_dates_since(time).empty? || 
+        !user.owned_boards.with_deleted_reserved_dates_since(time).empty?)
     end
     return users
   end
