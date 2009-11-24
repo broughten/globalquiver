@@ -22,8 +22,8 @@ class BoardsController < ApplicationController
       # because he might want to use one of these for the board he's about to enter
       @existing_locations = current_user.locations.ordered_by_desc_creation
       @board = Board.new
-      # allow for 4 pictures on each board
-      4.times {@board.images.build}
+      # allow for pictures on each board
+      Board::MAX_IMAGES.times {@board.images.build}
       respond_to do |format|
         format.html # new.html.erb
       end
@@ -47,6 +47,7 @@ class BoardsController < ApplicationController
         format.html { redirect_to(root_path) }
       else
         @existing_locations = current_user.locations.ordered_by_desc_creation
+        (Board::MAX_IMAGES - @board.images.length).times {@board.images.build}
         format.html { render :action => "new" }
       end
     end

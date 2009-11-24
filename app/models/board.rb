@@ -17,6 +17,8 @@ class Board < ActiveRecord::Base
   # put all of the options for the named_scope in the lambda so they get evaluated at runtime.
   named_scope :with_new_reserved_dates, lambda { |time| {:joins => :unavailable_dates, :conditions => ['unavailable_dates.created_at > ? AND unavailable_dates.creator_id != boards.creator_id', time]} }
   
+  MAX_IMAGES = 4
+  
   def style_name
     style.name if style
   end

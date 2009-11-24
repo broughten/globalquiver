@@ -30,6 +30,11 @@ describe BoardsController do
           get "new"
           response.should render_template "new"
         end
+        
+        it "should create Board::MAX_PICTURES for the new board" do
+          get "new"
+          assigns[:board].images.length.should == Board::MAX_IMAGES
+        end
       end
       
       describe "user without locations" do
@@ -52,13 +57,22 @@ describe BoardsController do
         flash[:notice].should_not be_nil
         response.should redirect_to(root_path)
       end
-
-      it "should render new template without a flash message on unsuccessful save" do
-        Board.any_instance.stubs(:valid?).returns(false)
-        post 'create'
-        assigns[:board].should be_new_record
-        flash[:notice].should be_nil
-        response.should render_template('new')
+      
+      describe "save failure" do
+        before(:each) do
+          Board.any_instance.stubs(:valid?).returns(false)
+        end
+        it "should render new template without a flash message" do
+          post 'create'
+          assigns[:board].should be_new_record
+          flash[:notice].should be_nil
+          response.should render_template('new')
+        end
+        
+        it "should make sure that board has at least Board::MAX_IMAGES created" do
+          post 'create'
+          assigns[:board].images.length.should == Board::MAX_IMAGES
+        end
       end
     end
     
