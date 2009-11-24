@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :password, :password_confirmation, :terms_of_service, :image_attributes, :description, :url, :friendly
+  attr_accessible :email, :password, :password_confirmation, :terms_of_service, :image_attributes, :description, :url, :friendly, :pickup_time_ids
   # allows for the image assocation to be created by auto assignment but you still have to 
   # add image_attributes to attr_accessible above.
   accepts_nested_attributes_for :image

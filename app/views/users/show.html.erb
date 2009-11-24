@@ -1,7 +1,15 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'user', 'board', :media => 'screen' %>
 <% end %>
-<h1><%= @user.full_name %></h1>
+<h1 id="user-name"><%=  @user.full_name %></h1>
+<% if @user == current_user %>
+  <h2 class="is-you">&nbsp;(This is you!</h2>
+  <p id="user-edit"><%= link_to "Edit", edit_user_path(:id => current_user.id) %></p>
+  <h2 class="is-you">)</h2>
+<% end %>
+<div class="clear"></div>
+
+<% link_to "Edit", edit_user_path(:id => @user.id) %>
 <div class  ="user-photo">
   <% if @user.image.nil? %>
   <p class="no-photo">No Photo</p>
@@ -45,7 +53,7 @@
           Unspecified
         <%  else %>
           <% @user.pickup_times.each do |time|  %>
-            <span><%= time %> </span>
+            <p><%= time.name %></p>
           <% end %>
         <% end %>
       </li>
@@ -82,6 +90,9 @@
       <li>Model</li>
       <li class="medium">Type</li>
       <li class="short">Length</li>
+      <% if @user == current_user %>
+        <li class="short">Delete</li>
+      <% end %>
     </ul>
     <%= render :partial => "boards/board", :collection => @user.owned_boards %>
   <% end %>

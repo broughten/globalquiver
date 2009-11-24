@@ -12,9 +12,23 @@ root {
 }
 
 /* show user profile */
-h1 {
+#user-name {
+  float:left;
   margin-bottom:10px;
 }
+
+.is-you {
+  padding-top:10px;
+  float:left;
+}
+
+#user-edit {
+  float:left;
+  padding-top:3px;
+  padding-left:5px;
+  font-size:2em;
+}
+
 .user-photo {
   float:left;
   height:400px;
@@ -90,12 +104,20 @@ h1 {
   background-color:#eeeeee;
 }
 
+.user-info-table .value p {
+  font-size:1em;
+  width:120px;
+}
+
 /* new user */
 
 /* create user */
 
 /* edit user */
 
+#show-name {
+  margin-bottom:10px;
+}
 
 .user-info-table label {
   font-size:1.5em;
@@ -167,6 +189,22 @@ h1 {
 
   height:42px;
 
+}
+
+.pickup-times {
+  height:28px;
+  width:200px;
+}
+
+.user-info-table .pickup-times input[type=checkbox] {
+  margin-right:10px;
+  float:left;
+}
+
+.pickup-times p {
+  font-size:1em;
+  width:110px;
+  float:left;
 }
 
 .user-info-table input[type=checkbox] {

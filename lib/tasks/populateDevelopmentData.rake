@@ -61,6 +61,11 @@ namespace :db do
     create_image_for_user(surfer, './spec/fixtures/images/users/deSouza.png')
 
 
+    morning = PickupTime.create(:name => "Morning")
+    afternoon = PickupTime.create(:name => "Afternoon")
+    evening = PickupTime.create(:name => "Evening")
+    by_appt = PickupTime.create(:name => "By Appointment")
+
 
     # Set up Style data
     longboard = Style.create(:name=>"longboard")

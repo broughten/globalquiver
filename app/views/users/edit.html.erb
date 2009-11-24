@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'user', :media => 'screen' %>
 <% end %>
-<h1>Edit Your Profile</h1>
+<h1 id="show-name">Edit Your Profile</h1>
 <div class  ="user-photo">
   <% semantic_form_for @user, :url => {:action => "update" }, :html => { :enctype => "multipart/form-data" } do |form| %>
     <div id="the-photo">
@@ -20,8 +20,8 @@
         <%= form.submit 'Upload', :class => 'submitBtn' %>
       </div>
     </div>
-
   <% end %>
+
 </div>
 <% semantic_form_for @user, :url => {:action => "update" }  do |form| %>
   <div class="user-info-table">
@@ -31,7 +31,7 @@
       <%= form.input :last_name, :required=>false if !@user.is_rental_shop?%>
       <%= form.input :name if @user.is_rental_shop? %>
       <%= form.input :email %>
-      <%= form.input :url, :required=>false %>
+      <%= form.input :url, :required=>false, :label => 'Website' %>
     </ul>
     <% if @user.is_a?(Surfer) %>
       <ul>
@@ -42,6 +42,18 @@
         <li class="attr-name">Member Since</li>
         <li class="value">
           <%= @user.created_at.to_date.strftime("%m/%d/%Y") %>
+        </li>
+      </ul>
+      <div class="clear"></div>
+      <ul>
+        <li class="attr-name">If you're renting out boards, when is it best for someone to pick them up?</li>
+        <li class="value">
+          <% for time in PickupTime.find(:all) %>
+          <div class="pickup-times">
+            <%= check_box_tag "#{current_user.class.to_s.downcase}[pickup_time_ids][]", time.id, @user.pickup_times.include?(time) %>
+            <p><%= time.name %></p>
+          </div>
+          <% end %>
         </li>
       </ul>
       <div class="clear"></div>
