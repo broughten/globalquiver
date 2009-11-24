@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   
   def self.has_boards_with_new_reservation_dates(time)
     users = Array.new
-    User.all.each do |user|
+    User.find_each do |user|
       users << user if user.owned_boards.with_new_reserved_dates(time).length > 0
     end
     return users
