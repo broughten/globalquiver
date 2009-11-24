@@ -15,7 +15,7 @@
 
 <% if @found_boards.empty? %>
   <p>
-    We couldn't find any boards where you're planning on going.  Try a different search.
+    We couldn't find any boards where you're planning on going.  Try a different <%= link_to "search", new_board_search_path %>.
   </p>
   <%  else %>
   <div id="search-results">
