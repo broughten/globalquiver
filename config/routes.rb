@@ -16,8 +16,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pages
 
   map.resource :blog_theme
-  
-  map.overview "/overview", :controller => 'overviews', :action => 'index'
 
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.with_options :controller => 'sessions'  do |m|
