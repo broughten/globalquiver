@@ -25,6 +25,11 @@ h1 {
   margin-bottom:10px;
 }
 
+#the-photo{
+  height:400px;
+  width:400px;
+}
+
 .no-photo {
   padding-top:140px;
   font-size:60px;
@@ -32,12 +37,12 @@ h1 {
 }
 
 .user-desc {
-  margin-top:10px;
+  margin-top:20px;
 }
 
 .user-desc p {
   background-color:#eeeeee;
-  height:126px;
+  height:110px;
   padding-left:10px;
   padding-right:10px;
 }
@@ -46,34 +51,42 @@ h1 {
   margin-bottom:10px;
 }
 
-#user-info-table {
-  float:right;
-  margin-right:100px;
+#photo-form {
+  text-align:left;
+  margin-top:10px;
 }
-#user-info-table h2 {
+#photo-form h2 {
+  margin-bottom:5px;
+}
+
+.user-info-table {
+  float:right;
+  margin-right:40px;
+}
+.user-info-table h2 {
   padding-bottom:5px;
 }
 
-#user-info-table .attr-name {
+.user-info-table .attr-name {
   font-size:1.5em;
   display:table-cell;
   vertical-align:middle;
   padding-left:10px;
-  height:40px;
+  height:41px;
   width:120px;
   background-color:#888888;
   color:white;
   border-right:3px solid white;
 }
 
-#user-info-table .value {
+.user-info-table .value {
   font-size:1.5em;
   display:table-cell;
   vertical-align:middle;
   height:40px;
   padding-left:10px;
   padding-right:10px;
-  width:150px;
+  width:202px;
   background-color:#eeeeee;
 }
 
@@ -82,6 +95,98 @@ h1 {
 /* create user */
 
 /* edit user */
+
+
+.user-info-table label {
+  font-size:1.5em;
+  float:left;
+  display:table-cell;
+  vertical-align:middle;
+  padding-left:10px;
+  padding-top:12px;
+  height:27px;
+  width:120px;
+  background-color:#888888;
+  color:white;
+  border-right:3px solid white;
+  border-bottom:2px solid white;
+}
+
+
+.user-info-table p {
+  width:333px;
+}
+
+.user-info-table lable abbr {
+  text-decoration:none;
+}
+
+#surfer_description_input label {
+  display:block;
+  background-color:white;
+  color:#555555;
+  padding-left:0px;
+  padding-bottom:0px;
+  font-size:2em;
+  float:none;
+  width:343px;
+  height:23px;
+}
+
+#surfer_description {
+  width:351px;
+  height:82px;
+}
+
+#surfer_description li {
+  list-style:none;
+}
+
+.user-info-table input[type=text], .user-info-table input[type=password] {
+  font-size:1.5em;
+  display:table-cell;
+  vertical-align:middle;
+  padding-top:10px;
+  height:27px;
+  padding-left:10px;
+  padding-right:10px;
+  width:200px;
+  border:1px solid;
+  margin-bottom:1px;
+}
+
+#surfer_password_input label {
+  height:28px;
+}
+#surfer_password_confirmation_input label {
+  padding-top:5px;
+  height:35px;
+  
+}
+#surfer_password_input {
+
+  height:42px;
+
+}
+
+.user-info-table input[type=checkbox] {
+  float:right;
+  margin-top:5px;
+  margin-right:35px;
+  height:20px;
+  width:20px;
+}
+
+#surfer_friendly_input {
+  width:300px;
+}
+
+#surfer_friendly_input label {
+  padding-top:3px;
+  width:344px;
+  height:38px;
+}
+
 
 .user-fields label {
   margin-top:10px;

@@ -1,21 +1,76 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'user', :media => 'screen' %>
 <% end %>
-<h1>Edit My Information</h1>
+<h1>Edit Your Profile</h1>
+<div class  ="user-photo">
+  <% semantic_form_for @user, :url => {:action => "update" }, :html => { :enctype => "multipart/form-data" } do |form| %>
+    <div id="the-photo">
+      <% if @user.image.nil? %>
+      <p class="no-photo">No Photo</p>
+      <% else %>
+        <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
+      <% end %>
+    </div>
+    <div id="photo-form">
+      <h2>Upload/Change Photo</h2>
+        <% form.fields_for :image_attributes do |image_fields| %>
+          <%= image_fields.file_field :data %>
+        <% end %>
+      <div id="upload-button" class="submit">
+        <%= form.submit 'Upload', :class => 'submitBtn' %>
+      </div>
+    </div>
 
-<p>Leave password fields blank to leave password unchanged.</p>
-
+  <% end %>
+</div>
 <% semantic_form_for @user, :url => {:action => "update" }  do |form| %>
-  <div class="user-fields">
- 	<%= form.input :first_name if !@user.is_rental_shop?%>
-	<%= form.input :last_name, :required=>false if !@user.is_rental_shop?%>
-	<%= form.input :name if @user.is_rental_shop? %>
-	<%= form.input :email %>
-	<%= form.input :password, :required=>false %>
-	<%= form.input :password_confirmation, :required=>false %>
-  </div>
+  <div class="user-info-table">
+    <h2>Update Your Info</h2>
+    <ul>
+      <%= form.input :first_name if !@user.is_rental_shop?%>
+      <%= form.input :last_name, :required=>false if !@user.is_rental_shop?%>
+      <%= form.input :name if @user.is_rental_shop? %>
+      <%= form.input :email %>
+      <%= form.input :url, :required=>false %>
+    </ul>
+    <% if @user.is_a?(Surfer) %>
+      <ul>
+        <%= form.input :friendly, :required=>false, :label => "I'm up for surfing with someone who rents one of my boards" %>
+      </ul>
+      <div class="clear"></div>
+      <ul>
+        <li class="attr-name">Member Since</li>
+        <li class="value">
+          <%= @user.created_at.to_date.strftime("%m/%d/%Y") %>
+        </li>
+      </ul>
+      <div class="clear"></div>
+    <% end %>
+    <ul class="user-desc">
+      <% if @user.is_a?(Surfer) %>
+        <%= form.input :description, :required=>false, :label => "Surfer Bio" %>
+      <% else %>
+        <%= form.input :description, :required=>false, :label => "About Your Store" %>
+      <% end %>
 
-  <div class="submit">
-    <%= form.submit 'Save', :class => 'submitBtn' %>
-  </div>
+    </ul>
+    <div class="submit">
+      <%= form.submit 'Save', :class => 'submitBtn' %>
+    </div>
 <% end -%>
+</div>
+<div class="clear"></div>
+
+<% semantic_form_for @user, :url => {:action => "update" }, :id => 'change_password'  do |form| %>
+
+  <div class="user-info-table">
+    <h2>Change Password</h2>
+    <ul>
+      <%= form.input :password, :required=>false %>
+      <%= form.input :password_confirmation, :required=>false %>
+    </ul>
+    <div class="submit">
+      <%= form.submit 'Change', :class => 'submitBtn' %>
+    </div>
+  </div>
+<% end %>

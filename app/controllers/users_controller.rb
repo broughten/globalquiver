@@ -47,8 +47,8 @@ class UsersController < ApplicationController
     # since the form will populate the params based on that
     class_string = @user.class.to_s.downcase   
     if @user.update_attributes(params[class_string])
-      flash[:notice] = 'Profile was successfully updated.'
-      redirect_to(overview_path)
+      flash[:notice] = 'Profile successfully updated.'
+      redirect_to(edit_user_path(:id =>  @user.id))
     else
       render :action => "edit"
     end

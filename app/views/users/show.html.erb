@@ -10,7 +10,7 @@
   <% end %>
 </div>
 
-<div id="user-info-table">
+<div class="user-info-table">
   <h2>Info</h2>
   <ul>
     <li class="attr-name">Email</li>
@@ -75,7 +75,7 @@
 </div>
 <div class="clear"></div>
 <div class="user-boards">
-  <% if @user.owned_boards.empty? %>
+  <% if !@user.owned_boards.empty? %>
     <h2>Boards</h2>
     <ul id="list-headings">
       <li>Pic</li>

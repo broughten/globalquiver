@@ -14,11 +14,11 @@ describe UsersController do
       login_as_user
     end
     
-    it "should redirect to overview page with a flash notice on successful update" do
+    it "should redirect to edit with a flash notice on successful update" do
       User.any_instance.stubs(:update_attributes).returns(true)
       post :update
       flash[:notice].should_not be_nil
-      response.should redirect_to(overview_path)
+      response.should redirect_to(edit_user_path(:id => @user.id))
       
     end
     

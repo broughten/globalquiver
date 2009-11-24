@@ -9,6 +9,13 @@ def create_images_for_board(board,photo_path)
   end
 end
 
+def create_image_for_user(user,photo_path)
+    image = Image.new
+    image.owner = user
+    image.data = File.open(photo_path)
+    image.save!
+end
+
 # this associates the task into the db: namespace
 namespace :db do
   # Always use one of these to allow a taks list to show this task
@@ -47,7 +54,14 @@ namespace :db do
           :password_confirmation=>"testing", :email=>"emptysurfer@test.com", :terms_of_service=>"true")
     adminSurfer = Surfer.create(:first_name=>"Admin", :last_name=>"Surfer", :password=>"testing", 
                 :password_confirmation=>"testing", :email=>"adminsurfer@test.com", :terms_of_service=>"true")
-          
+
+    #give Jordy, Kelly, and devSurfer images
+    create_image_for_user(jordy, './spec/fixtures/images/users/jordy.png')
+    create_image_for_user(slater, './spec/fixtures/images/users/slater.png')
+    create_image_for_user(surfer, './spec/fixtures/images/users/deSouza.png')
+
+
+
     # Set up Style data
     longboard = Style.create(:name=>"longboard")
     shortboard = Style.create(:name=>"shortboard")

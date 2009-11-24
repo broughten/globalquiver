@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User do
   
-  it "should succeed creating a new valid from the blueprint" do
+  it "should succeed creating a new valid user from the blueprint" do
     User.make().should be_valid
   end
   
