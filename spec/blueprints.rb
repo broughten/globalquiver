@@ -157,6 +157,10 @@ UnavailableDate.blueprint() do
   updater {creator}
 end
 
+UnavailableDate.blueprint(:deleted) do
+  deleted_at {Time.now.utc}
+end
+
 BoardSearch.blueprint() do
   location {SearchLocation.make}
   style {nil}

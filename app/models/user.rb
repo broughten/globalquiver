@@ -11,13 +11,15 @@ class User < ActiveRecord::Base
     'FROM boards b, unavailable_dates ud, user u ' +
     'WHERE b.id = ud.board_id ' +
     'AND ud.creator_id = #{id} ' +
-    'AND b.creator_id != ud.creator_id'
+    'AND b.creator_id != ud.creator_id ' +
+    'AND ud.deleted_at IS NULL'
   has_many  :board_reservations, :class_name => 'Board', :finder_sql =>
     'SELECT DISTINCT b.*, ud.* ' +
     'FROM boards b, unavailable_dates ud, user u ' +
     'WHERE b.id = ud.board_id ' +
     'AND ud.creator_id = #{id} ' +
     'AND b.creator_id != ud.creator_id ' +
+    'AND ud.deleted_at IS NULL ' +
     'ORDER BY ud.date'
   
   has_many  :locations, :foreign_key =>"creator_id"
@@ -67,25 +69,31 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
   end
   
-  def self.has_boards_with_new_reservation_dates(time)
+  def self.has_boards_with_reservation_date_changes_since(time)
     users = Array.new
     User.find_each do |user|
-      users << user if user.owned_boards.with_new_reserved_dates(time).length > 0
+      users << user if (user.owned_boards.with_new_reserved_dates_since(time).length > 0 || user.owned_boards.with_deleted_reserved_dates_since(time).length > 0)
     end
     return users
   end
   
   def self.send_reservation_status_change_update
     time = 1.day.ago
-    users = has_boards_with_new_reservation_dates(time)
+    users = has_boards_with_reservation_date_changes_since(time)
     users.each do |user|
       new_board_reservation_dates = Hash.new
-      boards_with_new_reservations = user.owned_boards.with_new_reserved_dates(time)
+      boards_with_new_reservations = user.owned_boards.with_new_reserved_dates_since(time)
       boards_with_new_reservations.each do |board|
-        new_reservation_dates = board.reserved_dates.recently_created(time)
+        new_reservation_dates = board.reserved_dates.created_since(time).active
         new_board_reservation_dates[board] = new_reservation_dates
       end
-      UserMailer.deliver_board_owner_board_reservation_change_notification(user, new_board_reservation_dates, {})
+      deleted_board_reservation_dates = Hash.new
+      boards_with_deleted_reservations = user.owned_boards.with_deleted_reserved_dates_since(time)
+      boards_with_deleted_reservations.each do |board|
+        deleted_reservation_dates = board.reserved_dates.deleted_since(time)
+        deleted_board_reservation_dates[board] = deleted_reservation_dates
+      end
+      UserMailer.deliver_board_owner_board_reservation_change_notification(user, new_board_reservation_dates, deleted_board_reservation_dates)
     end
     
   end

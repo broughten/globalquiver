@@ -46,16 +46,30 @@ describe UnavailableDate do
   end
   
   describe "named scopes" do
-    it "should contain recently_created that filters dates based on a passed in range" do
+    it "should find recently created unavailable dates based on a passed in date" do
       unavailable_date1 = UnavailableDate.make()
       unavailable_date2 = UnavailableDate.make()
-      result = UnavailableDate.recently_created(2.days.ago)
+      result = UnavailableDate.created_since(2.days.ago)
       result.should include(unavailable_date1)
       result.length.should == 2
       
       unavailable_date1.created_at = 4.days.ago
       unavailable_date1.save
-      result = UnavailableDate.recently_created(2.days.ago)
+      result = UnavailableDate.created_since(2.days.ago)
+      result.should_not include(unavailable_date1)
+      result.length.should == 1      
+    end
+    
+    it "should find recently deleted unavailable dates based on a passed in date" do
+      unavailable_date1 = UnavailableDate.make(:deleted)
+      unavailable_date2 = UnavailableDate.make(:deleted)
+      result = UnavailableDate.deleted_since(2.days.ago)
+      result.should include(unavailable_date1)
+      result.length.should == 2
+      
+      unavailable_date1.deleted_at = 4.days.ago
+      unavailable_date1.save
+      result = UnavailableDate.deleted_since(2.days.ago)
       result.should_not include(unavailable_date1)
       result.length.should == 1      
     end
@@ -64,7 +78,6 @@ describe UnavailableDate do
       unavailable_date1 = UnavailableDate.make()
       unavailable_date2 = UnavailableDate.make()
       unavailable_date2.destroy()
-      debugger
       results = UnavailableDate.inactive
       results.should_not include(unavailable_date1)
       results.should include(unavailable_date2)     

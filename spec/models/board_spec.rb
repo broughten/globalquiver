@@ -133,12 +133,34 @@ describe Board do
     board2 = make_board_with_unavailable_dates
     reservation_date = UnavailableDate.make()
     board1.unavailable_dates << reservation_date
-    Board.with_new_reserved_dates(1.day.ago).should include(board1)
-    Board.with_new_reserved_dates(1.day.ago).should_not include(board2)
+    Board.with_new_reserved_dates_since(1.day.ago).should include(board1)
+    Board.with_new_reserved_dates_since(1.day.ago).should_not include(board2)
     
     reservation_date.created_at = 2.days.ago
     reservation_date.save
-    Board.with_new_reserved_dates(1.day.ago).should_not include(board1)    
+    Board.with_new_reserved_dates_since(1.day.ago).should_not include(board1)    
+  end
+  
+  it "should not include boards with only deleted reservation dates when finding boards with new reservation dates" do
+    board1 = make_board_with_unavailable_dates
+    board2 = make_board_with_unavailable_dates
+    active_reservation_date = UnavailableDate.make()
+    deleted_reservation_date = UnavailableDate.make(:deleted_at=>Time.now.utc)
+    board1.unavailable_dates << active_reservation_date
+    board2.unavailable_dates << deleted_reservation_date
+    Board.with_new_reserved_dates_since(1.day.ago).should include(board1)
+    Board.with_new_reserved_dates_since(1.day.ago).should_not include(board2)
+  end
+  
+  it "should be able to find boards with deleted reservation dates" do
+    board1 = make_board_with_unavailable_dates
+    board2 = make_board_with_unavailable_dates
+    reservation_date1 = UnavailableDate.make(:deleted_at=>Time.now.utc)
+    reservation_date2 = UnavailableDate.make(:deleted_at=>2.days.ago)
+    board1.unavailable_dates << reservation_date1
+    board2.unavailable_dates << reservation_date2
+    Board.with_deleted_reserved_dates_since(1.day.ago).should include(board1)
+    Board.with_deleted_reserved_dates_since(1.day.ago).should_not include(board2)
   end
   
 end
