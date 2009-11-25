@@ -12,7 +12,7 @@ module UnavailableDatesHelper
     if (@board.reserved_dates.blank?)
       return 'null'
     else
-      takens = @board.reserved_dates.find(:all, :conditions => ['creator_id != ?', (current_user.nil?)?-1:current_user.id])
+      takens = @board.reserved_dates.not_created_by(current_user).active
       takens.to_json
     end
   end
@@ -21,7 +21,7 @@ module UnavailableDatesHelper
     if (@board.black_out_dates.blank?)
       return 'null'
     else
-      black_outs = @board.black_out_dates.find(:all, :conditions => ['creator_id != ?', (current_user.nil?)?-1:current_user.id])
+      black_outs = @board.black_out_dates.not_created_by(current_user).active
       black_outs.to_json
     end
   end
@@ -30,7 +30,7 @@ module UnavailableDatesHelper
     if (@board.black_out_dates.blank?)
       return 'null'
     else
-      black_outs = @board.black_out_dates.find(:all, :conditions => ['creator_id = ?', (current_user.nil?)?-1:current_user.id])
+      black_outs = @board.black_out_dates.created_by(current_user).active
       black_outs.to_json
     end
   end
@@ -39,7 +39,7 @@ module UnavailableDatesHelper
     if (@board.reserved_dates.blank?)
       return 'null'
     else
-      reservations = @board.reserved_dates.find(:all, :conditions => ['creator_id = ?', (current_user.nil?)?-1:current_user.id])
+      reservations = @board.reserved_dates.created_by(current_user).active
       reservations.to_json
     end   
   end

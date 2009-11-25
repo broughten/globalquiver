@@ -91,6 +91,20 @@ describe UnavailableDate do
       results.should include(unavailable_date1)
       results.should_not include(unavailable_date2)     
     end
+    
+    it "should be able to filter based on who created the unavailable date" do
+      unavailable_date1 = UnavailableDate.make()
+      unavailable_date2 = UnavailableDate.make()
+      UnavailableDate.created_by(unavailable_date1.creator).should include(unavailable_date1)
+      UnavailableDate.created_by(unavailable_date1.creator).should_not include(unavailable_date2)
+    end
+    
+    it "should be able to filter based on who didn't create the unavailable date" do
+      unavailable_date1 = UnavailableDate.make()
+      unavailable_date2 = UnavailableDate.make()
+      UnavailableDate.not_created_by(unavailable_date1.creator).should_not include(unavailable_date1)
+      UnavailableDate.not_created_by(unavailable_date1.creator).should include(unavailable_date2)
+    end
   end
 
   it "should soft delete a record by setting deleted_at" do

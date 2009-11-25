@@ -15,6 +15,9 @@ class UnavailableDate < ActiveRecord::Base
   named_scope :deleted_since, lambda { |time| {:conditions => ["deleted_at > ?", time]} }
   named_scope :inactive, :conditions => ["deleted_at IS NOT ?", nil]
   named_scope :active, :conditions => ["deleted_at IS ?", nil]
+  named_scope :created_by, lambda { |user| {:conditions => ['creator_id = ?', (user.nil?)?-1:user.id]} }
+  named_scope :not_created_by, lambda { |user| {:conditions => ['creator_id != ?', (user.nil?)?-1:user.id]} }
+  
     
   def destroy
     # see if someone above us tried to roll back.
