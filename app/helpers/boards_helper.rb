@@ -21,4 +21,12 @@ module BoardsHelper
       ['15/16' , '0.9375']
     ]
   end
+  
+  def submit_button_text_for(user, board)
+    # determine who is viewing the board details
+    # page and return a string based on that
+    button_text = 'Save Reservation' # assume its not the board owner.    
+    button_text = 'Save Board Availability' if  board.user_is_owner(user)    
+    return button_text    
+  end
 end

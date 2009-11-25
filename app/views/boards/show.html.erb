@@ -136,7 +136,7 @@
 
     <%= render :partial => '/unavailable_dates/form' %>
     <p>
-      <%= f.submit 'Make Reservation!' %>
+      <%= f.submit submit_button_text_for(current_user, @board) %>
     </p>
 
 <%end%>

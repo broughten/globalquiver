@@ -1,9 +1,10 @@
-<% if @board.creator == current_user or @board.creator.nil? %>
+<% if @board.user_is_owner(current_user) %>
 <h2>Which days is this board <strong>not</strong> available?</h2>
-<h3>Select the days you won't be able to rent or lend this board.<br>You can always return to change these dates later.</h3>
+<h3>Select the days you won't be able to rent or lend this board and click the button below.
+<br>You can always return to change these dates later.</h3>
 <% else %>
 <h2>Which days would you like to reserve this board?</h2>
-<h3>Select the days you want and click 'Reserve'.  You can change cancel with at least 48 hours notice.</h3>
+<h3>Select the days you want and click the button below.  You can cancel a reservation with at least 48 hours notice.</h3>
 
 <% end %>
 <br>
