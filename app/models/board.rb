@@ -149,4 +149,8 @@ class Board < ActiveRecord::Base
   def has_location?
     return self.location != nil;
   end
+  
+  def user_is_owner(user)
+    self.creator == user or self.creator.nil?
+  end
 end

@@ -163,4 +163,13 @@ describe Board do
     Board.with_deleted_reserved_dates_since(1.day.ago).should_not include(board2)
   end
   
+  it "should be able to tell if a user is the owner of this board" do
+    owner = User.make()
+    other_user = User.make()
+    board = Board.make(:creator=>owner)
+    board.user_is_owner(other_user).should be_false
+    board.user_is_owner(owner).should be_true
+    
+  end
+  
 end
