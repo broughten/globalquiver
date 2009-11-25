@@ -114,5 +114,11 @@ describe UnavailableDate do
     date.destroy
     date.deleted_at.should_not be_nil
   end
+  
+  it "should allow new record to be added if a deleted one exists" do
+    deleted_unavailable_date = UnavailableDate.make(:deleted)
+    new_unavailable_date = UnavailableDate.make(:board =>deleted_unavailable_date.board, :date=>deleted_unavailable_date.date)
+    new_unavailable_date.should_not be_new_record
+  end
 
 end

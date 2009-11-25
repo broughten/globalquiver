@@ -17,7 +17,8 @@ class UnavailableDate < ActiveRecord::Base
   named_scope :active, :conditions => ["deleted_at IS ?", nil]
   named_scope :created_by, lambda { |user| {:conditions => ['creator_id = ?', (user.nil?)?-1:user.id]} }
   named_scope :not_created_by, lambda { |user| {:conditions => ['creator_id != ?', (user.nil?)?-1:user.id]} }
-  
+    
+  before_validation_on_create :remove_soft_deleted_record
     
   def destroy
     # see if someone above us tried to roll back.
@@ -29,6 +30,14 @@ class UnavailableDate < ActiveRecord::Base
   end
   
   protected
+  def remove_soft_deleted_record
+    # we need to check to see if there is a soft deleted record in the
+    # db and delete it so the validation are OK
+    # there should be only one
+    found_records = UnavailableDate.all(:conditions => ["board_id = ? AND date = ? AND deleted_at IS NOT ?", self.board_id, self.date, nil]) 
+    found_records.each {|record| record.delete}
+  end
+  
   def mark_as_destroyed
     self.update_attribute(:deleted_at, Time.now.utc)
   end
