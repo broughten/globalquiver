@@ -1,5 +1,12 @@
 <div id="sideBar">
-  <div id="surfer-sidebar-spacer"></div>
+  <div id="photo">
+    <% if @user.image.nil? %>
+      <p class="no-photo">No Photo</p>
+      <%= link_to "Add One", edit_user_path(:id => current_user.id) %>
+    <% else %>
+      <%= image_tag current_user.image.data.url(:home_page), :alt => "user photo" %>
+    <% end %>
+  </div>
   <div id="counter">
     <% if days_until_next_reservation == -1 %>
       <span class="for">You have no upcoming reservations</span>
