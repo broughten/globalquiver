@@ -55,7 +55,6 @@ module UnavailableDatesHelper
       return days_until_mine
     end
     if (days_until_mine.nil? && !days_until_theirs.nil?)
-      puts "hi jc!! #{next_day_i_reserve_someone_elses_board.date} #{days_until_theirs} #{3.days.from_now} #{Date.today}"
       return days_until_theirs
     end
     if (days_until_mine.nil? && days_until_theirs.nil?)
