@@ -12,9 +12,9 @@
 ActiveRecord::Schema.define(:version => 20091124175701) do
 
   create_table "board_searches", :force => true do |t|
+    t.integer  "style_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "style_id"
     t.integer  "location_id"
     t.integer  "creator_id"
     t.integer  "updater_id"

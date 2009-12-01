@@ -267,13 +267,29 @@ a.call_to_action{
 
 
 /*Sidebar-------------------------------------*/
-#surfer-sidebar-spacer {
-  height:29px;
+#sidebar-spacer {
+  height:8px;
 }
+
+
+#photo{
+  height:223px;
+  width:223px;
+  background-color:#eeeeee;
+  text-align:center;
+  font-size:25px;
+
+}
+
+.no-photo {
+  padding-top:65px;
+  color:#999999;
+}
+
 
 #sideBar{
   float: right;
-  margin: 20px 20px 20px 0;
+  margin: 10px 27px 20px 0;
   width: 223px;
 }
 #counter{

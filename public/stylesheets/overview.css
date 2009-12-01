@@ -1,5 +1,6 @@
 #overview-left {
   float:left;
+  width:550px;
 }
 
 h1 {
@@ -14,6 +15,10 @@ h2 {
   margin-top:10px;
   margin-bottom:10px;
   font-size:1.5em;
+}
+
+#my-boards {
+  border-bottom:dotted 1px;
 }
 
 #my_board_reservations {

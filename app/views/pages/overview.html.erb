@@ -2,20 +2,20 @@
   <%= stylesheet_link_tag 'board', 'overview', :media => 'screen' %>
 <% end %>
 
-<% if current_user.is_a?(Surfer) %>
-<h1>What's in your quiver?</h1>
-<% else %>
-<h1>Your rental fleet</h1>
-<% end %>
-
 <div id="overview-left">
-  <div id="my_boards">
+  <% if current_user.is_a?(Surfer) %>
+    <h1>What's in your quiver?</h1>
+  <% else %>
+    <h1>Your rental fleet</h1>
+  <% end %>
+  <div id="my-boards">
     <% if current_user.is_a?(Surfer) %>
       <h2>Boards you've added to the Global Quiver</h2>
       <%if current_user.owned_boards.empty? %>
       <p>You haven't added any boards to the Global Quiver.  Maybe you don't have any extras or don't live by the coast.  But if you do have extras, please consider making the community better by
-			<%= link_to "adding one", new_board_url %>.</p>
-      
+        <%= link_to "adding one", new_board_url %>
+      </p>
+
       <% end %>
     <% else %>
       <h2>Below are the boards you are tracking via Global Quiver:</h2>
@@ -38,6 +38,9 @@
       </ul>
       <%= render :partial => "boards/board", :collection => @user.owned_boards %>
     <% end %>
+    <br/>
+    <br/>
+    <br/>
   </div>
   <% if current_user.is_a?(Surfer) %>
   <div id="my_board_reservations">

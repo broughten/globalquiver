@@ -45,10 +45,10 @@ module UnavailableDatesHelper
   end
 
   def days_until_next_reservation
-    next_day_someone_reserves_my_board = UnavailableDate.find(:first, :joins => :board, :conditions => ["date > ? AND unavailable_dates.creator_id = ? AND boards.creator_id != ?", Date.today, current_user.id, current_user.id])
-    next_day_one_of_my_boards_is_reserved = UnavailableDate.find(:first, :joins => :board, :conditions => ["date > ? AND unavailable_dates.creator_id != ? AND boards.creator_id =?", Date.today, current_user.id, current_user.id])
+    next_day_i_reserve_someone_elses_board = UnavailableDate.find(:first, :joins => :board, :order => "date", :conditions => ["date > ? AND unavailable_dates.creator_id = ? AND boards.creator_id != ?", Date.today, current_user.id, current_user.id])
+    next_day_one_of_my_boards_is_reserved = UnavailableDate.find(:first, :joins => :board, :order => "date", :conditions => ["date > ? AND unavailable_dates.creator_id != ? AND boards.creator_id =?", Date.today, current_user.id, current_user.id])
 
-    days_until_theirs = next_day_someone_reserves_my_board.date - Date.today unless next_day_someone_reserves_my_board.nil?
+    days_until_theirs = next_day_i_reserve_someone_elses_board.date - Date.today unless next_day_i_reserve_someone_elses_board.nil?
     days_until_mine = next_day_one_of_my_boards_is_reserved.date - Date.today unless next_day_one_of_my_boards_is_reserved.nil?
 
     if (days_until_theirs.nil? && !days_until_mine.nil?)
