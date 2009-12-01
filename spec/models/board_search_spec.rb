@@ -96,16 +96,5 @@ describe BoardSearch do
       result.should include(board1)
       result.should_not include(board2)
     end
-    
-    it "should not return boards that belong to the creator of the search" do
-      user  = Surfer.make()
-      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca), :creator=>user)
-      board2 = Board.make(:location=>board1.location)
-      search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
-      board_search = BoardSearch.make(:location=>search_location,:creator=>user)
-      result = board_search.execute
-      result.should_not include(board1)
-      result.should include(board2)
-    end
   end  
 end

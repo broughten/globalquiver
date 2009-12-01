@@ -10,7 +10,7 @@ class BoardSearch < ActiveRecord::Base
     boards = Array.new
     BoardLocation.find(:all, :within => self.location.search_radius, :origin => self.location.to_s).each do |board_location|
       board_location.boards.each do |board|
-        boards << board if ((self.style == nil || board.style == self.style) && self.creator != board.creator)
+        boards << board if (self.style == nil || board.style == self.style)
       end
     end
     return boards.uniq
