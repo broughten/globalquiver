@@ -13,14 +13,15 @@
     <% if current_user.is_a?(Surfer) %>
       <h2>Boards you've added to the Global Quiver</h2>
       <%if current_user.owned_boards.empty? %>
-      <p>You haven't added any boards to the Global Quiver.  Maybe you don't have any extras or don't live by the coast.  But if you do have extras, please consider making the community better by</p>
-      <%= link_to "adding one", new_board_url %>
+      <p>You haven't added any boards to the Global Quiver.  Maybe you don't have any extras or don't live by the coast.  But if you do have extras, please consider making the community better by
+			<%= link_to "adding one", new_board_url %>.</p>
+      
       <% end %>
     <% else %>
       <h2>Below are the boards you are tracking via Global Quiver:</h2>
       <%if current_user.owned_boards.empty? %>
-      <p>You haven't set up your shop on Global Quiver yet.  Get started by </p>
-      <%= link_to "adding a board.", new_board_url %>
+      <p>You haven't set up your shop on Global Quiver yet.  Get started by <%= link_to "adding a board", new_board_url %>.</p>
+      
       <% end %>
     <% end %>
     <% if !current_user.owned_boards.empty? %>
