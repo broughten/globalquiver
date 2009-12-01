@@ -67,6 +67,14 @@ table.jCalendar td.selected.dp-hover {
   background: #22D04A;
 }
 
+#calendar_key{
+	margin-bottom:15px;
+}
+
+#calendar_key td{
+	min-width:10px;
+}
+
 /* update availability */
 
 /* destroy availability */

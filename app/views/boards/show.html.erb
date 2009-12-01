@@ -99,35 +99,18 @@
 <div id="photos">
   <h2>Photos</h2>
 
+	<%(0...Board::MAX_IMAGES).each do |index|%>
   <div class="photo">
-    <% if @board.images[0].nil? %>
-      No Photo
-    <% else %>
-      <%= image_tag @board.images[0].data.url(:show_page), :alt => "image1" %>
-    <% end %>
+		<% if @board.images[index].nil? %>
+	    No Photo
+	  <% else %>
+	    <%= image_tag @board.images[index].data.url(:show_page), :alt => "Image #{index + 1}" %>
+	  <% end %>		
   </div>
-  <div class="photo">
-    <% if @board.images[1].nil? %>
-      No Photo
-    <% else %>
-      <%= image_tag @board.images[1].data.url(:show_page), :alt => "Image 2" %>
-    <% end %>
-  </div>
-  <div class="clear"></div>
-  <div class="photo">
-    <% if @board.images[2].nil? %>
-      No Photo
-    <% else %>
-      <%= image_tag @board.images[2].data.url(:show_page), :alt => "Image 3" %>
-    <% end %>
-  </div>
-  <div class="photo">
-    <% if @board.images[3].nil? %>
-      No Photo
-    <% else %>
-      <%= image_tag @board.images[3].data.url(:show_page), :alt => "Image 4" %>
-    <% end %>
-  </div>
+	<% if (index % 2 == 1) %>
+	<div class="clear"></div>
+	<% end %>		
+	<%end%>  
 </div>
 <div class="clear"></div>
 
