@@ -28,7 +28,8 @@
       </ul>
       <% @found_boards.group_by(&:creator).each do |owner, boards|  %>
         <div class="board-owner">
-          <p><span>Available from: </span><%= link_to "#{owner.full_name}", user_path(:id => owner.id) %></p>
+          <p><span>Available from: </span><%= link_to "#{owner.full_name}", user_path(:id => owner.id) %>
+            <% if current_user == owner %><span> (That's you!)</span><% end %></p>
         </div>
         <%= render :partial => "boards/board", :collection => boards %>
       <% end %>
