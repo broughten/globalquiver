@@ -63,7 +63,7 @@
   <ul>
     <li class="attr-name">Website</li>
     <li class="value">
-      <%=  @user.url %>
+      <%= link_to @user.url unless @user.url.nil?%>
     </li>
   </ul>
   <div class="clear"></div>
