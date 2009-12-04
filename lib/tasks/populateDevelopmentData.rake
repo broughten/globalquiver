@@ -56,9 +56,9 @@ namespace :db do
                 :password_confirmation=>"testing", :email=>"adminsurfer@test.com", :terms_of_service=>"true")
 
     #give Jordy, Kelly, and devSurfer images
-    create_image_for_user(jordy, './spec/fixtures/images/users/jordy.png')
-    create_image_for_user(slater, './spec/fixtures/images/users/slater.png')
-    create_image_for_user(surfer, './spec/fixtures/images/users/deSouza.png')
+    create_image_for_user(jordy, RAILS_ROOT + '/spec/fixtures/images/users/jordy.png')
+    create_image_for_user(slater, RAILS_ROOT + '/spec/fixtures/images/users/slater.png')
+    create_image_for_user(surfer, RAILS_ROOT + '/spec/fixtures/images/users/deSouza.png')
 
 
     morning = PickupTime.create(:name => "Morning")
@@ -166,7 +166,7 @@ namespace :db do
     end
     
     Board.find(:all).each_with_index do |board, index|
-      create_images_for_board(board,'./spec/fixtures/images/boards/*') if (index % 4 == 0)
+      create_images_for_board(board,RAILS_ROOT + '/spec/fixtures/images/boards/*') if (index % 4 == 0)
     end
     
     
