@@ -14,10 +14,17 @@ describe BoardsHelper do
       result.should include(@owner.full_name)      
     end
     
-    it "should return text that does include a mailto: link if the user does have a reservation" do
-      @board.stubs(:user_is_renter).returns(true)
+    it "should return text that does not include a mailto: link if the user does not have a reservation" do
+      @board.stubs(:user_is_renter).returns(false)
       result = owner_html_for(@user, @board)
-      result.should include("mailto:")   
+      result.should_not include("mailto:") 
+      result.should include(@owner.full_name)      
+    end
+    
+    it "should return text that does include a mailto: link if you don't have a current user" do
+      @board.stubs(:user_is_renter).returns(true)
+      result = owner_html_for(nil, @board)
+      result.should_not include("mailto:")   
       result.should include(@owner.full_name)   
     end
   end
