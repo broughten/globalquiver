@@ -172,4 +172,17 @@ describe Board do
     
   end
   
+  it "should be able to tell if a user has an active reservation on this board" do
+    owner = User.make()
+    other_user = User.make()
+    board = Board.make(:creator=>owner)
+    res1 = UnavailableDate.make(:creator=>other_user, :board=>board)
+    board.user_is_renter(other_user).should be_true
+    board.user_is_renter(owner).should be_false
+    
+    res1.destroy
+    board.user_is_renter(other_user).should be_false
+    
+  end
+  
 end

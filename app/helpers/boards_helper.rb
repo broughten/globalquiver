@@ -29,4 +29,12 @@ module BoardsHelper
     button_text = 'Save Board Availability' if  board.user_is_owner(user)    
     return button_text    
   end
+  
+  def owner_html_for(user, board)
+    if board.user_is_renter(user)
+      "<a href='mailto:#{h(board.creator.email)}' title='Email Me!'>#{h(board.creator.full_name)}</a>"
+    else
+     board.creator.full_name
+    end
+  end
 end

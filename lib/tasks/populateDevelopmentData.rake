@@ -165,10 +165,8 @@ namespace :db do
       board.location_id = hansensLocation.id
     end
     
-    counter = 0
-    Board.find(:all).each do |board|
-      create_images_for_board(board,'./spec/fixtures/images/boards/*') if (counter % 4 == 0)
-      counter += 1
+    Board.find(:all).each_with_index do |board, index|
+      create_images_for_board(board,'./spec/fixtures/images/boards/*') if (index % 4 == 0)
     end
     
     

@@ -147,10 +147,18 @@ class Board < ActiveRecord::Base
   end
   
   def has_location?
-    return self.location != nil;
+    self.location != nil
   end
   
   def user_is_owner(user)
     self.creator == user or self.creator.nil?
+  end
+  
+  def user_is_renter(user)
+    # tried to use self.reserved_dates.count{|reserved_date| reserved_date.creator == user}
+    # but for some reason the block wasn't getting passed into the count method like the Ruby
+    # array documentation says.  count was always returning the count of the reserved_dates
+    # collection.  I am guessing that is because is was calling ActiveRecord::Calculations::ClassMethods.count()
+    self.reserved_dates.active.count(:conditions => "creator_id = #{user.id}") > 0
   end
 end
