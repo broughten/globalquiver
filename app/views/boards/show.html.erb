@@ -2,6 +2,7 @@
   <%= stylesheet_link_tag 'board',
  	'datePicker',
  	'unavailable_dates',
+	'jquery/colorbox/colorbox',
  	:media => 'screen' %>
 	<%# All of the javascript for the date picker.  Cache these all up so they are served as one file.%>
   <%= javascript_include_tag 'jquery/date_picker/date',
@@ -9,8 +10,17 @@
 		'jquery/date_picker/datePickerMultiMonth',
 		:cache=> "cache/date_picker"%>
   <%= javascript_include_tag 'unavailable_dates/new'%>
+<%= javascript_include_tag 'jquery/colorbox/jquery.colorbox-min'%>
 
 <% end %>
+
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $(".large_board_image").colorbox();;
+  });
+
+<% end %>
+
 <h1>Board Details</h1>
 
 <div id="info-table">
@@ -104,7 +114,7 @@
 		<% if @board.images[index].nil? %>
 	    No Photo
 	  <% else %>
-	    <%= image_tag @board.images[index].data.url(:show_page), :alt => "Image #{index + 1}" %>
+	    <a class="large_board_image" href="<%= @board.images[index].data.url(:original)%>"><%= image_tag @board.images[index].data.url(:show_page), :alt => "Image #{index + 1}" %></a>
 	  <% end %>		
   </div>
 	<% if (index % 2 == 1) %>
