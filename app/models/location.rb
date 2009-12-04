@@ -8,7 +8,6 @@ class Location < ActiveRecord::Base
   validates_presence_of :locality, :region, :country 
   
   named_scope :ordered_by_desc_creation, :order => 'created_at desc'
-  
   def matches?(other_location)
     street == other_location.street && locality == other_location.locality && region == other_location.region && postal_code == other_location.postal_code && country == other_location.country
   end

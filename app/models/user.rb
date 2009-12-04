@@ -22,10 +22,14 @@ class User < ActiveRecord::Base
     'AND ud.deleted_at IS NULL ' +
     'ORDER BY ud.date'
   
+  has_many  :board_locations, :foreign_key =>"creator_id"
   has_many  :locations, :foreign_key =>"creator_id"
+
   has_one   :image, :as => :owner, :dependent => :destroy
 
-  has_one :main_location, :class_name => 'Location', :foreign_key => "creator_id", :conditions => {"locations.main = ?" => true}
+  belongs_to :location
+  belongs_to :user_location, :foreign_key => 'location_id'
+  accepts_nested_attributes_for :user_location
  
   has_and_belongs_to_many :pickup_times
 
@@ -53,7 +57,7 @@ class User < ActiveRecord::Base
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :password, :password_confirmation, :terms_of_service, :image_attributes, :description, :url, :friendly, :pickup_time_ids
+  attr_accessible :email, :password, :password_confirmation, :terms_of_service, :image_attributes, :description, :url, :friendly, :pickup_time_ids, :user_location_attributes, :location_id
   # allows for the image assocation to be created by auto assignment but you still have to 
   # add image_attributes to attr_accessible above.
   accepts_nested_attributes_for :image

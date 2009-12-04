@@ -20,7 +20,7 @@ class BoardsController < ApplicationController
     else
       # we pull up all the locations that the user has previously entered
       # because he might want to use one of these for the board he's about to enter
-      @existing_locations = current_user.locations.ordered_by_desc_creation
+      @existing_locations = current_user.board_locations.ordered_by_desc_creation
       @board = Board.new
       # allow for pictures on each board
       Board::MAX_IMAGES.times {@board.images.build}
@@ -31,10 +31,6 @@ class BoardsController < ApplicationController
     
   end
 
-  # GET /boards/1/edit
-  def edit
-    @board = Board.find(params[:id])
-  end
 
   # POST /boards
   # POST /boards.xml
@@ -46,7 +42,7 @@ class BoardsController < ApplicationController
         flash[:notice] = 'Board was successfully created.'
         format.html { redirect_to(root_path) }
       else
-        @existing_locations = current_user.locations.ordered_by_desc_creation
+        @existing_locations = current_user.board_locations.ordered_by_desc_creation
         (Board::MAX_IMAGES - @board.images.length).times {@board.images.build}
         format.html { render :action => "new" }
       end

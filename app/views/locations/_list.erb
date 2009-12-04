@@ -1,0 +1,11 @@
+<div id="location-picker">
+  <h3>Choose a location from the dropdown or enter a new one below:</h3>
+    <select id="location-selector" onchange="set_location_id(this.value)" >
+      <option value="" selected="selected" >-- Select a location --</option>
+      <% @existing_locations.each do |location| %>
+        <option value="<%= location.id %>">
+          <%= location.street %> <%= location.locality %>, <%= location.region %>
+        </option>
+      <% end %>
+    </select>
+</div>

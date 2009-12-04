@@ -30,7 +30,7 @@ class BoardLocationsController < ApplicationController
   
   private
   def init_data_for_new_view
-    @existing_locations = current_user.locations
+    @existing_locations = current_user.board_locations
     @map = GMap.new("map")
     # Use the larger pan/zoom control but disable the map type
     # selector

@@ -15,7 +15,7 @@ module Formtastic #:nodoc:
     @@collection_label_methods = %w[to_label display_name full_name name title username login value to_s]
     @@inline_order = [ :input, :hints, :errors ]
     @@file_methods = [ :file?, :public_filename ]
-    @@priority_countries = ["Australia", "Canada", "United Kingdom", "United States"]
+    @@priority_countries = ["United States", "Canada", "Australia", "United Kingdom"]
     @@i18n_lookups_by_default = false
     @@default_commit_button_accesskey = nil 
 

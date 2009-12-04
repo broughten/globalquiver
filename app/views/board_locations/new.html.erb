@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <%= GMap.header %>
   <%= @map.to_html %>
-<%= javascript_include_tag 'board_locations/new' %>
+<%= javascript_include_tag 'locations/new', 'board_locations/new' %>
 <%= stylesheet_link_tag 'location', :media => 'screen' %>
 <% end %>
 

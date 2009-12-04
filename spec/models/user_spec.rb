@@ -18,9 +18,7 @@ describe User do
       user.owned_boards.length.should == 2
     end
 
-    it "should allow one main_location" do
-      User.make().should respond_to(:main_location)
-    end
+
     
     it "should have many pickup_times" do
       User.make().should respond_to(:pickup_times)
@@ -103,13 +101,54 @@ describe User do
       renter.board_reservations.length.should == 1
     end
 
-    it "should have many locations" do
-      user = User.make()
-      Location.make(:creator=>user)
-      Location.make(:creator=>user)
-      user.locations.length.should == 2
+
+
+    describe "locations schmoekations" do
+      it "should allow one location" do
+        user = User.make()
+        location = Location.make()
+        user.location = location
+
+        #you can't access user_location when location_id is a foreign_key into something other than a user location
+        user.location.class.to_s.should eql "Location"
+        user.user_location.should be_nil
+
+        user_location = UserLocation.make()
+        user.location = user_location
+
+        #But when location_id is a foreign key into a user location, you can access it via either location, or user_location
+        user.location.class.to_s.should eql "UserLocation"
+        user.user_location.should_not be_nil
+      end
+
+      it "should allow one user location" do
+        user = User.make()
+        user_location = UserLocation.make()
+        
+        user.user_location = user_location
+        #see now we can access the user location via either accessor
+        user.location.class.to_s.should eql "UserLocation"
+        user.user_location.class.to_s.should eql "UserLocation"
+
+
+      end
+      it "should have many locations" do
+        user = User.make()
+        Location.make(:creator=>user)
+        Location.make(:creator=>user)
+        user.locations.length.should == 2
+      end
+
+      it "should have many board locations" do
+        user = User.make()
+        BoardLocation.make(:creator=>user)
+        Location.make(:creator=>user)
+        BoardLocation.make(:creator=>user)
+        Location.make(:creator=>user)
+        BoardLocation.make(:creator=>user)
+        user.board_locations.length.should == 3
+      end
     end
-    
   end
   
   describe "attribute validations" do

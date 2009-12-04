@@ -38,6 +38,8 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @existing_locations = current_user.locations
+    
     @user = current_user
   end
   

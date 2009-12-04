@@ -65,6 +65,11 @@ BoardLocation.blueprint() do
   postal_code {Sham.location_postal_code}
 end
 
+UserLocation.blueprint() do
+  street {Sham.location_street}
+  postal_code {Sham.location_postal_code}
+end
+
 SearchLocation.blueprint() do
   search_radius {100}
 end

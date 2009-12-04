@@ -29,8 +29,16 @@ root {
   font-size:2em;
 }
 
-.user-photo {
+.left-column {
   float:left;
+  width:400px;
+}
+
+.right-column {
+  float:right;
+}
+
+.user-photo {
   height:400px;
   width:400px;
   background-color:#eeeeee;
@@ -77,6 +85,11 @@ root {
   float:right;
   margin-right:40px;
 }
+
+.user-info-table li {
+  list-style:none;
+}
+
 .user-info-table h2 {
   padding-bottom:5px;
 }
@@ -115,8 +128,38 @@ root {
 
 /* edit user */
 
+#the-location {
+  padding-top:10px;
+  text-align:left;
+}
+
+#the-location p {
+  padding-left:10px;
+  margin-bottom:10px;
+  background-color:#333333;
+  color:white;
+  width:390px;
+}
+
 #show-name {
   margin-bottom:10px;
+}
+
+.address-button {
+  float:left;
+}
+
+.address-error {
+  background-color:#FFA200;
+  float:right;
+  font-size:13px;
+  height:27px;
+  margin-right:15px;
+  margin-top:10px;
+  padding-left:10px;
+  pading-right:10px;
+  padding-top:4px;
+  width:170px;
 }
 
 .user-info-table label {
@@ -160,9 +203,6 @@ root {
   height:82px;
 }
 
-#surfer_description li {
-  list-style:none;
-}
 
 .user-info-table input[type=text], .user-info-table input[type=password] {
   font-size:1.5em;
@@ -175,6 +215,67 @@ root {
   width:200px;
   border:1px solid;
   margin-bottom:1px;
+}
+
+#the-location {
+  margin-right:0px;
+}
+#the-location li {
+  width:400px;
+  margin-right:0px;
+}
+
+#the-location label {
+  width:80px;
+}
+
+#the-location input[type=text] {
+  width:270px;
+}
+
+
+#location-selector {
+  margin-left:93px;
+  margin-top:3px;
+  margin-bottom:10px;
+}
+
+
+
+#current-location {
+  text-align:left;
+  
+}
+
+#current-location p {
+  background-color:#eeeeee;
+  padding-left:10px;
+  width:390px;
+  margin-bottom:10px;
+  color:black;
+  padding-top:4px;
+  padding-bottom:4px;
+}
+#change-location-link {
+  color:#2797E6;
+  cursor:pointer;
+}
+#change-location-link:hover {
+  text-decoration:underline;
+}
+
+#address-fields select {
+  border:solid 1px;
+  width:292px;
+  height:39px;
+  font-size:15px;
+  padding-left:8px;
+  vertical-align:middle;
+}
+
+
+#location_country {
+  
 }
 
 #surfer_password_input label {
