@@ -44,6 +44,10 @@ module ApplicationHelper
        current_page?(new_session_path)      ||
        current_page?(new_user_path))
   end
+  
+  def google_analytics_id
+    APP_CONFIG['google_analytics_account']
+  end
 
   
 end
