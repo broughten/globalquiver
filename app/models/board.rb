@@ -11,7 +11,8 @@ class Board < ActiveRecord::Base
   has_many :black_out_dates, :class_name=>'UnavailableDate', :conditions=>'creator_id = #{(creator.nil?)?-1:creator.id}'
 
   validates_presence_of :maker, :style, :length, :location
-  
+  validates_numericality_of :daily_fee, :on => :create
+
   accepts_nested_attributes_for :images, :unavailable_dates, :allow_destroy => true
   
   # put all of the options for the named_scope in the lambda so they get evaluated at runtime.

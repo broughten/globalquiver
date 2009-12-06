@@ -29,10 +29,10 @@ function set_board_location_id(new_id){
 // returns the state of the optional fields
 function displayOptionalBoardFields(show){
   if (show){
-    $('#optional_fields').show();
+    $('#optional_fields').toggle(600);
     $('#visibility_indicator').text("Hide");
   }else{
-    $('#optional_fields').hide();
+    $('#optional_fields').toggle(600);
     $('#visibility_indicator').text("Show");
   }
   return show;

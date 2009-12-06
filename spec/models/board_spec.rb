@@ -79,7 +79,15 @@ describe Board do
       board.location = nil
       board.should_not be_valid
     end
-    
+
+    it "should validate numericality of daily fee" do
+      board = Board.make_unsaved()
+      board.should be_valid
+
+      board.daily_fee = "hi jc!"
+      board.should_not be_valid
+    end
+
     it "should validate length" do
       board = Board.make_unsaved(:length=>100)
       board.should be_valid

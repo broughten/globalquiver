@@ -100,6 +100,7 @@ namespace :db do
       board.length = [100, 120, 200]
       board.style_id = [longboard.id, shortboard.id, fish.id]
       board.description = Faker::Lorem.sentences(4)
+      board.daily_fee = [0,20,30,40,50]
       board.creator_id = surfer.id
       board.updater_id = surfer.id
       board.location_id = surferLocation.id
@@ -112,6 +113,7 @@ namespace :db do
       board.length = [72, 70, 100, 74]
       board.style_id = [longboard.id, shortboard.id, fish.id]
       board.description = Faker::Lorem.sentences(4)
+      board.daily_fee = [0,20,30,40,50]
       board.creator_id = slater.id
       board.updater_id = slater.id
       board.location_id = slaterLocation.id
@@ -123,6 +125,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [72, 70]
       board.style_id = [shortboard.id, fish.id]
+      board.daily_fee = [0,20,30,40,50]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = jordy.id
       board.updater_id = jordy.id
@@ -135,6 +138,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [100, 120, 200]
       board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.daily_fee = [20,30,40,50]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = shop.id
       board.updater_id = shop.id
@@ -147,6 +151,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [72, 73, 71, 70, 100, 74, 75, 76, 77, 78, 79, 80]
       board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.daily_fee = [20,30,40,50]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = killerdana.id
       board.updater_id = killerdana.id
@@ -159,6 +164,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [72, 73, 71, 70, 100, 74, 75]
       board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.daily_fee = [20,30,40,50]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = hansens.id
       board.updater_id = hansens.id

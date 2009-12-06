@@ -134,6 +134,7 @@ Board.blueprint() do
   width {2}
   thickness {5}
   style {Style.make()}
+  daily_fee {35}
   description {Sham.board_description}
   location {BoardLocation.make()}
   construction {Sham.board_construction}
