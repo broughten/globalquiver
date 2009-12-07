@@ -30,10 +30,11 @@
         <%= link_to "Calendar View" %>
       </div>
       <ul id="list-headings">
-        <li>Pic</li>
-        <li>Model</li>
+        <li class="pic">Pic</li>
+        <li class="model">Model</li>
         <li class="medium">Type</li>
         <li class="short">Length</li>
+        <li class="short">Daily Fee</li>
         <li class="short">Delete</li>
       </ul>
       <%= render :partial => "boards/board", :collection => @user.owned_boards %>
@@ -54,10 +55,11 @@
         <%= link_to "Calendar View" %>
       </div>
       <ul id="list-headings">
-        <li>Pic</li>
-        <li>Model</li>
+        <li class="pic">Pic</li>
+        <li class="model">Model</li>
         <li class="medium">Type</li>
         <li class="short">Length</li>
+        <li class="short">Daily Fee</li>
       </ul>
       <%= render :partial => "boards/board", :collection => @user.reserved_boards %>
     <% end %>

@@ -17,29 +17,52 @@
 <% end %>
   
 <ul id="list-table">
-  <li class="board-link<%=board.id%>">
-    <%= link_to "", board_path(board)%>
-    <% if board.images.first.nil? %>
-      <span class="muted-text">No Photo</span>
-    <% else %>
-      <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
-    <% end %>
+  <li class="board-link<%=board.id%> pic">
+    <p>
+      <%= link_to "", board_path(board)%>
+      <% if board.images.first.nil? %>
+        <span class="muted-text">No Photo</span>
+    
+      <% else %>
+    
+        <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
+    
+      <% end %>
+    </p>
   </li>
-  <li class="board-link<%=board.id%>">
-    <%= link_to "", board_path(board)%>
-    <%=h board.model %> by <%=h board.maker%>
+  <li class="board-link<%=board.id%> model">
+    <p>
+      <%= link_to "", board_path(board)%>
+      <%=h board.model %> by <%=h board.maker%>
+    </p>
   </li>
   <li class="board-link<%=board.id%> medium">
-    <%= link_to "", board_path(board)%>
-    <%=h board.style.name%>
+    <p>
+      <%= link_to "", board_path(board)%>
+      <%=h board.style.name%>
+    </p>
   </li>
   <li class="board-link<%=board.id%> short">
-    <%= link_to "", board_path(board)%>
-    <%=h board.length_feet%>' <%=h board.length_inches%>"
+    <p>
+      <%= link_to "", board_path(board)%>
+      <%=h board.length_feet%>' <%=h board.length_inches%>"
+    </p>
+  </li>
+  <li class="board-link<%=board.id%> short">
+    <p>
+      <%= link_to "", board_path(board)%>
+      <% if board.daily_fee == 0.00 %>
+        Free!
+      <% else %>
+        $<%= sprintf("%.2f", board.daily_fee) %>
+      <% end %>
+    </p>
   </li>
   <% if board.creator == current_user && !current_page?(:controller => 'board_searches', :action => 'show') %>
     <li class="board-delete short">
-      <%= link_to "X", board, :confirm => "Are you sure? Can't be undone.", :method=>:delete%>
+      <p>
+        <%= link_to "X", board, :confirm => "Are you sure? Can't be undone.", :method=>:delete%>
+      </p>
     </li>
   <%  end %>
 </ul>

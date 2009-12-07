@@ -29,6 +29,7 @@
 
 <div id="info-table">
   <h2>Info</h2>
+
   <ul>
     <li class="attr-name">Maker</li>
     <li class="value">
@@ -103,6 +104,18 @@
       <%=h @board.location%>
     </li>
   </ul>
+  <div id="show-daily-fee">
+    <ul>
+      <li id="money" class="attr-name">Daily Fee</li>
+      <li class="value">
+        <% if @board.daily_fee == 0.00 %>
+          Free!
+        <% else %>
+          $<%= sprintf("%.2f",@board.daily_fee) %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
   <div class="clear"></div>
   <% if !@board.description.nil? %>
   <h2>Description</h2>
