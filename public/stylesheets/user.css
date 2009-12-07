@@ -345,6 +345,11 @@ root {
   padding-left:66px;
 }
 
+.user-info-table .inline-errors {
+  color:red;
+  font-size:1.5em;
+}
+
 .submit {
   margin-top:10px;
 }
