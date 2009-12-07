@@ -1,0 +1,46 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'admin', :media => 'screen' %>
+<% end %>
+
+<h1>Admin Page: All Search Locations</h1>
+<div class="show-search-locations">
+  <table id="search-locations-table">
+    <tr class="search-locations-header">
+      <td>Street</td>
+      <td>City</td>
+      <td>State</td>
+      <td>Zip</td>
+      <td>Country</td>
+      <td>Search Radius</td>
+      <td>Delete</td>
+    </tr>
+
+  <% @search_locations.each do |search_location| %>
+    <tr>
+      <td>
+        <%= search_location.street %>
+      </td>
+      <td>
+        <%= search_location.locality %>
+      </td>
+      <td>
+        <%= search_location.region %>
+      </td>
+      <td>
+        <%= search_location.postal_code %>
+      </td>
+      <td>
+        <%= search_location.country %>
+      </td>
+      <td>
+        <%= search_location.search_radius %>
+      </td>
+      <td><%= link_to 'Delete', search_location, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'New Search Location', new_search_location_path %>
+</div>

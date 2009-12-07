@@ -6,6 +6,11 @@
       <%= f.collection_select :location_id, @search_locations, :id, :to_s, {:prompt => true} %>
     </p>
     <p>
+      <% if admin? %>
+        <%= link_to "Manage search locations", search_locations_path %>
+      <% end %>
+    </p>
+    <p>
       <%= f.label :style_id, "Style:" %>
       <%= f.collection_select :style_id, Style.all, :id, :name, {:prompt => "All"} %>
     </p>

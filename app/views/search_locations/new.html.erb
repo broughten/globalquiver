@@ -1,0 +1,22 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'admin', :media => 'screen' %>
+<% end %>
+<h1>New Search Location</h1>
+
+<div class="show-search-locations">
+  <% semantic_form_for @search_location, :url => {:action => "create" } do |form| %>
+    <div id="search-location-form"
+      <%= form.input :street, :required => false %>
+      <%= form.input :locality, :required => false, :label => "City" %>
+      <%= form.input :region, :required => false, :label => "State" %>
+      <%= form.input :postal_code, :required => false, :label => "Zip" %>
+      <%= form.input :country, :required => false %>
+      <%= form.input :search_radius, :required => false %>
+    </div>
+    <div id="save-button" class="submit">
+      <%= form.submit 'Save', :class => 'submitBtn' %>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+  <%= link_to 'Show All Search Locations', search_locations_path %>
+</div>

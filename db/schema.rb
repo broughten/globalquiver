@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091206012846) do
+ActiveRecord::Schema.define(:version => 20091207040056) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -104,14 +104,6 @@ ActiveRecord::Schema.define(:version => 20091206012846) do
     t.integer "user_id"
   end
 
-  create_table "reservations", :force => true do |t|
-    t.string   "name"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "styles", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -147,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20091206012846) do
     t.boolean  "friendly"
     t.string   "url"
     t.integer  "location_id"
+    t.boolean  "admin"
   end
 
 end

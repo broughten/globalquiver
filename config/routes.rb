@@ -1,10 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :board_searches
 
   map.resources :black_out_dates
 
   map.resources :board_locations
 
+  map.resources :search_locations
+  
   map.resources :styles
 
   map.resources :boards, :member => { :remap => :get }

@@ -15,5 +15,14 @@ module ControllerMacros
         end
       end
     end
+
+    def it_should_require_admin_for_actions(*actions)
+      actions.each do |action|
+        it "#{action} action should require admin" do
+          get action, :id => 1
+          response.should redirect_to(root_path)
+        end
+      end
+    end
   end
 end

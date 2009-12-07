@@ -40,6 +40,9 @@ namespace :db do
     #Set up User data
     surfer = Surfer.create(:first_name=>"Dev", :last_name=>"Surfer", :password=>"testing", 
       :password_confirmation=>"testing", :email=>"devsurfer@test.com", :terms_of_service=>"true")
+    #we can't actually set the admin flag with the app.  Has to be manually set in the database
+    admin = Surfer.create(:first_name=>"Admin", :last_name=>"Surfer", :password=>"testing",
+      :password_confirmation=>"testing", :email=>"admin@test.com", :terms_of_service=>"true")
     slater = Surfer.create(:first_name=>"Kelly", :last_name=>"Slater", :password=>"testing",
       :password_confirmation=>"testing", :email=>"slater@test.com", :terms_of_service=>"true")
     jordy  = Surfer.create(:first_name=>"Jordy", :last_name=>"Smith", :password=>"testing",
@@ -100,7 +103,7 @@ namespace :db do
       board.length = [100, 120, 200]
       board.style_id = [longboard.id, shortboard.id, fish.id]
       board.description = Faker::Lorem.sentences(4)
-      board.daily_fee = [0,20,30,40,50]
+      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
       board.creator_id = surfer.id
       board.updater_id = surfer.id
       board.location_id = surferLocation.id
@@ -113,7 +116,7 @@ namespace :db do
       board.length = [72, 70, 100, 74]
       board.style_id = [longboard.id, shortboard.id, fish.id]
       board.description = Faker::Lorem.sentences(4)
-      board.daily_fee = [0,20,30,40,50]
+      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
       board.creator_id = slater.id
       board.updater_id = slater.id
       board.location_id = slaterLocation.id
@@ -125,7 +128,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [72, 70]
       board.style_id = [shortboard.id, fish.id]
-      board.daily_fee = [0,20,30,40,50]
+      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = jordy.id
       board.updater_id = jordy.id
@@ -138,7 +141,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [100, 120, 200]
       board.style_id = [longboard.id, shortboard.id, fish.id]
-      board.daily_fee = [20,30,40,50]
+      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = shop.id
       board.updater_id = shop.id
@@ -151,7 +154,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [72, 73, 71, 70, 100, 74, 75, 76, 77, 78, 79, 80]
       board.style_id = [longboard.id, shortboard.id, fish.id]
-      board.daily_fee = [20,30,40,50]
+      board.daily_fee = ["$20.00","$30.00","$40.00","$50.00"]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = killerdana.id
       board.updater_id = killerdana.id
@@ -164,7 +167,7 @@ namespace :db do
       board.model = Faker::Lorem.words(1)
       board.length = [72, 73, 71, 70, 100, 74, 75]
       board.style_id = [longboard.id, shortboard.id, fish.id]
-      board.daily_fee = [20,30,40,50]
+      board.daily_fee = ["$20.00","$30.00","$40.00","$50.00"]
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = hansens.id
       board.updater_id = hansens.id

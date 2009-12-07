@@ -1,0 +1,32 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'admin', :media => 'screen' %>
+<% end %>
+<h1>Admin Page: Search Location ID <%= @search_location.id %></h1>
+<div class="show-search-locations">
+  <p>
+    Street:
+    <%= @search_location.street %>
+  </p>
+  <p>
+    City:
+    <%= @search_location.locality %>
+  </p>
+  <p>
+    State:
+    <%= @search_location.region %>
+  </p>
+  <p>
+    Zip:
+    <%= @search_location.postal_code %>
+  </p>
+  <p>
+    Country:
+    <%= @search_location.country %>
+  </p>
+  <p>
+    Country:
+    <%= @search_location.search_radius %>
+  </p>
+  <br/>
+  <%= link_to 'Show All Search Locations', search_locations_path %>
+</div>
