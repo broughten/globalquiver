@@ -16,7 +16,11 @@
 
 <% content_for :javascript do %>
   $(document).ready(function() {
-    $(".large_board_image").colorbox();;
+    $(".large_board_image").colorbox();
+    $("#how-link").click(function () {
+      $("#how-words").toggle(600);
+      return false;
+    });
   });
 
 <% end %>
@@ -128,8 +132,34 @@
   <%= f.error_messages %>
 
     <%= render :partial => '/unavailable_dates/form' %>
-    <p>
-      <%= f.submit submit_button_text_for(current_user, @board) %>
-    </p>
+    <div id="submit-reservation">
+      <p>
+        <%= f.submit submit_button_text_for(current_user, @board) %>
+        <%= link_to "What happens when I click save?", "#", :id => 'how-link' %>
+      </p>
+    </div>
+    <div id="how-words" style="display:none">
+      
+      <%  if !logged_in? %>
+        <p>
+          First you will be taken to the login screen to either login or create an account.
+        </p>
+        <br/>
+      <% end %>
+
+      <p>
+        You will get an email about the board you reserved and the dates of your
+        reservation(s). The email will have contact information for the shop or person
+        you're renting from. If you're renting from a person and not a shop, you should
+        make sure to plan a time to meet to pick up your board. Finally,
+        you'll be expected to pay for your reservation when you pickup your board. All
+        this will be repeated in the email you receive.
+      </p>
+      <br/>
+      <p>
+        Please be cool and treat other people's boards well. If you damage a board and it's your fault,
+        offer to cover repairs.
+      </p>
+    </div>
 
 <%end%>

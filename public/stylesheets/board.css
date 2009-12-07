@@ -190,5 +190,15 @@ h1 {
 }
 
 /* update boards */
+#submit-reservation {
+  margin-bottom:10px;
+}
+
+#how-words {
+  background-color:#eeeeee;
+  width:760px;
+  padding:10px 10px 10px 10px;
+  margin-bottom:10px;
+}
 
 /* destroy boards */
