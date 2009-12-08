@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  user_stamp Board, Location, UnavailableDate, BoardSearch
+  user_stamp Board, Location, UnavailableDate, BoardSearch, Reservation
 
   include AuthenticatedSystem
   helper :all # include all helpers, all the time
