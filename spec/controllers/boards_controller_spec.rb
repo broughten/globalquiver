@@ -107,19 +107,18 @@ describe BoardsController do
       end
       it "should attempt to find the board in question" do
         Board.expects(:find).returns(@temp_board)
-        post 'show', :id=>@temp_board.id
+        get 'show', :id=>@temp_board.id
         assigns[:board].should == @temp_board
       end
       
       it "should render the show view" do
-        post 'show', :id=>@temp_board.id
+        get 'show', :id=>@temp_board.id
         response.should render_template("show")
       end
     end
-  end
 
   describe "anonymous user" do
-    it_should_require_authentication_for_actions :new, :edit, :create, :update, :destroy
+    it_should_require_authentication_for_actions :new, :edit, :create, :update, :destroy, :select_reservation_dates
   end
 
 end

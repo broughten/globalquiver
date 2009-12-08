@@ -1,31 +1,14 @@
-<% if @board.user_is_owner(current_user) %>
-<h2>Which days is this board <strong>not</strong> available?</h2>
-<h3>Select the days you won't be able to rent or lend this board and click the button below.
-<br>You can always return to change these dates later.</h3>
-<% else %>
-<h2>Which days would you like to reserve this board?</h2>
-<h3>Select the days you want and click the button below.  You can cancel a reservation with at least 48 hours notice.</h3>
 
-<% end %>
-<br>
-<div id="calendar_key">
-	<table class="jCalendar">
-		<tr>
-			<td class="blackout"></td><td class="reserved"> </td> <td> Board unavailable </td>
-		</tr>
-		<tr>
-			<td class="selected"> </td> <td colspan="2"> Board reserved by you </td>
-		</tr>
-	</table>
-</div>
-<div id="multimonth">This will be replaced with the multimonth select</div>
-<script language="javascript">
-  
-  var takenDates    = <%= taken_dates_json %>;
-  var blackOutDates = <%= black_out_dates_json %>;
-  var ownerDates    = <%= owner_dates_json %>;
-  var reservedDates = <%= reserved_dates_json %>;
 
- 
-</script>
-<div style="clear:both;"></div>
+  <br>
+  <div id="multimonth">This will be replaced with the multimonth select</div>
+  <script language="javascript">
+
+    var takenDates    = <%= taken_dates_json %>;
+    var blackOutDates = <%= black_out_dates_json %>;
+    var ownerDates    = <%= owner_dates_json %>;
+    var reservedDates = <%= reserved_dates_json %>;
+
+
+  </script>
+  <div style="clear:both;"></div>

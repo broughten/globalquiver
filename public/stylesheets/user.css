@@ -157,7 +157,7 @@ root {
   margin-right:15px;
   margin-top:10px;
   padding-left:10px;
-  pading-right:10px;
+  padding-right:10px;
   padding-top:4px;
   width:170px;
 }
@@ -186,7 +186,7 @@ root {
   text-decoration:none;
 }
 
-#surfer_description_input label {
+#surfer_description_input label, #shop_description_input label {
   display:block;
   background-color:white;
   color:#555555;
@@ -198,7 +198,9 @@ root {
   height:23px;
 }
 
-#surfer_description {
+
+
+#surfer_description, #shop_description {
   width:351px;
   height:82px;
 }
@@ -273,20 +275,27 @@ root {
   vertical-align:middle;
 }
 
+#surfer_user_location_attributes_postal_code_input label,
+#shop_user_location_attributes_postal_code_input label {
+  padding-top:8px;
+  height:32px;
+  font-size:12px;
+}
+
 
 #location_country {
   
 }
 
-#surfer_password_input label {
+#surfer_password_input label, #shop_password_input label {
   height:28px;
 }
-#surfer_password_confirmation_input label {
+#surfer_password_confirmation_input label,#shop_password_confirmation_input label {
   padding-top:5px;
   height:35px;
   
 }
-#surfer_password_input {
+#surfer_password_input,#shop_password_input {
 
   height:42px;
 

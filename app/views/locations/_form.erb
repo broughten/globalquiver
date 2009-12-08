@@ -8,24 +8,12 @@
     });
 
     $("#location-submit").click(function () {
-      if(!$("#location-id").attr("value") == "") {
-        $(".street").attr('disabled', true);
-        $(".city").attr('disabled', true);
-        $(".state").attr('disabled', true);
-        $(".zip").attr('disabled', true);
-        $(".country").attr('disabled', true);
-        $("input#surfer_user_location_attributes_country").attr('disabled', true);
-        $("input#shop_user_location_attributes_country").attr('disabled', true);
-        $(".type").attr('disabled', true);
-
-      } else {
         return checkAddress(
           $(".street").attr("value") + " " +
           $(".city").attr("value") + " " +
           $(".state").attr("value") + " " +
           $(".zip").attr("value") + " " +
           $(".country").attr("value"));
-      }
     });
   });
 
@@ -35,29 +23,24 @@
 <div id="the-location" class="user-info-table">
   <h2>Your Location</h2>
   <% if @user.is_a?(Surfer) %>
-    <p>Note: Only your city, state and country are shared with other users unless they rent boards from you, and then they only see the 'pickup' address that you put on your boards.</p
+    <p>Note: We use your zip or postal code to share your general location (city/state/country) with other users.</p
   <% end %>
   <% if !@user.location.nil? %>
     <div id="current-location">
       <p>
-        <%= @user.location.street %> <%= @user.location.locality %>, <%= @user.location.region %>
+        Your Current Postal Code: <%= @user.location.postal_code %>
         <span id="change-location-link">&nbsp;Click to change it</span>
       </p>
     </div>
   <% end %>
   <div id="new-location" <% if !@user.location.nil? %>style='display:none'<% end %> >
-    <% if !@existing_locations.blank? %>
-      <%= render :partial => 'locations/list' %>
-      <input type="hidden" name="<%= @user.class.to_s.downcase %>[location_id]" id="location-id"/>
-    <% end %>
     <div id="address-fields">
       <% form.semantic_fields_for "user_location_attributes" do |fields| %>
-        <%= fields.input :street, :required => false, :input_html => { :class => 'street' } %>
-        <%= fields.input :locality, :label => "City", :input_html => { :class => 'city' }  %>
-        <%= fields.input :region, :label => "State", :required => false, :input_html => { :class => 'state' }  %>
-        <%= fields.input :postal_code, :label => "Zip", :required => false, :input_html => { :class => 'zip' }  %>
-        <%= fields.input :country, :as => :country, :input_html => { :class => 'country' } %>
-        <%= fields.input :country, :as => :hidden, :input_html => { :class => 'hidden-country' } %>
+        <%= fields.input :street, :as => :hidden, :required => false, :input_html => { :class => 'street' } %>
+        <%= fields.input :locality, :as => :hidden, :label => "City", :input_html => { :class => 'city' }  %>
+        <%= fields.input :region, :as => :hidden, :label => "State", :required => false, :input_html => { :class => 'state' }  %>
+        <%= fields.input :postal_code, :label => "Your zip or postal code", :required => false, :input_html => { :class => 'zip' }  %>
+        <%= fields.input :country, :as => :hidden, :input_html => { :class => 'hidden-country' }, :value => 'USA' %>
       <% end %>
     </div>
     <div class="clear"></div>

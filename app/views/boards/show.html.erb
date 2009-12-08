@@ -26,6 +26,11 @@
 <% end %>
 
 <h1>Board Details</h1>
+<% if !@board.user_is_owner(current_user) %>
+  <div id="rent-me-link">
+    <%= link_to "Reserve", new_reservation_path(:id => @board.id) %>
+  </div>
+<% end %>
 
 <div id="info-table">
   <h2>Info</h2>
@@ -141,38 +146,24 @@
 </div>
 <div class="clear"></div>
 
-<% form_for @board, :html => {:multipart => true } do |f| %>
-  <%= f.error_messages %>
 
-    <%= render :partial => '/unavailable_dates/form' %>
-    <div id="submit-reservation">
-      <p>
-        <%= f.submit submit_button_text_for(current_user, @board) %>
-        <%= link_to "What happens when I click save?", "#", :id => 'how-link' %>
-      </p>
-    </div>
-    <div id="how-words" style="display:none">
-      
-      <%  if !logged_in? %>
+  <% if @board.user_is_owner(current_user) %>
+    <% if @board.user_is_owner(current_user) %>
+      <h2>Which days is this board <strong>not</strong> available?</h2>
+      <h3>Select the days you won't be able to rent or lend this board and click the button below.
+      <br>You can always return to change these dates later.</h3>
+    <% else %>
+      <h2>Which days would you like to reserve this board?</h2>
+      <h3>Select the days you want and click the button below.  You can cancel a reservation with at least 48 hours notice.</h3>
+    <% end %>
+    <% form_for @board do |f| %>
+      <%= f.error_messages %>
+      <%= render :partial => '/unavailable_dates/form' %>
+      <div id="submit-reservation">
         <p>
-          First you will be taken to the login screen to either login or create an account.
+          <%= f.submit submit_button_text_for(current_user, @board) %>
         </p>
-        <br/>
-      <% end %>
+      </div>
+    <% end %>
+  <% end %>
 
-      <p>
-        You will get an email about the board you reserved and the dates of your
-        reservation(s). The email will have contact information for the shop or person
-        you're renting from. If you're renting from a person and not a shop, you should
-        make sure to plan a time to meet to pick up your board. Finally,
-        you'll be expected to pay for your reservation when you pickup your board. All
-        this will be repeated in the email you receive.
-      </p>
-      <br/>
-      <p>
-        Please be cool and treat other people's boards well. If you damage a board and it's your fault,
-        offer to cover repairs.
-      </p>
-    </div>
-
-<%end%>

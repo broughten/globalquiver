@@ -7,6 +7,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :board_locations
 
   map.resources :search_locations
+
+  map.resources :reservations
   
   map.resources :styles
 
@@ -25,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
     m.login  '/login',  :action => 'new'
     m.logout '/logout', :action => 'destroy'
   end
-
+  
   map.root :controller => 'pages', :action => 'show', :id => 'home'
 
   map.connect ':controller/:action/:id'

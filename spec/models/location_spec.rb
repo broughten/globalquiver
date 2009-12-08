@@ -5,10 +5,7 @@ describe Location do
   it "should create a new instance from blueprint" do
     Location.make().should be_valid 
   end
-  
-  describe "validations" do
-    it_should_validate_presence_for_attributes Location.make_unsaved(), :locality, :region, :country
-  end
+
   
   describe "associations" do
     it "should belong to a creator" do

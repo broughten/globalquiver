@@ -5,7 +5,6 @@ class Location < ActiveRecord::Base
   set_inheritance_column 'object_type'
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
-  validates_presence_of :locality, :region, :country 
   
   named_scope :ordered_by_desc_creation, :order => 'created_at desc'
   def matches?(other_location)
