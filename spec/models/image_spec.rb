@@ -21,5 +21,7 @@ describe Image do
   
   describe "validations" do
     it "should validate that the data file content type is jpeg or png" 
+    
+    it "should validate that the data file size is less than 600K" 
   end
 end

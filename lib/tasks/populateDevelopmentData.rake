@@ -32,7 +32,7 @@ namespace :db do
     require 'fileutils'
     
     #Clear out the tables
-    [User, Board, Location, Style, Image, Geocode, Geocoding].each(&:delete_all)
+    [User, Board, Location, Style, Image, Geocode, Geocoding,PickupTime].each(&:delete_all)
     
     #Clear out the images folder to remove old images
    FileUtils.rm_rf RAILS_ROOT + '/public/system/datas/'

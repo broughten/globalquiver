@@ -175,3 +175,10 @@ end
 PickupTime.blueprint() do
   name {Sham.name}
 end
+
+Reservation.blueprint() do
+  board {Board.make()}
+  creator {User.make()}
+  updater {creator}
+  dates {[UnavailableDate.make()]}
+end
