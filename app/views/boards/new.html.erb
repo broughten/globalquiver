@@ -65,8 +65,8 @@
       <input id="board_length_inches" name="board[length_inches]" size="4" type="text" title="inches" />
     </p>
     <p>
-      <%= f.label :style_name, "Style: (for example, thruster, fish, longboard.  If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
-      <%= f.text_field :style_name, :autocomplete =>"off" %>
+      <%= f.label :style_id, "Style: (If you're not sure, then just tell us if it's a longboard or shortboard)" %><span id="required_star">*</span><br />
+      <%= f.collection_select :style_id, Style.all, :id, :name, {:prompt => ""} %>
     </p>
     <p><a id='hide_show_optional_fields' href="javascript:void(0)"><span id='visibility_indicator'>Show</span> Optional Fields</a>
     </p>
