@@ -26,8 +26,11 @@ function set_board_location_id(new_id){
 }
 
 function toggleOptionalBoardFields(){
-	$('#optional_fields').toggle(600);
-  if ($('#optional_fields').is(':visible')){
+	$('#optional_fields').toggle(600,setVisibilityIndicator);
+}
+
+function setVisibilityIndicator(){
+	if ($('#optional_fields').is(':visible')){
     $('#visibility_indicator').text("Hide");
   }else{
     $('#visibility_indicator').text("Show");
