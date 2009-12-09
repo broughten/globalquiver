@@ -237,6 +237,7 @@ a.call_to_action{
   display: inline;
   margin: 0px 0 302px 0;
   padding-left: 20px;
+	padding-right: 20px;
   padding-top:15px;
   background:#ffffff;
   border: solid 3px;
@@ -424,7 +425,7 @@ float:left;
 
 .flash {
   margin-bottom:5px;
-  width: 200px;
+  /*width: 200px;*/
 }
 
 .flash p {
@@ -436,17 +437,11 @@ float:left;
   text-align:center;
 }
 
-
-
-
-
-
 /*Footer--------------------------*/
 
 #footer {
   padding: 0px 0 0 0;
   border-top: 1px solid #d5d0c1;
-  margin: 0 20px 0 0;
 }
 
 #footer ul{
