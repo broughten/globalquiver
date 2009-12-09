@@ -15,6 +15,18 @@ describe ReservationsController do
       login_as_user
     end
 
+    describe "new reservation" do
+      before(:each) do
+        @temp_board = Board.make()
+      end
+
+      it "should attempt to find the board in question" do
+        Board.expects(:find).returns(@temp_board)
+        get 'new', :id=>@temp_board.id
+        assigns[:board].should == @temp_board
+      end
+    end
+  end
   end
 
   describe "anonymous user" do

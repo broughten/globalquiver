@@ -1,0 +1,23 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'datePicker', 'unavailable_dates', :media => 'screen' %>
+	<%# All of the javascript for the date picker.  Cache these all up so they are served as one file.%>
+  <%= javascript_include_tag 'jquery/date_picker/date',
+		'jquery/date_picker/jquery.datePicker',
+		'jquery/date_picker/datePickerMultiMonth',
+		:cache=> "cache/date_picker"%>
+  <%= javascript_include_tag 'unavailable_dates/new'%>
+
+<% end %>
+<h1>Choose Reservation Dates</h1>
+<h2>Which days would you like to reserve this board?</h2>
+<h3>Select the days you want and click the button below. You can cancel a reservation with at least 48 hours notice.</h3>
+
+<% form_for @board do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => '/unavailable_dates/form' %>
+  <div id="submit-reservation">
+    <p>
+      <%= f.submit submit_button_text_for(current_user, @board) %>
+    </p>
+  </div>
+<% end %>

@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
 
   # GET /boards/new
   def new
-    @board = Board.find(params[:id])
+    @board = Board.find(params[:board_id])
     @reservation = Reservation.new
 
     respond_to do |format|
