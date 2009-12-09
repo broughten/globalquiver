@@ -216,8 +216,9 @@ h1 {
 }
 
 /* update boards */
-#submit-reservation {
+#submit-reservation, #submit-unavailable-dates, #submit-new-board {
   margin-bottom:10px;
+	margin-top:10px;
 }
 
 #how-words {

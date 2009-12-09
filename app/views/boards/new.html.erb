@@ -152,10 +152,9 @@
     </p>
   </div>
   <%= render :partial => '/unavailable_dates/form' %>
-  <br>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+  <div id="submit-unavailable-dates">
+    <%= f.submit 'Create', :class => 'submitBtn' %>
+  </div>
 </div>
   
 <% end %>

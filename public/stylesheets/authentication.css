@@ -37,13 +37,12 @@
 
 .submitBtn{
   background-color:#5ACBF9;
-  width: 65px;
   height: 30px;
   color: #494444;
   font-weight: bold;
   font-size:15px;
   border: none;
-  padding: 0 0 4px 0;
+  padding: 0 7px 4px 7px;
   cursor: pointer;
   margin-bottom:10px;
 }

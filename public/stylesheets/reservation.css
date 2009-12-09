@@ -1,0 +1,9 @@
+#submit-reservation{
+	float:right;
+	margin-top:10px;
+}
+
+#cancel-reservation{
+	float:left;
+	margin-top:10px;
+}

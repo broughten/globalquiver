@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'datePicker', 'unavailable_dates', :media => 'screen' %>
+  <%= stylesheet_link_tag 'datePicker', 'unavailable_dates', 'reservation', :media => 'screen' %>
 	<%# All of the javascript for the date picker.  Cache these all up so they are served as one file.%>
   <%= javascript_include_tag 'jquery/date_picker/date',
 		'jquery/date_picker/jquery.datePicker',
@@ -15,9 +15,14 @@
 <% form_for @board do |f| %>
   <%= f.error_messages %>
   <%= render :partial => '/unavailable_dates/form' %>
+	<div id="cancel-reservation">
+    <p>
+      <%= link_to "Cancel Reservation", board_path(@board) %>
+    </p>
+  </div>
   <div id="submit-reservation">
     <p>
-      <%= f.submit submit_button_text_for(current_user, @board) %>
+      <%= f.submit "Submit Reservation", :class => 'submitBtn' %>
     </p>
   </div>
 <% end %>

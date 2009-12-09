@@ -153,9 +153,9 @@
     <% form_for @board do |f| %>
       <%= f.error_messages %>
       <%= render :partial => '/unavailable_dates/form' %>
-      <div id="submit-reservation">
+      <div id="submit-unavailable-dates">
         <p>
-          <%= f.submit submit_button_text_for(current_user, @board) %>
+          <%= f.submit "Save Unavailable Dates", :class => 'submitBtn' %>
         </p>
       </div>
     <% end %>
