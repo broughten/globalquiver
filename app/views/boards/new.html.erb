@@ -19,7 +19,6 @@
 
 <% content_for :javascript do %>
   $(document).ready(function() {
-    $("input#board_style_name").autocomplete("/autocomplete/style/name");
     $('input[title!=""]').hint();
   });
 
@@ -70,7 +69,7 @@
     </p>
     <p><a id='hide_show_optional_fields' href="javascript:void(0)"><span id='visibility_indicator'>Show</span> Optional Fields</a>
     </p>
-    <div id="optional_fields">
+    <div id="optional_fields" style="display:none;">
       <p>
         <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
         <input id="board_width_inches" name="board[width_inches]" size="4" type="text" title="inches" />

@@ -5,9 +5,8 @@ $(document).ready(function(){
   if(new_id > 0){
     set_board_location_id(new_id);
   }
-  optional_fields_visible = displayOptionalBoardFields(false);
   $('#hide_show_optional_fields').click(function(){
-    optional_fields_visible = displayOptionalBoardFields(!optional_fields_visible);
+    toggleOptionalBoardFields();
   });
 
   $(':input',document.new_board_form).bind("change", function() {
@@ -26,16 +25,13 @@ function set_board_location_id(new_id){
   $("#board_location_id").val(new_id);
 }
 
-// returns the state of the optional fields
-function displayOptionalBoardFields(show){
-  if (show){
-    $('#optional_fields').toggle(600);
+function toggleOptionalBoardFields(){
+	$('#optional_fields').toggle(600);
+  if ($('#optional_fields').is(':visible')){
     $('#visibility_indicator').text("Hide");
   }else{
-    $('#optional_fields').toggle(600);
     $('#visibility_indicator').text("Show");
   }
-  return show;
 }
 
 
