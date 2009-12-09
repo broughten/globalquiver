@@ -95,8 +95,18 @@ describe BoardsController do
     end
     
     describe "PUT /boards (aka update board)" do
-      it "should have some specs so define them here" do
-        
+      before(:each) do
+        @temp_board = Board.make()
+      end
+      it "should try to update the attributes of the board" do
+        Board.any_instance.expects(:update_attributes)
+        post 'update', :id=>@temp_board.id
+      end
+      it "should return back to the show view with a flash message after successful update" do
+        Board.any_instance.stubs(:valid?).returns(true)
+        post 'update', :id=>@temp_board.id
+        flash[:notice].should_not be_nil
+        response.should render_template('show')
       end
     end
     
