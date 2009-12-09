@@ -98,7 +98,8 @@
   <ul>
     <li class="attr-name">Board Owner</li>
     <li class="value">
-			<%= owner_html_for(current_user, @board) %>
+			<%= link_to h(@board.creator.full_name), user_path(@board.creator) %>
+			<%=%>
     </li>
   </ul>
   <div class="clear"></div>
@@ -106,7 +107,7 @@
   <ul>
     <li class="attr-name">Location</li>
     <li class="value">
-      <%=h @board.location%>
+      <%=h @board.location %>
     </li>
   </ul>
   <div id="show-daily-fee">
