@@ -116,6 +116,7 @@ describe BoardsController do
         response.should render_template("show")
       end
     end
+  end
 
   describe "anonymous user" do
     it_should_require_authentication_for_actions :new, :edit, :create, :update, :destroy, :select_reservation_dates

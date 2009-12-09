@@ -27,7 +27,6 @@ describe ReservationsController do
       end
     end
   end
-  end
 
   describe "anonymous user" do
     it_should_require_authentication_for_actions
