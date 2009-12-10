@@ -425,16 +425,22 @@ float:left;
 
 .flash {
   margin-bottom:5px;
-  /*width: 200px;*/
 }
 
 .flash p {
-  background: #AEFF4B;
-  border-top: 1px solid #6AA02D;
-  border-bottom: 1px solid #6AA02D;
+  /*border-top: 1px solid #6AA02D;
+  border-bottom: 1px solid #6AA02D;*/
   color: #2a2829;
   padding: 4px;
   text-align:center;
+}
+
+#flash_error p{
+	background: #ec1111;
+}
+
+#flash_notice p{
+	background: #AEFF4B;
 }
 
 /*Footer--------------------------*/
