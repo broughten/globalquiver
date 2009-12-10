@@ -79,10 +79,10 @@ function addReservationDate(date, td, status) {
     //date to the form.
     $("#dates").append(
     "<input type='hidden' " +
-    "name='reservation[unavailable_dates_attributes][][id]");
+    "name='reservation[dates_attributes][][id]");
     $("#dates").append(
     "<input type='hidden' " +
-    "name='reservation[unavailable_dates_attributes][][date]' " +
+    "name='reservation[dates_attributes][][date]' " +
     "value='" + date.asString() + "'>");
 		//add the li
 		$("#dates ul").append("<li id='" + date.asString("yyyy-mm-dd") + "'>" + date.asString() + "</li>");

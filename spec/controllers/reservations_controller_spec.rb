@@ -48,7 +48,6 @@ describe ReservationsController do
       before(:each) do
         @test_board = Board.make()
       end
-      it "should pass parameters to new reservation"
       
       it "should find the existing board and assign it to the reservation" do
         post "create", :board_id=>@test_board.id
@@ -60,7 +59,7 @@ describe ReservationsController do
         post "create", :board_id=>@test_board.id
         assigns[:reservation].should_not be_new_record
         flash[:notice].should_not be_nil
-        response.should redirect_to(reservation_path)
+        response.should redirect_to(reservation_path(assigns[:reservation]))
       end
       
       describe "save failure" do
@@ -68,7 +67,7 @@ describe ReservationsController do
           Board.any_instance.stubs(:valid?).returns(false)
         end
         it "should render new template with a flash error message" do
-          post 'create'
+          post 'create', :board_id=>@test_board.id
           assigns[:reservation].should be_new_record
           flash[:error].should_not be_nil
           response.should render_template('new')
