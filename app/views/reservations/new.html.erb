@@ -5,24 +5,34 @@
 		'jquery/date_picker/jquery.datePicker',
 		'jquery/date_picker/datePickerMultiMonth',
 		:cache=> "cache/date_picker"%>
-  <%= javascript_include_tag 'unavailable_dates/new'%>
+  <%= javascript_include_tag 'reservations/new'%>
 
 <% end %>
-<h1>Choose Reservation Dates</h1>
-<h2>Which days would you like to reserve this board?</h2>
-<h3>Select the days you want and click the button below. You can cancel a reservation with at least 48 hours notice.</h3>
+<div id="date-selection">
+	<h1>1) Choose Reservation Dates</h1>
+	<h2>Which days would you like to reserve this board?</h2>
+	<h3>Select the days you want by clicking the dates in the calendar below.</h3>
+	<%= render :partial => '/unavailable_dates/form', :locals => { :board => @reservation.board } %>
+</div>
+<div id="reservation-confirmation">
+	<% form_for :reservation, :url => { :action => "create" } do |f| %>
+  	<%= f.error_messages %>
+  	<h1>2) Confirm and submit your reservation</h1>
+		<div id="board-info">
+			<h2><%= h@reservation.board.model %> by <%= h@reservation.board.maker %></h2>
+			<h2>Board Owner: <%= h@reservation.board.creator.full_name %></h2>
+		</div>
+		<div id="dates">
+			<h2>Dates:</h2>
+			<ul>
+			</ul>
+		</div>
+		<div id="cancel-reservation">
+      	<%= link_to "Cancel Reservation", board_path(@reservation.board) %>
+  		</div>
+  		<div id="submit-reservation">
+      	<%= f.submit "Submit Reservation", :class => 'submitBtn' %>
+  		</div>
+		<% end %>
+</div>
 
-<% form_for @board do |f| %>
-  <%= f.error_messages %>
-  <%= render :partial => '/unavailable_dates/form' %>
-	<div id="cancel-reservation">
-    <p>
-      <%= link_to "Cancel Reservation", board_path(@board) %>
-    </p>
-  </div>
-  <div id="submit-reservation">
-    <p>
-      <%= f.submit "Submit Reservation", :class => 'submitBtn' %>
-    </p>
-  </div>
-<% end %>

@@ -7,3 +7,25 @@
 	float:left;
 	margin-top:10px;
 }
+
+#date-selection{
+	border-bottom: #000000 1px dotted;
+	padding-bottom:10px;
+	margin-bottom:10px;
+}
+
+#date-selection h1, #reservation-confirmation h1{
+	margin-bottom:10px;
+}
+
+#dates ul{
+	margin-top:5px;
+}
+
+#dates li{
+	font-size:2em;
+}
+
+#board-info h2{
+	margin: 5px 0 5px 0;
+}

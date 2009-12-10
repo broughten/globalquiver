@@ -7,12 +7,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :board_locations
 
   map.resources :search_locations
-
-  map.resources :reservations, :path_prefix => '/boards/:board_id'
   
   map.resources :styles
 
-  map.resources :boards, :member => { :remap => :get }
+  #example of a nested route.  It is shallow so we can use /reservations
+  map.resources :boards, :shallow => true do |board|
+    board.resources :reservations
+  end
 
   map.resources :users
 
