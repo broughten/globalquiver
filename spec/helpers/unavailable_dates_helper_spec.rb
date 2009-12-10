@@ -59,7 +59,7 @@ describe UnavailableDatesHelper do
     describe "taken_dates_json" do
       it "should return null if reserved_dates is blank" do
         @board = Board.make()
-        taken_dates_json.should eql("null")
+        taken_dates_json_for(@board).should eql("null")
       end
 
       it "should return a json list of reserved dates for this board created by users other than the current user" do
@@ -82,7 +82,7 @@ describe UnavailableDatesHelper do
         UnavailableDate.make(:date => 8.days.from_now, :creator => @yet_another_person, :board => @board)
         UnavailableDate.make(:date => 10.days.from_now, :creator => @yet_another_person, :board => @board)
 
-        ActiveSupport::JSON.decode(taken_dates_json).length.should == 4
+        ActiveSupport::JSON.decode(taken_dates_json_for(@board)).length.should == 4
 
       end
     end
@@ -90,7 +90,7 @@ describe UnavailableDatesHelper do
     describe "black_out_dates_json" do
       it "should return null if reserved_dates is blank" do
         @board = Board.make()
-        black_out_dates_json.should eql("null")
+        black_out_dates_json_for(@board).should eql("null")
       end
 
       it "should return a json list of blackout dates for this board created by users other than the current user" do
@@ -112,14 +112,14 @@ describe UnavailableDatesHelper do
         UnavailableDate.make(:date => 6.days.from_now, :creator => @someone_else, :board => @board)
         UnavailableDate.make(:date => 8.days.from_now, :creator => @someone_else, :board => @board)
 
-        ActiveSupport::JSON.decode(black_out_dates_json).length.should == 3
+        ActiveSupport::JSON.decode(black_out_dates_json_for(@board)).length.should == 3
       end
     end
 
     describe "owner_dates_json" do
       it "should return null if reserved_dates is blank" do
         @board = Board.make()
-        owner_dates_json.should eql("null")
+        owner_dates_json_for(@board).should eql("null")
       end
 
       it "should return a json list of blackout dates for this board created by the current user" do
@@ -138,14 +138,14 @@ describe UnavailableDatesHelper do
         UnavailableDate.make(:date => 6.days.from_now, :creator => @someone_else, :board => @board)
         UnavailableDate.make(:date => 8.days.from_now, :creator => @someone_else, :board => @board)
 
-        ActiveSupport::JSON.decode(owner_dates_json).length.should == 2
+        ActiveSupport::JSON.decode(owner_dates_json_for(@board)).length.should == 2
       end
     end
 
     describe "reserved_dates_json" do
       it "should return null if reserved_dates is blank" do
         @board = Board.make()
-        reserved_dates_json.should eql("null")
+        reserved_dates_json_for(@board).should eql("null")
       end
 
       it "should return a json list of reserved dates for this board created by the current user" do
@@ -168,7 +168,7 @@ describe UnavailableDatesHelper do
         UnavailableDate.make(:date => 8.days.from_now, :creator => @yet_another_person, :board => @board)
         UnavailableDate.make(:date => 10.days.from_now, :creator => @yet_another_person, :board => @board)
 
-        ActiveSupport::JSON.decode(reserved_dates_json).length.should == 5
+        ActiveSupport::JSON.decode(reserved_dates_json_for(@board)).length.should == 5
       end
     end
   end

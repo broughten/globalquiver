@@ -6,40 +6,39 @@ module UnavailableDatesHelper
     end
     dates
   end
-
-
-  def taken_dates_json
-    if (@board.reserved_dates.blank?)
+  
+  def taken_dates_json_for(board)
+    if (board.reserved_dates.blank?)
       return 'null'
     else
-      takens = @board.reserved_dates.not_created_by(current_user).active
+      takens = board.reserved_dates.not_created_by(current_user).active
       takens.to_json
     end
   end
 
-  def black_out_dates_json
-    if (@board.black_out_dates.blank?)
+  def black_out_dates_json_for(board)
+    if (board.black_out_dates.blank?)
       return 'null'
     else
-      black_outs = @board.black_out_dates.not_created_by(current_user).active
+      black_outs = board.black_out_dates.not_created_by(current_user).active
       black_outs.to_json
     end
   end
 
-  def owner_dates_json
-    if (@board.black_out_dates.blank?)
+  def owner_dates_json_for(board)
+    if (board.black_out_dates.blank?)
       return 'null'
     else
-      black_outs = @board.black_out_dates.created_by(current_user).active
+      black_outs = board.black_out_dates.created_by(current_user).active
       black_outs.to_json
     end
   end
 
-  def reserved_dates_json
-    if (@board.reserved_dates.blank?)
+  def reserved_dates_json_for(board)
+    if (board.reserved_dates.blank?)
       return 'null'
     else
-      reservations = @board.reserved_dates.created_by(current_user).active
+      reservations = board.reserved_dates.created_by(current_user).active
       reservations.to_json
     end   
   end

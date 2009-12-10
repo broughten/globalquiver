@@ -152,7 +152,7 @@
     <br>You can always return to change these dates later.</h3>
     <% form_for @board do |f| %>
       <%= f.error_messages %>
-      <%= render :partial => '/unavailable_dates/form' %>
+      <%= render :partial => '/unavailable_dates/form', :locals => { :board => @board } %>
       <div id="submit-unavailable-dates">
         <p>
           <%= f.submit "Save Dates", :class => 'submitBtn' %>

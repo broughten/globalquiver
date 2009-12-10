@@ -150,7 +150,7 @@
        You can always return to change these dates later.
     </p>
   </div>
-  <%= render :partial => '/unavailable_dates/form' %>
+  <%= render :partial => '/unavailable_dates/form', :locals => { :board => @board } %>
   <div id="submit-unavailable-dates">
     <%= f.submit 'Create', :class => 'submitBtn' %>
   </div>
