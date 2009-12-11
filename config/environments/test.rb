@@ -31,7 +31,6 @@ config.gem "rspec", :lib => false
 config.gem "rspec-rails", :lib => false
 config.gem "webrat", :lib => false
 config.gem "machinist", :lib => false, :source => "http://gemcutter.org"
-config.gem "faker", :lib => false
 config.gem 'mocha'
 config.gem 'launchy', :lib => false
 config.gem "ZenTest" #Gives us access to autospec.
