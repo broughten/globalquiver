@@ -45,7 +45,7 @@ function unavailableDates($td, thisDate, month, year)
   if (reservedDates != null) {
     for (i = 0; i < reservedDates.length; i++) {
       if (checkDate == reservedDates[i].unavailable_date.date) {
-        $td.addClass('disabled blackout');
+        $td.addClass('disabled reserved');
       }
     }
   }
@@ -111,10 +111,10 @@ function addFormField(date, td, status) {
  }
 
  function getUnavailableDateId(unavailableDate) {
-   if (reservedDates != null) {
-     for (var i = 0; i < reservedDates.length; i++) {
-       if (reservedDates[i].unavailable_date.date == unavailableDate) {
-         return reservedDates[i].unavailable_date.id;
+   if (blackOutDates != null) {
+     for (var i = 0; i < blackOutDates.length; i++) {
+       if (blackOutDates[i].unavailable_date.date == unavailableDate) {
+         return blackOutDates[i].unavailable_date.id;
        }
      }
    }
@@ -122,9 +122,9 @@ function addFormField(date, td, status) {
  }
 
  function dateIsAlredyUnavailable(possiblyAlreadyUnavailableDate) {
-   if (reservedDates != null) {
-     for (var i = 0; i < reservedDates.length; i++) {
-       if (reservedDates[i].unavailable_date.date == possiblyAlreadyUnavailableDate) {
+   if (blackOutDates != null) {
+     for (var i = 0; i < blackOutDates.length; i++) {
+       if (blackOutDates[i].unavailable_date.date == possiblyAlreadyUnavailableDate) {
          return true;
        }
      }
