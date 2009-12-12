@@ -56,7 +56,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.update_attributes(params[:board])
         flash[:notice] = 'Board was successfully updated.'
-        format.html { render :action => "show" }
+        format.html { redirect_to(@board) }
       else
         format.html { render :action => "show" }
       end

@@ -102,11 +102,11 @@ describe BoardsController do
         Board.any_instance.expects(:update_attributes)
         post 'update', :id=>@temp_board.id
       end
-      it "should return back to the show view with a flash message after successful update" do
+      it "should redirect to the show view with a flash message after successful update" do
         Board.any_instance.stubs(:valid?).returns(true)
         post 'update', :id=>@temp_board.id
         flash[:notice].should_not be_nil
-        response.should render_template('show')
+        response.should redirect_to(board_path(@temp_board))
       end
     end
     
