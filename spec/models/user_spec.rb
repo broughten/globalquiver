@@ -25,6 +25,15 @@ describe User do
     it "should have many pickup_times" do
       User.make().should respond_to(:pickup_times)
     end
+    
+    it "should allow you to find all reservations for owned boards" do
+      owner1 = User.make()
+      reservation = Reservation.make(:board=>Board.make(:creator=>owner1))
+      owner2 = User.make()
+      owner1.reservations_for_owned_boards.should include(reservation)
+      owner1.reservations_for_owned_boards.count.should == 1
+      owner2.reservations_for_owned_boards.should be_empty
+    end
 
     describe "locations schmoekations" do
       it "should allow one location" do
@@ -129,6 +138,8 @@ describe User do
     user = User.make()
     user.full_name.should == ""
   end
+  
+  
   
 #  it "should allow you to find all users with boards that have reservation dates created in the past day" do
 #    board_owner = User.make()
