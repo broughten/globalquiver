@@ -83,7 +83,7 @@
 </div>
 <div class="clear"></div>
 <div class="user-boards">
-  <% if !@user.owned_boards.empty? %>
+  <% if !@user.boards.empty? %>
     <h2>Boards</h2>
     <ul id="list-headings">
       <li>Pic</li>
@@ -94,7 +94,7 @@
         <li class="short">Delete</li>
       <% end %>
     </ul>
-    <%= render :partial => "boards/board", :collection => @user.owned_boards %>
+    <%= render :partial => "boards/board", :collection => @user.boards %>
   <% end %>
 </div>
 

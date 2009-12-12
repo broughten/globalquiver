@@ -1,13 +1,13 @@
 class UnavailableDate < ActiveRecord::Base
-  belongs_to :board
+  belongs_to :parent, :polymorphic => true
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
 
 
-  validates_uniqueness_of :date, :scope => :board_id,
+  validates_uniqueness_of :date, :scope => [:parent_id, :parent_type],
     :message => 'This board was already unavailable on the selected date.'
 
-  validates_is_after :date
+  validates_is_after :date # makes sure the date is in the future
 
   validates_presence_of :date
   
@@ -34,7 +34,7 @@ class UnavailableDate < ActiveRecord::Base
     # we need to check to see if there is a soft deleted record in the
     # db and delete it so the validation are OK
     # there should be only one
-    found_records = UnavailableDate.all(:conditions => ["board_id = ? AND date = ? AND deleted_at IS NOT ?", self.board_id, self.date, nil]) 
+    found_records = UnavailableDate.all(:conditions => ["parent_id = ? AND date = ? AND deleted_at IS NOT ?", self.parent_id, self.date, nil]) 
     found_records.each {|record| record.delete}
   end
   

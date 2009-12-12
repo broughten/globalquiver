@@ -157,7 +157,6 @@ Image.blueprint() do
 end
 
 UnavailableDate.blueprint() do
-  board {Board.make()}
   date Sham.future_date
   creator {User.make()}
   updater {creator}
@@ -180,5 +179,5 @@ Reservation.blueprint() do
   board {Board.make()}
   creator {User.make()}
   updater {creator}
-  dates {[UnavailableDate.make()]}
+  reservation_dates {[UnavailableDate.make()]}
 end

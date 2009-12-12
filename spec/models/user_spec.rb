@@ -15,93 +15,16 @@ describe User do
       user = User.make()
       Board.make(:creator=>user)
       Board.make(:creator=>user)
-      user.owned_boards.length.should == 2
+      user.boards.length.should == 2
     end
 
-
+    it "should have many reservations" do
+      User.make_unsaved().should respond_to(:reservations)
+    end
     
     it "should have many pickup_times" do
       User.make().should respond_to(:pickup_times)
     end
-
-    it "should have many reserved boards" do
-      renter = User.make()
-      owner1 = User.make()
-      owner2 = User.make()
-      board1 = Board.make(:creator => owner1)
-      board2 = Board.make(:creator => owner2)
-      board3 = Board.make(:creator => owner2)
-      #make one board of our own just to make sure it doesn't get included
-      trickBoard = Board.make(:creator => renter)
-      trickReservation  = UnavailableDate.make(:creator => renter, :board => trickBoard)
-      trickReservation2 = UnavailableDate.make(:creator => renter, :board => trickBoard)
-      trickReservation3 = UnavailableDate.make(:creator => renter, :board => trickBoard)
-
-      #make more than one reservation on a couple of the boards to make sure
-      #we only get back actual boards and not one item for each reserved day
-      reservation1 = UnavailableDate.make(:creator => renter, :board => board1)
-      reservation2 = UnavailableDate.make(:creator => renter, :board => board1)
-      reservation3 = UnavailableDate.make(:creator => renter, :board => board2)
-      reservation4 = UnavailableDate.make(:creator => renter, :board => board3)
-      reservation5 = UnavailableDate.make(:creator => renter, :board => board3)
-      reservation6 = UnavailableDate.make(:creator => renter, :board => board3)
-      #so after all that, my renter should have three different boards he reserved.
-      renter.reserved_boards.length.should == 3
-    end
-    
-    it "should only show reserved boards with active unavailable dates" do
-      renter = User.make()
-      owner1 = User.make()
-      board1 = Board.make(:creator => owner1)
-      board2 = Board.make(:creator => owner1)
-      # make up the reservations
-      reservation1 = UnavailableDate.make(:creator => renter, :board => board1, :deleted_at=>Time.now.utc)
-      reservation2 = UnavailableDate.make(:creator => renter, :board => board2)
-      #so after all that, my renter should have one different board he reserved because board1 has only deleted dates.
-      renter.reserved_boards.should_not include(board1)
-      renter.reserved_boards.should include(board2)
-    end
-
-    it "should have many board reservations" do
-      renter = User.make()
-      owner1 = User.make()
-      owner2 = User.make()
-      board1 = Board.make(:creator => owner1)
-      board2 = Board.make(:creator => owner2)
-      board3 = Board.make(:creator => owner2)
-      #make one board of our own just to make sure it doesn't get included
-      trickBoard = Board.make(:creator => renter)
-      trickReservation  = UnavailableDate.make(:creator => renter, :board => trickBoard)
-      trickReservation2 = UnavailableDate.make(:creator => renter, :board => trickBoard)
-      trickReservation3 = UnavailableDate.make(:creator => renter, :board => trickBoard)
-
-      #make more than one reservation on a couple of the boards to make sure
-      #we get back one item for each reserved day
-      reservation1 = UnavailableDate.make(:creator => renter, :board => board1)
-      reservation2 = UnavailableDate.make(:creator => renter, :board => board1)
-      reservation3 = UnavailableDate.make(:creator => renter, :board => board2)
-      reservation4 = UnavailableDate.make(:creator => renter, :board => board3)
-      reservation5 = UnavailableDate.make(:creator => renter, :board => board3)
-      reservation6 = UnavailableDate.make(:creator => renter, :board => board3)
-      #so after all that, my renter should have 6 days worth or reserved boards.
-      renter.board_reservations.length.should == 6
-    end
-    
-    it "should only return board reservations that are not deleted" do
-      renter = User.make()
-      owner1 = User.make()
-      board1 = Board.make(:creator => owner1)
-
-      #make more than one reservation on a couple of the boards to make sure
-      #we get back one item for each reserved day
-      reservation1 = UnavailableDate.make(:creator => renter, :board => board1)
-      reservation2 = UnavailableDate.make(:creator => renter, :board => board1, :deleted_at=>Time.now.utc)
-      #so after all that, my renter should have 1 days worth or reserved boards because the 
-      # second one is deleted.
-      renter.board_reservations.length.should == 1
-    end
-
-
 
     describe "locations schmoekations" do
       it "should allow one location" do
@@ -207,70 +130,69 @@ describe User do
     user.full_name.should == ""
   end
   
-  it "should allow you to find all users with boards that have reservation dates created in the past day" do
-    board_owner = User.make()
-    board1 = make_board_with_unavailable_dates(:creator=>board_owner)
-    another_board_owner = User.make()
-    board2 = make_board_with_unavailable_dates(:creator=>another_board_owner)
-    reservation1 = UnavailableDate.make()
-    board1.unavailable_dates << reservation1
-    User.has_boards_with_reservation_date_changes_since(1.day.ago).should include(board_owner)
-    User.has_boards_with_reservation_date_changes_since(1.day.ago).should_not include(another_board_owner)
-    User.all.should include(board_owner)
-    User.all.should include(another_board_owner)
+#  it "should allow you to find all users with boards that have reservation dates created in the past day" do
+#    board_owner = User.make()
+#    board1 = make_board_with_unavailable_dates(:creator=>board_owner)
+#    another_board_owner = User.make()
+#    board2 = make_board_with_unavailable_dates(:creator=>another_board_owner)
+#    reservation1 = UnavailableDate.make()
+#    board1.unavailable_dates << reservation1
+#    User.has_boards_with_reservation_date_changes_since(1.day.ago).should include(board_owner)
+#    User.has_boards_with_reservation_date_changes_since(1.day.ago).should_not include(another_board_owner)
+#    User.all.should include(board_owner)
+#    User.all.should include(another_board_owner)
     
-    reservation1.created_at = 2.days.ago
-    reservation1.save
-    User.has_boards_with_reservation_date_changes_since(1.day.ago).should_not include(board_owner)
-  end
+#    reservation1.created_at = 2.days.ago
+#    reservation1.save
+#    User.has_boards_with_reservation_date_changes_since(1.day.ago).should_not include(board_owner)
+#  end
   
-  it "should allow you to send an email to all users who have boards with new reservations made within the past day" do
-    board_owner = User.make()
-    board1 = Board.make(:creator=>board_owner)
-    board2 = Board.make(:creator=>board_owner)
-    another_board_owner = User.make()
-    board3 = make_board_with_unavailable_dates(:creator=>another_board_owner)
-    reservation1 = UnavailableDate.make()
-    board1.unavailable_dates << reservation1
-    ActionMailer::Base.deliveries.clear
-    User.send_reservation_status_change_update
+  # it "should allow you to send an email to all board owners who have boards with new reservations" do
+  #   board_owner = User.make()
+  #   board1 = Board.make(:creator=>board_owner)
+  #   board2 = Board.make(:creator=>board_owner)
+  #   reservation1 = Reservation.make(:board=>board1)
+  #   reservation2 = Reservation.make(:board=>board1, :created_at=>2.days.ago)
+  #   
+  #    ActionMailer::Base.deliveries.clear
+  #   User.send_reservation_status_change_update(1.day.ago)
+  #   # you should only have one email to board_owner
+  #   ActionMailer::Base.deliveries.length.should == 1
+  #   email = ActionMailer::Base.deliveries.first
+  #   # that email should contain only dates for board1
+  #   email.body.should contain(board1.maker)
+  #   email.body.should_not contain(board2.maker)
+  #   
+  #   #push back the creation of the reservation
+  #   reservation1.created_at = 2.days.ago
+  #   reservation1.save
+  #   ActionMailer::Base.deliveries.clear
+  #   User.send_reservation_status_change_update(1.day.ago)
+  #   ActionMailer::Base.deliveries.length.should == 0
+  # end
+  
+#  it "should allow you to send an email to all users who have boards with deleted reservations made within the past day" do
+#    board_owner = User.make()
+#    board1 = Board.make(:creator=>board_owner)
+#    board2 = Board.make(:creator=>board_owner)
+#    another_board_owner = User.make()
+#    board3 = make_board_with_unavailable_dates(:creator=>another_board_owner)
+#    reservation1 = UnavailableDate.make(:deleted_at=>Time.now.utc)
+#    board1.unavailable_dates << reservation1
+#    ActionMailer::Base.deliveries.clear
+#    User.send_reservation_status_change_update
     # you should only have one email to board_owner
-    ActionMailer::Base.deliveries.length.should == 1
-    email = ActionMailer::Base.deliveries.first
+#    ActionMailer::Base.deliveries.length.should == 1
+#    email = ActionMailer::Base.deliveries.first
     # that email should contain only dates for board1
-    email.body.should contain(board1.maker)
-    email.body.should_not contain(board2.maker)
+#    email.body.should contain(board1.maker)
+#    email.body.should_not contain(board2.maker)
     
     #push back the creation of the reservation
-    reservation1.created_at = 2.days.ago
-    reservation1.save
-    ActionMailer::Base.deliveries.clear
-    User.send_reservation_status_change_update
-    ActionMailer::Base.deliveries.length.should == 0
-  end
-  
-  it "should allow you to send an email to all users who have boards with deleted reservations made within the past day" do
-    board_owner = User.make()
-    board1 = Board.make(:creator=>board_owner)
-    board2 = Board.make(:creator=>board_owner)
-    another_board_owner = User.make()
-    board3 = make_board_with_unavailable_dates(:creator=>another_board_owner)
-    reservation1 = UnavailableDate.make(:deleted_at=>Time.now.utc)
-    board1.unavailable_dates << reservation1
-    ActionMailer::Base.deliveries.clear
-    User.send_reservation_status_change_update
-    # you should only have one email to board_owner
-    ActionMailer::Base.deliveries.length.should == 1
-    email = ActionMailer::Base.deliveries.first
-    # that email should contain only dates for board1
-    email.body.should contain(board1.maker)
-    email.body.should_not contain(board2.maker)
-    
-    #push back the creation of the reservation
-    reservation1.deleted_at = 2.days.ago
-    reservation1.save
-    ActionMailer::Base.deliveries.clear
-    User.send_reservation_status_change_update
-    ActionMailer::Base.deliveries.length.should == 0
-  end
+#    reservation1.deleted_at = 2.days.ago
+#    reservation1.save
+#    ActionMailer::Base.deliveries.clear
+#    User.send_reservation_status_change_update
+#    ActionMailer::Base.deliveries.length.should == 0
+#  end
 end

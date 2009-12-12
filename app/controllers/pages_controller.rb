@@ -7,7 +7,6 @@ class PagesController < ApplicationController
   def show
     @title = "Global Quiver / #{params[:id]}"
     if (params[:id].downcase == 'home') && (logged_in?)
-      @user = current_user
       render :template => "pages/overview"
     else
       render :template => current_page

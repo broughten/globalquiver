@@ -4,21 +4,20 @@ class Board < ActiveRecord::Base
   belongs_to :location, :class_name => 'BoardLocation'
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
-  has_many :images, :as => :owner, :dependent => :destroy
-  has_many :unavailable_dates
-  #note: learned out to create associations below from http://www.dweebd.com/ruby/has_many-with-arguments/
-  has_many :reserved_dates, :class_name=>'UnavailableDate', :conditions=> 'creator_id != #{(creator.nil?)?-1:creator.id}'
-  has_many :black_out_dates, :class_name=>'UnavailableDate', :conditions=>'creator_id = #{(creator.nil?)?-1:creator.id}'
+  has_many :images, :as => :owner
+  has_many :reservations
+  has_many :reserved_dates, :through=>:reservations, :source=>:reservation_dates
+  has_many :black_out_dates, :class_name=>'UnavailableDate', :as=> :parent
 
   validates_presence_of :maker, :style, :length, :location
   validates_numericality_of :daily_fee, :on => :create
 
-  accepts_nested_attributes_for :images, :unavailable_dates, :allow_destroy => true
+  accepts_nested_attributes_for :images, :black_out_dates
   
   # put all of the options for the named_scope in the lambda so they get evaluated at runtime.
-  named_scope :with_new_reserved_dates_since, lambda { |time| {:joins => :unavailable_dates, :conditions => ['unavailable_dates.created_at > ? AND unavailable_dates.creator_id != boards.creator_id AND unavailable_dates.deleted_at IS ?', time, nil]} }
+  #named_scope :with_new_reservations_since, lambda { |time| {:conditions => ['unavailable_dates.created_at > ? AND unavailable_dates.creator_id != boards.creator_id AND unavailable_dates.deleted_at IS ?', time, nil]} }
 
-  named_scope :with_deleted_reserved_dates_since, lambda { |time| {:joins => :unavailable_dates, :conditions => ['unavailable_dates.creator_id != boards.creator_id AND unavailable_dates.deleted_at > ?', time]} }
+  #named_scope :with_deleted_reservations_since, lambda { |time| {:joins => :unavailable_dates, :conditions => ['unavailable_dates.creator_id != boards.creator_id AND unavailable_dates.deleted_at > ?', time]} }
   
   MAX_IMAGES = 4
   
@@ -156,10 +155,6 @@ class Board < ActiveRecord::Base
   end
   
   def user_is_renter(user)
-    # tried to use self.reserved_dates.count{|reserved_date| reserved_date.creator == user}
-    # but for some reason the block wasn't getting passed into the count method like the Ruby
-    # array documentation says.  count was always returning the count of the reserved_dates
-    # collection.  I am guessing that is because is was calling ActiveRecord::Calculations::ClassMethods.count()
-    self.reserved_dates.active.count(:conditions => "creator_id = #{user.id}") > 0
+    self.reservations.for_user(user).count > 0
   end
 end

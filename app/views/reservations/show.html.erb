@@ -1,1 +1,6 @@
-Show reservation page.
+<%= h @reservation.board.maker%><br/>
+<%= h @reservation.board.model%><br/>
+
+<%@reservation.reservation_dates.each do |reservation_date|%>
+	<%= h reservation_date.date%><br/>
+<%end%>

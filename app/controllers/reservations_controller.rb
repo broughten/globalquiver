@@ -30,4 +30,13 @@ class ReservationsController < ApplicationController
       end
     end
   end
+  
+  # GET /reservations/1
+  def show
+    @reservation = Reservation.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+    end
+  end
 end

@@ -1,6 +1,6 @@
 <div id="sideBar">
   <div id="photo">
-    <% if @user.image.nil? %>
+    <% if current_user.image.nil? %>
       <p class="no-photo">No Photo</p>
       <%= link_to "Add One", edit_user_path(:id => current_user.id) %>
     <% else %>

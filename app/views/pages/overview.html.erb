@@ -11,7 +11,7 @@
   <div id="my-boards">
     <% if current_user.is_a?(Surfer) %>
       <h2>Boards you've added to the Global Quiver</h2>
-      <%if current_user.owned_boards.empty? %>
+      <%if current_user.boards.empty? %>
       <p>You haven't added any boards to the Global Quiver.  Maybe you don't have any extras or don't live by the coast.  But if you do have extras, please consider making the community better by
         <%= link_to "adding one", new_board_url %>
       </p>
@@ -19,12 +19,11 @@
       <% end %>
     <% else %>
       <h2>Below are the boards you are tracking via Global Quiver:</h2>
-      <%if current_user.owned_boards.empty? %>
+      <%if current_user.boards.empty? %>
       <p>You haven't set up your shop on Global Quiver yet.  Get started by <%= link_to "adding a board", new_board_url %>.</p>
-      
       <% end %>
     <% end %>
-    <% if !current_user.owned_boards.empty? %>
+    <% if !current_user.boards.empty? %>
       <div class="view-tabs">
         <%= link_to "Board View" %> |
         <%= link_to "Calendar View" %>
@@ -37,7 +36,7 @@
         <li class="short">Daily Fee</li>
         <li class="short">Delete</li>
       </ul>
-      <%= render :partial => "boards/board", :collection => @user.owned_boards %>
+      <%= render :partial => "boards/board", :collection => current_user.boards %>
     <% end %>
     <br/>
     <br/>
@@ -45,13 +44,12 @@
   </div>
   <% if current_user.is_a?(Surfer) %>
   <div id="my_board_reservations">
-    <h2>Boards you've reserved in the Global Quiver</h2>
-    <%if current_user.reserved_boards.empty? %>
+    <h2>Reservations for boards in the Global Quiver</h2>
+    <%if current_user.reservations.empty? %>
       <p>You don't have any board reservations yet.  Get started by <%= link_to "finding a board.", new_board_search_url %></p>
     <% end %>
-    <% if !current_user.reserved_boards.empty? %>
+    <% if !current_user.reservations.empty? %>
       <div class="view-tabs">
-        <%= link_to "Board View" %> |
         <%= link_to "Calendar View" %>
       </div>
       <ul id="list-headings">
@@ -61,7 +59,7 @@
         <li class="short">Length</li>
         <li class="short">Daily Fee</li>
       </ul>
-      <%= render :partial => "boards/board", :collection => @user.reserved_boards %>
+      <%= render :partial => "reservations/reservation", :collection => current_user.reservations %>
     <% end %>
   </div>
   <% end %>

@@ -37,41 +37,25 @@ $(function()
     );
   });
 
-function unavailableDates($td, thisDate, month, year)
-{
-	checkDate = thisDate.asString('yyyy-mm-dd');
-	if (ownerDates != null) {
-		for (i = 0; i < ownerDates.length; i++) {
-			if (checkDate == ownerDates[i].unavailable_date.date) {
-				// the disabled class prevents the user from being able to select the element.
-				$td.addClass('selected');
-			}
-		}
+	function unavailableDates($td, thisDate, month, year)
+	{
+		// block out all of the dates this board is unavailable
+	  checkDate = thisDate.asString('yyyy-mm-dd');
+	  if (reservedDates != null) {
+	    for (i = 0; i < reservedDates.length; i++) {
+	      if (checkDate == reservedDates[i].unavailable_date.date) {
+	        $td.addClass('disabled blackout');
+	      }
+	    }
+	  }
+	  if (blackOutDates != null) {
+	    for (i = 0; i < blackOutDates.length; i++) {
+	      if (checkDate == blackOutDates[i].unavailable_date.date) {
+					$td.addClass('disabled blackout');
+	      }
+	    }
+	  }
 	}
-	if (reservedDates != null) {
-		for (i = 0; i < reservedDates.length; i++) {
-			if (checkDate == reservedDates[i].unavailable_date.date) {
-				$td.addClass('selected');
-			}
-		}
-	}
-	if (blackOutDates != null) {
-		for (i = 0; i < blackOutDates.length; i++) {
-			if (checkDate == blackOutDates[i].unavailable_date.date) {
-				// the disabled class prevents the user from being able to select the element.
-				$td.addClass('disabled blackout');
-			}
-		}
-	}
-	if (takenDates != null) {
-		for (i = 0; i < takenDates.length; i++) {
-			if (checkDate == takenDates[i].unavailable_date.date) {
-				$td.addClass('disabled blackout');
-			}
-		}
-	}
-}
-
 function addReservationDate(date, td, status) {
 	if (status) {
 		//A date has been selected in the calendar
@@ -79,10 +63,10 @@ function addReservationDate(date, td, status) {
     //date to the form.
     $("#dates").append(
     "<input type='hidden' " +
-    "name='reservation[dates_attributes][][id]");
+    "name='reservation[reservation_dates_attributes][][id]");
     $("#dates").append(
     "<input type='hidden' " +
-    "name='reservation[dates_attributes][][date]' " +
+    "name='reservation[reservation_dates_attributes][][date]' " +
     "value='" + date.asString() + "'>");
 		//add the li
 		$("#dates ul").append("<li id='" + date.asString("yyyy-mm-dd") + "'>" + date.asString() + "</li>");

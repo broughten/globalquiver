@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091208210342) do
+ActiveRecord::Schema.define(:version => 20091210235607) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20091208210342) do
   end
 
   create_table "unavailable_dates", :force => true do |t|
-    t.integer  "board_id"
+    t.integer  "parent_id"
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -127,9 +127,10 @@ ActiveRecord::Schema.define(:version => 20091208210342) do
     t.integer  "updater_id"
     t.datetime "deleted_at"
     t.integer  "reservation_id"
+    t.string   "parent_type"
   end
 
-  add_index "unavailable_dates", ["board_id", "date"], :name => "index_black_out_dates_on_board_id_and_date", :unique => true
+  add_index "unavailable_dates", ["parent_id", "date"], :name => "index_black_out_dates_on_board_id_and_date", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

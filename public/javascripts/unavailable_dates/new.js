@@ -42,18 +42,10 @@ $(function()
 function unavailableDates($td, thisDate, month, year)
 {
   checkDate = thisDate.asString('yyyy-mm-dd');
-  if (ownerDates != null) {
-    for (i = 0; i < ownerDates.length; i++) {
-      if (checkDate == ownerDates[i].unavailable_date.date) {
-        // the disabled class prevents the user from being able to select the element.
-        $td.addClass('selected');
-      }
-    }
-  }
   if (reservedDates != null) {
     for (i = 0; i < reservedDates.length; i++) {
       if (checkDate == reservedDates[i].unavailable_date.date) {
-        $td.addClass('selected');
+        $td.addClass('disabled blackout');
       }
     }
   }
@@ -61,20 +53,11 @@ function unavailableDates($td, thisDate, month, year)
     for (i = 0; i < blackOutDates.length; i++) {
       if (checkDate == blackOutDates[i].unavailable_date.date) {
         // the disabled class prevents the user from being able to select the element.
-        $td.addClass('disabled blackout');
+				$td.addClass('selected');
       }
     }
   }
-  if (takenDates != null) {
-      for (i = 0; i < takenDates.length; i++) {
-      if (checkDate == takenDates[i].unavailable_date.date) {
-        $td.addClass('disabled reserved');
-      }
-    }
-  }
-
-  
- }
+}
 
 
 
@@ -97,10 +80,10 @@ function addFormField(date, td, status) {
       //date to the form.
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[unavailable_dates_attributes][][id]");
+      "name='board[black_out_dates_attributes][][id]");
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[unavailable_dates_attributes][][date]' " +
+      "name='board[black_out_dates_attributes][][date]' " +
       "value='" + date.asString() + "'>");
     }
   } else {
@@ -109,11 +92,11 @@ function addFormField(date, td, status) {
       //this creates an hidden input with the date marked for removal
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[unavailable_dates_attributes][][id]' " +
+      "name='board[black_out_dates_attributes][][id]' " +
       "value='" + getUnavailableDateId(date.asString('yyyy-mm-dd')) +"'>");
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[unavailable_dates_attributes][][_delete]' " +
+      "name='board[black_out_dates_attributes][][_delete]' " +
       "value='1'>");
     } else {
       //and if the date was just chosen during this session and later
@@ -135,14 +118,6 @@ function addFormField(date, td, status) {
        }
      }
    }
-   if (ownerDates != null) {
-     for (var i = 0; i < ownerDates.length; i++) {
-       if (ownerDates[i].unavailable_date.date == unavailableDate) {
-         return ownerDates[i].unavailable_date.id;
-       }
-     } 
-   }
-
    return null;
  }
 
@@ -150,13 +125,6 @@ function addFormField(date, td, status) {
    if (reservedDates != null) {
      for (var i = 0; i < reservedDates.length; i++) {
        if (reservedDates[i].unavailable_date.date == possiblyAlreadyUnavailableDate) {
-         return true;
-       }
-     }
-   }
-   if (ownerDates != null) {
-     for (var i = 0; i < ownerDates.length; i++) {
-       if (ownerDates[i].unavailable_date.date == possiblyAlreadyUnavailableDate) {
          return true;
        }
      }

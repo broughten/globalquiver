@@ -73,11 +73,28 @@ describe ReservationsController do
           response.should render_template('new')
         end
       end
-    end
-  end
+    end # of create reservation
+    
+    describe "Get /reservations/:id (aka show reservation)" do
+      before(:each) do
+        @reservation = Reservation.make()
+      end
+      
+      it "should attempt to find the reservation in question" do
+        Reservation.expects(:find).returns(@reservation)
+        get 'show', :id=>@reservation.id
+        assigns[:reservation].should == @reservation
+      end
+      
+      it "should render the show view" do
+        get 'show', :id=>@reservation.id
+        response.should render_template("show")
+      end
+    end # of show reservation
+  end # of authenticated user
 
   describe "anonymous user" do
-    it_should_require_authentication_for_actions :new, :create
+    it_should_require_authentication_for_actions :new, :create, :show
   end
 
 end

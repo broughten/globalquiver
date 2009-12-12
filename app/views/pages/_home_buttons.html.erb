@@ -19,18 +19,18 @@
 <div id="button-area">
   <div id="main-buttons">
     <div id="new-board-button" class="home-page-button">
-      <%= link_to "Add your boards to the Global Quiver", new_board_url, :id=>"rent" %>
+      <%= link_to "Add your boards to the Global Quiver", new_board_path, :id=>"rent" %>
     </div>
     <div id="board-search-button" class="home-page-button">
-      <a id="boards" href="http://localhost:3000/board_searches/new">Reserve boards in<br/>the Global Quiver</a>
+			<%= link_to "Reserve boards in<br/>the Global Quiver", new_board_search_path, :id=>"boards" %>
     </div>
   </div>
   <div id="question-buttons">
     <div id="why-button" class="home-page-button">
-      <a id="why" href="http://localhost:3000/pages/why">Why would I lend<br/>my board?</a>
+			<%= link_to "Why would I lend<br/>my board?", page_path('why'), :id=>"why" %>
     </div>
     <div id="how-button" class="home-page-button">
-      <%= link_to "How does this work?", page_url('how'), :id=>"how" %>
+      <%= link_to "How does this work?", page_path('how'), :id=>"how" %>
     </div>
   </div>
 </div>

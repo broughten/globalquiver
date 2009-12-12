@@ -24,9 +24,4 @@ describe "/board_locations/new" do
       form.should have_selector("input[type=submit]") 
     end
   end
-    
-    it "should have a link to use an existing address when creating a new board if current_user has locations" 
-    
-    it "should not have a link to use an existing address when creating a new board if current_user does not have locations" 
-    
-  end
+end

@@ -8,7 +8,8 @@ describe UnavailableDate do
 
   describe "associations" do
     it "should have a board" do
-      UnavailableDate.make().should respond_to(:board)
+      UnavailableDate.make().should respond_to(:parent)
+      UnavailableDate.make().should respond_to(:parent_id)
     end
 
     it "should have a date" do
@@ -17,18 +18,20 @@ describe UnavailableDate do
 
     it "should have a creator" do
       UnavailableDate.make().should respond_to(:creator)
+      UnavailableDate.make().should respond_to(:creator_id)
     end
 
     it "should have a updater" do
       UnavailableDate.make().should respond_to(:updater)
+      UnavailableDate.make().should respond_to(:updater_id)
     end
   end
 
   describe "validations" do
-    it "should not allow two entries with the same date and board id" do
+    it "should not allow two entries with the same date, parent id and parent type" do
       unavailabledate = UnavailableDate.make
 
-      unavailabledate2 = UnavailableDate.make_unsaved(:board_id => unavailabledate.board_id, :date => unavailabledate.date)
+      unavailabledate2 = UnavailableDate.make_unsaved(:parent => unavailabledate.parent, :date => unavailabledate.date)
 
       unavailabledate2.should_not be_valid
     end
@@ -116,8 +119,8 @@ describe UnavailableDate do
   end
   
   it "should allow new record to be added if a deleted one exists" do
-    deleted_unavailable_date = UnavailableDate.make(:deleted)
-    new_unavailable_date = UnavailableDate.make(:board =>deleted_unavailable_date.board, :date=>deleted_unavailable_date.date)
+    deleted_unavailable_date = UnavailableDate.make(:deleted, :parent=>Board.make())
+    new_unavailable_date = UnavailableDate.make(:parent =>deleted_unavailable_date.parent, :date=>deleted_unavailable_date.date)
     new_unavailable_date.should_not be_new_record
   end
 
