@@ -23,7 +23,8 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.save
         flash[:notice] = "Reservation created.  Thank you."
-        format.html { redirect_to(@reservation) }
+        UserMailer.deliver_board_renter_reservation_details(@reservation)
+        format.html { redirect_to(reservation_path(@reservation)) }
       else
         flash[:error] = "Error saving reservation. Please try again."
         format.html { render :action => "new" }

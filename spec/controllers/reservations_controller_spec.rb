@@ -54,8 +54,9 @@ describe ReservationsController do
         assigns[:reservation].board.should == @test_board
       end
       
-      it "should render the show template with a flash message on successful save" do
+      it "should render the show template with a flash message and an email on successful save" do
         Reservation.any_instance.stubs(:valid?).returns(true)
+        UserMailer.expects(:deliver_board_renter_reservation_details)
         post "create", :board_id=>@test_board.id
         assigns[:reservation].should_not be_new_record
         flash[:notice].should_not be_nil
