@@ -1,0 +1,21 @@
+
+		<%@added_reservations.each do |reservation|%>
+		<h1>New reservation for <%=h reservation.board.model%> by <%=h reservation.board.maker%></h1>
+
+		<ul>
+			<% reservation.reservation_dates.each do |reservation_date| %>
+				<li><%=h reservation_date.date%></li>
+			<% end %>
+		</ul>
+		<%end%>
+		<%@deleted_reservations.each do |reservation|%>
+		<h1>Deleted reservation for <%=h reservation.board.model%> by <%=h reservation.board.maker%></h1>
+
+		<ul>
+			<% reservation.reservation_dates.each do |reservation_date| %>
+				<li><%=h reservation_date.date%></li>
+			<% end %>
+		</ul>
+		<%end%>
+	</body>
+</html>

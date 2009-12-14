@@ -141,46 +141,45 @@ describe User do
   
   
   
-#  it "should allow you to find all users with boards that have reservation dates created in the past day" do
-#    board_owner = User.make()
-#    board1 = make_board_with_unavailable_dates(:creator=>board_owner)
-#    another_board_owner = User.make()
-#    board2 = make_board_with_unavailable_dates(:creator=>another_board_owner)
-#    reservation1 = UnavailableDate.make()
-#    board1.unavailable_dates << reservation1
-#    User.has_boards_with_reservation_date_changes_since(1.day.ago).should include(board_owner)
-#    User.has_boards_with_reservation_date_changes_since(1.day.ago).should_not include(another_board_owner)
-#    User.all.should include(board_owner)
-#    User.all.should include(another_board_owner)
-    
-#    reservation1.created_at = 2.days.ago
-#    reservation1.save
-#    User.has_boards_with_reservation_date_changes_since(1.day.ago).should_not include(board_owner)
-#  end
+  it "should allow you to find all users with reservations on owned boards that have been created since a certain date" do
+    board_owner = User.make()
+    board1 = Board.make(:creator=>board_owner)
+    another_board_owner = User.make()
+    board2 = Board.make(:creator=>another_board_owner)
+    reservation1 = Reservation.make(:board=>board1)
+    User.with_reservations_for_owned_boards_created_since(1.day.ago).should include(board_owner)
+    User.with_reservations_for_owned_boards_created_since(1.day.ago).should_not include(another_board_owner)
+    User.all.should include(board_owner)
+    User.all.should include(another_board_owner)
   
-  # it "should allow you to send an email to all board owners who have boards with new reservations" do
-  #   board_owner = User.make()
-  #   board1 = Board.make(:creator=>board_owner)
-  #   board2 = Board.make(:creator=>board_owner)
-  #   reservation1 = Reservation.make(:board=>board1)
-  #   reservation2 = Reservation.make(:board=>board1, :created_at=>2.days.ago)
-  #   
-  #    ActionMailer::Base.deliveries.clear
-  #   User.send_reservation_status_change_update(1.day.ago)
-  #   # you should only have one email to board_owner
-  #   ActionMailer::Base.deliveries.length.should == 1
-  #   email = ActionMailer::Base.deliveries.first
-  #   # that email should contain only dates for board1
-  #   email.body.should contain(board1.maker)
-  #   email.body.should_not contain(board2.maker)
-  #   
-  #   #push back the creation of the reservation
-  #   reservation1.created_at = 2.days.ago
-  #   reservation1.save
-  #   ActionMailer::Base.deliveries.clear
-  #   User.send_reservation_status_change_update(1.day.ago)
-  #   ActionMailer::Base.deliveries.length.should == 0
-  # end
+    reservation1.created_at = 2.days.ago
+    reservation1.save
+    User.with_reservations_for_owned_boards_created_since(1.day.ago).should_not include(board_owner)
+  end
+  
+  it "should allow you to send an email to all board owners who have boards with new reservations" do
+    board_owner = User.make()
+    board1 = Board.make(:creator=>board_owner)
+    board2 = Board.make(:creator=>board_owner)
+    reservation1 = Reservation.make(:board=>board1)
+    reservation2 = Reservation.make(:board=>board1, :created_at=>2.days.ago)
+    
+     ActionMailer::Base.deliveries.clear
+    User.send_reservation_update_for_owned_boards(1.day.ago)
+    # you should only have one email to board_owner
+    ActionMailer::Base.deliveries.length.should == 1
+    email = ActionMailer::Base.deliveries.first
+    # that email should contain only dates for board1
+    email.body.should contain(board1.maker)
+    email.body.should_not contain(board2.maker)
+    
+    #push back the creation of the reservation
+    reservation1.created_at = 2.days.ago
+    reservation1.save
+    ActionMailer::Base.deliveries.clear
+    User.send_reservation_update_for_owned_boards(1.day.ago)
+    ActionMailer::Base.deliveries.length.should == 0
+  end
   
 #  it "should allow you to send an email to all users who have boards with deleted reservations made within the past day" do
 #    board_owner = User.make()
