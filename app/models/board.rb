@@ -14,10 +14,7 @@ class Board < ActiveRecord::Base
 
   accepts_nested_attributes_for :images, :black_out_dates
   
-  # put all of the options for the named_scope in the lambda so they get evaluated at runtime.
-  #named_scope :with_new_reservations_since, lambda { |time| {:conditions => ['unavailable_dates.created_at > ? AND unavailable_dates.creator_id != boards.creator_id AND unavailable_dates.deleted_at IS ?', time, nil]} }
-
-  #named_scope :with_deleted_reservations_since, lambda { |time| {:joins => :unavailable_dates, :conditions => ['unavailable_dates.creator_id != boards.creator_id AND unavailable_dates.deleted_at > ?', time]} }
+  named_scope :active, :conditions=>{:inactive=>false}
   
   MAX_IMAGES = 4
   
@@ -156,5 +153,17 @@ class Board < ActiveRecord::Base
   
   def user_is_renter(user)
     self.reservations.for_user(user).count > 0
+  end
+  
+  def active?
+    !inactive
+  end
+  
+  def deactivate
+    self.inactive = true
+  end
+  
+  def activate
+    self.inactive = false
   end
 end
