@@ -166,4 +166,13 @@ class Board < ActiveRecord::Base
   def activate
     self.inactive = false
   end
+  
+  def status
+    if self.active?
+      "Active"
+    else
+      "Inactive"
+    end
+    
+  end
 end

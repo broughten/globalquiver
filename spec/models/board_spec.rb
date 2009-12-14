@@ -179,4 +179,13 @@ describe Board do
     Board.active.should_not include board2
   end
   
+  it "should allow you to get a status string from the board" do
+    board = Board.make()
+    board.status.should == "Active"
+    
+    board.deactivate
+    board.status.should == "Inactive"
+    
+  end
+  
 end
