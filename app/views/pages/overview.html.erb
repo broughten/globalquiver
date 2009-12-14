@@ -53,11 +53,9 @@
         <%= link_to "Calendar View" %>
       </div>
       <ul id="list-headings">
-        <li class="pic">Pic</li>
-        <li class="model">Model</li>
-        <li class="medium">Type</li>
-        <li class="short">Length</li>
-        <li class="short">Daily Fee</li>
+        <li class="medium">Board</li>
+        <li class="medium">Board Owner</li>
+        <li class="medium">Start Date</li>
       </ul>
       <%= render :partial => "reservations/reservation", :collection => current_user.reservations %>
     <% end %>

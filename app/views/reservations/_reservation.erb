@@ -1,1 +1,39 @@
-Reservation details.
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $(".reservation-link<%=reservation.id%>").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+
+    $(".reservation-link<%=reservation.id%>").mouseover(function() {
+      $(".reservation-link<%=reservation.id%>").css("background-color","#C5C2C4");
+    });
+
+        $(".reservation-link<%=reservation.id%>").mouseout(function() {
+      $(".reservation-link<%=reservation.id%>").css("background-color","#eeeeee");
+    });
+    
+  });
+
+<% end %>
+
+<ul id="list-table">
+  <li class="reservation-link<%=reservation.id%> medium">
+    <p>
+      <%= link_to "", reservation_path(reservation)%>
+      <%=h reservation.board.model %> by <%=h reservation.board.maker%>
+    </p>
+  </li>
+  <li class="reservation-link<%=reservation.id%> medium">
+    <p>
+      <%= link_to "", reservation_path(reservation)%>
+      <%=h reservation.board.creator.full_name%>
+    </p>
+  </li>
+  <li class="reservation-link<%=reservation.id%> medium">
+    <p>
+      <%= link_to "", reservation_path(reservation)%>
+      <%=h reservation.reservation_dates.first.date%>
+    </p>
+  </li>
+</ul>
+<div class="clear"></div>

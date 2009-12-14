@@ -1,6 +1,12 @@
-<%= h @reservation.board.maker%><br/>
-<%= h @reservation.board.model%><br/>
+<h1>Board: <%= h @reservation.board.model%> by <%= h @reservation.board.maker%></h1>
 
+<h2>Board Owner: <%= h @reservation.board.creator.full_name%></h2>
+
+<h2>Reservation Dates:</h2>
+<ul>
 <%@reservation.reservation_dates.each do |reservation_date|%>
-	<%= h reservation_date.date%><br/>
+	<li>
+		<%= h reservation_date.date%><br/>
+	</li>
 <%end%>
+</ul>
