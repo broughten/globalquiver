@@ -1,0 +1,7 @@
+<%= h reservation.board.model%> by <%= h reservation.board.maker%>
+
+<%= h reservation.board.creator.full_name%> at <%= h reservation.board.creator.email%>
+
+<% reservation.reservation_dates.each do |reservation_date| %>
+	<%=h reservation_date.date%>,
+<% end %>

@@ -10,4 +10,12 @@ class UserMailer < ActionMailer::Base
     sent_on(Time.now)    
     body({:added_reservations => added_reservations, :deleted_reservations => deleted_reservations})
   end
+  
+  def board_renter_reservation_details(reservation)
+    recipients(reservation.creator.email)
+    from("GlobalQuiver <info@globalquiver.com>")
+    subject("New Board Reservation Details")
+    sent_on(Time.now)    
+    body({:reservation => reservation})
+  end
 end
