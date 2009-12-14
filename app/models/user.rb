@@ -36,6 +36,8 @@ class User < ActiveRecord::Base
 
   named_scope :limited_to, lambda{|count| {:limit => count} }
   named_scope :latest, :order => 'users.created_at DESC'
+  named_scope :with_reservations_for_owned_boards_created_since, 
+    lambda{|time| {:joins => :reservations_for_owned_boards, :conditions => ['reservations.created_at >= ?', time]} }
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
@@ -55,34 +57,12 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
   end
   
-  # def self.has_boards_with_reservation_date_changes_since(time)
-  #   users = Array.new
-  #   User.find_each do |user|
-  #     users << user if (!user.owned_boards.with_new_reserved_dates_since(time).empty? || 
-  #       !user.owned_boards.with_deleted_reserved_dates_since(time).empty?)
-  #   end
-  #   return users
-  # end
-  
-  # def self.send_reservation_status_change_update(time)
-  #   users = has_boards_with_reservation_date_changes_since(time)
-  #   users.each do |user|
-  #     new_board_reservation_dates = Hash.new
-  #     boards_with_new_reservations = user.owned_boards.with_new_reserved_dates_since(time)
-  #     boards_with_new_reservations.each do |board|
-  #       new_reservation_dates = board.reserved_dates.created_since(time).active
-  #       new_board_reservation_dates[board] = new_reservation_dates
-  #     end
-  #     deleted_board_reservation_dates = Hash.new
-  #     boards_with_deleted_reservations = user.owned_boards.with_deleted_reserved_dates_since(time)
-  #     boards_with_deleted_reservations.each do |board|
-  #       deleted_reservation_dates = board.reserved_dates.deleted_since(time)
-  #       deleted_board_reservation_dates[board] = deleted_reservation_dates
-  #     end
-  #     UserMailer.deliver_board_owner_board_reservation_change_notification(user, new_board_reservation_dates, deleted_board_reservation_dates)
-  #   end
-  #     
-  # end
+  def self.send_reservation_update_for_owned_boards(time)
+    User.with_reservations_for_owned_boards_created_since(time).find_each do |user|
+      UserMailer.deliver_board_owner_reservation_update(user, 
+        user.reservations_for_owned_boards.created_since(time), [])
+    end
+  end
 
   # Encrypts the password with the user salt
   def encrypt(password)
@@ -135,8 +115,6 @@ class User < ActiveRecord::Base
     "" # placeholder...will be redefined in sub classes.
   end
   
-  
-
   protected
     # before filter 
     def encrypt_password
