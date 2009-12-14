@@ -32,7 +32,7 @@ namespace :db do
     require 'fileutils'
     
     #Clear out the tables
-    [User, Board, Location, Style, Image, Geocode, Geocoding,PickupTime].each(&:delete_all)
+    [User, Board, Location, Style, Image, Geocode, Geocoding, PickupTime, Reservation].each(&:delete_all)
     
     #Clear out the images folder to remove old images
    FileUtils.rm_rf RAILS_ROOT + '/public/system/datas/'
@@ -177,6 +177,16 @@ namespace :db do
     Board.find(:all).each_with_index do |board, index|
       create_images_for_board(board,RAILS_ROOT + '/spec/fixtures/images/boards/*') if (index % 4 == 0)
     end
+    
+    Reservation.create(:creator=>surfer,:updater=>surfer,
+      :board=>hansens.boards.first,:reservation_dates=>[UnavailableDate.create(:date=>2.days.from_now, :creator=>surfer, :updater=>surfer),
+      UnavailableDate.create(:date=>3.days.from_now, :creator=>surfer, :updater=>surfer),
+      UnavailableDate.create(:date=>5.days.from_now, :creator=>surfer, :updater=>surfer)])
+        
+    Reservation.create(:creator=>surfer,:updater=>surfer,
+      :board=>hansens.boards.last,:reservation_dates=>[UnavailableDate.create(:date=>10.days.from_now, :creator=>surfer, :updater=>surfer),
+      UnavailableDate.create(:date=>11.days.from_now, :creator=>surfer, :updater=>surfer),
+      UnavailableDate.create(:date=>15.days.from_now, :creator=>surfer, :updater=>surfer)])
     
     
   end
