@@ -96,5 +96,20 @@ describe BoardSearch do
       result.should include(board1)
       result.should_not include(board2)
     end
+    
+    it "should only show active boards" do
+      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+      # this board comes back with a location that is a mix of the BoardLocation.make(:santa_barbara_ca)
+      # blueprint and the Location.make() blueprint.  This is why the geocoding is failing.
+      board2 = Board.make(:location=>board1.location)
+      board2.deactivate
+      board2.save
+      
+      search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
+      board_search = BoardSearch.make(:location=>search_location)
+      result = board_search.execute
+      result.should include(board1)
+      result.should_not include(board2)
+    end
   end  
 end
