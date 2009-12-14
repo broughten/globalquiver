@@ -162,6 +162,14 @@ UnavailableDate.blueprint() do
   updater {creator}
 end
 
+UnavailableDate.blueprint(:for_board) do
+  parent {Board.make}
+end
+
+UnavailableDate.blueprint(:for_reservation) do
+  parent {Reservation.make}
+end
+
 UnavailableDate.blueprint(:deleted) do
   deleted_at {Time.now.utc}
 end
