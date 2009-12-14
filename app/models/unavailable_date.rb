@@ -7,7 +7,7 @@ class UnavailableDate < ActiveRecord::Base
   validates_uniqueness_of :date, :scope => [:parent_id, :parent_type],
     :message => 'This board was already unavailable on the selected date.'
 
-  validates_is_after :date # makes sure the date is in the future
+  validates_is_after :date, :on=>:create # makes sure the date is in the future but only when it is created
 
   validates_presence_of :date
   

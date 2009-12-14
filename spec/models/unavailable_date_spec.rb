@@ -29,16 +29,27 @@ describe UnavailableDate do
 
   describe "validations" do
     it "should not allow two entries with the same date, parent id and parent type" do
-      unavailabledate = UnavailableDate.make
+      unavailabledate = UnavailableDate.make(:for_board)
 
       unavailabledate2 = UnavailableDate.make_unsaved(:parent => unavailabledate.parent, :date => unavailabledate.date)
 
       unavailabledate2.should_not be_valid
+      
+      unavailabledate2 = UnavailableDate.make_unsaved(:for_reservation,:date => unavailabledate.date)
+      unavailabledate2.should be_valid
     end
 
     it "should not allow you to make a new unavailable date that is in the past" do
       unavailabledate = UnavailableDate.make_unsaved(:date => 2.days.ago)
       unavailabledate.should_not be_valid
+    end
+    
+    it "should allow you to update an unavailable date to a date in the past" do
+      # we need this functionality in case we have existing unavailable dates 
+      # in the past when we update black out dates for boards. 
+      unavailabledate = UnavailableDate.make()
+      unavailabledate.date = 2.days.ago
+      unavailabledate.should be_valid
     end
 
     it "should not allow you to create an unavailable date without a date" do
