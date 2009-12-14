@@ -7,6 +7,7 @@ class Reservation < ActiveRecord::Base
   accepts_nested_attributes_for :reservation_dates
   
   validates_length_of :reservation_dates, :minimum => 1, :message => 'must contain at least %d date'
+  validates_presence_of :board
   
   named_scope :for_user, lambda { |user| {:conditions => ['reservations.creator_id = ?', user.id]} }
   named_scope :created_since, lambda { |time| {:conditions => ['reservations.created_at >= ?', time]} }

@@ -32,10 +32,17 @@ describe Reservation do
   end
   
   describe "validations" do
+    before(:each) do
+      @reservation = Reservation.make_unsaved()
+    end
     it "should contain at least one date" do
-      reservation = Reservation.make_unsaved()
-      reservation.reservation_dates = []
-      reservation.should_not be_valid
+      @reservation.reservation_dates = []
+      @reservation.should_not be_valid
+    end
+    
+    it "should have a board" do
+      @reservation.board = nil
+      @reservation.should_not be_valid
     end
   end
   
