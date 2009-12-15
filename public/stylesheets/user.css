@@ -128,6 +128,7 @@ root {
 
 /* edit user */
 
+
 #the-location {
   padding-top:10px;
   text-align:left;
@@ -283,22 +284,10 @@ root {
 }
 
 
-#location_country {
-  
-}
-
-#surfer_password_input label, #shop_password_input label {
-  height:28px;
-}
 #surfer_password_confirmation_input label,#shop_password_confirmation_input label {
   padding-top:5px;
-  height:35px;
+  height:34px;
   
-}
-#surfer_password_input,#shop_password_input {
-
-  height:42px;
-
 }
 
 .pickup-times {
@@ -355,8 +344,12 @@ root {
 }
 
 .user-info-table .inline-errors {
-  color:red;
+  color:black;
+  background-color:red;
   font-size:1.5em;
+  margin-bottom:2px;
+  padding-left:10px;
+  width:345px;
 }
 
 .submit {

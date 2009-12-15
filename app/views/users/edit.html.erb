@@ -36,7 +36,7 @@
     <div class="user-info-table">
       <h2>Update Your Info</h2>
       <ul>
-        <%= form.input :first_name if !@user.is_rental_shop?%>
+        <%= form.input :first_name, :error_message => 'hey jc!' if !@user.is_rental_shop?%>
         <%= form.input :last_name, :required=>false if !@user.is_rental_shop?%>
         <%= form.input :name if @user.is_rental_shop? %>
         <%= form.input :email %>

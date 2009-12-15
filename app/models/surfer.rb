@@ -1,6 +1,6 @@
 class Surfer < User
 
-  validates_presence_of :first_name
+  validates_presence_of :first_name, :message => "first name can't be blank."
 
   attr_accessible :first_name, :last_name
 
