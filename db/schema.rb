@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091214232416) do
+ActiveRecord::Schema.define(:version => 20091216002707) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(:version => 20091214232416) do
     t.datetime "updated_at"
     t.integer  "creator_id"
     t.integer  "updater_id"
-    t.datetime "deleted_at"
     t.integer  "reservation_id"
     t.string   "parent_type"
   end

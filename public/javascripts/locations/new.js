@@ -17,6 +17,7 @@ Address.prototype.isValid = function() {
 
 function processGeoCodeResponse(response, callback) {
     if (!response || response.Status.code != 200) {
+      alert(JSON.stringify(response));
       createErrorMsg();
   } else {
     var ourAddress = null;
