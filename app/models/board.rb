@@ -12,8 +12,8 @@ class Board < ActiveRecord::Base
   validates_presence_of :maker, :style, :length, :location
   validates_numericality_of :daily_fee, :on => :create
 
-  accepts_nested_attributes_for :images, :black_out_dates
-  
+  accepts_nested_attributes_for :images
+  accepts_nested_attributes_for :black_out_dates, :allow_destroy => true
   named_scope :active, :conditions=>{:inactive=>false}
   
   MAX_IMAGES = 4
@@ -152,7 +152,7 @@ class Board < ActiveRecord::Base
   end
   
   def user_is_renter(user)
-    self.reservations.for_user(user).count > 0
+    self.reservations.active.for_user(user).count > 0
   end
   
   def active?

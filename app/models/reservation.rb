@@ -11,4 +11,25 @@ class Reservation < ActiveRecord::Base
   
   named_scope :for_user, lambda { |user| {:conditions => ['reservations.creator_id = ?', user.id]} }
   named_scope :created_since, lambda { |time| {:conditions => ['reservations.created_at >= ?', time]} }
+  named_scope :inactive, :conditions => ["reservations.deleted_at IS NOT ?", nil]
+  named_scope :deleted_since, lambda { |time| {:conditions => ["reservations.deleted_at > ?", time]} }
+  named_scope :active, :conditions => ["reservations.deleted_at IS ?", nil]
+
+  def destroy
+    # see if someone above us tried to roll back.
+    return false if callback(:before_destroy) == false
+    mark_as_destroyed
+    #allow the after_destroy
+    callback(:after_destroy)
+    self
+  end
+
+
+
+  protected
+
+  def mark_as_destroyed
+    self.update_attribute(:deleted_at, Time.now.utc)
+  end
 end
+

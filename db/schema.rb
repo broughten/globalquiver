@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091216002707) do
+ActiveRecord::Schema.define(:version => 20091216054343) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20091216002707) do
     t.integer  "updater_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   create_table "styles", :force => true do |t|
@@ -126,7 +127,6 @@ ActiveRecord::Schema.define(:version => 20091216002707) do
     t.datetime "updated_at"
     t.integer  "creator_id"
     t.integer  "updater_id"
-    t.integer  "reservation_id"
     t.string   "parent_type"
   end
 

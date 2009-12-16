@@ -61,7 +61,59 @@ describe Reservation do
       Reservation.created_since(1.day.ago).should_not include(reservation)
       Reservation.created_since(3.days.ago).should include(reservation)
     end
-  
+
+    it "should find recently deleted reservations based on a passed in date" do
+      reservation1 = Reservation.make(:deleted)
+      reservation2 = Reservation.make(:deleted)
+      result = Reservation.deleted_since(2.days.ago)
+      result.should include(reservation1)
+      result.length.should == 2
+
+      reservation1.deleted_at = 4.days.ago
+      reservation1.save
+      result = Reservation.deleted_since(2.days.ago)
+      result.should_not include(reservation1)
+      result.length.should == 1
+    end
+
+
+
+    it "should contain inactive that only returns the inactive records" do
+      reservation1 = Reservation.make()
+      reservation2 = Reservation.make()
+      reservation2.destroy()
+      results = Reservation.inactive
+      results.should_not include(reservation1)
+      results.should include(reservation2)
+    end
+
+
+
+    it "should contain active that only returns the deleted records" do
+      reservation1 = Reservation.make()
+      reservation2 = Reservation.make()
+      reservation2.destroy()
+      results = Reservation.active
+      results.should include(reservation1)
+      results.should_not include(reservation2)
+    end
+ 
+  end
+
+  it "should soft delete a record by setting deleted_at" do
+    reservation = Reservation.make()
+    reservation.deleted_at.should be_nil
+
+    reservation.destroy
+    reservation.deleted_at.should_not be_nil
+  end
+
+
+
+  it "should allow new record to be added if a deleted one exists" do
+    deleted_reservation = Reservation.make(:deleted)
+    new_reservation = Reservation.make(:reservation_dates=>deleted_reservation.reservation_dates)
+    new_reservation.should_not be_new_record
   end
   
   

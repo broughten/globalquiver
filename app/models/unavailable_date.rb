@@ -12,7 +12,6 @@ class UnavailableDate < ActiveRecord::Base
   validates_presence_of :date
   
   named_scope :created_since, lambda { |time| {:conditions => ["unavailable_dates.created_at > ?", time]} }
-  named_scope :inactive, :conditions => ["unavailable_dates.deleted_at IS NOT ?", nil]
   named_scope :created_by, lambda { |user| {:conditions => ['unavailable_dates.creator_id = ?', (user.nil?)?-1:user.id]} }
   named_scope :not_created_by, lambda { |user| {:conditions => ['unavailable_dates.creator_id != ?', (user.nil?)?-1:user.id]} }
   

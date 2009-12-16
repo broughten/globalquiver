@@ -170,7 +170,7 @@ UnavailableDate.blueprint(:for_reservation) do
   parent {Reservation.make}
 end
 
-UnavailableDate.blueprint(:deleted) do
+Reservation.blueprint(:deleted) do
   deleted_at {Time.now.utc}
 end
 
