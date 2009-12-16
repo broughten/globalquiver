@@ -40,7 +40,9 @@
         <%= fields.input :locality, :as => :hidden, :label => "City", :input_html => { :class => 'city' }  %>
         <%= fields.input :region, :as => :hidden, :label => "State", :required => false, :input_html => { :class => 'state' }  %>
         <%= fields.input :postal_code, :label => "Your zip or postal code", :required => false, :input_html => { :class => 'zip' }  %>
+        <div class="clear"></div>
         <%= fields.input :country, :as => :hidden, :input_html => { :class => 'hidden-country' }, :value => 'USA' %>
+        <%= fields.input :country, :as => :country, :input_html => { :class => 'hidden-country' }, :value => 'USA' %>
       <% end %>
     </div>
     <div class="clear"></div>
