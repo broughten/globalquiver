@@ -8,6 +8,24 @@
 
 
 /* index boards */
+#board_submit {
+  border:none;
+  font-size:13px;
+  width:70px;
+  color:#2797E6;
+  text-decoration:underline;
+}
+
+.short-flash {
+  width:545px;
+  margin-bottom:2px;
+}
+
+#board_submit:hover {
+  text-decoration:underline;
+  cursor:pointer;
+}
+
 #board_list {
     padding-bottom:10px;
 }
@@ -41,7 +59,7 @@
 }
 
 #list-table li a {
-  font-size:24px;
+  font-size:13px;
 }
 
 #list-table li a:hover {

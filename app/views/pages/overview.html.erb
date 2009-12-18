@@ -1,7 +1,25 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'board', 'overview', :media => 'screen' %>
+  <%= javascript_include_tag 'jquery/form/jquery.form' %>
 <% end %>
 
+<% content_for :javascript do %>
+
+$(document).ready(function() {
+   $('form').ajaxForm({
+     dataType: 'script',
+     beforeSubmit: function(arr, $form, opts) {
+      // add form id to options object
+      opts.formId = $form.attr('id');
+    },
+    success: function(responseText) {
+      // 'this' is the options object, so we can access 'formId' on 'this'
+      addFlash(this.formId);
+    }
+  });
+});
+
+<% end %>
 <div id="overview-left">
   <% if current_user.is_a?(Surfer) %>
     <h1>What's in your quiver?</h1>

@@ -1,21 +1,18 @@
 <% content_for :javascript do %>
-  $(document).ready(function() {
-    $(".board-link<%=board.id%>").click(function(){
-      window.location=$(this).find("a").attr("href"); return false;
-    });
-
-    $(".board-link<%=board.id%>").mouseover(function() {
-      $(".board-link<%=board.id%>").css("background-color","#C5C2C4");
-    });
-
-        $(".board-link<%=board.id%>").mouseout(function() {
-      $(".board-link<%=board.id%>").css("background-color","#eeeeee");
-    });
-    
+$(document).ready(function() {
+  $(".board-link<%=board.id%>").click(function(){
+    window.location=$(this).find("a").attr("href"); return false;
   });
 
+  $(".board-link<%=board.id%>").mouseover(function() {
+    $(".board-link<%=board.id%>").css("background-color","#C5C2C4");
+  });
+
+  $(".board-link<%=board.id%>").mouseout(function() {
+    $(".board-link<%=board.id%>").css("background-color","#eeeeee");
+  });
+});
 <% end %>
-  
 <ul id="list-table">
   <li class="board-link<%=board.id%> pic">
     <p>
@@ -58,10 +55,18 @@
       <% end %>
     </p>
   </li>
-  <% if board.creator == current_user && !current_page?(:controller => 'board_searches', :action => 'show') %>
+  <% if board.user_is_owner(current_user) && !current_page?(:controller => 'board_searches', :action => 'show') %>
     <li class="board-delete short">
       <p>
-        <%= link_to "X", board, :confirm => "Are you sure? Can't be undone.", :method=>:delete%>
+        <% form_for board do |f| %>
+          <% if board.active? %>
+            <%= f.hidden_field :inactive, :value => "true" %>
+            <%= f.submit "Remove\nfrom\nquiver" %>
+          <% else %>
+            <%= f.hidden_field :inactive, :value => "false" %>
+            <%= f.submit "Add\nto\nquiver" %>
+          <% end %>
+        <% end %>
       </p>
     </li>
   <%  end %>
