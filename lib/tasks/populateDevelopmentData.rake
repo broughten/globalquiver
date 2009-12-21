@@ -107,6 +107,7 @@ namespace :db do
       board.creator_id = surfer.id
       board.updater_id = surfer.id
       board.location_id = surferLocation.id
+      board.inactive = 0
     end
 
     #Set up 4 boards for slater
@@ -120,6 +121,7 @@ namespace :db do
       board.creator_id = slater.id
       board.updater_id = slater.id
       board.location_id = slaterLocation.id
+      board.inactive = 0
     end
 
     #Set up 2 boards for jordy
@@ -133,6 +135,7 @@ namespace :db do
       board.creator_id = jordy.id
       board.updater_id = jordy.id
       board.location_id = jordyLocation.id
+      board.inactive = 0
     end
     
     #Set up boards for shop
@@ -146,6 +149,7 @@ namespace :db do
       board.creator_id = shop.id
       board.updater_id = shop.id
       board.location_id = shopLocation.id
+      board.inactive = 0
     end
 
     #Set up 50 boards for killer dana
@@ -159,6 +163,7 @@ namespace :db do
       board.creator_id = killerdana.id
       board.updater_id = killerdana.id
       board.location_id = killerdanaLocation.id
+      board.inactive = 0
     end
 
     #Set up 7 boards for hansens
@@ -172,6 +177,7 @@ namespace :db do
       board.creator_id = hansens.id
       board.updater_id = hansens.id
       board.location_id = hansensLocation.id
+      board.inactive = 0
     end
     
     Board.find(:all).each_with_index do |board, index|
