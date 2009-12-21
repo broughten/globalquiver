@@ -117,7 +117,7 @@
         <% if @board.daily_fee == 0.00 %>
           Free!
         <% else %>
-          $<%= sprintf("%.2f",@board.daily_fee) %>
+					<%= h number_to_currency(@board.daily_fee, :unit => "$") %>
         <% end %>
       </li>
     </ul>
