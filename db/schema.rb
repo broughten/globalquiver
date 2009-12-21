@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(:version => 20091216054343) do
     t.string   "construction"
     t.integer  "creator_id"
     t.integer  "updater_id"
-    t.decimal  "daily_fee",    :precision => 19, :scale => 2
-    t.boolean  "inactive",                                    :default => false
+    t.decimal  "daily_fee",    :precision => 8, :scale => 2
+    t.boolean  "inactive",                                   :default => false
   end
 
   create_table "geocodes", :force => true do |t|
