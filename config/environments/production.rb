@@ -9,10 +9,6 @@ config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
-# store the sessions in the database in production so
-# we can load balance the app servers.
-config.action_controller.session_store = :active_record_store
-
 # See everything in the log (default is :info)
 # config.log_level = :debug
 
