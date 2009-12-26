@@ -28,8 +28,8 @@ class ActionController::Base
 	end
 	
 	def require_http_basic_auth
-	  # don't require basic auth for local development
-	  request.domain.downcase != 'localhost'
+	  # a list of the environments that require basic authentication
+	  ENV['RAILS_ENV'] == 'production' || ENV['RAILS_ENV'] == 'staging'
   end
 	
 end
