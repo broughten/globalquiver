@@ -206,6 +206,7 @@ a.call_to_action{
 }
 
 #left-nav img {
+  float:left;
   width:15px;
   margin-top:5px;
 }
