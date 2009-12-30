@@ -7,7 +7,10 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if (found_board.user_is_owner(current_user))
         flash[:error] = "You can't reserve your own board.  Please edit the board unavailable dates on the board details page."
-        format.html { redirect_to(root_path) }
+        format.html { redirect_to :back }
+      elsif (!found_board.active?)
+        flash[:error] = "This board got snaked while you were reserving it. Sorry. Try another one."
+        format.html { redirect_to :back }
       else
         @reservation = Reservation.new
         @reservation.board = found_board

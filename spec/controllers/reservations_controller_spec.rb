@@ -20,10 +20,19 @@ describe ReservationsController do
         @temp_board = Board.make()
       end
       
-      it "should redirect to the root pate with a flash error if the owner of the board tries to create a new reservation" do
+      it "should redirect back with a flash error if the owner of the board tries to create a new reservation" do
+        @request.env['HTTP_REFERER'] = new_board_search_path
         @temp_board = Board.make(:creator=>@user)
         get 'new', :board_id=>@temp_board.id
-        response.should redirect_to(root_path)
+        response.should redirect_to(new_board_search_path)
+        flash[:error].should_not be_nil
+      end
+
+      it "should redirect back with a flash error if the user tries to create a reservation on an inactive board" do
+        @request.env['HTTP_REFERER'] = new_board_search_path
+        @temp_board = Board.make(:creator=>@user, :inactive=>true)
+        get 'new', :board_id=>@temp_board.id
+        response.should redirect_to(new_board_search_path)
         flash[:error].should_not be_nil
       end
 
