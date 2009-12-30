@@ -8,7 +8,8 @@ class Reservation < ActiveRecord::Base
   
   validates_length_of :reservation_dates, :minimum => 1, :message => 'must contain at least {count} date'
   validates_presence_of :board
-  
+  validate :board_must_be_active
+
   named_scope :for_user, lambda { |user| {:conditions => ['reservations.creator_id = ?', user.id]} }
   named_scope :created_since, lambda { |time| {:conditions => ['reservations.created_at >= ?', time]} }
   named_scope :inactive, :conditions => ["reservations.deleted_at IS NOT ?", nil]
@@ -30,6 +31,12 @@ class Reservation < ActiveRecord::Base
 
   def mark_as_destroyed
     self.update_attribute(:deleted_at, Time.now.utc)
+  end
+
+  def board_must_be_active
+    if board
+      errors.add_to_base("This board got snaked while you were reserving it. Sorry. Try another one.") unless self.board.active?
+    end
   end
 end
 

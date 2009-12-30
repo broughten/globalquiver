@@ -44,6 +44,21 @@ describe Reservation do
       @reservation.board = nil
       @reservation.should_not be_valid
     end
+
+    it "should have an active board" do
+      @board = Board.make()
+      @reservation.board = @board
+
+      @reservation.should be_valid
+    end
+
+    it "should not have an inactive board" do
+      @board = Board.make()
+      @reservation.board = @board
+      @board.deactivate
+
+      @reservation.should_not be_valid
+    end
   end
   
   describe "named scopes" do
