@@ -34,7 +34,7 @@ describe Location do
       location2 = Location.make()
       locations = Location.ordered_by_desc_creation
 
-      locations[0].should == location2
+      locations.index(location1).should < locations.index(location2)
     end
   end
 

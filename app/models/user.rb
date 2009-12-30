@@ -35,8 +35,8 @@ class User < ActiveRecord::Base
 
   named_scope :limited_to, lambda{|count| {:limit => count} }
   named_scope :latest, :order => 'users.created_at DESC'
-  named_scope :with_reservations_for_owned_boards_created_since, 
-    lambda{|time| {:joins => :reservations_for_owned_boards, :conditions => ['reservations.created_at >= ?', time]} }
+  named_scope :board_owners_needing_reminder_emails,
+    lambda{|time| {:joins => :reservations_for_owned_boards, :conditions => ['reservations.created_at >= ? or reservations.deleted_at >= ?', time, time]} }
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
@@ -57,9 +57,10 @@ class User < ActiveRecord::Base
   end
   
   def self.send_reservation_update_for_owned_boards(time)
-    User.with_reservations_for_owned_boards_created_since(time).find_each do |user|
+    User.board_owners_needing_reminder_emails(time).find_each do |user|
       UserMailer.deliver_board_owner_reservation_update(user, 
-        user.reservations_for_owned_boards.created_since(time), [])
+        user.reservations_for_owned_boards.created_since(time),
+        user.reservations_for_owned_boards.deleted_since(time))
     end
   end
 

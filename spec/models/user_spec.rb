@@ -147,14 +147,56 @@ describe User do
     another_board_owner = User.make()
     board2 = Board.make(:creator=>another_board_owner)
     reservation1 = Reservation.make(:board=>board1)
-    User.with_reservations_for_owned_boards_created_since(1.day.ago).should include(board_owner)
-    User.with_reservations_for_owned_boards_created_since(1.day.ago).should_not include(another_board_owner)
+    User.board_owners_needing_reminder_emails(1.day.ago).should include(board_owner)
+    User.board_owners_needing_reminder_emails(1.day.ago).should_not include(another_board_owner)
     User.all.should include(board_owner)
     User.all.should include(another_board_owner)
   
     reservation1.created_at = 2.days.ago
     reservation1.save
-    User.with_reservations_for_owned_boards_created_since(1.day.ago).should_not include(board_owner)
+    User.board_owners_needing_reminder_emails(1.day.ago).should_not include(board_owner)
+  end
+
+  it "should allow you to find all users with reservations on owned boards that have been deleted since a certain date" do
+    board_owner = User.make()
+    board1 = Board.make(:creator=>board_owner)
+    another_board_owner = User.make()
+    board2 = Board.make(:creator=>another_board_owner)
+    reservation1 = Reservation.make(:board=>board1)
+    reservation1.created_at = 2.days.ago
+    reservation1.deleted_at = 1.day.ago
+    User.board_owners_needing_reminder_emails(1.day.ago).should include(board_owner)
+    User.board_owners_needing_reminder_emails(1.day.ago).should_not include(another_board_owner)
+    User.all.should include(board_owner)
+    User.all.should include(another_board_owner)
+
+    reservation1.deleted_at = 2.days.ago
+    reservation1.save
+    User.board_owners_needing_reminder_emails(1.day.ago).should_not include(board_owner)
+  end
+
+  it "should allow you to find all users with reservations on owned boards that have been created or deleted since a certain date" do
+    board_owner = User.make()
+    board1 = Board.make(:creator=>board_owner)
+    another_board_owner = User.make()
+    board2 = Board.make(:creator=>another_board_owner)
+    reservation1 = Reservation.make(:board=>board1)
+    reservation1.created_at = 3.days.ago
+    reservation1.deleted_at = 1.day.ago
+    reservation2 = Reservation.make(:board=>board2)
+    reservation2.created_at = 1.day.ago
+    User.board_owners_needing_reminder_emails(1.day.ago).should include(board_owner)
+    User.board_owners_needing_reminder_emails(1.day.ago).should include(another_board_owner)
+    User.all.should include(board_owner)
+    User.all.should include(another_board_owner)
+
+    reservation1.deleted_at = 2.days.ago
+    reservation1.save
+    reservation2.created_at = 2.days.ago
+    reservation2.save
+    User.board_owners_needing_reminder_emails(1.day.ago).should_not include(board_owner)
+    User.board_owners_needing_reminder_emails(1.day.ago).should_not include(another_board_owner)
+
   end
   
   it "should allow you to send an email to all board owners who have boards with new reservations" do
@@ -180,29 +222,30 @@ describe User do
     User.send_reservation_update_for_owned_boards(1.day.ago)
     ActionMailer::Base.deliveries.length.should == 0
   end
-  
-#  it "should allow you to send an email to all users who have boards with deleted reservations made within the past day" do
-#    board_owner = User.make()
-#    board1 = Board.make(:creator=>board_owner)
-#    board2 = Board.make(:creator=>board_owner)
-#    another_board_owner = User.make()
-#    board3 = make_board_with_unavailable_dates(:creator=>another_board_owner)
-#    reservation1 = UnavailableDate.make(:deleted_at=>Time.now.utc)
-#    board1.unavailable_dates << reservation1
-#    ActionMailer::Base.deliveries.clear
-#    User.send_reservation_status_change_update
+
+  it "should allow you to send an email to all board owners who have boards with deleted reservations" do
+    board_owner = User.make()
+    board1 = Board.make(:creator=>board_owner)
+    board2 = Board.make(:creator=>board_owner)
+    reservation1 = Reservation.make(:board=>board1, :created_at=>2.days.ago, :deleted_at=>1.day.ago)
+    reservation2 = Reservation.make(:board=>board2, :created_at=>2.days.ago)
+
+
+    ActionMailer::Base.deliveries.clear
+    User.send_reservation_update_for_owned_boards(1.day.ago)
     # you should only have one email to board_owner
-#    ActionMailer::Base.deliveries.length.should == 1
-#    email = ActionMailer::Base.deliveries.first
+    ActionMailer::Base.deliveries.length.should == 1
+    email = ActionMailer::Base.deliveries.first
     # that email should contain only dates for board1
-#    email.body.should contain(board1.maker)
-#    email.body.should_not contain(board2.maker)
-    
-    #push back the creation of the reservation
-#    reservation1.deleted_at = 2.days.ago
-#    reservation1.save
-#    ActionMailer::Base.deliveries.clear
-#    User.send_reservation_status_change_update
-#    ActionMailer::Base.deliveries.length.should == 0
-#  end
+    email.body.should contain(board1.maker)
+    email.body.should_not contain(board2.maker)
+
+    #push back the deletion of the reservation
+    reservation1.deleted_at = 2.days.ago
+    reservation1.save
+    ActionMailer::Base.deliveries.clear
+    User.send_reservation_update_for_owned_boards(1.day.ago)
+    ActionMailer::Base.deliveries.length.should == 0
+  end
+
 end
