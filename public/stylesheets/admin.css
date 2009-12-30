@@ -1,15 +1,15 @@
-.show-search-locations {
+.show-admin-items {
   margin-bottom:10px;
 }
-.show-search-locations a {
+.show-admin-items a {
   font-size:14px;
 }
 
-.show-search-locations p {
+.show-admin-items p {
   padding-left:20px;
 }
 
-.show-search-locations li {
+.show-admin-items li {
   padding-left:20px;
   list-style:none;
   font-size:14px;
@@ -20,12 +20,17 @@
   width:70px;
 }
 
-#search-location-form {
+
+#style_submit {
+  width:70px;
+}
+
+#admin-item-form {
   margin-top:10px;
   margin-bottom:10px;
 }
 
-.show-search-locations label {
+.show-admin-items label {
   width:5em;
   float: left;
   text-align: left;
@@ -33,7 +38,7 @@
   display: block
 }
 
-.show-search-locations input {
+.show-admin-items input {
   width:250px;
   float:left;
 }
@@ -47,17 +52,17 @@
 
 
 
-#search-locations-table {
+#admin-items-table {
   margin-top:10px;
   border:solid 1px;
 }
 
-#search-locations-table td {
+#admin-items-table td {
   border:solid 1px;
   padding:3px 3px 5px 5px;
 }
 
-.search-locations-header {
+.admin-items-header {
   background-color:black;
   color:white;
 }

@@ -11,10 +11,6 @@ class SearchLocationsController < ApplicationController
     @search_location = SearchLocation.new
   end
 
-  def show
-    @search_location = SearchLocation.find_by_id(params[:id])
-  end
-
   # POST /search_locations
   def create
     @search_location = SearchLocation.new(params[:search_location])

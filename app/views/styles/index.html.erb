@@ -1,16 +1,19 @@
-<h1>Listing styles</h1>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'admin', :media => 'screen' %>
+<% end %>
+<h1>Admin Page: All Styles</h1>
+<div class="show-admin-items">
 
-<table>
-  <tr>
-    <th>Style</th>
+<table id="admin-items-table">
+  <tr class="admin-items-header">
+    <td>Style</td>
+    <td>Delete</td>
   </tr>
 
 <% @styles.each do |style| %>
   <tr>
-    <td><%=h style.style %></td>
-    <td><%= link_to 'Show', style %></td>
-    <td><%= link_to 'Edit', edit_style_path(style) %></td>
-    <td><%= link_to 'Destroy', style, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%=h style.name %></td>
+    <td><%= link_to 'Delete', style, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
@@ -18,3 +21,4 @@
 <br />
 
 <%= link_to 'New style', new_style_path %>
+</div>

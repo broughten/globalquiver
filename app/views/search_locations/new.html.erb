@@ -3,9 +3,9 @@
 <% end %>
 <h1>New Search Location</h1>
 
-<div class="show-search-locations">
+<div class="show-admin-items">
   <% semantic_form_for @search_location, :url => {:action => "create" } do |form| %>
-    <div id="search-location-form"
+    <div id="admin-item-form"
       <%= form.input :street, :required => false %>
       <%= form.input :locality, :required => false, :label => "City" %>
       <%= form.input :region, :required => false, :label => "State" %>

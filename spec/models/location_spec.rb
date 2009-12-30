@@ -30,11 +30,11 @@ describe Location do
 
   describe "named scopes" do
     it "should have a named scope that allows you to get locations ordered by descending created_at date" do
-      location1 = Location.make()
-      location2 = Location.make()
+      location1 = Location.make(:created_at => 1.day.from_now)
+      location2 = Location.make(:created_at => 2.days.from_now)
       locations = Location.ordered_by_desc_creation
 
-      locations.index(location1).should < locations.index(location2)
+      locations.index(location2).should < locations.index(location1)
     end
   end
 
