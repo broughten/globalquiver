@@ -53,6 +53,7 @@ class ReservationsController < ApplicationController
         format.html { redirect_to(:back) }
         format.js
       else
+        flash[:error] = @reservation.errors.full_messages.first
         format.html { redirect_to(:back) }
         format.js
       end

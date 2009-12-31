@@ -10,9 +10,16 @@
       <%= link_to "Return to home page", root_path %>
   <% else %>
     </h1>
-    <p>
-      <%= link_to "Click to Cancel", @reservation, :confirm => "Are you sure you want to cancel this reservation?", :method=>:delete%>
-    </p>
+    <% if @reservation.too_near_to_delete %>
+      <p>
+        Reservations less than a day from now can't be canceled.
+        If you can't make it, please contact <%= link_to @reservation.board.creator.full_name, user_path(@reservation.board.creator) %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to "Click to Cancel", @reservation, :confirm => "Are you sure you want to cancel this reservation?", :method=>:delete%>
+      </p>
+    <% end %>
   <% end %>
 
 <div id="info-table">

@@ -59,6 +59,28 @@ describe Reservation do
 
       @reservation.should_not be_valid
     end
+
+    it "should not destroy on a reservation that will start in less than a day" do
+      @reservation.reservation_dates = [
+        UnavailableDate.make(:date => Date.today),
+        UnavailableDate.make(:date => 1.day.from_now)
+      ]
+      @reservation.save
+      @reservation.destroy.should raise_error
+      @reservation.deleted_at.should be_nil
+
+    end
+
+    it "should allow destroy on a reservation that starts more than a day away" do
+      @reservation.reservation_dates = [
+        UnavailableDate.make(:date => 2.days.from_now),
+        UnavailableDate.make(:date => 3.day.from_now)
+      ]
+      @reservation.save
+      @reservation.destroy
+      @reservation.deleted_at.should_not be_nil
+
+    end
   end
   
   describe "named scopes" do

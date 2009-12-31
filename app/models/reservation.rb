@@ -1,8 +1,9 @@
 class Reservation < ActiveRecord::Base
+  
   belongs_to :board # this is belongs_to because the Reservations table has a board_id field.
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
-  has_many :reservation_dates, :class_name => 'UnavailableDate', :as => :parent
+  has_many :reservation_dates, :class_name => 'UnavailableDate', :as => :parent, :order => 'date'
   
   accepts_nested_attributes_for :reservation_dates
   
@@ -16,7 +17,15 @@ class Reservation < ActiveRecord::Base
   named_scope :deleted_since, lambda { |time| {:conditions => ['reservations.deleted_at >= ?', time]} }
   named_scope :active, :conditions => ["reservations.deleted_at IS ?", nil]
 
-  def destroy
+  
+  def before_destroy
+    if (too_near_to_delete)
+      errors.add_to_base "Cannot delete reservation less than 1 day away"
+      return false
+    end
+  end
+  
+  def destroy_without_callbacks
     # see if someone above us tried to roll back.
     return false if callback(:before_destroy) == false
     mark_as_destroyed
@@ -25,7 +34,9 @@ class Reservation < ActiveRecord::Base
     self
   end
 
-
+  def too_near_to_delete
+    (reservation_dates.first.date - Date.today <= 1)?true:false
+  end
 
   protected
 
@@ -38,5 +49,6 @@ class Reservation < ActiveRecord::Base
       errors.add_to_base("This board got snaked while you were reserving it. Sorry. Try another one.") unless self.board.active?
     end
   end
+
 end
 

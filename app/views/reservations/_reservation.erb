@@ -36,11 +36,17 @@
     </p>
   </li>
   <li class="reservation-delete<%=reservation.id%> short">
+    <% if reservation.too_near_to_delete %>
+    <p>
+      Coming up within a day
+    </p>
+    <% else %>
     <p class="big-x">
       <% form_for reservation, :html => { :method => :delete } do |f| %>
         <%= f.submit "X" %>
       <% end %>
     </p>
+    <% end %>
   </li>
 </ul>
 <div class="clear"></div>

@@ -1,15 +1,19 @@
 function addFlash(element) {
-  $("#" +element).parent().parent().before('<div class="flash reservation-flash"><div id="flash_notice"><p><%= escape_javascript(flash.delete(:notice)) %></p></div></div>');
-  <%  if current_user.reservations.active.empty? %>
-    setTimeout(function() {
-      $("#" +element).parent().parent().parent().children().fadeOut('fast', addNoReservationsMessage);
-      }, 3000);
-
+  <% if !@reservation.errors.blank? %>
+    alert('<%= @reservation.errors.full_messages.first %>');
   <% else %>
-    setTimeout(function() {
-      $("#" +element).parent().parent().fadeOut('fast');
-      }, 3000);
+    $("#" +element).parent().parent().before('<div class="flash reservation-flash"><div id="flash_notice"><p><%= escape_javascript(flash.delete(:notice)) %></p></div></div>');
+    <%  if current_user.reservations.active.empty? %>
+      setTimeout(function() {
+        $("#" +element).parent().parent().parent().children().fadeOut('fast', addNoReservationsMessage);
+        }, 3000);
 
+    <% else %>
+      setTimeout(function() {
+        $("#" +element).parent().parent().fadeOut('fast');
+        }, 3000);
+
+    <% end %>
   <% end %>
 }
 
