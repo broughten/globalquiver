@@ -35,5 +35,12 @@
       <%=h reservation.reservation_dates.first.date%>
     </p>
   </li>
+  <li class="reservation-delete<%=reservation.id%> short">
+    <p class="big-x">
+      <% form_for reservation, :html => { :method => :delete } do |f| %>
+        <%= f.submit "X" %>
+      <% end %>
+    </p>
+  </li>
 </ul>
 <div class="clear"></div>

@@ -1,0 +1,22 @@
+function addFlash(element) {
+  $("#" +element).parent().parent().before('<div class="flash reservation-flash"><div id="flash_notice"><p><%= escape_javascript(flash.delete(:notice)) %></p></div></div>');
+  <%  if current_user.reservations.active.empty? %>
+    setTimeout(function() {
+      $("#" +element).parent().parent().parent().children().fadeOut('fast', addNoReservationsMessage);
+      }, 3000);
+
+  <% else %>
+    setTimeout(function() {
+      $("#" +element).parent().parent().fadeOut('fast');
+      }, 3000);
+
+  <% end %>
+}
+
+setTimeout(function() {
+  $("div.flash").fadeOut('fast');
+  }, 3000);
+
+function addNoReservationsMessage() {
+  $("#my-board-reservations").html('<h2>Reservations for boards in the Global Quiver</h2><p>You dont have any board reservations yet.  Get started by <%= link_to "finding a board.", new_board_search_url %></p>');
+}

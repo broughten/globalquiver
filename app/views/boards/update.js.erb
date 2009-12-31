@@ -1,5 +1,5 @@
 function addFlash(element) {
-  $("#" +element).parent().parent().before('<div class="flash short-flash"><div id="flash_notice"><p><%= escape_javascript(flash.delete(:notice)) %></p></div></div>');
+  $("#" +element).parent().parent().before('<div class="flash board-flash"><div id="flash_notice"><p><%= escape_javascript(flash.delete(:notice)) %></p></div></div>');
 
   if ($("#" +element).children("#board_submit").val() == "Remove\nfrom\nquiver") {
     $("#" +element).children("#board_submit").attr("value", "Add\nto\nquiver");

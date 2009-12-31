@@ -101,6 +101,28 @@ describe ReservationsController do
         response.should render_template("show")
       end
     end # of show reservation
+
+    describe "DELETE /reservations (aka delete reservation)" do
+      before(:each) do
+        @temp_reservation = Reservation.make()
+      end
+      it "should try to find the reservation in question" do
+        @request.env['HTTP_REFERER'] = root_path
+        Reservation.expects(:find).returns(@temp_reservation)
+        post 'destroy', :id=>@temp_reservation.id
+      end
+      it "should try to delete the reservation" do
+        @request.env['HTTP_REFERER'] = root_path
+       
+        Reservation.any_instance.expects(:destroy)
+        post 'destroy', :id=>@temp_reservation.id
+      end
+      it "should redirect back" do
+        @request.env['HTTP_REFERER'] = root_path
+        post 'destroy', :id=>@temp_reservation.id
+        response.should redirect_to root_path
+      end
+    end # of delete reservation
   end # of authenticated user
 
   describe "anonymous user" do

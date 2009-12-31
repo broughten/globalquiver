@@ -2,6 +2,11 @@
   <%= stylesheet_link_tag 'admin', :media => 'screen' %>
 <% end %>
 <h1>Admin Page: All Styles</h1>
+<p>
+  Probably not a good idea to ever delete styles because if there are boards out there
+  of the style you deleted, they will throw nil exceptions all over the place when accessed.
+  But since you're an admin, you have the power if you need it.
+</p>
 <div class="show-admin-items">
 
 <table id="admin-items-table">

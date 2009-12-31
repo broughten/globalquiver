@@ -16,7 +16,7 @@
   text-decoration:underline;
 }
 
-.short-flash {
+.board-flash {
   width:545px;
   margin-bottom:2px;
 }
@@ -60,6 +60,10 @@
 
 #list-table li a {
   font-size:13px;
+}
+
+#list-table li p.big-x a {
+    font-size:28px;
 }
 
 #list-table li a:hover {

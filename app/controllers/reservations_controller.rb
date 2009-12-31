@@ -43,4 +43,19 @@ class ReservationsController < ApplicationController
       format.html # show.html.erb
     end
   end
+
+  # DELETE /reservations/1
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    respond_to do |format|
+      if @reservation.destroy
+        flash[:notice] = 'Reservation was successfully canceled.'
+        format.html { redirect_to(:back) }
+        format.js
+      else
+        format.html { redirect_to(:back) }
+        format.js
+      end
+    end
+  end
 end

@@ -1,3 +1,8 @@
+.reservation-flash {
+  width:379px;
+  margin-bottom:2px;
+}
+
 #submit-reservation{
 	float:right;
 	margin-top:10px;
@@ -29,3 +34,40 @@
 #board-info h2{
 	margin: 5px 0 5px 0;
 }
+
+.edit_reservation #reservation_submit {
+  border:none;
+  font-size:28px;
+  width:70px;
+  color:#2797E6;
+  text-decoration:underline;
+}
+
+
+/* show reservation */
+#info-table {
+  float:left;
+}
+.attr-name {
+  font-size:1.5em;
+  display:table-cell;
+  vertical-align:middle;
+  padding-left:10px;
+  height:40px;
+  width:100px;
+  background-color:#888888;
+  color:white;
+  border-right:6px solid white;
+}
+
+.value {
+  font-size:1.5em;
+  display:table-cell;
+  vertical-align:middle;
+  height:40px;
+  padding-left:10px;
+  padding-right:10px;
+  width:100px;
+  background-color:#eeeeee;
+}
+

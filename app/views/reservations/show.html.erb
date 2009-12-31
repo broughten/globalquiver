@@ -1,12 +1,57 @@
-<h1>Board: <%= h @reservation.board.model%> by <%= h @reservation.board.maker%></h1>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'reservation', :media => 'screen' %>
+<%  end %>
 
-<h2>Board Owner: <%= h @reservation.board.creator.full_name%></h2>
+<h1>Reservation
+  <% if !@reservation.deleted_at.nil? %>
+    <span class="canceled-reservation">(Canceled)</span>
+    </h1>
+    <p>
+      <%= link_to "Return to home page", root_path %>
+  <% else %>
+    </h1>
+    <p>
+      <%= link_to "Click to Cancel", @reservation, :confirm => "Are you sure you want to cancel this reservation?", :method=>:delete%>
+    </p>
+  <% end %>
 
-<h2>Reservation Dates:</h2>
-<ul>
-<%@reservation.reservation_dates.each do |reservation_date|%>
-	<li>
-		<%= h reservation_date.date%><br/>
-	</li>
-<%end%>
-</ul>
+<div id="info-table">
+  <h2>Board Info</h2
+  <ul>
+    <li class="attr-name">Maker</li>
+    <li class="value">
+      <%=h @reservation.board.maker %>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <ul>
+    <li class="attr-name">Model</li>
+    <li class="value">
+      <%=h @reservation.board.model %>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <br/>
+  <h2>Board Owner Info</h2>
+  <ul>
+    <li class="attr-name">Name</li>
+    <li class="value">
+      <%=h @reservation.board.creator.full_name %>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <br/>
+
+  <h2>Reservation Dates:</h2>
+
+  <%@reservation.reservation_dates.each do |reservation_date|%>
+    <ul>
+      <li class="attr-name"><%=h reservation_date.date.strftime('%A') %></li>
+      <li class="value">
+        <%=h reservation_date.date.strftime('%m/%d/%Y') %>
+      </li>
+    </ul>
+    <div class="clear"></div>
+  <%end%>
+  <br/>
+</div>
