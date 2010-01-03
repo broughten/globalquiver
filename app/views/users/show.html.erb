@@ -10,86 +10,91 @@
 <div class="clear"></div>
 
 <% link_to "Edit", edit_user_path(:id => @user.id) %>
-<div class  ="user-photo">
-  <% if @user.image.nil? %>
-  <p class="no-photo">No Photo</p>
-  <% else %>
-    <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
-  <% end %>
-</div>
-
-<div class="user-info-table">
-  <h2>Info</h2>
-  <ul>
-    <li class="attr-name">Email</li>
-    <li class="value">
-      <%= @user.email %>
-    </li>
-  </ul>
-  <div class="clear"></div>
-  <% if @user.is_a?(Surfer) %>
-    <ul>
-      <li class="attr-name">Member Since</li>
-      <li class="value">
-        <%= @user.created_at.to_date.strftime("%m/%d/%Y") %>
-      </li>
-    </ul>
-    <div class="clear"></div>
-    <ul>
-      <li class="attr-name">Will surf with visitors?</li>
-      <li class="value">
-        <% if @user.friendly %>
-          Sure let's go rip
-        <%  else %>
-          No thanks
-        <% end %>
-      </li>
-    </ul>
-    <div class="clear"></div>
-    <ul>
-      <li class="attr-name">Best Time to Pickup Boards</li>
-      <li class="value">
-        <% if @user.pickup_times.empty? %>
-          Unspecified
-        <%  else %>
-          <% @user.pickup_times.each do |time|  %>
-            <p><%= time.name %></p>
-          <% end %>
-        <% end %>
-      </li>
-    </ul>
-    <div class="clear"></div>
-  <% end %>
-  <ul>
-    <li class="attr-name">Website</li>
-    <li class="value">
-      <%= link_to @user.url unless @user.url.nil?%>
-    </li>
-  </ul>
-  <div class="clear"></div>
-  <div class="user-desc">
-    <% if @user.is_a?(Surfer) %>
-      <h2><%= @user.first_name %> says</h2>
+<div class="left-column">
+  <div class  ="user-photo">
+    <% if @user.image.nil? %>
+    <p class="no-photo">No Photo</p>
     <% else %>
-      <h2>About <%= @user.name %></h2>
+      <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
     <% end %>
-      <% if @user.description.nil? %>
-        <p>...</p>
-      <% else %>
-        <p><%= @user.description %></p>
-      <% end %>
-   
   </div>
 </div>
+<div class="right-column">
+  <div class="user-info-table">
+    <h2>Info</h2>
+    <ul>
+      <li class="attr-name">Email</li>
+      <li class="value">
+        <%= @user.email %>
+      </li>
+    </ul>
+    <div class="clear"></div>
+    <% if @user.is_a?(Surfer) %>
+      <ul>
+        <li class="attr-name">Member Since</li>
+        <li class="value">
+          <%= @user.created_at.to_date.strftime("%m/%d/%Y") %>
+        </li>
+      </ul>
+      <div class="clear"></div>
+      <ul>
+        <li class="attr-name">Will surf with visitors?</li>
+        <li class="value">
+          <% if @user.friendly %>
+            Sure let's go rip
+          <%  else %>
+            No thanks
+          <% end %>
+        </li>
+      </ul>
+      <div class="clear"></div>
+      <ul>
+        <li class="attr-name">Best Time to Pickup Boards</li>
+        <li class="value">
+          <% if @user.pickup_times.empty? %>
+            Unspecified
+          <%  else %>
+            <% @user.pickup_times.each do |time|  %>
+              <p><%= time.name %></p>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+      <div class="clear"></div>
+    <% end %>
+    <ul>
+      <li class="attr-name">Website</li>
+      <li class="value">
+        <%= link_to @user.url unless @user.url.nil?%>
+      </li>
+    </ul>
+    <div class="clear"></div>
+    <div class="user-desc">
+      <% if @user.is_a?(Surfer) %>
+        <h2><%= @user.first_name %> says</h2>
+      <% else %>
+        <h2>About <%= @user.name %></h2>
+      <% end %>
+        <% if @user.description.nil? %>
+          <p>...</p>
+        <% else %>
+          <p><%= @user.description %></p>
+        <% end %>
+
+    </div>
+  </div>
+</div>
+
 <div class="clear"></div>
 <div class="user-boards">
   <% if !@user.boards.empty? %>
     <h2>Boards</h2>
     <ul id="list-headings">
-      <li>Pic</li>
-      <li>Model</li>
+      <li class="pic">Pic</li>
+      <li class="model">Model</li>
       <li class="medium">Type</li>
       <li class="short">Length</li>
+      <li class="short">Daily Fee</li>
       <% if @user == current_user %>
         <li class="short">Delete</li>
       <% end %>
