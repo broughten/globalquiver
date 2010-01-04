@@ -56,4 +56,67 @@ describe ReservationsHelper do
      end
    
    end
+
+  describe "next_reservation" do
+    before(:each) do
+      @me = Surfer.make()
+      @someone_else = Surfer.make()
+
+      self.stubs(:current_user).returns(@me)
+    end
+
+     it "should return my reservation on someone elses board if it comes soonest" do
+       someone_elses_board = Board.make(:creator => @someone_else)
+       my_board = Board.make(:creator => @me)
+       #reservations created by @me
+       my_reservation = Reservation.make(:creator => @me, :board => someone_elses_board, :reservation_dates => [
+         UnavailableDate.make(:date => 3.days.from_now),
+         UnavailableDate.make(:date => 5.days.from_now),
+         UnavailableDate.make(:date => 7.days.from_now),
+         UnavailableDate.make(:date => 9.days.from_now),
+         UnavailableDate.make(:date => 11.days.from_now)
+       ])
+
+       their_reservation = Reservation.make(:creator => @someone_else, :board => my_board, :reservation_dates => [
+         UnavailableDate.make(:date => 4.days.from_now),
+         UnavailableDate.make(:date => 6.days.from_now),
+         UnavailableDate.make(:date => 8.days.from_now),
+         UnavailableDate.make(:date => 10.days.from_now),
+         UnavailableDate.make(:date => 12.days.from_now)
+       ])
+       next_reservation.should == my_reservation
+
+     end
+
+     it "should return someone elses reservation on my board if it comes soonest" do
+       someone_elses_board = Board.make(:creator => @someone_else)
+       my_board = Board.make(:creator => @me)
+       #reservations created by @me
+       my_reservation = Reservation.make(:creator => @me, :board => someone_elses_board, :reservation_dates => [
+         UnavailableDate.make(:date => 3.days.from_now),
+         UnavailableDate.make(:date => 5.days.from_now),
+         UnavailableDate.make(:date => 7.days.from_now),
+         UnavailableDate.make(:date => 9.days.from_now),
+         UnavailableDate.make(:date => 11.days.from_now)
+       ])
+
+       their_reservation = Reservation.make(:creator => @someone_else, :board => my_board, :reservation_dates => [
+         UnavailableDate.make(:date => 2.days.from_now),
+         UnavailableDate.make(:date => 4.days.from_now),
+         UnavailableDate.make(:date => 6.days.from_now),
+         UnavailableDate.make(:date => 8.days.from_now),
+         UnavailableDate.make(:date => 10.days.from_now),
+         UnavailableDate.make(:date => 12.days.from_now)
+       ])
+       next_reservation.should == their_reservation
+
+     end
+
+     it "should return nil if there are no upcoming reservations" do
+       @board = Board.make(:creator => @me)
+       days_until_next_reservation.should eql(-1)
+     end
+
+   end
+
 end

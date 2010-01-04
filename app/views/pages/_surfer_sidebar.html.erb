@@ -8,10 +8,16 @@
     <% end %>
   </div>
   <div id="counter">
-    <% if days_until_next_reservation == -1 %>
+    <% days = days_until_next_reservation %>
+    <% if days == -1 %>
       <span class="for">You have no upcoming reservations</span>
     <% else %>
-      <span class="amount"><%= days_until_next_reservation %></span><br/>
+      <% the_next_reservation = next_reservation %>
+      <%if !the_next_reservation.nil? %>
+        <span class="amount"><%= link_to days, the_next_reservation %></span><br/>
+      <% else %>
+        <span class="amount"><%= days %></span><br/>
+      <% end %>
       <span class="for">days until next reservation</span>
     <% end %>
   </div>

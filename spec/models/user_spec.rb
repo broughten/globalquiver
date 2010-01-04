@@ -227,7 +227,7 @@ describe User do
     board_owner = User.make()
     board1 = Board.make(:creator=>board_owner)
     board2 = Board.make(:creator=>board_owner)
-    reservation1 = Reservation.make(:board=>board1, :created_at=>2.days.ago, :deleted_at=>1.day.ago)
+    reservation1 = Reservation.make(:board=>board1, :created_at=>2.days.ago, :deleted_at=>Date.today)
     reservation2 = Reservation.make(:board=>board2, :created_at=>2.days.ago)
 
 
