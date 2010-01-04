@@ -79,10 +79,9 @@ $(document).ready(function() {
   <% if current_user.is_a?(Surfer) %>
   <div id="my-board-reservations">
     <h2>Reservations for boards in the Global Quiver</h2>
-    <%if current_user.reservations.active.empty? %>
+    <%if current_user.reservations.active.blank? %>
       <p>You don't have any board reservations yet.  Get started by <%= link_to "finding a board.", new_board_search_url %></p>
-    <% end %>
-    <% if !current_user.reservations.active.empty? %>
+    <% else %>
       <div class="view-tabs">
         <%= link_to "Calendar View" %>
       </div>

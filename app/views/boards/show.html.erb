@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'board',
+  <%= stylesheet_link_tag 'overview','board', 'reservation',
  	'datePicker',
  	'unavailable_dates',
 	'jquery/colorbox/colorbox',
@@ -31,7 +31,24 @@
     <%= link_to "Reserve This Board!", new_board_reservation_path(@board) %>
   </div>
 <% end %>
-
+<% if @board.user_is_owner(current_user) && @board.active? %>
+  <h2>Reservations</h2>
+  <%if @board.reservations.active.blank? %>
+    <p>This board has no upcoming reservations</p>
+  <% else %>
+    <div class="view-tabs">
+      <%= link_to "Calendar View" %>
+    </div>
+    <ul id="list-headings">
+      <li class="medium">Board</li>
+      <li class="medium">Board Owner</li>
+      <li class="medium">Start Date</li>
+      <li class="short">Cancel</li>
+    </ul>
+    <%= render :partial => "reservations/reservation", :collection => @board.reservations.active %>
+  <% end %>
+<% end %>
+<br/>
 <div id="info-table">
   <h2>Info</h2>
 
