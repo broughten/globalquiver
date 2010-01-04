@@ -48,7 +48,10 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])
     respond_to do |format|
-      if @reservation.destroy
+      if (@reservation.creator != current_user)
+          flash[:error] = "You can't cancel someone else's reservation"
+          format.html { redirect_to :back }
+      elsif @reservation.destroy
         flash[:notice] = 'Reservation was successfully canceled.'
         format.html { redirect_to(:back) }
         format.js

@@ -19,6 +19,18 @@
 	margin-bottom:10px;
 }
 
+#list-table li.squat {
+    height:35px;
+}
+
+#list-table li.long p {
+  width:145px;
+}
+
+#list-headings li.long {
+  width:145px;
+}
+
 #date-selection h1, #reservation-confirmation h1{
 	margin-bottom:10px;
 }

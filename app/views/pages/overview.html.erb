@@ -86,10 +86,10 @@ $(document).ready(function() {
         <%= link_to "Calendar View" %>
       </div>
       <ul id="list-headings">
-        <li class="medium">Board</li>
-        <li class="medium">Board Owner</li>
-        <li class="medium">Start Date</li>
-        <li class="short">Cancel</li>
+        <li class="long">Board</li>
+        <li class="long">Board Owner</li>
+        <li class="long">Start Date</li>
+        <li class="medium">Cancel</li>
       </ul>
       <%= render :partial => "reservations/reservation", :collection => current_user.reservations.active %>
     <% end %>

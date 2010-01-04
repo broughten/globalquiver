@@ -17,36 +17,45 @@
 <% end %>
 
 <ul id="list-table">
-  <li class="reservation-link<%=reservation.id%> medium">
+  <li class="reservation-link<%=reservation.id%> squat long">
     <p>
       <%= link_to "", reservation_path(reservation)%>
       <%=h reservation.board.model %> by <%=h reservation.board.maker%>
     </p>
   </li>
-  <li class="reservation-link<%=reservation.id%> medium">
+  <li class="reservation-link<%=reservation.id%> squat long">
     <p>
       <%= link_to "", reservation_path(reservation)%>
       <%=h reservation.board.creator.full_name%>
     </p>
   </li>
-  <li class="reservation-link<%=reservation.id%> medium">
+  <li class="reservation-link<%=reservation.id%> squat long">
     <p>
       <%= link_to "", reservation_path(reservation)%>
       <%=h reservation.reservation_dates.first.date%>
     </p>
   </li>
-  <li class="reservation-delete<%=reservation.id%> short">
-    <% if reservation.too_near_to_delete %>
-    <p>
-      Coming up within a day
-    </p>
-    <% else %>
-    <p class="big-x">
-      <% form_for reservation, :html => { :method => :delete } do |f| %>
-        <%= f.submit "X" %>
+  <% if reservation.creator == current_user %>
+    <li class="reservation-delete<%=reservation.id%> squat medium">
+      <% if reservation.too_near_to_delete %>
+      <p>
+        Coming up within a day
+      </p>
+      <% else %>
+      <p class="big-x">
+        <% form_for reservation, :html => { :method => :delete } do |f| %>
+          <%= f.submit "X" %>
+        <% end %>
+      </p>
       <% end %>
+    </li>
+  <% else %>
+    <li class="reservation-link<%=reservation.id%> squat medium">
+    <p>
+      <%= link_to "", reservation_path(reservation)%>
+      <%=h reservation.reservation_dates.length%>
     </p>
-    <% end %>
   </li>
+  <% end %>
 </ul>
 <div class="clear"></div>

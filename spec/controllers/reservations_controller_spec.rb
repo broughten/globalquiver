@@ -104,22 +104,29 @@ describe ReservationsController do
 
     describe "DELETE /reservations (aka delete reservation)" do
       before(:each) do
-        @temp_reservation = Reservation.make()
+        @request.env['HTTP_REFERER'] = root_path
       end
       it "should try to find the reservation in question" do
-        @request.env['HTTP_REFERER'] = root_path
+        @temp_reservation = Reservation.make()
         Reservation.expects(:find).returns(@temp_reservation)
         post 'destroy', :id=>@temp_reservation.id
       end
       it "should try to delete the reservation" do
-        @request.env['HTTP_REFERER'] = root_path
-       
+        @temp_reservation = Reservation.make(:creator => @user)
         Reservation.any_instance.expects(:destroy)
         post 'destroy', :id=>@temp_reservation.id
       end
-      it "should redirect back" do
-        @request.env['HTTP_REFERER'] = root_path
+      it "should redirect back upon successful cancelation" do
+        @temp_reservation = Reservation.make(:creator => @user)
         post 'destroy', :id=>@temp_reservation.id
+        response.should redirect_to root_path
+      end
+
+      it "should not allow anyone other than the reservation creator to cancel the reservation" do
+        someone_else = User.make()
+        @temp_reservation = Reservation.make(:creator => someone_else)
+        post 'destroy', :id=>@temp_reservation.id
+        flash[:error].should == "You can't cancel someone else's reservation"
         response.should redirect_to root_path
       end
     end # of delete reservation

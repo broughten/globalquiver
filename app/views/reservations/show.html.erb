@@ -16,9 +16,11 @@
         If you can't make it, please contact <%= link_to @reservation.board.creator.full_name, user_path(@reservation.board.creator) %>
       </p>
     <% else %>
-      <p>
-        <%= link_to "Click to Cancel", @reservation, :confirm => "Are you sure you want to cancel this reservation?", :method=>:delete%>
-      </p>
+      <% if @reservation.creator == current_user %>
+        <p>
+          <%= link_to "Click to Cancel", @reservation, :confirm => "Are you sure you want to cancel this reservation?", :method=>:delete%>
+        </p>
+      <% end %>
     <% end %>
   <% end %>
 
