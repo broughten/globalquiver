@@ -16,8 +16,9 @@ class Reservation < ActiveRecord::Base
   named_scope :inactive, :conditions => ["reservations.deleted_at IS NOT ?", nil]
   named_scope :deleted_since, lambda { |time| {:conditions => ['reservations.deleted_at >= ?', time]} }
   named_scope :active, :conditions => ["reservations.deleted_at IS ?", nil]
-
-  
+  named_scope :with_dates_after, 
+      lambda { |time| {:select => "DISTINCT reservations.*",:joins=>:reservation_dates, :conditions => ['date > ?', time]} }
+       
   def before_destroy
     if (too_near_to_delete)
       errors.add_to_base "Cannot delete reservation less than 1 day away"

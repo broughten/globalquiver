@@ -173,6 +173,9 @@ class Board < ActiveRecord::Base
     else
       "Inactive"
     end
-    
+  end
+  
+  def has_future_reservations
+    self.reservations.with_dates_after(Time.now).length > 0
   end
 end
