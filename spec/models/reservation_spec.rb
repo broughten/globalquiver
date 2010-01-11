@@ -172,6 +172,19 @@ describe Reservation do
     new_reservation = Reservation.make(:reserved_dates=>deleted_reservation.reserved_dates)
     new_reservation.should_not be_new_record
   end
-  
+
+  it "should put the reservation creator's full name when a non-creator is passed into calendar_strip_text" do
+    reserver = User.make()
+    non_reserver = User.make()
+    reservation = Reservation.make(:creator => reserver)
+    reservation.calendar_strip_text(non_reserver).should contain reserver.full_name
+  end
+
+  it "should put the board owner's full name when a reservation creator is passed into calendar_strip_text" do
+    board_owner = User.make()
+    reserver = User.make()
+    reservation = Reservation.make(:creator => reserver)
+    reservation.calendar_strip_text(reserver).should contain reservation.board.creator.full_name
+  end
   
 end

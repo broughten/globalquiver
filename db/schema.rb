@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091223195650) do
+ActiveRecord::Schema.define(:version => 20100111061243) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20091223195650) do
     t.integer  "updater_id"
     t.decimal  "daily_fee",    :precision => 8, :scale => 2
     t.boolean  "inactive",                                   :default => false
+    t.string   "name"
   end
 
   create_table "geocodes", :force => true do |t|

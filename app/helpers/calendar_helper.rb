@@ -17,7 +17,7 @@ module CalendarHelper
 
   def reservation_calendar
     calendar reservation_calendar_opts do |reservation|
-      %(<a href="/reservations/#{reservation.id}" title="#{h(reservation.calendar_strip_text)}">#{h(reservation.calendar_strip_text)}</a>)
+      %(<a href="/reservations/#{reservation.id}" title="#{h(reservation.calendar_strip_text(current_user))}">#{h(reservation.calendar_strip_text(current_user))}</a>)
     end
   end
 end

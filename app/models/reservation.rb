@@ -40,6 +40,19 @@ class Reservation < ActiveRecord::Base
     (reserved_dates.first.date - Date.today <= 1)?true:false
   end
 
+  def calendar_strip_text(user)
+    if creator == user
+      "#{board.creator.full_name}: #{board.location.locality}"
+    else
+      if board.name.blank?
+        "#{board.model} by #{board.maker}: #{creator.full_name}"
+      else
+        "#{board.name}: #{creator.full_name}"
+      end
+     
+    end
+  end
+
   protected
 
   def mark_as_destroyed
