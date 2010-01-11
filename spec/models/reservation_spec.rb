@@ -146,6 +146,14 @@ describe Reservation do
       results.should include(reservation1)
       results.should_not include(reservation2)
     end
+    
+    it "should allow me to find reservations that occur after a certain date" do
+      reservation1 = Reservation.make(:reservation_dates=>[UnavailableDate.make(:date=>2.days.from_now)])
+      reservation2 = Reservation.make(:reservation_dates=>[UnavailableDate.make(:date=>4.days.from_now),UnavailableDate.make(:date=>6.days.from_now)])
+      Reservation.with_dates_after(3.days.from_now).should include(reservation2)
+      Reservation.with_dates_after(3.days.from_now).should_not include(reservation1)
+      Reservation.with_dates_after(3.days.from_now).length.should == 1
+    end
  
   end
 
