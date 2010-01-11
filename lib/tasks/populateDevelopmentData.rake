@@ -185,12 +185,12 @@ namespace :db do
     end
     
     Reservation.create(:creator=>surfer,:updater=>surfer,
-      :board=>hansens.boards.first,:reservation_dates=>[UnavailableDate.create(:date=>2.days.from_now, :creator=>surfer, :updater=>surfer),
+      :board=>hansens.boards.first,:reserved_dates=>[UnavailableDate.create(:date=>2.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>3.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>5.days.from_now, :creator=>surfer, :updater=>surfer)])
         
     Reservation.create(:creator=>surfer,:updater=>surfer,
-      :board=>hansens.boards.last,:reservation_dates=>[UnavailableDate.create(:date=>10.days.from_now, :creator=>surfer, :updater=>surfer),
+      :board=>hansens.boards.last,:reserved_dates=>[UnavailableDate.create(:date=>10.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>11.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>15.days.from_now, :creator=>surfer, :updater=>surfer)])
     

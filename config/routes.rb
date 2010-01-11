@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect '/shop_calendar/:year/:month', :controller => 'calendar', :action => 'shop_calendar', :year => Time.zone.now.year, :month => Time.zone.now.month
+  map.connect '/trip_calendar/:year/:month', :controller => 'calendar', :action => 'trip_calendar', :year => Time.zone.now.year, :month => Time.zone.now.month
+  map.trip_calendar 'trip_calendar', :controller => 'calendar', :action => 'trip_calendar', :year => Time.zone.now.year, :month => Time.zone.now.month
+  map.shop_calendar 'shop_calendar', :controller => 'calendar', :action => 'shop_calendar', :year => Time.zone.now.year, :month => Time.zone.now.month
 
   map.resources :board_searches
 

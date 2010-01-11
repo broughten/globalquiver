@@ -27,7 +27,7 @@ describe Reservation do
     end
     
     it "should have many dates" do
-      Reservation.make_unsaved().should respond_to(:reservation_dates)
+      Reservation.make_unsaved().should respond_to(:reserved_dates)
     end
   end
   
@@ -36,7 +36,7 @@ describe Reservation do
       @reservation = Reservation.make_unsaved()
     end
     it "should contain at least one date" do
-      @reservation.reservation_dates = []
+      @reservation.reserved_dates = []
       @reservation.should_not be_valid
     end
     
@@ -61,7 +61,7 @@ describe Reservation do
     end
 
     it "should not destroy on a reservation that will start in less than a day" do
-      @reservation.reservation_dates = [
+      @reservation.reserved_dates = [
         UnavailableDate.make(:date => Date.today),
         UnavailableDate.make(:date => 1.day.from_now)
       ]
@@ -72,7 +72,7 @@ describe Reservation do
     end
 
     it "should allow destroy on a reservation that starts more than a day away" do
-      @reservation.reservation_dates = [
+      @reservation.reserved_dates = [
         UnavailableDate.make(:date => 2.days.from_now),
         UnavailableDate.make(:date => 3.day.from_now)
       ]
@@ -92,7 +92,19 @@ describe Reservation do
       
       Reservation.for_user(non_renter).should be_empty
     end
-    
+
+    it "should be able to find reservations for a user's boards" do
+      renter = User.make()
+      owner = User.make()
+      board = Board.make(:creator => owner)
+      board2 = Board.make(:creator => renter)
+      reservation = Reservation.make(:creator=>renter, :board => board)
+      reservation2 = Reservation.make(:creator=>owner, :board => board2)
+      Reservation.for_boards_of_user(owner).should include(reservation)
+
+      Reservation.for_boards_of_user(renter).should include(reservation2)
+    end
+
     it "should be able to find new reservations for a time frame" do
       reservation = Reservation.make(:created_at=>2.days.ago)
       Reservation.created_since(1.day.ago).should_not include(reservation)
@@ -149,7 +161,7 @@ describe Reservation do
 
   it "should allow new record to be added if a deleted one exists" do
     deleted_reservation = Reservation.make(:deleted)
-    new_reservation = Reservation.make(:reservation_dates=>deleted_reservation.reservation_dates)
+    new_reservation = Reservation.make(:reserved_dates=>deleted_reservation.reserved_dates)
     new_reservation.should_not be_new_record
   end
   

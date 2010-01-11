@@ -1,0 +1,130 @@
+==ReservationCalendar
+
+Easily show multiple, overlapping reservations across calendar days and rows.
+
+Based on Jeff Schuil's Event Calendar: http://github.com/elevation/event_calendar
+The difference between this and his is in the underlying model that this one supports.
+
+Jeff's Event Calendar calls for an underlying model class in which each instance
+has a start date and an end date.
+
+This calendar works from an underlying model class in which each instance that
+contains any number and assortment of child individual date objects.
+
+After install, the "calendar" method will be available within your views.
+
+To customize the look, modify the included stylesheet and/or change the default options.
+
+For an example application that is a basic implementation of this plugin, see:
+http://github.com/broughten/reservation_calendar_test_app
+
+
+==Install
+
+  script/plugin install git@github.com:broughten/reservation_calendar.git
+
+
+To generate the necessary static files (javascript and css):
+
+  script/generate reservation_calendar
+
+Options:
+
+* --use-jquery: Generate jquery javascript
+
+==Default Options
+
+The default options for the calendar are:
+
+  defaults = {
+    :year => Time.zone.now.year,
+    :month => Time.zone.now.month,
+    :abbrev => (0..2),
+    :first_day_of_week => 0, # See note below when setting this
+    :show_today => true,
+    :month_name_text => Time.zone.now.strftime("%B %Y"),
+    :previous_month_text => nil,
+    :next_month_text => nil,
+    :reservation_strips => [],
+    
+    # it would be nice to have these in the CSS file
+    # but they are needed to perform height calculations
+    :width => nil,
+    :height => 500, 
+    :day_names_height => 18,
+    :day_nums_height => 18,
+    :reservation_height => 18,
+    :reservation_margin => 1,
+    :reservation_padding_top => 1,
+    
+    :use_javascript => true,
+    :link_to_day_action => false
+  }
+  
+You can override any of these by passing your options to the calendar method. In the above example, update the reservation_calendar_options helper method.
+
+====Details
+
+* See the notes in the plugin's calendar_helper.rb for more info.
+
+* *width*: Optional, if none is given it will stretch to the containing element.
+
+* *height*: Defaults to 500px. This is the approx minimum total height of the calendar. It could be greater if a calendar row(s) need to stretch to fit additional reservations.
+
+* *use_javascript*: If you set it to false, cleaner HTML will be output, without inline Javascript, but reservations spanning multiple days will not be displayed correctly. This option should therefore only be used if your calendar uses only single-day reservations.
+
+* *link_to_day_action*: Will make the calendar's day numbers links to the given Rails action. Note, you'll probably want a corresponding route, controller action, and view to go with this action. Example:
+  
+  Helper/View calendar option:
+    :link_to_day_action => "day"
+  
+  Route (the controller is the same as your other calendar route):
+    map.calendar_day "/calendar/:year/:month/:day", :controller => "calendar", :action => "day"
+
+
+==Notes
+
+* If you want to change the <b>first day of the week</b> from the default of Sunday (0), then set the new value in an instance variable and pass it to reservation_strips_for_month (in the controller), and to the reservation calendar options (in the helper/view).
+
+  Controller:
+    @first_day_of_week = 1
+    @reservation_strips = Reservation.reservation_strips_for_month(@shown_month, @first_day_of_week)
+  
+  Helper/View calendar options:
+    :first_day_of_week => @first_day_of_week
+    
+* If you need access to the reservations, not just the reservation strips, then instead of calling reservation_strips_for_month call these 3 methods:
+
+    start_d, end_d = Reservation.get_start_and_end_dates(@shown_month) # optionally pass in @first_day_of_week
+    @reservations = Reservation.reservations_for_date_range(start_d, end_d)
+    @reservation_strips = Reservation.create_reservation_strips(start_d, end_d, @reservations)
+
+* The reservation <b>select color</b> is set in the reservation_calendar.js file.
+  
+== Helping develop the plugin
+
+Fork the plugin and clone your fork onto your computer.
+
+You should clone the reservation_calendar_test_app from http://github.com/broughten/reservation_calendar_test_app
+and create a symbolic link (ln -s) into the vendor directory.  This link should point to the location where you 
+cloned the plugin.
+
+As you develop, please create RSpec specs for any functionality that you add/modify.  These specs can be found in the 
+spec directory of the test application.  You will need the RSpec and the rspec-rails gems installed on you computer.
+These gems can be installed if you run rake gems:install from the test app directory.
+
+==Contributors
+
+* Jeff Schuil (original author)
+* Jon Christensen (modified to reservation from events)
+* Mike Gehard ()
+* See commit history for list of additional contributors.
+* Thanks to those who have added features, fixed bugs, and/or reported issues.
+
+== History
+
+* Though ReservationCalendar has diverged greatly, it was...
+* Originally based off of James Urquhart's http://www.cuppadev.co.uk/webdev/making-a-real-calendar-in-rails/
+* This in turn started as Geoffrey Grosenbach's CalendarHelper.
+
+Copyright (c) 2010 Kelsus Inc, released under the MIT license

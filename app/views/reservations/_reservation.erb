@@ -32,7 +32,7 @@
   <li class="reservation-link<%=reservation.id%> squat long">
     <p>
       <%= link_to "", reservation_path(reservation)%>
-      <%=h reservation.reservation_dates.first.date%>
+      <%=h reservation.reserved_dates.first.date%>
     </p>
   </li>
   <% if reservation.creator == current_user %>
@@ -53,7 +53,7 @@
     <li class="reservation-link<%=reservation.id%> squat medium">
     <p>
       <%= link_to "", reservation_path(reservation)%>
-      <%=h reservation.reservation_dates.length%>
+      <%=h reservation.reserved_dates.length%>
     </p>
   </li>
   <% end %>

@@ -53,7 +53,7 @@
 
   <h2>Reservation Dates:</h2>
 
-  <%@reservation.reservation_dates.each do |reservation_date|%>
+  <%@reservation.reserved_dates.each do |reservation_date|%>
     <ul>
       <li class="attr-name"><%=h reservation_date.date.strftime('%A') %></li>
       <li class="value">

@@ -6,7 +6,7 @@ class Board < ActiveRecord::Base
   belongs_to :updater, :class_name => 'User'
   has_many :images, :as => :owner
   has_many :reservations
-  has_many :reserved_dates, :through=>:reservations, :source=>:reservation_dates
+  has_many :reserved_dates, :through=>:reservations, :source=>:reserved_dates
   has_many :black_out_dates, :class_name=>'UnavailableDate', :as=> :parent
 
   validates_presence_of :maker, :style, :length, :location

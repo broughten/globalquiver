@@ -187,5 +187,5 @@ Reservation.blueprint() do
   board {Board.make()}
   creator {User.make()}
   updater {creator}
-  reservation_dates {[UnavailableDate.make()]}
+  reserved_dates {[UnavailableDate.make()]}
 end

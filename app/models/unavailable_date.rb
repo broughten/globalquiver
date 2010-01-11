@@ -1,4 +1,6 @@
 class UnavailableDate < ActiveRecord::Base
+  acts_as_reserved_date
+
   belongs_to :parent, :polymorphic => true
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'

@@ -1,16 +1,17 @@
 class Reservation < ActiveRecord::Base
-  
+  has_reservation_calendar
   belongs_to :board # this is belongs_to because the Reservations table has a board_id field.
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
-  has_many :reservation_dates, :class_name => 'UnavailableDate', :as => :parent, :order => 'date'
+  has_many :reserved_dates, :class_name => 'UnavailableDate', :as => :parent, :order => 'date'
   
-  accepts_nested_attributes_for :reservation_dates
+  accepts_nested_attributes_for :reserved_dates
   
-  validates_length_of :reservation_dates, :minimum => 1, :message => 'must contain at least {count} date'
+  validates_length_of :reserved_dates, :minimum => 1, :message => 'must contain at least {count} date'
   validates_presence_of :board
   validate :board_must_be_active
 
+  named_scope :for_boards_of_user, lambda { |user| {:joins => :board, :conditions => ['boards.creator_id = ?', user.id]} }
   named_scope :for_user, lambda { |user| {:conditions => ['reservations.creator_id = ?', user.id]} }
   named_scope :created_since, lambda { |time| {:conditions => ['reservations.created_at >= ?', time]} }
   named_scope :inactive, :conditions => ["reservations.deleted_at IS NOT ?", nil]
@@ -35,7 +36,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def too_near_to_delete
-    (reservation_dates.first.date - Date.today <= 1)?true:false
+    (reserved_dates.first.date - Date.today <= 1)?true:false
   end
 
   protected

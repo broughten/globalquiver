@@ -8,7 +8,7 @@
 		<h1>New reservation for <%=h reservation.board.model%> by <%=h reservation.board.maker%></h1>
 
 		<ul>
-			<% reservation.reservation_dates.each do |reservation_date| %>
+			<% reservation.reserved_dates.each do |reservation_date| %>
 				<li><%=h reservation_date.date%></li>
 			<% end %>
 		</ul>
@@ -17,7 +17,7 @@
 		<h1>Deleted reservation for <%=h reservation.board.model%> by <%=h reservation.board.maker%></h1>
 
 		<ul>
-			<% reservation.reservation_dates.each do |reservation_date| %>
+			<% reservation.reserved_dates.each do |reservation_date| %>
 				<li><%=h reservation_date.date%></li>
 			<% end %>
 		</ul>

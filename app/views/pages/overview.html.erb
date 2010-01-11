@@ -58,7 +58,7 @@ $(document).ready(function() {
     <% if !current_user.boards.empty? %>
       <div class="view-tabs">
         <%= link_to "Board View" %> |
-        <%= link_to "Calendar View" %>
+        <%= link_to "Calendar View", shop_calendar_path %>
       </div>
       <ul id="list-headings">
         <li class="pic">Pic</li>
@@ -83,7 +83,7 @@ $(document).ready(function() {
       <p>You don't have any board reservations yet.  Get started by <%= link_to "finding a board.", new_board_search_url %></p>
     <% else %>
       <div class="view-tabs">
-        <%= link_to "Calendar View" %>
+        <%= link_to "Calendar View", trip_calendar_path %>
       </div>
       <ul id="list-headings">
         <li class="long">Board</li>

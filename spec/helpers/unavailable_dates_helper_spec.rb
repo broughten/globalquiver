@@ -16,7 +16,7 @@ describe UnavailableDatesHelper do
         @board = Board.make(:creator => @someone_else)
    
         #reserved dates created by @me and @me is the current_user
-        Reservation.make(:creator => @me, :board => @board, :reservation_dates => [
+        Reservation.make(:creator => @me, :board => @board, :reserved_dates => [
           UnavailableDate.make(:date => 3.days.from_now),
           UnavailableDate.make(:date => 5.days.from_now),
           UnavailableDate.make(:date => 7.days.from_now),
@@ -46,7 +46,7 @@ describe UnavailableDatesHelper do
         @board = Board.make(:creator => @someone_else)
    
         #reserved dates created by @me and @me is the current_user
-        Reservation.make(:creator => @me, :board => @board, :reservation_dates => [
+        Reservation.make(:creator => @me, :board => @board, :reserved_dates => [
           UnavailableDate.make(:date => 3.days.from_now),
           UnavailableDate.make(:date => 5.days.from_now),
           UnavailableDate.make(:date => 7.days.from_now),

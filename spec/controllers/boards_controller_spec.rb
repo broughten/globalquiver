@@ -129,7 +129,7 @@ describe BoardsController do
   end
 
   describe "anonymous user" do
-    it_should_require_authentication_for_actions :new, :edit, :create, :update, :destroy, :select_reservation_dates
+    it_should_require_authentication_for_actions :new, :edit, :create, :update, :destroy, :select_reserved_dates
   end
 
 end
