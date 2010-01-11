@@ -191,7 +191,7 @@ describe Board do
   it "should be able to tell if it has future reservations" do
     reserved_board = Board.make()
     unreserved_board = Board.make()
-    reservation = Reservation.make(:board=>reserved_board,:reservation_dates=>[UnavailableDate.make(:date=>2.days.from_now)])
+    reservation = Reservation.make(:board=>reserved_board,:reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now)])
     
     reserved_board.has_future_reservations.should be_true
     unreserved_board.has_future_reservations.should be_false
