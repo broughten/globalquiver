@@ -53,6 +53,18 @@
   <h2>Info</h2>
 
   <ul>
+    <% if current_user.is_a?(Surfer) %>
+      <li class="attr-name">Nickname</li>
+    <% else %>
+      <li class="attr-name">Name/ID</li>
+    <% end %>
+    <li class="value">
+      <%=h @board.name %>
+    </li>
+  </ul>
+  <div class="clear"></div>
+
+  <ul>
     <li class="attr-name">Maker</li>
     <li class="value">
       <%=h @board.maker %>
@@ -141,6 +153,7 @@
   </div>
   <div class="clear"></div>
   <% if !@board.description.nil? %>
+  <br/>
   <h2>Description</h2>
   <p class="description"><%= h @board.description %></p>
   <% end %>
