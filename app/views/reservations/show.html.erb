@@ -25,7 +25,18 @@
   <% end %>
 
 <div id="info-table">
-  <h2>Board Info</h2
+  <h2>Board Info</h2>
+  <ul>
+    <% if @reservation.board.creator.is_a?(Surfer) %>
+      <li class="attr-name">NickName</li>
+    <% else %>
+      <li class="attr-name">Name/ID</li>
+    <% end %>
+    <li class="value">
+      <%=h @reservation.board.name %>
+    </li>
+  </ul>
+  <div class="clear"></div>
   <ul>
     <li class="attr-name">Maker</li>
     <li class="value">
@@ -45,13 +56,21 @@
   <ul>
     <li class="attr-name">Name</li>
     <li class="value">
-      <%=h @reservation.board.creator.full_name %>
+      <%= link_to @reservation.board.creator.full_name, user_path(@reservation.board.creator.id) %><br/><% if current_user == @reservation.board.creator %>That's you!<% end %>
     </li>
   </ul>
   <div class="clear"></div>
   <br/>
 
-  <h2>Reservation Dates:</h2>
+  <h2>Reservation Holder Info</h2>
+    <li class="attr-name">Name</li>
+    <li class="value">
+      <%= link_to @reservation.creator.full_name, user_path(@reservation.creator.id) %><br/><% if current_user == @reservation.creator %>That's you!<% end %>
+    </li>
+  </ul>
+  <div class="clear"></div>
+  <br/>
+  <h2>Reservation Dates</h2>
 
   <%@reservation.reserved_dates.each do |reservation_date|%>
     <ul>

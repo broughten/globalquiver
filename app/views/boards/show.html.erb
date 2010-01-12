@@ -53,7 +53,7 @@
   <h2>Info</h2>
 
   <ul>
-    <% if current_user.is_a?(Surfer) %>
+    <% if @board.creator.is_a?(Surfer) %>
       <li class="attr-name">Nickname</li>
     <% else %>
       <li class="attr-name">Name/ID</li>
