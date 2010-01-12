@@ -1,4 +1,7 @@
 function addFlash(element) {
+  <% if !flash[:error].blank? %>
+    alert('<%= escape_javascript(flash.delete(:error)) %>');
+  <% else %>
   $("#" +element).parent().parent().before('<div class="flash board-flash"><div id="flash_notice"><p><%= escape_javascript(flash.delete(:notice)) %></p></div></div>');
 
   if ($("#" +element).children("#board_submit").val() == "Remove\nfrom\nquiver") {
@@ -6,7 +9,7 @@ function addFlash(element) {
   } else {
     $("#" +element).children("#board_submit").attr("value", "Remove\nfrom\nquiver");
   }
-
+  <% end %>
 }
 
 setTimeout(function() {

@@ -76,23 +76,6 @@ describe BoardsController do
       end
     end
     
-    describe "DELETE /boards (aka delete board)" do
-      before(:each) do
-        @temp_board = Board.make()
-      end
-      it "should try to find the board in question" do
-        Board.expects(:find).returns(@temp_board)
-        post 'destroy', :id=>@temp_board.id
-      end
-      it "should try to delete the board" do
-        Board.any_instance.expects(:destroy)
-       post 'destroy', :id=>@temp_board.id
-      end
-      it "should redirect to the root path" do
-        post 'destroy', :id=>@temp_board.id
-        response.should redirect_to root_path
-      end
-    end
     
     describe "PUT /boards (aka update board)" do
       before(:each) do
@@ -107,6 +90,13 @@ describe BoardsController do
         post 'update', :id=>@temp_board.id
         flash[:notice].should_not be_nil
         response.should redirect_to(board_path(@temp_board))
+      end
+      it "should not allow you to deactivate a board with reservations in the future" do
+        @request.env['HTTP_REFERER'] = root_path
+        Board.any_instance.stubs(:has_future_reservations).returns(true)
+        post 'update', :id=>@temp_board.id
+        flash[:error].should_not be_nil
+        response.should redirect_to(root_path)
       end
     end
     

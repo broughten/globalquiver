@@ -54,7 +54,11 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
 
     respond_to do |format|
-      if @board.update_attributes(params[:board])
+      if @board.has_future_reservations
+        flash[:error] = "This board cant be deactivated because it has upcoming reservations. Please contact the reservation holder(s) if this board is truly no longer available."
+        format.html { redirect_to(:back) }
+        format.js
+      elsif @board.update_attributes(params[:board])
         flash[:notice] = 'Board was successfully updated.'
         format.html { redirect_to(@board) }
         format.js
@@ -65,14 +69,5 @@ class BoardsController < ApplicationController
     end
   end
 
-  # DELETE /boards/1
-  def destroy
-    @board = Board.find(params[:id])
-    @board.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(root_path) }
-    end
-  end
 
 end
