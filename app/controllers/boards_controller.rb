@@ -63,6 +63,7 @@ class BoardsController < ApplicationController
         format.html { redirect_to(@board) }
         format.js
       else
+        flash[:error] = "Something bad happened and your changes weren't save. Please try again."
         format.html { render :action => "show" }
         format.js
       end

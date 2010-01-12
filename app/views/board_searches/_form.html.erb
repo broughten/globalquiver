@@ -1,6 +1,6 @@
-<div class="search-form-div">
-  <% form_for @board_search, :html => {:id => 'search_form' } do |f| %>
-    <%= f.error_messages %>
+<% form_for @board_search, :html => {:id => 'search_form' } do |f| %>
+  <%= f.error_messages %>
+  <div class="search-form-div">
     <p>
       <%= f.label :location_id, "Location:" %>
       <%= f.collection_select :location_id, @search_locations, :id, :to_s, {:prompt => true} %>
@@ -18,5 +18,6 @@
     <p>
       <%= f.submit "Search", :class => 'submitBtn'  %>
     </p>
-  <% end %>
-</div>
+  </div>
+<% end %>
+
