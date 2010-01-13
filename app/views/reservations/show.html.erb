@@ -33,7 +33,7 @@
       <li class="attr-name">Name/ID</li>
     <% end %>
     <li class="value">
-      <%=h @reservation.board.name %>
+      <%= link_to @reservation.board.name, board_path(@reservation.board) %>
     </li>
   </ul>
   <div class="clear"></div>
