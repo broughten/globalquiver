@@ -88,6 +88,15 @@ describe Board do
       board.should_not be_valid
       
     end
+
+    it "should validate name" do
+      board = Board.make_unsaved(:name => "Big Blue")
+      board.should be_valid
+
+      board.name = nil
+      board.should_not be_valid
+
+    end
     
     it "should validate maker" do
       board = Board.make_unsaved(:maker=>"Test Maker")

@@ -130,11 +130,11 @@ h1 {
   display:table-cell;
   vertical-align:middle;
   padding-left:10px;
-  height:40px;
   width:100px;
   background-color:#888888;
   color:white;
   border-right:6px solid white;
+  border-bottom:2px solid white;
 }
 
 .description {
@@ -145,11 +145,17 @@ h1 {
   font-size:1.5em;
   display:table-cell;
   vertical-align:middle;
-  height:40px;
+  height:54px;
   padding-left:10px;
   padding-right:10px;
   width:100px;
   background-color:#eeeeee;
+  border-bottom:2px solid white;
+}
+
+#val-span {
+  float:right;
+  width:100px;
 }
 
 #photos {

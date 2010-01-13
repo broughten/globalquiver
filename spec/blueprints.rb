@@ -13,6 +13,7 @@ Sham.define do
   name  { Faker::Lorem.words(1) }
   group_name {Faker::Lorem.words(2)}
   shop_name {Faker::Company.name}
+  board_name {Faker::Company.name}
   board_maker {Faker::Company.name}
   board_model {Faker::Lorem.words(1)}
   board_description {Faker::Lorem.words(10)}
@@ -128,6 +129,7 @@ SearchLocation.blueprint(:santa_barbara_ca) do
 end
 
 Board.blueprint() do
+  name {Sham.board_name}
   maker {Sham.board_maker}
   model {Sham.board_model}
   length {7}

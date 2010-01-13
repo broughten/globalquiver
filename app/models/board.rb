@@ -9,7 +9,7 @@ class Board < ActiveRecord::Base
   has_many :reserved_dates, :through=>:reservations, :source=>:reserved_dates
   has_many :black_out_dates, :class_name=>'UnavailableDate', :as=> :parent
 
-  validates_presence_of :maker, :style, :length, :location
+  validates_presence_of :name, :maker, :style, :length, :location
   validates_numericality_of :daily_fee, :on => :create
 
   accepts_nested_attributes_for :images

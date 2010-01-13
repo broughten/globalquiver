@@ -98,6 +98,7 @@ namespace :db do
 
     #Set up boards for surfer
     Board.populate 3 do |board|
+      board.name = Faker::Company.name
       board.maker = ['Channel Islands', 'Firewire', 'Hurley']
       board.model = Faker::Lorem.words(1)
       board.length = [100, 120, 200]
@@ -112,6 +113,7 @@ namespace :db do
 
     #Set up 4 boards for slater
     Board.populate 4 do |board|
+      board.name = Faker::Company.name
       board.maker = ['Channel Islands', 'Firewire', 'Hurley', 'Hobie']
       board.model = Faker::Lorem.words(1)
       board.length = [72, 70, 100, 74]
@@ -126,6 +128,7 @@ namespace :db do
 
     #Set up 2 boards for jordy
     Board.populate 2 do |board|
+      board.name = Faker::Company.name
       board.maker = ['Channel Islands', 'Firewire']
       board.model = Faker::Lorem.words(1)
       board.length = [72, 70]
@@ -140,6 +143,7 @@ namespace :db do
     
     #Set up boards for shop
     Board.populate 10 do |board|
+      board.name = Faker::Company.name
       board.maker = ['Hobie', 'Gordon & Smith', 'T&C Surf Designs', 'BIC Sport', 'Wave Riding Vehicles', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
       board.model = Faker::Lorem.words(1)
       board.length = [100, 120, 200]
@@ -154,6 +158,7 @@ namespace :db do
 
     #Set up 50 boards for killer dana
     Board.populate 50 do |board|
+      board.name = Faker::Company.name
       board.maker = ['Hobie', 'Gordon & Smith', 'T&C Surf Designs', 'BIC Sport', 'Wave Riding Vehicles', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
       board.model = Faker::Lorem.words(1)
       board.length = [72, 73, 71, 70, 100, 74, 75, 76, 77, 78, 79, 80]
@@ -168,6 +173,7 @@ namespace :db do
 
     #Set up 7 boards for hansens
     Board.populate 7 do |board|
+      board.name = Faker::Company.name
       board.maker = ['Hobie', 'Gordon & Smith', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
       board.model = Faker::Lorem.words(1)
       board.length = [72, 73, 71, 70, 100, 74, 75]
