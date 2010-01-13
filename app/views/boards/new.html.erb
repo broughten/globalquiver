@@ -29,7 +29,7 @@
 <div class="owners-instructions">
   <p>
     When you enter one of your extra surfboards below, it will be added to your quiver.
-    If someone wants to borrow or rent it, we'll send you an email.
+    If someone wants to <% if current_user.is_a?(Surfer) %>borrow or <% end %>rent it, we'll send you an email.
     You will then need to reply with pickup and payment instructions.
   </p>
 </div>
