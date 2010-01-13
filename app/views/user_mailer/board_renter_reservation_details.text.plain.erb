@@ -1,7 +1,39 @@
-<%= h @reservation.board.model%> by <%= h @reservation.board.maker%>
+Hi <%=  @reservation.creator.first_name %>,
 
-<%= h @reservation.board.creator.full_name%> at <%= h @reservation.board.creator.email%>
+You just made a reservation on Global Quiver. Thanks! The details of your reservation are below, but here are a few important things you should know:
+<% if @reservation.board.creator.is_a?(Surfer) %>
+-- The owner of the board knows you reserved it but doesn't know who you are or how to get the baord to you. You have to conact the owner at <%= @reservation.board.creator.email %> to figure out how to do the pickup and drop off.
+<% if @reservation.board.daily_fee != 0.00 %>-- You should plan on paying for your board in cash in advance unless the owner of the board tell you otherwise.<% end %>
+-- Please be cool. If you bust up a board and it's your fault, offer to pay for the repairs. The owner was doing you a favor to let you use it.
+-- Be on time, don't flake and call the owner if there's an issue. This community depends on a little bit of being responsible.<% else %>
+-- Make sure you know the shop's hours. It might be worth giving them a call if you have any questions.
+-- Global Quiver doesn't manage or track surf shop rental policies. Be ready to pay a deposit, or pay in cash, or use a credit card, and in general do what the shop requires.
+-- Please be cool. Don't flake on your reservations and call the shop if there's an issue. This community depends on a little bit of being responsible.<% end %>
 
-<% @reservation.reserved_dates.each do |reservation_date| %>
-	<%=h reservation_date.date%>,
-<% end %>
+OK. Here are the details of your reservation:
+
+  Board Name:  <%= h @reservation.board.name%>
+  Board Model: <%= h @reservation.board.model%>
+  Board Maker: <%= h @reservation.board.maker%>
+
+  <% if @reservation.board.creator.is_a?(Surfer) %>
+  Board Owner: <%= h @reservation.board.creator.full_name%>
+  Owner Email: <%= h @reservation.board.creator.email%>
+  <% else %>
+  Board Shop:  <%= h @reservation.board.creator.full_name%>
+  Shop Email:  <%= h @reservation.board.creator.email%>
+  <% end %>
+
+  Reservation Date(s):
+    <% @reservation.reserved_dates.each do |reservation_date| %><%=h reservation_date.date%>
+    <% end %>
+    
+  And possibly the most important part.... Board Pickup Location:
+    Address: <%= h @reservation.board.location.street %>
+    City:    <%= h @reservation.board.location.locality %>
+    State:   <%= h @reservation.board.location.region %>
+    Zip:     <%= h @reservation.board.location.postal_code %>
+
+Thanks for using GlobalQuiver to plan your surf trip.
+--Jon and Mike
+www.GlobalQuiver.com

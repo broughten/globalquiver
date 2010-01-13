@@ -189,6 +189,11 @@ h1 {
   padding-right:25px;
 }
 
+#rent-me-link-too{
+  font-size:3.8em;
+  padding-bottom:10px;
+}
+
 #show-board-header {
   float:left;
 }

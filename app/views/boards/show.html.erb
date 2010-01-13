@@ -178,18 +178,22 @@
 	<%end%>  
 </div>
 <div class="clear"></div>
-  <% if @board.user_is_owner(current_user) %>
-    <h2>Which days is this board <strong>not</strong> available?</h2>
-    <h3>Select the days you won't be able to rent or lend this board and click the button below.
-    <br>You can always return to change these dates later.</h3>
-    <% form_for @board do |f| %>
-      <%= f.error_messages %>
-      <%= render :partial => '/unavailable_dates/form', :locals => { :board => @board } %>
-      <div id="submit-unavailable-dates">
-        <p>
-          <%= f.submit "Save Dates", :class => 'submitBtn' %>
-        </p>
-      </div>
-    <% end %>
+<% if @board.user_is_owner(current_user) %>
+  <h2>Which days is this board <strong>not</strong> available?</h2>
+  <h3>Select the days you won't be able to rent or lend this board and click the button below.
+  <br>You can always return to change these dates later.</h3>
+  <% form_for @board do |f| %>
+    <%= f.error_messages %>
+    <%= render :partial => '/unavailable_dates/form', :locals => { :board => @board } %>
+    <div id="submit-unavailable-dates">
+      <p>
+        <%= f.submit "Save Dates", :class => 'submitBtn' %>
+      </p>
+    </div>
   <% end %>
-
+<% end %>
+<% if !@board.user_is_owner(current_user) && @board.active? %>
+  <div id="rent-me-link-too">
+    <%= link_to "Reserve This Board!", new_board_reservation_path(@board) %>
+  </div>
+<% end %>
