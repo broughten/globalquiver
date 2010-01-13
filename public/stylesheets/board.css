@@ -160,7 +160,6 @@ h1 {
 
 #photos {
   float:right;
-  margin-right:20px;
 }
 
 .photo {
@@ -192,7 +191,6 @@ h1 {
 #rent-me-link{
   float:right;
   font-size:3.8em;
-  padding-right:25px;
 }
 
 #rent-me-link-too{

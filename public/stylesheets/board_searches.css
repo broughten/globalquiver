@@ -23,7 +23,6 @@ h1 {
   margin-bottom:10px;
   float:left;
   height:290px;
-  padding-right:10px;
   width:240px;
   border-right:dotted 1px;
 }
@@ -37,7 +36,6 @@ h1 {
   width:515px;
   float:right;
   padding-right:40px;
-  padding-left:10px;
 }
 
 #twitter-link {
