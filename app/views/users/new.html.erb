@@ -5,9 +5,9 @@
 
 <h1>Signup</h1>
 
-<h3>Already have an account?</h3>
+<h3 id="registered-user-why">Already have an account?</h3>
  <%= link_to 'Login', new_session_path, :class=>'call_to_action' %>
-<h3>As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
+<h3 id="registered-user-why">As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
 
 <% form_for :user,
             :url => users_url(:protocol => env_ssl_protocol),

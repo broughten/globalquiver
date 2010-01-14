@@ -9,7 +9,7 @@ $(document).ready(function(){
     toggleOptionalBoardFields();
   });
 
-  $(':input',document.new_board_form).bind("change", function() {
+  $('input',document.new_board_form).bind("change", function() {
     setConfirmUnload(true); // Prevent accidental navigation away
   });
 

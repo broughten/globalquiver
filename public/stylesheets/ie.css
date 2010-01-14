@@ -1,1 +1,8 @@
 /* put any css in here that is specific to ie */
+.terms-checkbox {
+  padding-right:70px;
+}
+
+div .board-flash {
+  width:545px;
+}

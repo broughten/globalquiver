@@ -258,7 +258,7 @@ a.call_to_action{
 #mainContent h3{
   margin: 10px 0 5px 0;
   color: #969696;
-  font-size: 1.8em;
+  font-size: 18px;
 }
 
 
@@ -287,7 +287,7 @@ a.call_to_action{
 #sideBar{
   float: right;
   margin: 10px 0px 20px 0;
-  width: 290px;
+  width: 223px;
 }
 #counter{
   display:table-cell;
@@ -319,7 +319,7 @@ a.call_to_action{
 #button-area {
     margin: 25px 0 10px 0px;
     float:left;
-    width:520px;
+    width:580px;
     font-size:25px;
     text-align:center;    
 }
@@ -352,7 +352,7 @@ a.call_to_action{
   height:94px;
   background-color:#DDDDDD;
   border:solid 1px;
-  margin: 0 10px 0 0;
+  margin: 0 35px 0 0;
   float:right;
   padding-top:40px;
 }
@@ -378,7 +378,7 @@ a.call_to_action{
 #how-button {
   height:48px;
   background-color:#5ACBF9;
-  margin: 0 10px 0 0;
+  margin: 0 35px 0 0;
   float:right;
   padding-top:17px;
 }
@@ -392,7 +392,7 @@ a.call_to_action{
 #question-buttons{
   margin: 17px 0 0 0;
   float:left;
-  width:520px;
+  width:580px;
 
 }
 

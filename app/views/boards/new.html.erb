@@ -37,7 +37,7 @@
 <h2>First, where is this board?</h2>
 <p>
   We need to know where your board is so that whoever rents or borrows it will be able to find it, pick it up, and use it
-<p>
+</p>
 
 <%= render :partial => '/board_locations/list' %>
 
@@ -81,7 +81,7 @@
         <%= link_to "Manage board styles", styles_path %>
       <% end %>
     </p>
-    <p><a id='hide_show_optional_fields' href="javascript:void(0)"><span id='visibility_indicator'>Show</span> Optional Fields</a>
+    <p><a id='hide_show_optional_fields' href="#" onclick="javascript:void(0); return false;"><span id='visibility_indicator'>Show</span> Optional Fields</a>
     </p>
     <div id="optional_fields" style="display:none;">
       <p>

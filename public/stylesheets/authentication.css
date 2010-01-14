@@ -7,6 +7,9 @@
 */
 
 /* overall label css for form alignment */
+#mainContent #registered-user-why {
+  font-size:17px;
+}
 .user-fields label {
   width:5em;
   float: left;
@@ -24,8 +27,14 @@
   width:9em;
 }
 
-.user-fields input {
+.user-fields input[type='text'],.user-fields input[type='password'] {
   margin-bottom:1em;
+  width:200px;
+}
+
+.user-fields input[type='checkbox'] {
+  margin-bottom:1em;
+  width:12px;
 }
 
 
@@ -53,7 +62,7 @@
 
 .terms-checkbox {
   float:left;
-  padding-right:91px;
+  padding-right:60px;
 }
 
 
