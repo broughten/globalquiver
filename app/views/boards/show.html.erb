@@ -186,7 +186,7 @@
     <%= render :partial => '/unavailable_dates/form', :locals => { :board => @board } %>
     <div id="submit-unavailable-dates">
       <p>
-        <%= f.submit "Save Dates", :class => 'submitBtn' %>
+        <%= f.submit "Save Dates", :class => 'submitBtn', :id => "save_board_dates" %>
       </p>
     </div>
   <% end %>
