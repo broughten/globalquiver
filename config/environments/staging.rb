@@ -21,8 +21,21 @@ config.action_view.cache_template_loading            = true
 # Enable serving of images, stylesheets, and javascripts from an asset server
 # config.action_controller.asset_host = "http://assets.example.com"
 
-# Disable delivery errors, bad email addresses will be ignored
-# config.action_mailer.raise_delivery_errors = false
+# Tell us if the mailer can't send
+config.action_mailer.raise_delivery_errors = true
+
+# Set delivery method to :smtp, :sendmail, or :test
+config.action_mailer.delivery_method = :sendmail
+
+# these options are only needed if you chose :smtp delivery
+#config.action_mailer.smtp_settings = {
+#  :address            => "smtp.engineyard.com",
+#  :port               => 25,
+#  :domain             => 'engineyard.com',
+#  :authentication     => :login,
+#  :username           => 'make@samyamatech.com',
+#  :password           => 'broughten'
+#}
 
 # Enable threaded mode
 # config.threadsafe!
