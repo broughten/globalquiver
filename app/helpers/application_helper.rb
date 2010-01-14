@@ -25,6 +25,14 @@ module ApplicationHelper
     current_tab?(keyword) ? ' active' : ''
   end
 
+  def needs_sidebar?
+    if current_tab?("About") || current_tab?("Blog") || current_tab?("FAQ")
+      return false
+    else
+      return true
+    end
+  end
+
   def current_tab?(keyword)
     current_page?(page_path(keyword)) || tab_conditions(keyword).any?(&:call)
   end

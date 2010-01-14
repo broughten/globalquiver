@@ -4,13 +4,15 @@
 <div id="mainContent">
   <%= render :partial => 'layouts/flashes' %>
   <%= yield %>
-  <% if logged_in? && current_user.is_a?(Surfer) %>
-    <%= render :partial => 'pages/surfer_sidebar' %>
-  <% else %>
-    <% if logged_in? && current_user.is_a?(Shop) %>
-      <%= render :partial => 'pages/shop_sidebar' %>
+  <% if needs_sidebar? %>
+    <% if logged_in? && current_user.is_a?(Surfer) %>
+      <%= render :partial => 'pages/surfer_sidebar' %>
     <% else %>
-      <%= render :partial => 'pages/sidebar' %>
+      <% if logged_in? && current_user.is_a?(Shop) %>
+        <%= render :partial => 'pages/shop_sidebar' %>
+      <% else %>
+        <%= render :partial => 'pages/sidebar' %>
+      <% end %>
     <% end %>
   <% end %>
   <%= render :partial => 'layouts/footer' %>
