@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
   
   def board_renter_reservation_details(reservation)
     recipients(reservation.creator.email)
-    from("GlobalQuiver <info@globalquiver.com>")
+    from("GlobalQuiver <reservations@globalquiver.com>")
     subject("New Board Reservation Details")
     sent_on(Time.now)    
     body({:reservation => reservation})
