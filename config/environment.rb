@@ -26,6 +26,8 @@ Rails::Initializer.run do |config|
     # The next two gems are used for geocoding
     config.gem 'graticule'
     config.gem 'acts_as_geocodable'
+    # gem used to easily define cron jobs and create crontab file
+    config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
