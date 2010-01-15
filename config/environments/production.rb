@@ -33,3 +33,5 @@ config.action_mailer.delivery_method = :sendmail
 
 # Enable threaded mode
 # config.threadsafe!
+
+Geocode.geocoder = Graticule.service(:google).new 'ABQIAAAA1hU_SVFhmMhTRhqw95_GmRQatKjDE1e3MudaGM46DqRMTLUKRRTlql2KI1LCWDcDmWTBqdsZgGkSHQ'
