@@ -38,4 +38,7 @@ config.gem "ZenTest" #Gives us access to autospec.
 #rack-test is used for testing rack based apps.  See http://github.com/brynary/rack-test for details.
 config.gem 'rack-test', :lib => false
 
-Geocode.geocoder = Graticule.service(:google).new 'ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ'
+config.after_initialize do
+  #test
+  Geocode.geocoder = Graticule.service(:google).new 'ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ'
+end
