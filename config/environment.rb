@@ -47,3 +47,6 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+#the default geocoder is the production one. Hopefully this will get successfully overwritten in staging, test and development
+Geocode.geocoder = Graticule.service(:google).new 'ABQIAAAA1hU_SVFhmMhTRhqw95_GmRQatKjDE1e3MudaGM46DqRMTLUKRRTlql2KI1LCWDcDmWTBqdsZgGkSHQ'
