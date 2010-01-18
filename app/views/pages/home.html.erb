@@ -12,6 +12,34 @@
     $("div#how-button").click(function(){
       window.location=$(this).find("a").attr("href"); return false;
     });
+
+    $("#newest-shop").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+
+    $("#newest-shop").mouseover(function() {
+      $("#newest-shop").css("background-color","#efefef");
+      $("#newest-shop").css("border","solid 2px white");
+    });
+
+    $("#newest-shop").mouseout(function() {
+      $("#newest-shop").css("background-color","#ffffff");
+      $("#newest-shop").css("border","solid 2px #333333");
+    });
+
+     $("#most-popular-board").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+
+    $("#most-popular-board").mouseover(function() {
+      $("#most-popular-board").css("background-color","#efefef");
+      $("#most-popular-board").css("border","solid 2px white");
+    });
+
+    $("#most-popular-board").mouseout(function() {
+      $("#most-popular-board").css("background-color","#ffffff");
+      $("#most-popular-board").css("border","solid 2px #333333");
+    });
   });
 
 <% end %>
