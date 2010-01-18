@@ -29,6 +29,7 @@ describe PagesController do
   describe "anonymous user" do
     it "should show home page on root path for anonymous user" do
       get "show", :id => 'home'
+      
       response.should render_template("home")
     end
   end

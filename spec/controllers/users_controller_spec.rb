@@ -58,9 +58,9 @@ describe UsersController do
       response.should redirect_to(login_path)
     end
 
-    it "should redirect to login screen on show" do
-      get :show
-      response.should redirect_to(login_path)
+    it "should show the user on show" do
+      get :show, :id=>Surfer.make.id
+      response.should render_template("show")
     end
 
     describe "creating a new user" do

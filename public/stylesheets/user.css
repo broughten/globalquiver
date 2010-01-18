@@ -81,6 +81,15 @@ root {
   margin-bottom:5px;
 }
 
+#hidden-user-stuff {
+  width:343px;
+  height:50px;
+  padding-top:15px;
+  padding-left:10px;
+  background-color:#eeeeee;
+  font-size:16px;
+}
+
 .user-info-table {
   float:right;
   margin-right:40px;

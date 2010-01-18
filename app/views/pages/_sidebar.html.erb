@@ -1,6 +1,31 @@
     <div id="sideBar">
-      <div id="sidebar-spacer"></div>
-      <div id="home-page-board">
+      <div id="feature-holder">
+        <span class="feature-header">Latest shop to join</span>
+        <div id="newest-shop" class="feature">
+          <div class="feature-image">
+            <% shop = most_recent_shop %>
+            <div id="centering-div">
+              <%= image_tag(shop.image.data.url(:thumb)) unless shop.nil? or shop.image.nil? %>
+            </div>
+          </div>
+          <div class="feature-desc">
+            <span class="bold"><%= link_to shorten(shop.name,15), user_path(shop) unless shop.nil? %></span><br/><br/>
+            Has <span class="bold"><%= link_to shop.boards.active.length, user_path(shop) unless shop.nil? %></span> boards listed
+          </div>
+        </div>
+        <span class="feature-header">Most popular board</span>
+        <div id="most-popular-board" class="feature">
+          <div class="feature-image">
+            <div id="centering-div">
+              <% board = most_popular_board %>
+              <%= image_tag(board.images.first.data.url(:thumb)) unless board.nil? %>
+            </div>
+          </div>
+          <div class="feature-desc">
+            <span class="bold">"<%= link_to shorten(board.name,15), board_path(board) unless board.nil? %>"</span><br/><br/>
+            Listed by: <span class="bold"><%= link_to shorten(board.creator.full_name,20), user_path(board.creator) unless board.nil? %></span>
+          </div>
+        </div>
       </div>
     </div><!-- #sideBar -->
 

@@ -268,7 +268,61 @@ a.call_to_action{
   height:15px;
 }
 
+#feature-holder {
+  background-color:#666666;
+  padding-top:5px;
+  height:255px;
+  width:223px;
+}
 
+.feature {
+ background-color:white;
+ width:217px;
+ margin-left:3px;
+ margin-top:5px;
+ margin-bottom:5px;
+ height:100px;
+ vertical-align: bottom;
+}
+
+.feature-header {
+  padding-top:5px;
+  padding-left:10px;
+  font-size:16px;
+  color:white;;
+}
+
+.feature-image {
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  float:left;
+  height:100px;
+  width:100px;
+  text-align:center;
+  vertical-align: middle;
+  margin-right:3px;
+}
+
+#centering-div {
+  #position:absolute;
+  #top:50%;
+  display:table-cell;
+  vertical-align:middle;
+}
+
+#centering-div img {
+  #position:relative;
+  #top:-50%;
+}
+
+.feature-desc {
+  padding-top:15px;
+  font-size: 15px;
+}
+.bold {
+  font-weight: bold;
+}
 #photo{
   height:223px;
   width:223px;
@@ -317,7 +371,7 @@ a.call_to_action{
 
 
 #button-area {
-    margin: 25px 0 10px 0px;
+    margin: 20px 0 10px 0px;
     float:left;
     width:580px;
     font-size:25px;
@@ -364,10 +418,10 @@ a.call_to_action{
 
 #why-button {
   display:block;
-  height:57px;
+  height:67px;
   background-color:#5ACBF9;
   float:left;
-  padding-top:8px;
+  padding-top:13px;
 }
 
 #why-button:hover {
@@ -376,11 +430,11 @@ a.call_to_action{
 
 
 #how-button {
-  height:48px;
+  height:58px;
   background-color:#5ACBF9;
   margin: 0 35px 0 0;
   float:right;
-  padding-top:17px;
+  padding-top:23px;
 }
 
 #how-button:hover {

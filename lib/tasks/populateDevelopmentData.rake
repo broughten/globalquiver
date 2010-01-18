@@ -1,12 +1,15 @@
 #require 'paperclip'
 
 def create_images_for_board(board,photo_path)
-  Dir.glob(photo_path).entries.each do |e|
+  4.times do
+    
     image = Image.new
     image.owner = board
-    image.data = File.open(e)
+    image.data = File.open(Dir.glob(photo_path).entries.rand)
     image.save!
+
   end
+
 end
 
 def create_image_for_user(user,photo_path)
@@ -47,21 +50,24 @@ namespace :db do
       :password_confirmation=>"testing", :email=>"slater@test.com", :terms_of_service=>"true")
     jordy  = Surfer.create(:first_name=>"Jordy", :last_name=>"Smith", :password=>"testing",
       :password_confirmation=>"testing", :email=>"jordy@test.com", :terms_of_service=>"true")
-    shop = Shop.create(:name=>"Dev Shop",   :password=>"testing", 
-        :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true")
-    hansens = Shop.create(:name=>"Hansen's Surf Shop",   :password=>"testing",
-        :password_confirmation=>"testing", :email=>"hansens@test.com", :terms_of_service=>"true")
     killerdana = Shop.create(:name=>"Killer Dana Surf Shop",   :password=>"testing",
-        :password_confirmation=>"testing", :email=>"killerdana@test.com", :terms_of_service=>"true")
+      :password_confirmation=>"testing", :email=>"killerdana@test.com", :terms_of_service=>"true")
+    shop = Shop.create(:name=>"Dev Shop",   :password=>"testing",
+      :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true")
+    hansens = Shop.create(:name=>"Hansen's Surf Shop",   :password=>"testing",
+      :password_confirmation=>"testing", :email=>"hansens@test.com", :terms_of_service=>"true")
     emptySurfer = Surfer.create(:first_name=>"Empty", :last_name=>"Surfer", :password=>"testing", 
-          :password_confirmation=>"testing", :email=>"emptysurfer@test.com", :terms_of_service=>"true")
+      :password_confirmation=>"testing", :email=>"emptysurfer@test.com", :terms_of_service=>"true")
     adminSurfer = Surfer.create(:first_name=>"Admin", :last_name=>"Surfer", :password=>"testing", 
-                :password_confirmation=>"testing", :email=>"adminsurfer@test.com", :terms_of_service=>"true")
+      :password_confirmation=>"testing", :email=>"adminsurfer@test.com", :terms_of_service=>"true")
 
     #give Jordy, Kelly, and devSurfer images
     create_image_for_user(jordy, RAILS_ROOT + '/spec/fixtures/images/users/jordy.png')
     create_image_for_user(slater, RAILS_ROOT + '/spec/fixtures/images/users/slater.png')
     create_image_for_user(surfer, RAILS_ROOT + '/spec/fixtures/images/users/deSouza.png')
+
+    #give killer dana an image
+    create_image_for_user(killerdana, RAILS_ROOT + '/spec/fixtures/images/users/killerdana.png')
 
 
     morning = PickupTime.create(:name => "Morning")
@@ -187,7 +193,7 @@ namespace :db do
     end
     
     Board.find(:all).each_with_index do |board, index|
-      create_images_for_board(board,RAILS_ROOT + '/spec/fixtures/images/boards/*') if (index % 4 == 0)
+      create_images_for_board(board,RAILS_ROOT + '/spec/fixtures/images/boards/*')
     end
     
     Reservation.create(:creator=>surfer,:updater=>surfer,
