@@ -71,10 +71,10 @@ h1 {
 }
 
 .board-owner {
-  width:452px;
+  width:449px;
   padding-top:0px;
   height:25px;
-  margin-bottom:1px;
+  margin-bottom:2px;
   padding-left:20px;
   background-color:#5ACBF9;
   color:#333333;

@@ -15,7 +15,7 @@ $(document).ready(function() {
 <% end %>
 <ul id="list-table">
   <li class="board-link<%=board.id%> pic">
-    <p>
+    <div id="centering-div">
       <%= link_to "", board_path(board)%>
       <% if board.images.first.nil? %>
         <span class="muted-text">No Photo</span>
@@ -25,7 +25,7 @@ $(document).ready(function() {
         <%= image_tag(board.images.first.data.url(:thumb)) if !board.images.empty? %>
     
       <% end %>
-    </p>
+    </div>
   </li>
   <li class="board-link<%=board.id%> model">
     <p>

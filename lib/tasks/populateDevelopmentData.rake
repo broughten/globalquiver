@@ -78,8 +78,11 @@ namespace :db do
 
     # Set up Style data
     longboard = Style.create(:name=>"longboard")
-    shortboard = Style.create(:name=>"shortboard")
+    thruster = Style.create(:name=>"thruster")
     fish = Style.create(:name=>"fish")
+    gun = Style.create(:name=>"gun")
+    funboard = Style.create(:name=>"funboard")
+    non_standard = Style.create(:name=>"non-standard")
     
     #Set up location data
     surferLocation = BoardLocation.create(:street=>"233 W Micheltorena St", :locality=>"Santa Barbara", 
@@ -88,8 +91,8 @@ namespace :db do
         :region=>"FL", :postal_code=>"32084", :country=>"USA", :creator=>slater, :updater=>slater)
     jordyLocation = BoardLocation.create(:street=>"5283 Los Robles Dr", :locality=>"Carlsbad",
         :region=>"CA", :postal_code=>"92008", :country=>"USA", :creator=>jordy, :updater=>jordy)
-    shopLocation = BoardLocation.create(:street=>"13005 Lowell Blvd", :locality=>"Westminster",
-        :region=>"CO", :postal_code=>"80031", :country=>"USA", :creator=>shop, :updater=>shop)
+    shopLocation = BoardLocation.create(:street=>"1454 48th Ave", :locality=>"San Francisco",
+        :region=>"CA", :postal_code=>"94122", :country=>"USA", :creator=>shop, :updater=>shop)
     killerdanaLocation = BoardLocation.create(:street=>"24470 Del Prado", :locality=>"Dana Point",
         :region=>"CA", :postal_code=>"92629", :country=>"USA", :creator=>killerdana, :updater=>killerdana)
     hansensLocation = BoardLocation.create(:street=>"1105 So Coast Highway 101", :locality=>"Encinitas",
@@ -97,20 +100,20 @@ namespace :db do
 
     # Set up some search locations
     SearchLocation.create(:locality=>"Santa Barbara", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
-    SearchLocation.create(:locality=>"Westminster", :region=>"CO", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
+    SearchLocation.create(:locality=>"San Fransico", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
     SearchLocation.create(:locality=>"San Diego", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
     SearchLocation.create(:locality=>"St Augustine", :region=>"FL", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
     SearchLocation.create(:locality=>"Dana Point", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
 
     #Set up boards for surfer
     Board.populate 3 do |board|
-      board.name = Faker::Company.name
-      board.maker = ['Channel Islands', 'Firewire', 'Hurley']
-      board.model = Faker::Lorem.words(1)
-      board.length = [100, 120, 200]
-      board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.name = ['Art', 'Bobby', 'Child Seat', 'Dropper Inner', 'Eat Me', 'Franks Legend', 'Ghost Board', 'Hippy Board', 'It Board', 'Just a Board', 'Killer', 'Life', 'Manboard', 'No Name', 'Occys Revenge', 'Pounder', 'Quick', 'Rail Rider', 'Slopper', 'Tubs', 'Undermind', 'Velvet Sea', 'X', 'Your Board', 'Zoo Board'].rand
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
+      board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
+      board.length = [100, 120, 200].rand
+      board.style_id = [longboard.id, thruster.id, fish.id, gun.id, funboard.id, non_standard.id].rand
       board.description = Faker::Lorem.sentences(4)
-      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
+      board.daily_fee = [0,30,40,50,20].rand
       board.creator_id = surfer.id
       board.updater_id = surfer.id
       board.location_id = surferLocation.id
@@ -119,13 +122,13 @@ namespace :db do
 
     #Set up 4 boards for slater
     Board.populate 4 do |board|
-      board.name = Faker::Company.name
-      board.maker = ['Channel Islands', 'Firewire', 'Hurley', 'Hobie']
-      board.model = Faker::Lorem.words(1)
-      board.length = [72, 70, 100, 74]
-      board.style_id = [longboard.id, shortboard.id, fish.id]
+      board.name = ['Art', 'Bobby', 'Child Seat', 'Dropper Inner', 'Eat Me', 'Franks Legend', 'Ghost Board', 'Hippy Board', 'It Board', 'Just a Board', 'Killer', 'Life', 'Manboard', 'No Name', 'Occys Revenge', 'Pounder', 'Quick', 'Rail Rider', 'Slopper', 'Tubs', 'Undermind', 'Velvet Sea', 'X', 'Your Board', 'Zoo Board'].rand
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
+      board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
+      board.length = [72, 70, 100, 74].rand
+      board.style_id = [longboard.id, thruster.id, fish.id, gun.id, funboard.id, non_standard.id].rand
       board.description = Faker::Lorem.sentences(4)
-      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
+      board.daily_fee = [0,30,40,50,20].rand
       board.creator_id = slater.id
       board.updater_id = slater.id
       board.location_id = slaterLocation.id
@@ -134,12 +137,13 @@ namespace :db do
 
     #Set up 2 boards for jordy
     Board.populate 2 do |board|
-      board.name = Faker::Company.name
-      board.maker = ['Channel Islands', 'Firewire']
-      board.model = Faker::Lorem.words(1)
+      board.name = ['Art', 'Bobby', 'Child Seat', 'Dropper Inner', 'Eat Me', 'Franks Legend', 'Ghost Board', 'Hippy Board', 'It Board', 'Just a Board', 'Killer', 'Life', 'Manboard', 'No Name', 'Occys Revenge', 'Pounder', 'Quick', 'Rail Rider', 'Slopper', 'Tubs', 'Undermind', 'Velvet Sea', 'X', 'Your Board', 'Zoo Board'].rand
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
+      board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
+      board.length = [72, 70, 100, 74].rand
       board.length = [72, 70]
-      board.style_id = [shortboard.id, fish.id]
-      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
+      board.style_id = [longboard.id, thruster.id, fish.id, gun.id, funboard.id, non_standard.id].rand
+      board.daily_fee = [0,30,40,50,20].rand
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = jordy.id
       board.updater_id = jordy.id
@@ -149,12 +153,12 @@ namespace :db do
     
     #Set up boards for shop
     Board.populate 10 do |board|
-      board.name = Faker::Company.name
-      board.maker = ['Hobie', 'Gordon & Smith', 'T&C Surf Designs', 'BIC Sport', 'Wave Riding Vehicles', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
-      board.model = Faker::Lorem.words(1)
-      board.length = [100, 120, 200]
-      board.style_id = [longboard.id, shortboard.id, fish.id]
-      board.daily_fee = ["$0.00","$20.00","$30.00","$40.00","$50.00"]
+      board.name = ['1234123','1234124','1234125','1234126','1234127','1234128','1234129','1234130','1234131','1234132','1234133','1234134','1234135','1234136','1234137','1234138','1234139','1234140','1234141','1234142','1234143','1234144','1234145','1234146','1234147','1234148','1234149'].rand
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
+      board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
+      board.length = [72, 70, 100, 74].rand
+      board.style_id = [longboard.id, thruster.id, fish.id, gun.id, funboard.id, non_standard.id].rand
+      board.daily_fee = [0,30,40,50,20].rand
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = shop.id
       board.updater_id = shop.id
@@ -164,12 +168,12 @@ namespace :db do
 
     #Set up 50 boards for killer dana
     Board.populate 50 do |board|
-      board.name = Faker::Company.name
-      board.maker = ['Hobie', 'Gordon & Smith', 'T&C Surf Designs', 'BIC Sport', 'Wave Riding Vehicles', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
-      board.model = Faker::Lorem.words(1)
-      board.length = [72, 73, 71, 70, 100, 74, 75, 76, 77, 78, 79, 80]
-      board.style_id = [longboard.id, shortboard.id, fish.id]
-      board.daily_fee = ["$20.00","$30.00","$40.00","$50.00"]
+      board.name = ['1234123','1234124','1234125','1234126','1234127','1234128','1234129','1234130','1234131','1234132','1234133','1234134','1234135','1234136','1234137','1234138','1234139','1234140','1234141','1234142','1234143','1234144','1234145','1234146','1234147','1234148','1234149'].rand
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
+      board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
+      board.length = [72, 73, 71, 70, 100, 74, 75, 76, 77, 78, 79, 80].rand
+      board.style_id = [longboard.id, thruster.id, fish.id, gun.id, funboard.id, non_standard.id].rand
+      board.daily_fee = [0,30,40,50,20].rand
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = killerdana.id
       board.updater_id = killerdana.id
@@ -179,12 +183,12 @@ namespace :db do
 
     #Set up 7 boards for hansens
     Board.populate 7 do |board|
-      board.name = Faker::Company.name
-      board.maker = ['Hobie', 'Gordon & Smith', 'Rusty', 'Proctor Surfboards', 'Bear Surfboards', 'Yater Surfboards', 'Aloha Surfboards']
-      board.model = Faker::Lorem.words(1)
-      board.length = [72, 73, 71, 70, 100, 74, 75]
-      board.style_id = [longboard.id, shortboard.id, fish.id]
-      board.daily_fee = ["$20.00","$30.00","$40.00","$50.00"]
+      board.name = ['1234123','1234124','1234125','1234126','1234127','1234128','1234129','1234130','1234131','1234132','1234133','1234134','1234135','1234136','1234137','1234138','1234139','1234140','1234141','1234142','1234143','1234144','1234145','1234146','1234147','1234148','1234149'].rand
+      board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
+      board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
+      board.length = [72, 73, 71, 70, 100, 74, 75].rand
+      board.style_id = [longboard.id, thruster.id, fish.id, gun.id, funboard.id, non_standard.id].rand
+      board.daily_fee = [0,30,40,50,20].rand
       board.description = Faker::Lorem.sentences(4)
       board.creator_id = hansens.id
       board.updater_id = hansens.id

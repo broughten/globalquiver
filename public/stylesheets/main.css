@@ -274,7 +274,8 @@ a.call_to_action{
 
 
 #most-popular-board {
-  border: solid 2px #333333;
+  border-color: #333333;
+  border: solid 2px;
 }
 
 #feature-holder {

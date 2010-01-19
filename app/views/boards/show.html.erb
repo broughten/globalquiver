@@ -162,19 +162,20 @@
 
 <div id="photos">
   <h2>Photos</h2>
-
-	<%(0...Board::MAX_IMAGES).each do |index|%>
-  <div class="photo">
-		<% if @board.images[index].nil? %>
-	    No Photo
-	  <% else %>
-	    <a class="large_board_image" href="<%= @board.images[index].data.url(:original)%>"><%= image_tag @board.images[index].data.url(:show_page), :alt => "Image #{index + 1}" %></a>
-	  <% end %>		
-  </div>
-	<% if (index % 2 == 1) %>
-	<div class="clear"></div>
-	<% end %>		
-	<%end%>  
+  <%(0...Board::MAX_IMAGES).each do |index|%>
+    <div class="photo <% if @board.images[index].nil? %>no-photo<% end %>">
+      <div id="centering-div">
+        <% if @board.images[index].nil? %>
+          No Photo
+        <% else %>
+          <a class="large_board_image" href="<%= @board.images[index].data.url(:original)%>"><%= image_tag @board.images[index].data.url(:show_page), :alt => "Image #{index + 1}" %></a>
+        <% end %>
+      </div>
+    </div>
+    <% if (index % 2 == 1) %>
+      <div class="clear"></div>
+    <% end %>
+  <%end%>
 </div>
 <div class="clear"></div>
 <% if @board.user_is_owner(current_user) %>
