@@ -28,6 +28,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :blog_theme
 
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.lost_password '/lost_password', :controller => 'users', :action => 'lost_password'
+  map.reset_password 'reset_password/:reset_code', :controller => 'users', :action => 'reset_password'
   map.with_options :controller => 'sessions'  do |m|
     m.login  '/login',  :action => 'new'
     m.logout '/logout', :action => 'destroy'

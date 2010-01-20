@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   
-  before_filter :login_required, :except => [:show, :new, :create]
+  before_filter :login_required, :except => [:show, :new, :create, :lost_password, :reset_password]
+  before_filter :get_partial_user_from_session, :only => [:new, :lost_password]
+  after_filter :save_partial_user_in_session, :only => [:new, :lost_password]
 
   # render new.rhtml
   def new
@@ -56,4 +58,54 @@ class UsersController < ApplicationController
     end
   end
 
+  def lost_password
+   case request.method
+   when :post
+     @user = User.find_by_email(params[:user][:email])
+     unless @user.blank?
+       @user.create_password_reset_code
+       flash[:notice] = "Reset code sent to #{params[:user][:email]}"
+       redirect_back_or_default('/')
+     else
+       flash[:error] = "Please enter a valid email address"
+     end
+   when :get
+     @user = User.new
+   end
+  end
+
+  def reset_password
+    @user = User.find_by_password_reset_code(params[:reset_code]) unless params[:reset_code].nil?
+    if !@user
+      flash[:error] = "Reset password token invalid, please contact support."
+      redirect_to('/')
+      return
+    else
+      @user.crypted_password = nil
+    end
+    if request.post?
+     if @user.update_attributes(:password => params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
+       #self.current_user = @user
+      @user.delete_password_reset_code
+       flash[:notice] = "Password updated successfully for #{@user.email} - You may now log in using your new password."
+       redirect_back_or_default('/')
+     else
+       render :action => :reset_password
+     end
+    end
+  end
+
+
+  private
+    def get_partial_user_from_session
+      unless session[:partial_user].nil?
+        @user =  session[:partial_user]
+      else
+        @user = User.new
+      end
+    end
+
+    def save_partial_user_in_session
+      session[:partial_user] = @user
+    end
 end

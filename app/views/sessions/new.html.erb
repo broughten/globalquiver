@@ -21,7 +21,10 @@
 	<%= form.label :password, 'Password' %>
 	<%= form.password_field :password %>
   </div>
-  <div class="submit">
+  <div class="session-submit">
     <%= form.submit 'Login', :class => 'submitBtn' %>
   </div>
+  <p>
+    <%= link_to "Forgot Password?", lost_password_path %>
+  </p>
 <% end -%>

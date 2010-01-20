@@ -44,6 +44,11 @@
 
 /* create authentication */
 
+.session-submit {
+  float:left;
+  padding-right:20px;
+}
+
 .submitBtn{
   background-color:#5ACBF9;
   height: 30px;
@@ -71,8 +76,15 @@
 }
 
 #signup_form label,
-#login_form label{
-    font-size:1.2em;
+#login_form label,
+#lost-password-form label,
+#reset-password-form label {
+  margin-top:3px;
+  font-size:1.2em;
+}
+
+#two-lines label {
+  margin-top:0px;
 }
 
 #login-signup{

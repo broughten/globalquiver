@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   # Without this, if :password_confirmation is nil the confirmation check
   # will not run. 
   validates_presence_of     :password_confirmation,        :if => :password_required?
-  validates_uniqueness_of   :email, :case_sensitive => false
+  validates_uniqueness_of   :email, :case_sensitive => false, :on => :create
 
   # since we are evaluating a db column we need to set the :accept option
   validates_acceptance_of :terms_of_service, :accept => true
@@ -98,11 +98,6 @@ class User < ActiveRecord::Base
     save(false)
   end
 
-  # Returns true if the user has just been activated.
-  def recently_activated?
-    @activated
-  end
-
   def is_rental_shop?
     false
   end
@@ -113,6 +108,21 @@ class User < ActiveRecord::Base
   
   def full_name
     "" # placeholder...will be redefined in sub classes.
+  end
+
+  def create_password_reset_code
+   @password_reset = true
+   self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+   self.save(false)
+  end
+
+  def password_recently_reset?
+   @password_reset
+  end
+
+  def delete_password_reset_code
+   self.password_reset_code = nil
+   self.save(false)
   end
   
   protected
@@ -125,6 +135,15 @@ class User < ActiveRecord::Base
       
     def password_required?
       crypted_password.blank? || !password.blank?
+    end
+
+    def updating_email?
+      # validate_uniqueness_of email unless specifically set to false
+      if updating_email == false
+       return false
+      else
+       return true
+      end
     end
     
     

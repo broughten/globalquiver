@@ -98,5 +98,71 @@ describe UsersController do
         assigns[:user].email.should == 'test@testing.com'
       end
     end
+
+    describe "forgot password functionality" do
+      it "should create an empty user on get" do
+        get "lost_password"
+        assigns[:user].should_not be_nil
+      end
+
+      it "should find the user by his email address on post" do
+        user = Shop.make(:email =>"test@testing.com")
+        post "lost_password", :user => user
+        assigns[:user].should == user
+      end
+
+      it "should flash an error when it can't find the user" do
+        post "lost_password", :user => User.new
+        flash[:error].should == "Please enter a valid email address"
+      end
+
+      it "should try to create a reset code and redirect to root when it finds the user" do
+        user = Shop.make(:email =>"test@testing.com")
+        
+        post "lost_password", :user => {:email =>"test@testing.com"}
+
+        same_user_after_post = User.find_by_email("test@testing.com")
+        same_user_after_post.password_reset_code.should_not be_nil
+        flash[:notice].should == "Reset code sent to test@testing.com"
+        response.should redirect_to(root_path)
+      end
+    end
+    describe "reset password functionality" do
+      it "should try to find user by password reset token" do
+        user = Shop.make()
+        user.create_password_reset_code
+        post :reset_password, :reset_code => user.password_reset_code, :user => {:password => "whatev", :password_confirmation => "whatev"}
+        assigns[:user].should == user
+      end
+
+      it "should flash an error and redirect to root path if the user isn't found" do
+        user = Shop.make()
+        post :reset_password, :user => user
+        flash[:error].should == "Reset password token invalid, please contact support."
+        response.should redirect_to(root_path)
+      end
+
+      it "should modify the password and send a success message if it is able to change the password" do
+        user = Shop.make(:email => "nada@test.com")
+        user.create_password_reset_code
+        current_crypted_password = user.crypted_password
+        post :reset_password, :reset_code => user.password_reset_code, :user => {:password => "whatev", :password_confirmation => "whatev"}
+        same_user_after_post = User.find_by_email("nada@test.com")
+        same_user_after_post.crypted_password.should_not == current_crypted_password
+        flash[:notice].should == "Password updated successfully for nada@test.com - You may now log in using your new password."
+        response.should redirect_to(root_path)
+      end
+
+      it "should re-disply the password change page and not change the password if passwords don't match" do
+        user = Shop.make(:email => "brudda@test.com")
+        user.create_password_reset_code
+        current_crypted_password = user.crypted_password
+        post :reset_password, :reset_code => user.password_reset_code, :user => {:password => "whatev", :password_confirmation => "wrong"}
+        same_user_after_post = User.find_by_email("brudda@test.com")
+        same_user_after_post.crypted_password.should == current_crypted_password
+        flash[:notice].should be_nil
+        response.should render_template(:reset_password)
+      end
+    end
   end
 end

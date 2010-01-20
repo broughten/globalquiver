@@ -248,4 +248,38 @@ describe User do
     ActionMailer::Base.deliveries.length.should == 0
   end
 
+  describe "fogot password" do
+    it "should create a password reset code when asked nicely" do
+      user = Surfer.make()
+      user.password_recently_reset?.should == nil || false
+      user.password_reset_code.should be_nil
+      user.create_password_reset_code
+      user.password_reset_code.should_not be_nil
+      user.password_recently_reset?.should == true
+    end
+
+    it "should delete a password reset code when asked nicely" do
+      user = Shop.make()
+      user.create_password_reset_code
+      user.password_reset_code.should_not be_nil
+      user.password_recently_reset?.should == true
+      user.delete_password_reset_code
+      user.password_reset_code.should be_nil
+    end
+
+    #this tests that my user_observer is firing!
+    it "should try to send an email after creating a password reset token" do
+      user = Shop.make()
+      UserMailer.expects(:deliver_password_reset_notification).with(user)
+      user.create_password_reset_code
+    end
+
+    it "should not try to send an email if no password reset token is created" do
+      user = Shop.make()
+      user.email = "in@your.face"
+      user.save
+      UserMailer.expects(:deliver_password_reset_notification).with(user).never
+    end
+  end
+
 end

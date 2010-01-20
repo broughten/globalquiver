@@ -1,8 +1,12 @@
 development:
-    
+  forgot_password_url: http://localhost:3000
 
 test:
-    
+  forgot_password_url: http://localhost:3000
+
+staging:
+  forgot_password_url: http://staging.globalquiver.com
 
 production:
-    google_analytics_account: UA-11933613-1
+  forgot_password_url: http://www.globalquiver.com
+  google_analytics_account: UA-11933613-1
