@@ -1,0 +1,55 @@
+#idea {
+  float:left;
+  width:530px;
+}
+
+#idea p {
+  padding-bottom: 5px;
+  text-align: justify;
+}
+
+#counting-on ul {
+  padding-left:25px;
+  padding-top:10px;
+}
+#counting-on li {
+  font-size:15px;
+  list-style:disc;
+  padding-bottom:5px;
+  text-align: justify;
+}
+
+#idea-pic {
+  padding-top:25px;
+  width:250px;
+  float:right;
+}
+
+#people {
+  text-align: justify;
+}
+
+#jon {
+  padding-top:20px;
+  float:left;
+  width:580px;
+}
+
+#jon-pic {
+  padding-top:15px;
+  width:188px;
+  float:right;
+}
+
+#mike {
+  padding-top:50px;
+  float:left;
+  width:580px;
+}
+
+#mike-pic {
+  padding-top:10px;
+  padding-bottom:10px;
+  width:188px;
+  float:right;
+}
