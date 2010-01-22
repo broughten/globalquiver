@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  PAGE_KEYWORDS = %w(Home Blog About FAQ)
+  PAGE_KEYWORDS = %w(Home About FAQ)
 
   helper_method :total_user_count, :recent_users, :total_board_count
 

@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def needs_sidebar?
-    if current_tab?("About") || current_tab?("Blog") || current_tab?("FAQ")
+    if current_tab?("About") || current_tab?("FAQ")
       return false
     else
       return true
@@ -41,7 +41,7 @@ module ApplicationHelper
     {
       :Home => [ lambda { current_page?(root_path)         } ],
       :Find => [ lambda { current_page?(new_board_search_path) } ],
-      :Add  => [ lambda { current_page?(new_board_path)    } ]
+      :Add  => [ lambda { current_page?(new_board_path)    } ],
     }[keyword.to_sym] || []
   end
 

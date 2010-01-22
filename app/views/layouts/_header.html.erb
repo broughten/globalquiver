@@ -50,6 +50,7 @@
           <% static_page_keywords.each do |keyword| %>
             <li <%= active_class_if_current_tab(keyword) %> ><%= link_to h(keyword.titleize), page_path(keyword) %></li>
           <% end %>
+            <li><%= link_to "Blog", "/blog" %></li>
         </ul>
       </div>
       <div class="clear"></div>
