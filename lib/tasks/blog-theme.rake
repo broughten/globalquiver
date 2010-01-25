@@ -10,7 +10,7 @@ namespace :blog_theme do
     index_content = app.html_document.root.to_s
     # Change theme_home to the correct path for your
     # environment, leave the final directory as rails-generated
-    theme_home = '/Users/JC/Sites/wordpress/wp-content/themes/rails-generated'
+    theme_home = '../globalquiver_blog/wp-content/themes/rails-generated'
     mkdir theme_home unless File.exists? theme_home
     index_path = "#{theme_home}/index.php"
     puts "Writing index.php to '#{index_path}'"
