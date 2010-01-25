@@ -54,7 +54,11 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
 
     respond_to do |format|
-      if @board.has_future_reservations
+      if @board.creator != current_user
+        flash[:error] = "Only the board owner can activate and deactivate boards."
+        format.html { redirect_to(:back) }
+        format.js
+      elsif @board.has_future_reservations
         flash[:error] = "This board cant be deactivated because it has upcoming reservations. Please contact the reservation holder(s) if this board is truly no longer available."
         format.html { redirect_to(:back) }
         format.js

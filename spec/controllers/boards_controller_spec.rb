@@ -79,7 +79,7 @@ describe BoardsController do
     
     describe "PUT /boards (aka update board)" do
       before(:each) do
-        @temp_board = Board.make()
+        @temp_board = Board.make(:creator => @user)
       end
       it "should try to update the attributes of the board" do
         Board.any_instance.expects(:update_attributes)
@@ -96,6 +96,16 @@ describe BoardsController do
         Board.any_instance.stubs(:has_future_reservations).returns(true)
         post 'update', :id=>@temp_board.id
         flash[:error].should_not be_nil
+        response.should redirect_to(root_path)
+      end
+
+      it "should not allow you to deactivate a board you don't own" do
+        @request.env['HTTP_REFERER'] = root_path
+        user = User.make
+        @temp_board.creator = user
+        @temp_board.save
+        post 'update', :id=>@temp_board.id
+        flash[:error].should == 'Only the board owner can activate and deactivate boards.'
         response.should redirect_to(root_path)
       end
     end
