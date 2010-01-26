@@ -51,10 +51,7 @@ class UsersController < ApplicationController
     #need to figure out what type of object you are dealing with
     # since the form will populate the params based on that
     class_string = @user.class.to_s.downcase
-
-    if params[class_string]
-      @image = Image.new(params[class_string][:image_attributes])
-    end
+    @image = Image.new(params[class_string][:image_attributes])
     
     if !@image.nil? && !@image.valid?
       render :action => :edit

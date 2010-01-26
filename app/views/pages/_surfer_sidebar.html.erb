@@ -4,7 +4,7 @@
       <p class="no-photo">No Photo</p>
       <%= link_to "Add One", edit_user_path(:id => current_user.id) %>
     <% else %>
-      <%= image_tag current_user.image.data.url(:home_page), :alt => "user photo" %>
+      <%= link_to image_tag(current_user.image.data.url(:home_page)), edit_user_path(:id => current_user.id) %>
     <% end %>
   </div>
   <div id="counter">
