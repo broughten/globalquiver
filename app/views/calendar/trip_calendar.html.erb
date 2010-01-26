@@ -1,6 +1,9 @@
 <!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
 <%= stylesheet_link_tag "reservation_calendar" %>
-
-<h1>Calendar</h1>
-
-<%= reservation_calendar %>
+<div id="trip-cal">
+  <div id="trip-cal-top">
+    <h1>Trip Calendar</h1>
+    <span class="home-link"><%= link_to "(Return to overview)", root_path %></span>
+  </div>
+  <%= reservation_calendar %>
+</div>

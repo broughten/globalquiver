@@ -359,14 +359,14 @@ module ReservationCalendar
       @cal << %(<table class="ec-calendar-header" cellpadding="0" cellspacing="0">)
       @cal << %(<thead><tr>)
       if @options[:previous_month_text] or @options[:next_month_text]
-        @cal << %(<th colspan="2" class="ec-month-nav">#{@options[:previous_month_text]}</th>)
+        @cal << %(<th colspan="2" class="prev-month-nav">#{@options[:previous_month_text]}</th>)
         colspan = 3
       else
         colspan = 7
       end
       @cal << %(<th colspan="#{colspan}" class="ec-month-name">#{@options[:month_name_text]}</th>)
       if @options[:next_month_text]
-        @cal << %(<th colspan="2" class="ec-month-nav">#{@options[:next_month_text]}</th>)
+        @cal << %(<th colspan="2" class="next-month-nav">#{@options[:next_month_text]}</th>)
       end
       @cal << %(</tr></thead></table>)
     end

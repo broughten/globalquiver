@@ -31,12 +31,16 @@
 }
 
 .ec-month-name {
+  text-align: center;
   font-size: 16px;
   font-weight: bold;
 }
 
-.ec-month-nav {
-
+.prev-month-nav {
+  text-align:left;
+}
+.next-month-nav {
+  text-align:right;
 }
 
 /* Containers */
@@ -198,4 +202,30 @@ a.ec-day-link {
   margin-left: auto;
   margin-right: 3px;
   border-left: 4px solid white;
+}
+
+/* customizations */
+#shop-cal h1 {
+  float:left;
+}
+
+#trip-cal h1 {
+  float:left;
+}
+#shop-cal-top {
+  width:500px;
+  height:40px;
+  margin-bottom:10px;
+}
+
+#trip-cal-top {
+  width:475px;
+  height:40px;
+  margin-bottom:10px;
+}
+.home-link {
+  float:right;
+  padding-right:100px;
+  padding-top:20px;
+  font-size: 14px;
 }
