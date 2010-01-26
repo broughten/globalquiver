@@ -1,11 +1,25 @@
-    <div id="sideBar">
-      <div id="counter">
-        <span class="amount"><%= total_user_count %></span><br/>
-        <span class="for">surfers signed up</span>
-      </div>
-      <div id="counter">
-        <span class="amount"><%= total_board_count %></span><br/>
-        <span class="for">boards in global quiver</span>
-      </div>
-    </div><!-- #sideBar -->
+<div id="sideBar">
+  <div id="photo">
+    <% if current_user.image.nil? %>
+      <p class="no-photo">No Photo</p>
+      <%= link_to "Add One", edit_user_path(:id => current_user.id) %>
+    <% else %>
+      <%= link_to image_tag(current_user.image.data.url(:home_page)), edit_user_path(:id => current_user.id) %>
+    <% end %>
+  </div>
+  <div id="counter">
+    <% days = days_until_next_reservation %>
+    <% if days == -1 %>
+      <span class="for">You have no upcoming reservations</span>
+    <% else %>
+      <% the_next_reservation = next_reservation %>
+      <%if !the_next_reservation.nil? %>
+        <span class="amount"><%= link_to days, the_next_reservation %></span><br/>
+      <% else %>
+        <span class="amount"><%= days %></span><br/>
+      <% end %>
+      <span class="for">days until next reservation</span>
+    <% end %>
+  </div>
+</div><!-- #sideBar -->
 
