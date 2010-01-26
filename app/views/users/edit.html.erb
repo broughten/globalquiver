@@ -1,13 +1,13 @@
 <% content_for :head do %>
   <%= GMap.header %>
   <%= stylesheet_link_tag 'user', :media => 'screen' %>
-  <%= javascript_include_tag 'json2','locations/new','users/edit' %>
+  <%= javascript_include_tag 'json2','locations/new' %>
 <% end %>
 
 <h1 id="show-name">Edit Your Profile</h1>
 <div class="left-column">
   <div class  ="user-photo">
-    <% semantic_form_for @user, :url => {:action => "update" }, :html => { :enctype => "multipart/form-data" } do |form| %>
+    <% form_for @user, :url => {:action => "update" }, :html => {:multipart => true } do |form| %>
       <div id="the-photo">
         <% if @user.image.nil? %>
         <p class="no-photo">No Photo</p>
@@ -17,6 +17,7 @@
       </div>
       <div id="photo-form">
         <h2>Upload/Change Photo</h2>
+          <%= error_messages_for 'image' %>
           <% form.fields_for :image_attributes do |image_fields| %>
             <%= image_fields.file_field :data %>
           <% end %>
@@ -36,7 +37,7 @@
     <div class="user-info-table">
       <h2>Update Your Info</h2>
       <ul>
-        <%= form.input :first_name, :error_message => 'hey jc!' if !@user.is_rental_shop?%>
+        <%= form.input :first_name if !@user.is_rental_shop?%>
         <%= form.input :last_name, :required=>false if !@user.is_rental_shop?%>
         <%= form.input :name if @user.is_rental_shop? %>
         <%= form.input :email %>

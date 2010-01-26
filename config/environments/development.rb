@@ -25,3 +25,5 @@ config.after_initialize do
   #development
   Geocode.geocoder = Graticule.service(:google).new 'ABQIAAAAzMUFFnT9uH0xq39J0Y4kbhTJQa0g3IQ9GZqIMmInSLzwtGDKaBR6j135zrztfTGVOm2QlWnkaidDIQ'
 end
+
+Paperclip.options[:command_path] = "/opt/local/bin/"

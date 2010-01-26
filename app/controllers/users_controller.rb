@@ -47,14 +47,22 @@ class UsersController < ApplicationController
   
   def update
     @user = current_user
+
     #need to figure out what type of object you are dealing with
     # since the form will populate the params based on that
-    class_string = @user.class.to_s.downcase   
-    if @user.update_attributes(params[class_string])
+    class_string = @user.class.to_s.downcase
+
+    if params[class_string]
+      @image = Image.new(params[class_string][:image_attributes])
+    end
+    
+    if !@image.nil? && !@image.valid?
+      render :action => :edit
+    elsif @user.update_attributes(params[class_string])
       flash[:notice] = 'Profile successfully updated.'
       redirect_to(edit_user_path(:id =>  @user.id))
     else
-      render :action => "edit"
+      render :action => :edit
     end
   end
 

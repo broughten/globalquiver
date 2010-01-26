@@ -11,21 +11,26 @@ describe UsersController do
   
   describe "for authenticated user" do
     before(:each) do
-      login_as_user
+      login_as_surfer
     end
     
     it "should redirect to edit with a flash notice on successful update" do
-      User.any_instance.stubs(:update_attributes).returns(true)
-      post :update
+      @user.stubs(:update_attributes).returns(true)
+      post :update, {:id => @user.id, :surfer => {:first_name => 'James'}}
       flash[:notice].should_not be_nil
       response.should redirect_to(edit_user_path(:id => @user.id))
       
     end
     
     it "should render the edit page on unsucessful update" do
-      User.any_instance.stubs(:update_attributes).returns(false)
-      post :update
+      @user.stubs(:update_attributes).returns(false)
+      post :update, {:id => @user.id, :surfer => {:email => 'James'}}
       flash[:notice].should be_nil
+      response.should render_template("edit")
+    end
+
+    it "should show an error when user attempts to upload a non-png or jpg image" do
+      post :update, {:id => @user.id, :surfer => {:image_attributes => {:data => File.open(RAILS_ROOT + '/spec/fixtures/images/users/dummy.txt')}}}
       response.should render_template("edit")
     end
 
