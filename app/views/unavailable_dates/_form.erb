@@ -1,7 +1,20 @@
 
 
   <br>
-  <div id="multimonth">This will be replaced with the multimonth select</div>
+  <div id="multimonth-wrapper">
+    <div id="multimonth">This will be replaced with the multimonth select</div>
+    <div class="clear"></div>
+    <% if !current_page?(new_board_path) %>
+      <div id="reserved-square"></div>
+      <div id="reserved-text">
+        <% if board.user_is_owner(current_user) %>
+          <span>Dates with reservations. See </span><%= link_to "calendar view", shop_calendar_path %><span> for more details.</span>
+        <% else %>
+          <span>Unavailable dates.</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
   <script language="javascript">
     var blackOutDates = <%= black_out_dates_json_for(board) %>;
     var reservedDates = <%= reserved_dates_json_for(board) %>;

@@ -53,7 +53,7 @@ function unavailableDates($td, thisDate, month, year)
     for (i = 0; i < blackOutDates.length; i++) {
       if (checkDate == blackOutDates[i].unavailable_date.date) {
         // the disabled class prevents the user from being able to select the element.
-				$td.addClass('selected');
+	$td.addClass('selected');
       }
     }
   }

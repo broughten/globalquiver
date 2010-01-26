@@ -15,8 +15,34 @@
 
 
 /* new availability */
-#multimonth {
+
+#reserved-square {
+  height:15px;
+  width:15px;
+  border: 2px solid silver;
+  background-color: #CB7132;
+  float:left;
+  margin-right:5px;
+  margin-left:5px;
+}
+
+#reserved-key {
+  width:450px;
+  height:25px;
+}
+
+#reserved-text {
+  padding-top:3px;
+  font-size:13px;
+  padding-bottom:3px;
+}
+
+
+#multimonth-wrapper {
   border: 2px solid #000;
+  width:776px;
+}
+#multimonth {
   overflow: auto;
   float: left;
 }
@@ -55,7 +81,7 @@ table.jCalendar td.reserved, table.jCalendar td.reserved:hover {
 }
 
 table.jCalendar td.blackout, table.jCalendar td.blackout:hover {
-	background: #777;
+	background: #CB7132;
 	color: #555;
 }
 
