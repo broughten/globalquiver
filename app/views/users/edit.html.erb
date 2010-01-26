@@ -8,13 +8,19 @@
 <div class="left-column">
   <div class  ="user-photo">
     <% form_for @user, :url => {:action => "update" }, :html => {:multipart => true } do |form| %>
-      <div id="the-photo">
-        <% if @user.image.nil? %>
-        <p class="no-photo">No Photo</p>
-        <% else %>
-          <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
-        <% end %>
-      </div>
+      <% if @user.image.nil? %>
+        <div id="no-photo-div">
+          <div id="centering-div">
+            <p class="no-photo">No Photo</p>
+          </div>
+        </div>
+      <% else %>
+        <div id="the-photo">
+          <div id="centering-div">
+            <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
+          </div>
+        </div>
+      <% end %>
       <div id="photo-form">
         <h2>Upload/Change Photo</h2>
           <%= error_messages_for 'image' %>

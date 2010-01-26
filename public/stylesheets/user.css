@@ -41,19 +41,45 @@ root {
 .user-photo {
   height:400px;
   width:400px;
-  background-color:#eeeeee;
-  vertical-align:middle;
   text-align:center;
   margin-bottom:10px;
 }
 
 #the-photo{
+  display:table;
+  #position:relative;
+  background-color:white;
+  overflow:hidden;
   height:400px;
   width:400px;
 }
 
-.no-photo {
-  padding-top:140px;
+#centering-div {
+  #position:absolute;
+  #top:50%;
+  display:table-cell;
+  vertical-align:middle;
+}
+
+#centering-div img {
+  #position:relative;
+  #top:-50%;
+}
+
+#no-photo-div{
+  display:table;
+  #position:relative;
+  background-color:#eeeeee;
+  overflow:hidden;
+  text-align:center;
+  height:400px;
+  width:400px;
+}
+
+#centering-div .no-photo {
+  #position:relative;
+  #top:-50%;
+  padding-top:0;
   font-size:60px;
   color:#999999;
 }
