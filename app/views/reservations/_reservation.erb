@@ -18,43 +18,53 @@
 
 <ul id="list-table">
   <li class="reservation-link<%=reservation.id%> squat long">
-    <p>
-      <%= link_to "", reservation_path(reservation)%>
-      <%=h reservation.board.model %> by <%=h reservation.board.maker%>
-    </p>
+    <div id="centering-div">
+      <p>
+        <%= link_to "", reservation_path(reservation)%>
+        <%=h reservation.board.model %> by <%=h reservation.board.maker%>
+      </p>
+    </div>
   </li>
   <li class="reservation-link<%=reservation.id%> squat long">
-    <p>
-      <%= link_to "", reservation_path(reservation)%>
-      <%=h reservation.board.creator.full_name%>
-    </p>
+    <div id="centering-div">
+      <p>
+        <%= link_to "", reservation_path(reservation)%>
+        <%=h reservation.board.creator.full_name%>
+      </p>
+    </div>
   </li>
   <li class="reservation-link<%=reservation.id%> squat long">
-    <p>
-      <%= link_to "", reservation_path(reservation)%>
-      <%=h reservation.reserved_dates.first.date%>
-    </p>
+    <div id="centering-div">
+      <p>
+        <%= link_to "", reservation_path(reservation)%>
+        <%=h reservation.reserved_dates.first.date%>
+      </p>
+    </div>
   </li>
   <% if reservation.creator == current_user %>
     <li class="reservation-delete<%=reservation.id%> squat medium">
-      <% if reservation.too_near_to_delete %>
-      <p>
-        Coming up within a day
-      </p>
-      <% else %>
-      <p class="big-x">
-        <% form_for reservation, :html => { :method => :delete } do |f| %>
-          <%= f.submit "X" %>
+      <div id="centering-div">
+        <% if reservation.too_near_to_delete %>
+        <p>
+          Coming up within a day
+        </p>
+        <% else %>
+        <p class="big-x">
+          <% form_for reservation, :html => { :method => :delete } do |f| %>
+            <%= f.submit "X" %>
+          <% end %>
+        </p>
         <% end %>
-      </p>
-      <% end %>
+      </div>
     </li>
   <% else %>
     <li class="reservation-link<%=reservation.id%> squat medium">
-    <p>
-      <%= link_to "", reservation_path(reservation)%>
-      <%=h reservation.reserved_dates.length%>
-    </p>
+      <div id="centering-div">
+        <p>
+          <%= link_to "", reservation_path(reservation)%>
+          <%=h reservation.reserved_dates.length%>
+        </p>
+      </div>
   </li>
   <% end %>
 </ul>

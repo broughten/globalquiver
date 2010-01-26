@@ -73,6 +73,10 @@
   #top:-50%;
 }
 
+#centering-div p {
+  #position:relative;
+  #top:-50%;
+}
 
 #list-table li p.big-x a {
     font-size:28px;
