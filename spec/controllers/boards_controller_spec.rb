@@ -94,9 +94,18 @@ describe BoardsController do
       it "should not allow you to deactivate a board with reservations in the future" do
         @request.env['HTTP_REFERER'] = root_path
         Board.any_instance.stubs(:has_future_reservations).returns(true)
-        post 'update', :id=>@temp_board.id
+        post 'update', {:id=>@temp_board.id, :board => {:inactive => true}}
         flash[:error].should_not be_nil
         response.should redirect_to(root_path)
+      end
+
+      it "should allow you to change blackout dates on a board with reservations in the future" do
+        @request.env['HTTP_REFERER'] = root_path
+        Board.any_instance.stubs(:has_future_reservations).returns(true)
+        post 'update', {:id=>@temp_board.id, :board => {:black_out_dates_attributes => [{:id => "", :date => 3.days.from_now.strftime('%m/%d/%Y')}]}}
+        flash[:error].should be_nil
+        flash[:notice].should_not be_nil
+        response.should redirect_to(board_path(@temp_board))
       end
 
       it "should not allow you to deactivate a board you don't own" do
