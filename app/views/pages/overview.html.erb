@@ -79,7 +79,8 @@ $(document).ready(function() {
   <% if current_user.is_a?(Surfer) %>
   <div id="my-board-reservations">
     <h2>Reservations for boards in the Global Quiver</h2>
-    <%if current_user.reservations.active.blank? %>
+    <% reservations = current_user.reservations.with_dates_after(Date.today).active %>
+    <%if reservations.blank? %>
       <p>You don't have any board reservations yet.  Get started by <%= link_to "finding a board.", new_board_search_url %></p>
     <% else %>
       <div class="view-tabs">
@@ -91,7 +92,7 @@ $(document).ready(function() {
         <li class="long">Start Date</li>
         <li class="medium">Cancel</li>
       </ul>
-      <%= render :partial => "reservations/reservation", :collection => current_user.reservations.active %>
+      <%= render :partial => "reservations/reservation", :collection => reservations %>
     <% end %>
   </div>
   <% end %>
