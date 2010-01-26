@@ -123,6 +123,15 @@ describe ReservationsController do
         response.should redirect_to root_path
       end
 
+      it "should render a flash message and send an email on successful cancelation" do
+        @temp_reservation = Reservation.make(:creator => @user)
+        UserMailer.expects(:deliver_reservation_cancelation_details)
+        post "destroy", :id=>@temp_reservation.id
+        assigns[:reservation].should_not be_new_record
+        flash[:notice].should_not be_nil
+        response.should redirect_to(root_path)
+      end
+
       it "should not allow anyone other than the reservation creator to cancel the reservation" do
         someone_else = User.make()
         @temp_reservation = Reservation.make(:creator => someone_else)

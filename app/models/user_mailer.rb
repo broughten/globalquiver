@@ -19,6 +19,14 @@ class UserMailer < ActionMailer::Base
     body({:reservation => reservation})
   end
 
+  def reservation_cancelation_details(reservation)
+    recipients(reservation.creator.email)
+    from("GlobalQuiver <noreply@globalquiver.com>")
+    subject("Reservation Canceled")
+    sent_on(Time.now)
+    body({:reservation => reservation})
+  end
+
   def password_reset_notification(user)
     recipients(user.email)
     from("GlobalQuiver <noreply@globalquiver.com>")

@@ -53,6 +53,7 @@ class ReservationsController < ApplicationController
           format.html { redirect_to :back }
       elsif @reservation.destroy
         flash[:notice] = 'Reservation was successfully canceled.'
+        UserMailer.deliver_reservation_cancelation_details(@reservation)
         format.html { redirect_to(root_path) }
         format.js
       else

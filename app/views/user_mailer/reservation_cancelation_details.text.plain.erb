@@ -1,0 +1,25 @@
+Hi <%=  @reservation.creator.first_name %>,
+
+This email is just to confirm that you canceled a reservation on Global Quiver.
+
+OK. Here are the details of the reservation you canceled:
+
+  Board Name:  <%= h @reservation.board.name%>
+  Board Model: <%= h @reservation.board.model%>
+  Board Maker: <%= h @reservation.board.maker%>
+
+  <% if @reservation.board.creator.is_a?(Surfer) %>
+  Board Owner: <%= h @reservation.board.creator.full_name%>
+  Owner Email: <%= h @reservation.board.creator.email%>
+  <% else %>
+  Board Shop:  <%= h @reservation.board.creator.full_name%>
+  Shop Email:  <%= h @reservation.board.creator.email%>
+  <% end %>
+
+  Reservation Date(s):
+    <% @reservation.reserved_dates.each do |reservation_date| %><%=h reservation_date.date%>
+    <% end %>
+    
+Thanks for using GlobalQuiver.
+--Jon and Mike
+www.GlobalQuiver.com
