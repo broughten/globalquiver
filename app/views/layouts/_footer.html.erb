@@ -1,6 +1,10 @@
       <div class="clear"></div>
         <div id="footer">
-          <p>Copyright &copy; <%=Date.today.year %>  Global Quiver, Inc.</p>
+          <p>
+            Copyright &copy; <%=Date.today.year %>  Global Quiver, LLC. |
+            <%= link_to "Terms of Use", page_path("terms") %> |
+            <%= link_to "Privacy Policy", page_path("privacy") %>
+          </p>
           <ul>
             <li class="last"><%= mail_to "info@kelsusconsulting.com", "Found a Bug?" %></li>
           </ul>

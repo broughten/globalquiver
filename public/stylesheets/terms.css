@@ -1,0 +1,16 @@
+#terms p {
+  line-height: 15px;
+  padding-bottom: 5px;
+}
+#terms h2 {
+  padding-bottom:5px;
+  font-size: 18px;
+}
+#terms li {
+  padding-left:10px;
+  padding-bottom:5px;
+  font-size: 14px;
+}
+#terms {
+  margin-bottom:10px;
+}
