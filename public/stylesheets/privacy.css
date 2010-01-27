@@ -1,0 +1,21 @@
+#privacy p {
+  line-height: 18px;
+  padding-bottom: 5px;
+}
+#privacy h1 {
+  padding-bottom:15px;
+}
+#privacy h2 {
+  padding-top:15px;
+  padding-bottom:5px;
+  font-size: 18px;
+}
+#privacy li {
+  padding-left:10px;
+  padding-bottom:5px;
+  font-size: 14px;
+  line-height: 18px;
+}
+#privacy {
+  margin-bottom:10px;
+}

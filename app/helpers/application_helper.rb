@@ -28,7 +28,8 @@ module ApplicationHelper
   def needs_sidebar?
     if current_tab?("About") || 
        current_tab?("FAQ")   ||
-       current_page?(page_path("terms"))
+       current_page?(page_path("terms")) ||
+       current_page?(page_path("privacy"))
       return false
     else
       return true
