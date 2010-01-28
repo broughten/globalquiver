@@ -397,7 +397,7 @@ a.call_to_action{
 
 
 #button-area {
-    margin: 20px 0 10px 0px;
+    margin: 10px 0 10px 0px;
     float:left;
     width:580px;
     font-size:25px;
@@ -416,11 +416,11 @@ a.call_to_action{
 
 #new-board-button {
   display:block;
-  height:94px;
+  height:81px;
   background-color:#DDDDDD;
   border:solid 1px;
   float:left;
-  padding-top:40px;
+  padding-top:35px;
   
 }
 
@@ -429,12 +429,12 @@ a.call_to_action{
 }
 
 #board-search-button {
-  height:94px;
+  height:81px;
   background-color:#DDDDDD;
   border:solid 1px;
   margin: 0 35px 0 0;
   float:right;
-  padding-top:40px;
+  padding-top:35px;
 }
 
 #board-search-button:hover {
@@ -470,17 +470,40 @@ a.call_to_action{
 
 
 #question-buttons{
-  margin: 17px 0 0 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
   float:left;
   width:580px;
 
 }
 
+#shop-button {
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  width:543px;
+  height:35px;
+  background-color: #666666;
+  color:white;
+  border: 1px solid black;
+
+}
+
+#shop-button a {
+  color:white;
+}
 
 
 /*Static Content----------------------------------------*/
+.paragraph {
+  margin-bottom:15px;
+}
+
+.paragraph p {
+  margin-bottom:10px;
+}
 .static_content {
-   margin-top:20px;
+   margin-top:10px;
 	width:575px;
 float:left;
 	margin-bottom:20px;

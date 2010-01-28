@@ -22,15 +22,23 @@
       <%= link_to "Add your boards to<br/>Global Quiver", new_board_path, :id=>"rent" %>
     </div>
     <div id="board-search-button" class="home-page-button">
-			<%= link_to "Find boards in<br/>Global Quiver", new_board_search_path, :id=>"boards" %>
+      <%= link_to "Find boards in<br/>Global Quiver", new_board_search_path, :id=>"boards" %>
     </div>
   </div>
   <div id="question-buttons">
     <div id="why-button" class="home-page-button">
-			<%= link_to "Why would I lend<br/>my board?", page_path('why'), :id=>"why" %>
+      <%= link_to "Why would I lend<br/>my board?", page_path('why'), :id=>"why" %>
     </div>
     <div id="how-button" class="home-page-button">
       <%= link_to "How does this work?", page_path('how'), :id=>"how" %>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div id="shop-button">
+    <div id="centering-div">
+      <p>
+        <%= link_to "Surf shops click here", page_path('shop'), :id=>"why" %>
+      </p>
     </div>
   </div>
 </div>
