@@ -264,6 +264,22 @@ a.call_to_action{
 
 
 /*Sidebar-------------------------------------*/
+
+.first-link-outer {
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  height:100%;
+  width:100%;
+  text-align:center;
+}
+
+#centering-div p {
+  #position:relative;
+  #top:-50%;
+  font-size:25px;
+}
+
 #sidebar-spacer {
   height:15px;
 }
