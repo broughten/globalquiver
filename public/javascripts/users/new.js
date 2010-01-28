@@ -6,10 +6,10 @@ $(document).ready(function(){
 
 function initialize(){
 	if ($('#is_shop')) {
-		// set up the initial state
-		toggleNames($('#is_shop').is(':checked'));
-		// register the event handlers.
-		$('#is_shop').click(function(){toggleNames($(this).is(':checked'))});
+            // set up the initial state
+            toggleNames($('#is_shop').is(':checked'));
+            // register the event handlers.
+            $('#is_shop').click(function(){toggleNames($(this).is(':checked'))});
 	}
 }
 
@@ -24,19 +24,22 @@ function toggleNames(isShop){
 }
 
 function hideShopSpecificFields(){
-	$('#user_name').parent().hide();
+  $('#user_name').parent().hide();
+  $('#shop-text').hide();
 }
 
 function showShopSpecificFields(){
-	$('#user_name').parent().show();
+  $('#user_name').parent().show();
+  $('#shop-text').show();
+
 }
 
 function hideSurferSpecificFields(){
-	$('#user_first_name').parent().hide();
-    $('#user_last_name').parent().hide();
+  $('#user_first_name').parent().hide();
+  $('#user_last_name').parent().hide();
 }
 
 function showSurferSpecificFields(){
-	$('#user_first_name').parent().show();
-    $('#user_last_name').parent().show();
+  $('#user_first_name').parent().show();
+  $('#user_last_name').parent().show();
 }

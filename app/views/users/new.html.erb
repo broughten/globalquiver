@@ -15,37 +15,44 @@
   <%= form.error_messages %>
   <div class="user-fields">
     <div>
-	  <%= check_box_tag 'is_shop', 'yes', false, :class=>'checkbox'%>
-	  <%=label_tag 'is_shop', 'I am a rental shop', :class => 'big-label'%>
-	</div>
-	<div>
-	  <%= form.label :first_name, 'First Name' %>
-	  <%= form.text_field :first_name%>
-	</div>
-	<div>
-	  <%= form.label :last_name, 'Last Name' %>
-	  <%= form.text_field :last_name%>
-	</div>
-	<div>
-	  <%= form.label :name, 'Name' %>
-	  <%= form.text_field :name%>
-	</div>
-	<div>
-	  <%= form.label :email %>
-	  <%= form.text_field :email %>
-	</div>
-	<div>
-	  <%= form.label :password %>
-	  <%= form.password_field :password %>
-	</div>
-	<div id="two-lines">
-	  <%= form.label :password_confirmation, 'Password Confirm' %>
-	  <%= form.password_field :password_confirmation %>
-	</div>
-	<div class="terms-checkbox">
-	  <%= form.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>", :class => 'big-label' %>
-          <%= form.check_box :terms_of_service, :class=>'checkbox'%>
-        </div>
+      <%= check_box_tag 'is_shop', 'yes', false, :class=>'checkbox'%>
+      <%=label_tag 'is_shop', 'I am a rental shop', :class => 'big-label'%>
+    </div>
+    <div id="shop-text" style="display:none">
+      <p>
+        See <%= link_to "this info", page_path("shop") %>
+        for details about joining as a surf shop.
+        We will be in touch with you right away once you sign up.
+      </p>
+    </div>
+    <div>
+      <%= form.label :first_name, 'First Name' %>
+      <%= form.text_field :first_name%>
+    </div>
+    <div>
+      <%= form.label :last_name, 'Last Name' %>
+      <%= form.text_field :last_name%>
+    </div>
+    <div>
+      <%= form.label :name, 'Name' %>
+      <%= form.text_field :name%>
+    </div>
+    <div>
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
+    <div id="two-lines">
+      <%= form.label :password_confirmation, 'Password Confirm' %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+    <div class="terms-checkbox">
+      <%= form.label :terms_of_service, "I have read the <a href='#'>Terms of Service</a>", :class => 'big-label' %>
+      <%= form.check_box :terms_of_service, :class=>'checkbox'%>
+    </div>
   </div>
 
   <div class="submit">

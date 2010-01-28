@@ -7,6 +7,16 @@
 */
 
 /* overall label css for form alignment */
+
+#shop-text {
+  width:800px;
+  padding-top:5px;
+  height:25px;
+  background-color: #eeeeee;
+  padding-left:10px;
+  margin-bottom:10px;
+}
+
 #mainContent #registered-user-why {
   font-size:17px;
 }
