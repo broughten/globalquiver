@@ -10,7 +10,7 @@
 <h3 id="registered-user-why">As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
 
 <% form_for :user,
-            :url => users_url(:protocol => env_ssl_protocol),
+            :url => users_url,
             :html => {:id => 'signup_form'} do |form| %>
   <%= form.error_messages %>
   <div class="user-fields">
