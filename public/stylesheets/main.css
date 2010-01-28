@@ -107,7 +107,7 @@ a.call_to_action{
 
 #container {
   text-align: left;
-  width: 810px;
+  width: 805px;
   margin: 0 auto;
   padding: 0;
 }
@@ -277,6 +277,9 @@ a.call_to_action{
 #centering-div p {
   #position:relative;
   #top:-50%;
+}
+
+#shop-button p {
   font-size:25px;
 }
 
@@ -399,7 +402,7 @@ a.call_to_action{
 #button-area {
     margin: 10px 0 10px 0px;
     float:left;
-    width:580px;
+    width:575px;
     font-size:25px;
     text-align:center;    
 }
@@ -458,7 +461,7 @@ a.call_to_action{
 #how-button {
   height:58px;
   background-color:#5ACBF9;
-  margin: 0 35px 0 0;
+  margin: 0 41px 0 0;
   float:right;
   padding-top:23px;
 }
@@ -481,7 +484,7 @@ a.call_to_action{
   display:table;
   #position:relative;
   overflow:hidden;
-  width:543px;
+  width:537px;
   height:35px;
   background-color: #666666;
   color:white;
