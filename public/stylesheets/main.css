@@ -265,13 +265,17 @@ a.call_to_action{
 
 /*Sidebar-------------------------------------*/
 
-.first-link-outer {
+#first-link-outer {
   display:table;
   #position:relative;
   overflow:hidden;
   height:100%;
   width:100%;
   text-align:center;
+}
+
+.first-link-outer p {
+  font-size:25px;
 }
 
 #centering-div p {
@@ -300,7 +304,7 @@ a.call_to_action{
 #feature-holder {
   background-color:#666666;
   padding-top:5px;
-  height:255px;
+  height:260px;
   width:227px;
 }
 
@@ -473,8 +477,8 @@ a.call_to_action{
 
 
 #question-buttons{
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 13px;
   float:left;
   width:580px;
 

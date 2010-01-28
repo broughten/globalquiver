@@ -5,7 +5,7 @@
     <div id="newest-shop" class="feature">
       <% shop = most_recent_shop %>
       <% if shop.nil? %>
-        <div class="first-link-outer">
+        <div id="first-link-outer">
           <div id="centering-div">
             <p class="first-link">
               <%= link_to "Be the first shop!", new_user_path %>
@@ -28,7 +28,7 @@
     <div id="most-popular-board" class="feature">
       <% board = most_popular_board %>
       <% if board.nil? %>
-        <div class="first-link-outer">
+        <div id="first-link-outer">
           <div id="centering-div">
             <p class="first-link">
               <%= link_to "Make the first reservation!", new_board_search_path %>
