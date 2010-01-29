@@ -1,5 +1,5 @@
 var DEFAULT_ZOOM = 13;
-Address.MIN_ACCURACY = 7;
+Address.MIN_ACCURACY = 6;
 /* This should stay in the window.onload event.  Not sure why
 	but don't change it! */
 window.onload = addCodeToFunction(window.onload,function() {
