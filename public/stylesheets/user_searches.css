@@ -22,7 +22,6 @@ h1 {
   padding-top:0px;
   margin-bottom:10px;
   float:left;
-  height:290px;
   width:240px;
   border-right:dotted 1px;
 }
@@ -154,6 +153,12 @@ h1 {
 
 #search-and {
   padding-right:40px;
+}
+
+#location-reminder {
+  background-color: #eeeeee;
+  padding-left:10px;
+  padding-right:5px;
 }
 
 

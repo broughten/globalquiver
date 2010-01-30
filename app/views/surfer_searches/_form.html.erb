@@ -23,6 +23,13 @@
     <p>
       <%= f.submit "Search", :class => 'submitBtn'  %>
     </p>
+    <div id="location-reminder">
+      <p>
+        Not all surfers put in their locations, so when you search
+        by location, you only get people that have updated their profiles with a location.
+        Click <%= link_to "here", edit_user_path(current_user) %> to add your own location.
+      </p>
+    </div>
   </div>
 <% end %>
 
