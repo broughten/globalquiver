@@ -1,0 +1,28 @@
+<% form_for @surfer_search, :html => {:id => 'search_form' } do |f| %>
+  <%= f.error_messages %>
+  <div class="search-form-div">
+    <p>
+      <%= f.label :location_id, "Location:" %>
+      <%= f.collection_select :location_id, @search_locations, :id, :to_s, {:prompt => 'Any'} %>
+    </p>
+    <p>
+      <% if admin? %>
+        <%= link_to "Manage search locations", search_locations_path %>
+      <% end %>
+    </p>
+    <div id="search-and">
+      <h2>
+        - and -
+      </h2>
+    </div>
+    <p>
+      <%= f.label :terms, "Surfer Name or Email:" %>
+      <%= f.text_field :terms %>
+    </p>
+
+    <p>
+      <%= f.submit "Search", :class => 'submitBtn'  %>
+    </p>
+  </div>
+<% end %>
+

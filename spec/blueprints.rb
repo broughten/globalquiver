@@ -112,7 +112,25 @@ BoardLocation.blueprint(:santa_barbara_ca) do
   country {"USA"}
 end
 
-SearchLocation.blueprint(:des_plaines_il) do
+BoardLocation.blueprint(:des_plaines_il) do
+  street {"2164 Westview Drive"}
+  postal_code {"60018"}
+  # duped stuff from above
+  locality {"Des Plaines"}
+  region {"IL"}
+  country {"USA"}
+end
+
+UserLocation.blueprint(:santa_barbara_ca) do
+  street {"233 W Micheltorena St"}
+  postal_code {"93101"}
+  # duped stuff from above
+  locality {"Santa Barbara"}
+  region {"CA"}
+  country {"USA"}
+end
+
+UserLocation.blueprint(:des_plaines_il) do
   search_radius {100}
   # duped stuff from above
   locality {"Des Plaines"}
@@ -179,6 +197,16 @@ end
 BoardSearch.blueprint() do
   location {SearchLocation.make}
   style {nil}
+end
+
+ShopSearch.blueprint() do
+  location {SearchLocation.make}
+  terms {nil}
+end
+
+SurferSearch.blueprint() do
+  location {SearchLocation.make}
+  terms {nil}
 end
 
 PickupTime.blueprint() do

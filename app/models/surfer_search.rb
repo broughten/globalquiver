@@ -1,0 +1,3 @@
+class SurferSearch < UserSearch
+  
+end

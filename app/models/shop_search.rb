@@ -1,0 +1,3 @@
+class ShopSearch < UserSearch
+ 
+end

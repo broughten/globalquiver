@@ -93,7 +93,7 @@
   <ul>
     <li class="attr-name">Width</li>
     <li class="value">
-      <% if !@board.width.nil? %>
+      <% if !@board.width.nil? && @board.width != 0 %>
         <%=h @board.width_inches %> <%=h @board.width_fraction %>"
       <% end %>
     </li>
@@ -103,7 +103,7 @@
   <ul>
     <li class="attr-name">Thickness</li>
     <li class="value">
-      <% if !@board.thickness.nil? %>
+      <% if !@board.thickness.nil? && @board.thickness != 0 %>
         <%=h @board.thickness_inches %> <%=h @board.thickness_fraction %>"
       <% end %>
     </li>

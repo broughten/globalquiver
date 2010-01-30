@@ -54,21 +54,35 @@
         </ul>
       </div>
       <div class="clear"></div>
-      <% if show_left_nav %>
         <div id="left-nav">
-          <div class="left-nav-button<%= active_if_current_tab('Add') %>">
+          <div class="left-nav-button<%= active_if_current_tab('Shop') %>">
             <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
             <div class="left-link">
-              <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
+              <%= link_to "Find a shop", new_shop_search_url, :id=>"new_search" %>
             </div>
           </div>
-          <div class="left-nav-button<%= active_if_current_tab('Find') %>">
+          <div class="left-nav-button<%= active_if_current_tab('Surfer') %>">
             <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
             <div class="left-link">
-              <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
+              <%= link_to "Find a surfer", new_surfer_search_url, :id=>"new_search" %>
             </div>
           </div>
+          <% if show_left_nav %>
+            <div id="lower-left-nav">
+              <div class="left-nav-button<%= active_if_current_tab('Add') %>">
+                <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+                <div class="left-link">
+                  <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
+                </div>
+              </div>
+              <div class="left-nav-button<%= active_if_current_tab('Find') %>">
+                <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+                <div class="left-link">
+                  <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
+                </div>
+              </div>
+            </div>
+          <%  end %>
         </div>
-      <% end %>
       <div id="container">
       

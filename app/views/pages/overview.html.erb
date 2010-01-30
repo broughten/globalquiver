@@ -17,14 +17,14 @@ $(document).ready(function() {
        addFlash(this.formId);
     }
   });
-    $('.edit_reservation').ajaxForm({
-      dataType: 'script',
-      beforeSubmit: function(arr, $form, opts) {
-      // add form id to options object
-      if (!confirm("Are you sure you want to delete this reservation?")) {
-        return false;
-      }
-      opts.formId = $form.attr('id');
+  $('.edit_reservation').ajaxForm({
+    dataType: 'script',
+    beforeSubmit: function(arr, $form, opts) {
+    // add form id to options object
+    if (!confirm("Are you sure you want to cancel this reservation?")) {
+      return false;
+    }
+    opts.formId = $form.attr('id');
     },
     success: function(responseText) {
       // 'this' is the options object, so we can access 'formId' on 'this'

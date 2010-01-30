@@ -1,12 +1,20 @@
 <div id="sideBar">
-  <div id="photo">
-    <% if current_user.image.nil? %>
-      <p class="no-photo">No Photo</p>
-      <%= link_to "Add One", edit_user_path(:id => current_user.id) %>
-    <% else %>
-      <%= link_to image_tag(current_user.image.data.url(:home_page)), edit_user_path(:id => current_user.id) %>
-    <% end %>
-  </div>
+  <% if current_user.image.nil? %>
+    <div id="no-photo-div">
+      <div id="centering-div">
+        <p class="no-photo">
+          No Photo
+        </p>
+        <%= link_to "Add One", edit_user_path(:id => current_user.id) %>
+       </div>
+     </div>
+   <% else %>
+     <div id="photo">
+       <div id="centering-div">
+         <%= link_to image_tag(current_user.image.data.url(:home_page)), edit_user_path(:id => current_user.id) %>
+       </div>
+     </div>
+  <% end %>
   <div id="counter">
     <% days = days_until_next_reservation %>
     <% if days == -1 %>

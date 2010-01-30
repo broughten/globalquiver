@@ -1,0 +1,159 @@
+h1 {
+  margin-bottom:10px;
+}
+#search_form p {
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.search-instructions {
+  color:#333333;
+  margin-top:10px;
+  width:705px;
+  padding-top:10px;
+  padding-bottom:10px;
+  margin-bottom:10px;
+  padding-left:10px;
+  background-color:#dddddd;
+}
+
+.search-form-div {
+  margin-top:0px;
+  padding-top:0px;
+  margin-bottom:10px;
+  float:left;
+  height:290px;
+  width:240px;
+  border-right:dotted 1px;
+}
+
+#search_form {
+  padding-top:0px;
+  margin-top:-5px;
+}
+
+#twitter-help {
+  width:515px;
+  float:right;
+  padding-right:40px;
+}
+
+#twitter-link {
+  margin-left:105px;
+  text-align:center;
+  vertical-align:middle;
+  padding-bottom:10px;
+  padding-top:10px;
+  width:220px;
+}
+
+#desired-location {
+  float:left;
+}
+
+#twitter-link a {
+  font-size:16px;
+}
+
+#search-results .user-list {
+  float:left;
+}
+
+#search-results .search-form-div {
+  border-right:none;
+  
+}
+
+#redo-search {
+  float:right;
+  width:300px;
+  margin-right:20px;
+}
+
+.user-owner {
+  width:449px;
+  padding-top:0px;
+  height:25px;
+  margin-bottom:2px;
+  padding-left:20px;
+  background-color:#5ACBF9;
+  color:#333333;
+  cursor:pointer;
+}
+
+.user-owner a {
+  color:#333333;
+}
+
+#search-results {
+  float:right;
+  margin-top:10px;
+  margin-right:107px;
+  margin-bottom:10px;
+}
+
+#no-results {
+  float:right;
+  margin-top:10px;
+  margin-right:157px;
+  margin-bottom:10px;
+}
+
+#list-headings li {
+  text-align:center;
+  display:table-cell;
+  vertical-align:middle;
+  border-right:3px solid white;
+  border-bottom:2px solid white;
+  height:35px;
+  color:#ffffff;
+  font-size:16px;
+  background-color:#333333;
+}
+
+#list-table li {
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  float:left;
+  vertical-align:middle;
+  text-align:center;
+  height:100px;
+  font-size:10px;
+  border-right:3px solid white;
+  background-color:#eeeeee;
+}
+
+#list-table li.pic {
+  width:100px;
+}
+
+#list-headings li.pic {
+  width:100px;
+}
+
+#list-table li.location {
+  width:150px;
+}
+
+#list-headings li.location {
+  width:150px;
+}
+
+#list-table li.name {
+  width:170px;
+}
+
+#list-headings li.name {
+  width:170px;
+}
+
+#search-and {
+  text-align: center;
+}
+
+#search-and {
+  padding-right:40px;
+}
+
+

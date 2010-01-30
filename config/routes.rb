@@ -4,6 +4,10 @@ ActionController::Routing::Routes.draw do |map|
   map.trip_calendar 'trip_calendar', :controller => 'calendar', :action => 'trip_calendar', :year => Time.zone.now.year, :month => Time.zone.now.month
   map.shop_calendar 'shop_calendar', :controller => 'calendar', :action => 'shop_calendar', :year => Time.zone.now.year, :month => Time.zone.now.month
 
+  map.resources :shop_searches
+  
+  map.resources :surfer_searches
+
   map.resources :board_searches
 
   map.resources :black_out_dates

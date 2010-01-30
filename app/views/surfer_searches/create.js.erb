@@ -1,0 +1,76 @@
+function addResults(element) {
+  $('#search-results').remove();
+  $('#no-results').remove();
+  $(".new_surfer_search").after(
+    <% if @found_surfers.blank? %>
+      '<div id="no-results">' +
+        '<p>' +
+          'We couldn\'t find any surfers.  Try a different search.' +
+        '</p>' +
+      '</div>'
+    <%  else %>
+      '<div id="search-results">' +
+        '<div class="user-list">' +
+          '<ul id="list-headings">' +
+            '<li class="pic">Pic</li>' +
+            '<li class="name">Name</li>' +
+            '<li class="location">Location</li>' +
+          '</ul>' +
+          <% @found_surfers.each do |user| %>
+            '<ul id="list-table">' +
+              '<li class="user-link<%=user.id%> pic">' +
+                '<div id="centering-div">' +
+                  '<%= link_to "", user_path(user)%>' +
+                  <% if user.image.nil? %>
+                    '<p><span class="muted-text">No Photo</span></p>' +
+
+                  <% else %>
+
+                    '<%= image_tag(user.image.data.url(:thumb)) %>' +
+
+                  <% end %>
+                '</div>' +
+              '</li>' +
+              '<li class="user-link<%=user.id%> name">' +
+                '<div id="centering-div">' +
+                  '<p>' +
+                    '<%= link_to "", user_path(user)%>' +
+                    '<%= escape_javascript(user.full_name) %>' +
+                  '</p>' +
+                '</div>' +
+              '</li>' +
+              '<li class="user-link<%=user.id%> location">' +
+                '<div id="centering-div">' +
+                  <% if user.location %>
+                    '<p>' +
+                      '<%= link_to "", user_path(user)%>' +
+                      '<%= escape_javascript(user.location.locality) unless user.location.locality.blank? %>' +
+                    '</p>' +
+                  <% else %>
+                    '<p>' +
+                      'Location not listed' +
+                    '</p>' +
+                  <% end %>
+                '</div>' +
+              '</li>' +
+            '</ul>' +
+            '<div class="clear"></div>' +
+          <% end %>
+        '</div>' +
+      '</div>'
+    <% end %>
+  );
+  <% @found_surfers.each do |user| %>
+    $(".user-link<%=user.id%>").click(function(){
+      window.location=$(this).find("a").attr("href"); return false;
+    });
+
+    $(".user-link<%=user.id%>").mouseover(function() {
+      $(".user-link<%=user.id%>").css("background-color","#C5C2C4");
+    });
+
+    $(".user-link<%=user.id%>").mouseout(function() {
+      $(".user-link<%=user.id%>").css("background-color","#eeeeee");
+    });
+  <% end %>
+}

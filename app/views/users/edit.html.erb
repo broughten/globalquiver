@@ -33,9 +33,7 @@
       </div>
     <% end %>
 
-    <% if current_user.is_a?(Surfer)  %>
-      <%= render :partial => '/locations/form' %>
-    <% end %>
+    <%= render :partial => '/locations/form' %>
   </div>
 </div>
 <div class="right-column">

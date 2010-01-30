@@ -1,0 +1,28 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'user_searches', :media => 'screen' %>
+  <%= javascript_include_tag 'jquery/form/jquery.form' %>
+<% end %>
+
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $('.new_shop_search').ajaxForm({
+      dataType: 'script',
+      beforeSubmit: function(arr, $form, opts) {
+        // add form id to options object
+        opts.formId = $form.attr('id');
+      },
+      success: function(responseText) {
+         // 'this' is the options object, so we can access 'formId' on 'this'
+         addResults(this.formId);
+      }
+    });
+
+  });
+
+<% end %>
+<h1>Find surf shops</h1>
+<div class="search-instructions">
+  <h2>Search for a shop by location and name. (Name may be left blank.)</h2>
+</div>
+
+<%= render :partial => 'form' %>

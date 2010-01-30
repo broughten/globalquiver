@@ -349,6 +349,11 @@ a.call_to_action{
   #top:-50%;
 }
 
+#centering-div a {
+  #position:relative;
+  #top:-50%;
+}
+
 .feature-desc {
   padding-top:15px;
   font-size: 15px;
@@ -357,6 +362,20 @@ a.call_to_action{
   font-weight: bold;
 }
 #photo{
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  height:223px;
+  width:223px;
+  background-color:white;
+  text-align:center;
+
+}
+
+#no-photo-div{
+  display:table;
+  #position:relative;
+  overflow:hidden;
   height:223px;
   width:223px;
   background-color:#eeeeee;
@@ -366,8 +385,11 @@ a.call_to_action{
 }
 
 .no-photo {
-  padding-top:65px;
   color:#999999;
+}
+
+.no-photo a {
+  font-size:20px;
 }
 
 
