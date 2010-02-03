@@ -6,7 +6,7 @@ function addReply(element) {
     '<div id="comment<%=@reply.id%>" class="comment">' +
       '<div class="user-info">' +
         <% if @reply.user.image.blank? %>
-          '<div class="no-photo">' +
+          '<div class="non-photo-comment">' +
             '<div id="centering-div">' +
               '<p>' +
                 'No Photo' +

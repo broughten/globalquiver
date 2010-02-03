@@ -57,7 +57,7 @@
   height:50px;
 }
 
-.no-photo {
+.non-photo-comment {
   display:table;
   #position:relative;
   overflow:hidden;
@@ -67,7 +67,7 @@
   background-color:#eeeeee;
 }
 
-.no-photo p {
+.non-photo-comment p {
   font-size:11px;
 }
 
