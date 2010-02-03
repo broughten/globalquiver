@@ -15,24 +15,26 @@
 	<%= render :partial => '/unavailable_dates/form', :locals => { :board => @reservation.board } %>
 </div>
 <div id="reservation-confirmation">
-	<% form_for :reservation, :url => { :action => "create" } do |f| %>
-  	<%= f.error_messages %>
-  	<h1>2) Confirm and submit your reservation</h1>
-		<div id="board-info">
-			<h2><%= h@reservation.board.model %> by <%= h@reservation.board.maker %></h2>
-			<h2>Board Owner: <%= h@reservation.board.creator.full_name %></h2>
-		</div>
-		<div id="dates">
-			<h2>Dates:</h2>
-			<ul>
-			</ul>
-		</div>
-		<div id="cancel-reservation">
-      	<%= link_to "Cancel Reservation", board_path(@reservation.board) %>
-  		</div>
-  		<div id="submit-reservation">
-      	<%= f.submit "Submit Reservation", :class => 'submitBtn' %>
-  		</div>
-		<% end %>
+  <% form_for :reservation, :url => { :action => "create" } do |f| %>
+    <%= f.error_messages %>
+    <h1>2) Confirm and submit your reservation</h1>
+      <div id="board-info">
+        <h2><%= h@reservation.board.model %> by <%= h@reservation.board.maker %></h2>
+        <h2>Board Owner: <%= h@reservation.board.creator.full_name %></h2>
+      </div>
+    <div id="dates">
+      <h2>Dates:</h2>
+      <ul>
+      </ul>
+    </div>
+    <div id="cancel-reservation">
+      <p>
+        <%= link_to "Cancel Reservation", board_path(@reservation.board) %>
+      </p>
+    </div>
+    <div id="submit-reservation">
+      <%= f.submit "Submit Reservation", :class => 'submitBtn' %>
+    </div>
+  <% end %>
 </div>
 

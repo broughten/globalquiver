@@ -53,9 +53,6 @@ class CommentsController < ApplicationController
 
       if @reply.save
         @reply.move_to_child_of(@comment)
-        if @comment.user != current_user
-          UserMailer.deliver_comment_notification(current_user, @comment.user, @comment)
-        end
         format.js
       else
         format.js {

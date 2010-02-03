@@ -36,16 +36,6 @@ describe CommentsController do
         xhr :post, 'reply', {:id => @temp_comment.id, :reply => {:body => "comment"}}
       end
 
-      it "should send an email to the original commentor if the replier is not the same person" do
-        UserMailer.expects(:deliver_comment_notification)
-        other_user = User.make()
-        board = Board.make()
-        comment = Comment.build_from(board, other_user.id, "this is a comment");
-        comment.save
-        xhr :post, 'reply', {:id => comment.id, :reply => {:body => "reply"}}
-
-      end
-
       it "should render an alert if the comment fails to save" do
         Comment.any_instance.stubs(:valid?).returns(false)
         xhr :post, 'reply', {:id => @temp_comment.id, :reply => {:body => "comment"}}

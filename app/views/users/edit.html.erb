@@ -7,32 +7,31 @@
 <h1 id="show-name">Edit Your Profile</h1>
 <div class="left-column">
   <div class  ="user-photo">
-    <% form_for @user, :html => {:multipart => true } do |form| %>
-      <% if @user.image.nil? %>
-        <div id="no-photo-div">
-          <div id="centering-div">
-            <p class="no-photo">No Photo</p>
-          </div>
+    <% if @user.image.nil? %>
+      <div id="no-photo-div">
+        <div id="centering-div">
+          <p class="no-photo">No Photo</p>
         </div>
-      <% else %>
-        <div id="the-photo">
-          <div id="centering-div">
-            <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
-          </div>
-        </div>
-      <% end %>
-      <div id="photo-form">
-        <h2>Upload/Change Photo</h2>
-          <%= error_messages_for 'image' %>
-          <% form.fields_for :image_attributes do |image_fields| %>
-            <%= image_fields.file_field :data %>
-          <% end %>
-        <div id="upload-button" class="submit">
-          <%= form.submit 'Upload', :class => 'submitBtn' %>
+      </div>
+    <% else %>
+      <div id="the-photo">
+        <div id="centering-div">
+          <%= image_tag @user.image.data.url(:user_page), :alt => "user photo" %>
         </div>
       </div>
     <% end %>
-    <div class="clear"></div>
+    <div id="photo-form">
+      <h2>Upload/Change Photo</h2>
+      <% form_for @user, :html => {:multipart => true } do |form| %>
+        <%= error_messages_for 'image' %>
+        <% form.fields_for :image_attributes do |image_fields| %>
+          <%= image_fields.file_field :data %>
+        <% end %>
+        <div id="upload-button" class="submit">
+          <%= form.submit 'Upload', :class => 'submitBtn' %>
+        </div>
+      <% end %>
+    </div>
     <%= render :partial => '/locations/form' %>
 
   </div>
@@ -66,13 +65,14 @@
         </ul>
         <div class="clear"></div>
         <ul>
-          <li class="attr-name">If you're renting out boards, when is it best for someone to pick them up?</li>
-          <li class="value">
+          <li class="attr-name tall">If you're renting out boards, when is it best for someone to pick them up?</li>
+          <li class="value tall">
             <% for time in PickupTime.find(:all) %>
-            <div class="pickup-times">
-              <%= check_box_tag "#{current_user.class.to_s.downcase}[pickup_time_ids][]", time.id, @user.pickup_times.include?(time) %>
-              <p><%= time.name %></p>
-            </div>
+              <div class="pickup-times">
+                <%= check_box_tag "#{current_user.class.to_s.downcase}[pickup_time_ids][]", time.id, @user.pickup_times.include?(time) %>
+                <p><%= time.name %></p>
+              </div>
+              <div class="clear"></div>
             <% end %>
           </li>
         </ul>

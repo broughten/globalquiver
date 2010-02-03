@@ -10,7 +10,7 @@ div .board-flash {
 
 .right-column {
   width:300px;
-  padding-right:70px;
+  padding-right:90px;
 }
 
 .user-info-table input[type=text],.user-info-table input[type=password] {
@@ -29,7 +29,7 @@ div .board-flash {
 .user-info-table .attr-name {
   padding-top:15px;
   height:30px;
-  width:80px;
+  width:100px;
   float:left;
 }
 
@@ -42,9 +42,13 @@ div .board-flash {
 }
 
 .user-info-table {
-  width:350px;
+  width:370px;
 }
 
 .user-info-table .inline-errors {
   width:340px;
+}
+
+.user-info-table .tall {
+  height:140px;
 }

@@ -4,14 +4,15 @@ function addFlash(element) {
   <% else %>
 
   var message = "<%= escape_javascript(flash.delete(:notice)) %>";
-  $("#" +element).parent().parent().parent().before('<div class="flash board-flash"><div id="flash_notice"><p>' + message + '</p></div></div>');
   if ($.browser.msie) {
+    $("#" +element).parent().parent().parent().parent().prev().after('<div class="flash board-flash"><div id="flash_notice"><p>' + message + '</p></div></div>');
     if ($("#" +element).parent().parent().children("#board_submit").val() == "Remove\nfrom\nquiver") {
       $("#" +element).parent().parent().children("#board_submit").attr("value", "Add\nto\nquiver");
     } else {
       $("#" +element).parent().parent().children("#board_submit").attr("value", "Remove\nfrom\nquiver");
     }
   } else {
+    $("#" +element).parent().parent().parent().before('<div class="flash board-flash"><div id="flash_notice"><p>' + message + '</p></div></div>');
     if ($("#" +element).children("#board_submit").val() == "Remove\nfrom\nquiver") {
       $("#" +element).children("#board_submit").attr("value", "Add\nto\nquiver");
     } else {
