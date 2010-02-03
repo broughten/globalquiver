@@ -16,7 +16,7 @@ function addReply(element) {
         <% else %>
          '<div class="user-photo">' +
            '<div id="centering-div">' +
-              '<%= link_to image_tag(@reply.user.image.data.url(:tinythumb)), user_path(:id => @reply.user.id) %>' +
+              '<%= link_to image_tag(@reply.user.image.data.url(:thumb)), user_path(:id => @reply.user.id) %>' +
            '</div>' +
           '</div>' +
         <% end %>

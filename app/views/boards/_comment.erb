@@ -35,7 +35,7 @@
     <% else %>
       <div class="user-photo">
         <div id="centering-div">
-          <%= link_to image_tag(comment.user.image.data.url(:tinythumb)), user_path(:id => comment.user.id) %>
+          <%= link_to image_tag(comment.user.image.data.url(:thumb)), user_path(:id => comment.user.id) %>
         </div>
       </div>
     <% end %>
