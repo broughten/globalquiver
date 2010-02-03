@@ -38,7 +38,7 @@ class UserMailer < ActionMailer::Base
   def comment_notification(commentor, target_user, comment)
     recipients(target_user.email)
     from("GlobalQuiver <noreply@globalquiver.com>")
-    subject('Link to reset your password')
+    subject('Someone commented on your board')
     sent_on(Time.now)
     body({:commentor => commentor, :target_user => target_user, :comment => comment})
   end
