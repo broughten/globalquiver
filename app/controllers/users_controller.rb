@@ -59,7 +59,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'Profile successfully updated.'
       redirect_to(edit_user_path(:id =>  @user.id))
     else
-      render :action => :edit
+      render :template => 'users/edit'
     end
   end
 

@@ -6,3 +6,45 @@
 div .board-flash {
   width:545px;
 }
+
+
+.right-column {
+  width:300px;
+  padding-right:70px;
+}
+
+.user-info-table input[type=text],.user-info-table input[type=password] {
+  display:block;
+  width:195px;
+}
+
+.user-info-table li {
+  width:350px;
+}
+
+.user-info-table .value, .user-info-table .attr-name {
+  display:block;
+}
+
+.user-info-table .attr-name {
+  padding-top:15px;
+  height:30px;
+  width:80px;
+  float:left;
+}
+
+.user-info-table .value {
+  padding-top:15px;
+  height:30px;
+  width:150px;
+  float:right;
+  padding-right:95px;
+}
+
+.user-info-table {
+  width:350px;
+}
+
+.user-info-table .inline-errors {
+  width:340px;
+}

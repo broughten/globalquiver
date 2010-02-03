@@ -67,7 +67,8 @@ module AuthenticatedSystem
           redirect_to login_path
         end
         format.any do
-          request_http_basic_authentication 'Web Password'
+          store_location
+          redirect_to login_path
         end
       end
     end
