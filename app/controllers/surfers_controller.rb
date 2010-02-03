@@ -1,0 +1,3 @@
+class SurfersController < UsersController
+  
+end

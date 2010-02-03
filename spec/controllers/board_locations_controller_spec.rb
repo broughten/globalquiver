@@ -66,7 +66,14 @@ describe BoardLocationsController do
   end
 
   describe "anonymous user" do
-    it_should_require_authentication_for_actions :new, :create
+    it "new action should require authentication" do
+      get :new
+      response.should redirect_to(login_path)
+    end
+    it "create action should require authentication" do
+      post :create, :id => "1"
+      response.should redirect_to(login_path)
+    end
   end
 
 end

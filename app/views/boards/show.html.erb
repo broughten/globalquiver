@@ -10,17 +10,43 @@
 		'jquery/date_picker/datePickerMultiMonth',
 		:cache=> "cache/date_picker"%>
   <%= javascript_include_tag 'unavailable_dates/new'%>
-<%= javascript_include_tag 'jquery/colorbox/jquery.colorbox-min'%>
+  <%= javascript_include_tag 'jquery/colorbox/jquery.colorbox-min'%>
+  <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? -%>
+
 
 <% end %>
 
 <% content_for :javascript do %>
+
   $(document).ready(function() {
     $(".large_board_image").colorbox();
     $("#how-link").click(function () {
       $("#how-words").toggle(600);
       return false;
     });
+
+    $('.edit_comment').ajaxForm({
+      dataType: 'script',
+      beforeSubmit: function(arr, $form, opts) {
+        // add form id to options object
+        opts.formId = $form.attr('id');
+        $form.prev().children(".reply").text("reply");
+      },
+      success: function(responseText) {
+        // 'this' is the options object, so we can access 'formId' on 'this'
+        addReply(this.formId);
+      }
+    });
+
+
+    // Always send the authenticity_token with ajax
+    $(document).ajaxSend(function(event, request, settings) {
+        if ( settings.type == 'post' ) {
+            settings.data = (settings.data ? settings.data + "&" : "")
+                + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN );
+        }
+    });
+
   });
 
 <% end %>
@@ -197,3 +223,18 @@
     <%= link_to "Reserve This Board!", new_board_reservation_path(@board) %>
   </div>
 <% end %>
+
+<% if logged_in? %>
+  <%= render :partial => "new_comment" %>
+
+  <%= render :partial => "comment", :collection => @board.root_comments %>
+
+<% else %>
+  <% if !@board.root_comments.blank? %>
+    <p>
+      <%= link_to "Log in", new_session_path %> to view comments about this board.
+    </p>
+  <% end %>
+<% end %>
+
+

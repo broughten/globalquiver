@@ -8,7 +8,13 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :surfer_searches
 
-  map.resources :board_searches
+  map.resources :board_searches, :singular => "board_search"
+
+  map.resources :comments
+
+  map.connect 'boards/:id/new_comment', :controller => 'boards', :action => 'new_comment'
+
+  map.connect 'comments/:id/reply', :controller => 'comments', :action => 'reply'
 
   map.resources :black_out_dates
 
@@ -27,20 +33,21 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
+  map.resources :surfers
+
+  map.resources :shops
+
   map.resources :pages
 
   map.resource :blog_theme
 
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.lost_password '/lost_password', :controller => 'users', :action => 'lost_password'
-  map.reset_password 'reset_password/:reset_code', :controller => 'users', :action => 'reset_password'
+  map.connect 'reset_password/:reset_code', :controller => 'users', :action => 'reset_password'
   map.with_options :controller => 'sessions'  do |m|
     m.login  '/login',  :action => 'new'
     m.logout '/logout', :action => 'destroy'
   end
   
   map.root :controller => 'pages', :action => 'show', :id => 'home'
-
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end

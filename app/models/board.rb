@@ -1,4 +1,5 @@
 class Board < ActiveRecord::Base
+  acts_as_commentable
 
   belongs_to :style
   belongs_to :location, :class_name => 'BoardLocation'

@@ -78,5 +78,21 @@ class BoardsController < ApplicationController
     end
   end
 
+  def new_comment
+    @board = Board.find(params[:id])
+    @comment = Comment.build_from(@board, current_user.id, params[:comment][:body] )
 
+    respond_to do |format|
+      if @comment.save
+        if !@board.user_is_owner(current_user)
+          UserMailer.deliver_comment_notification(current_user, @board.creator, @comment)
+        end
+        format.js
+      else
+        format.js {
+          render :inline => "alert('Ooops! Something went wrong. Please refresh this page and try again.');"
+        }
+      end
+    end
+  end
 end

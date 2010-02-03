@@ -144,7 +144,23 @@ describe ReservationsController do
   end # of authenticated user
 
   describe "anonymous user" do
-    it_should_require_authentication_for_actions :new, :create, :show
+
+    it "new action should require authentication" do
+
+      get :new, :board_id => "1"
+      response.should redirect_to(login_path)
+    end
+    it "create action should require authentication" do
+
+      post :create, :board_id => "1"
+      response.should redirect_to(login_path)
+    end
+    it "show action should require authentication" do
+
+      get :show, :id => "1"
+      response.should redirect_to(login_path)
+    end
+
   end
 
 end

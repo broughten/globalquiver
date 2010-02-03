@@ -1,0 +1,102 @@
+function addReply(element) {
+  var reply_text = "<%= escape_javascript(@reply.body) %>";
+  $("#" + element).toggle();
+  oldhtml = $("#" + element).parent().next().next().html();
+  $("#" + element).parent().next().next().html(
+    '<div id="comment<%=@reply.id%>" class="comment">' +
+      '<div class="user-info">' +
+        <% if @reply.user.image.blank? %>
+          '<div class="no-photo">' +
+            '<div id="centering-div">' +
+              '<p>' +
+                'No Photo' +
+              '</p>' +
+            '</div>' +
+          '</div>' +
+        <% else %>
+         '<div class="user-photo">' +
+           '<div id="centering-div">' +
+              '<%= link_to image_tag(@reply.user.image.data.url(:tinythumb)), user_path(:id => @reply.user.id) %>' +
+           '</div>' +
+          '</div>' +
+        <% end %>
+        '<div class="user-stats">' +
+          '<div class="user-name">' +
+            '<p>' +
+              '<%= link_to @reply.user.full_name, user_path(:id => @reply.user.id) %>' +
+            '</p>' +
+          '</div>' +
+          '<div class="when">' +
+            '<p>' +
+              '<%= comment_time_ago(@reply.created_at)  %>' +
+            '</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="actual-comment <%= owner_comment(@reply, @board) %> <%= deleted_comment(@reply) %>">' +
+        '<p>'+ 
+          reply_text +
+        '</p>' +
+        <% if @reply.level < 3 && @reply.body != "Comment deleted by user" %>
+          '<p>' +
+            '<%= link_to "reply", "", :id => "reply-link#{@reply.id}", :class => "reply" %>' +
+            <% if @reply.user == current_user%>' | ' +
+              '<%= link_to 'delete', "", :id => "delete-link#{@reply.id}" %>' +
+            <% end %>
+          '</p>' +
+          '<% form_for @reply, :url => {:controller => 'comments', :action => 'reply', :id => @reply.id}, :html => {:id => "reply-form#{@reply.id}", :style => "display:none"} do |f| -%>' +
+            <% fields_for "reply" do |fields| %>
+              '<%= fields.text_area :body, :size => "60x2", :value => "" %>' +
+            <% end %>
+            '<div id="submit-comment">' +
+              '<p>' +
+                '<%= f.submit "Reply", :class => 'submitBtn', :id => "reply-button" %>' +
+              '</p>' +
+            '</div>' +
+          '<% end %>' +
+         <% elsif @reply.body != "Comment deleted by user" && @reply.user == current_user %>
+          '<p>' +
+            '<%= link_to 'delete', "", :id => "delete-link#{@reply.id}" %>' +
+          '</p>' +
+        <% end %>
+      '</div>' +
+      '<div class="clear"></div>' +
+      '<div id="children">' +
+      '</div>' +
+    '</div>' + oldhtml
+  );
+  
+  $("#reply-link<%= @reply.id %>").click(function (){
+    $("#reply-link<%= @reply.id %>").text($("#reply-link<%= @reply.id %>").text() == "reply"?"cancel":"reply");
+    $("#reply-form<%= @reply.id %>").children("#reply_body").val("");
+    $("#reply-form<%= @reply.id %>").toggle(300);
+    return false;
+  });
+  $('.edit_comment').ajaxForm({
+    dataType: 'script',
+    beforeSubmit: function(arr, $form, opts) {
+      // add form id to options object
+      opts.formId = $form.attr('id');
+      $form.prev().children(".reply").text("reply");
+    },
+    success: function(responseText) {
+      // 'this' is the options object, so we can access 'formId' on 'this'
+      addReply(this.formId);
+    }
+  });
+    $("#delete-link<%= @reply.id %>").click(function (event){
+    if ( confirm("Are you sure you want to delete this comment?") )
+      $.ajax({
+        url: '/comments/<%= @reply.id %>',
+        type: 'post',
+        dataType: 'script',
+        data: { '_method': 'delete' },
+        success: function() {
+          deleteComment();
+        }
+      });
+    return false;
+  });
+}
+
+ 

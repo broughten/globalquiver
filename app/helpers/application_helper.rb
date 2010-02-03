@@ -39,12 +39,18 @@ module ApplicationHelper
   def current_tab?(keyword)
     current_page?(page_path(keyword)) || tab_conditions(keyword).any?(&:call)
   end
+  
+  def current_controller?(c)
+    controller.controller_name == c
+  end
 
   def tab_conditions(keyword)
     {
-      :Home => [ lambda { current_page?(root_path)         } ],
-      :Find => [ lambda { current_page?(new_board_search_path) } ],
-      :Add  => [ lambda { current_page?(new_board_path)    } ],
+      :Home   => [ lambda { current_page?(root_path)         } ],
+      :Find   => [ lambda { current_page?(new_board_search_path) } ],
+      :Add    => [ lambda { current_page?(new_board_path)    } ],
+      :Surfer => [ lambda { current_page?(new_surfer_search_path)    } ],
+      :Shop   => [ lambda { current_page?(new_shop_search_path)    } ]
     }[keyword.to_sym] || []
   end
 

@@ -10,7 +10,7 @@
 
 <% end %>
   
-<% semantic_form_for @user, :url => {:action => "update" }, :html => { :id => "location-form",:enctype => "multipart/form-data" } do |form| %>
+<% semantic_form_for @user, :html => { :id => "location-form",:enctype => "multipart/form-data" } do |form| %>
 <div id="the-location" class="user-info-table">
   <h2>Your Location</h2>
   <% if @user.is_a?(Surfer) %>

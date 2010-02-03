@@ -1,0 +1,30 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'comment', :media => 'screen' %>
+  <%= javascript_include_tag 'jquery/form/jquery.form' %>
+<% end %>
+
+<% content_for :javascript do %>
+  $(document).ready(function() {
+    $('#new-comment-form').ajaxForm({
+      dataType: 'script',
+      success: function(responseText) {
+        // 'this' is the options object, so we can access 'formId' on 'this'
+        addComment();
+      }
+    });
+
+  });
+<% end %>
+
+<h2>Comment on this Board</h2>
+<% @comment = Comment.new %>
+<% form_for @board, :url => {:action => 'new_comment'}, :html => {:id => "new-comment-form"} do |f| %>
+  <% fields_for @comment do |fields| %>
+    <%= fields.text_area :body, :size => "60x2" %>
+  <% end %>
+  <div id="submit-comment">
+    <p>
+      <%= f.submit "Comment", :class => 'submitBtn', :id => "comment-button" %>
+    </p>
+  </div>
+<% end %>

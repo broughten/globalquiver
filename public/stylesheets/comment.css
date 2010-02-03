@@ -1,0 +1,76 @@
+#comment_body, #reply_body {
+  margin-bottom:5px;
+}
+
+#children {
+  margin-top:10px;
+  margin-left:100px;
+}
+
+
+.actual-comment {
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-left:100px;
+  padding-left:10px;
+  background-color:#eeeeee;
+  display:table-cell;
+  width:700px;
+}
+
+
+.comment {
+  margin-bottom:10px;
+}
+
+.user-info {
+  float:left;
+  width:100px;
+  border-right:solid 1px gray;
+  border-bottom:solid 1px gray;
+}
+
+.owner {
+  border-right:solid 1px #2797E6;
+  border-top:solid 1px #2797E6;
+  border-bottom:solid 1px #2797E6;
+}
+
+.deleted {
+  color: #999999;
+}
+
+.user-stats {
+  height:30px;
+  width:100px;
+}
+
+.user-stats a, .user-stats p {
+  font-size:11px;
+}
+
+.user-photo {
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  width:50px;
+  height:50px;
+}
+
+.no-photo {
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  text-align:center;
+  width:50px;
+  height:50px;
+  background-color:#eeeeee;
+}
+
+.no-photo p {
+  font-size:11px;
+}
+
+#reply-button {
+  margin-bottom:5px;
+}

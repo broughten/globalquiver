@@ -63,7 +63,7 @@ $(document).ready(function() {
       </p>
     </div>
   </li>
-  <% if board.user_is_owner(current_user) && !current_page?(:controller => 'board_searches', :action => 'show') %>
+  <% if board.user_is_owner(current_user) && !current_controller?("board_searches") %>
     <li class="board-delete short">
       <div id="centering-div">
         <p>

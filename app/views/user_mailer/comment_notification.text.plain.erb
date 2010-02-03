@@ -1,0 +1,8 @@
+Hi <%=  @target_user.first_name %>,
+
+<%= @commentor.first_name %> wrote this to you:
+
+   "<%= @comment.body %>"
+
+
+   See it in context here: <%= "#{APP_CONFIG['forgot_password_url']}" %>/boards/<%= @comment.commentable_id %>

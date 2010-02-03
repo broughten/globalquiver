@@ -135,10 +135,77 @@ describe BoardsController do
         response.should render_template("show")
       end
     end
+
+    describe "add comment to board" do
+      before(:each) do
+        @temp_board = Board.make()
+      end
+      it "should attempt to find the board in question" do
+        Board.expects(:find).returns(@temp_board)
+        post 'new_comment', :id => @temp_board.id, :comment => {:body => "comment"}
+        assigns[:board].should == @temp_board
+      end
+
+      it "should attempt to build a new comment" do
+        post 'new_comment', :id => @temp_board.id, :comment => {:body => "comment"}
+        assigns[:comment].commentable_id.should == @temp_board.id
+      end
+
+      it "should attempt to save the comment" do
+        Comment.any_instance.expects(:save)
+        xhr :post, 'new_comment', {:id => @temp_board.id, :comment => {:body => "comment"}}
+      end
+
+      it "should send an email to the baord owner if the commentor and the board owner are not the same person" do
+        UserMailer.expects(:deliver_comment_notification)
+        other_user = User.make()
+        board = Board.make(:creator => other_user)
+        xhr :post, 'new_comment', {:id => board.id, :comment => {:body => "comment"}}
+
+      end
+
+      it "should render an alert if the comment fails to save" do
+        Comment.any_instance.stubs(:valid?).returns(false)
+        xhr :post, 'new_comment', {:id => @temp_board.id, :comment => {:body => "comment"}}
+        response.should contain("alert('Ooops! Something went wrong. Please refresh this page and try again.');")
+      end
+
+    end
   end
 
   describe "anonymous user" do
-    it_should_require_authentication_for_actions :new, :edit, :create, :update, :destroy, :select_reserved_dates
+    it "new action should require authentication" do
+
+      get :new
+      response.should redirect_to(login_path)
+    end
+    it "new action should require authentication" do
+
+      get :edit, :id => "1"
+      response.should redirect_to(login_path)
+    end
+    it "create action should require authentication" do
+
+      post :create, :id => "1"
+      response.should redirect_to(login_path)
+    end
+    it "update action should require authentication" do
+
+      put :update, :id => "1"
+      response.should redirect_to(login_path)
+    end
+    it "destroy action should require authentication" do
+
+      put :destroy, :id => "1"
+      response.should redirect_to(login_path)
+    end
+
+    it "new_comment action should require authentication" do
+
+      post :new_comment, :id => "1", :comment => {:body => "comment"}
+      response.should redirect_to(login_path)
+    end
+
   end
 
 end

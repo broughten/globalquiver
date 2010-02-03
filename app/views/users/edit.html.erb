@@ -7,7 +7,7 @@
 <h1 id="show-name">Edit Your Profile</h1>
 <div class="left-column">
   <div class  ="user-photo">
-    <% form_for @user, :url => {:action => "update" }, :html => {:multipart => true } do |form| %>
+    <% form_for @user, :html => {:multipart => true } do |form| %>
       <% if @user.image.nil? %>
         <div id="no-photo-div">
           <div id="centering-div">
@@ -37,7 +37,7 @@
   </div>
 </div>
 <div class="right-column">
-  <% semantic_form_for @user, :url => {:action => "update" }  do |form| %>
+  <% semantic_form_for @user do |form| %>
     <div class="user-info-table">
       <h2>Update Your Info</h2>
       <ul>
@@ -87,7 +87,7 @@
   </div>
   <div class="clear"></div>
 
-  <% semantic_form_for @user, :url => {:action => "update" }, :id => 'change_password'  do |form| %>
+  <% semantic_form_for @user, :id => 'change_password'  do |form| %>
 
     <div class="user-info-table">
       <h2>Change Password</h2>

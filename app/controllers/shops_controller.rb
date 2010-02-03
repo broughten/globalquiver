@@ -1,0 +1,3 @@
+class ShopsController < UsersController
+  
+end

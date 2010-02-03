@@ -54,12 +54,12 @@ describe UsersController do
   
   describe "anonymous user" do
     it "should redirect to login screen on edit" do
-      get :edit
+      get "edit", :id => "1"
       response.should redirect_to(login_path)
     end
     
     it "should redirect to login screen on update" do
-      post :update
+      put :update, :id => "1"
       response.should redirect_to(login_path)
     end
 
@@ -142,7 +142,7 @@ describe UsersController do
 
       it "should flash an error and redirect to root path if the user isn't found" do
         user = Shop.make()
-        post :reset_password, :user => user
+        post :reset_password, :reset_code => "wrong"
         flash[:error].should == "Reset password token invalid, please contact support."
         response.should redirect_to(root_path)
       end

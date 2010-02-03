@@ -1,0 +1,13 @@
+function deleteComment() {
+  <% if @comment.destroyed %>
+
+    $("#comment<%= @id_to_remove %>").remove();
+
+  <% else %>
+    
+    $("#comment<%= @id_to_remove %>").children(".actual-comment").children().remove();
+    $("#comment<%= @id_to_remove %>").children(".actual-comment").addClass("deleted");
+    $("#comment<%= @id_to_remove %>").children(".actual-comment").html("<p><%= @comment.body %></p>");
+
+<% end %>
+}

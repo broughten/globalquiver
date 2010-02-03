@@ -9,8 +9,19 @@ module ControllerMacros
     def it_should_require_authentication_for_actions(*actions)
       actions.each do |action|
         it "#{action} action should require authentication" do
-          # include the ID just in case the action needs it
-          get action, :id => 1
+
+          if action == "new"
+            get action
+          end
+          if action == "create"
+            post action
+          end
+          if action == "edit"
+            get action, :id => "1"
+          end
+          if action == "update"
+            put action, :id => ""
+          end
           response.should redirect_to(login_path)
         end
       end

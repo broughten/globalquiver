@@ -37,4 +37,27 @@ module BoardsHelper
      board.creator.full_name
     end
   end
+
+  def comment_time_ago(time)
+    if Time.now - time < 60
+      answer = "Moments ago"
+    elsif Time.now - time < 60 * 60
+      answer = "#{(Time.now - time).div(60)} minutes ago"
+    elsif Time.now - time < 2 * 60 * 60
+      answer = "1 hr #{(Time.now - time).div(60) - 60} minutes ago"
+    elsif Time.now - time < 24 * 60 * 60
+      answer = "#{(Time.now - time).div(60 * 60)} hours ago"
+    else
+      answer = "#{(Time.now - time).div(60 * 60 * 24)} days ago"
+    end
+    return answer
+  end
+
+  def owner_comment(comment, board)
+    if comment.user == board.creator
+      return "owner"
+    else
+      return ""
+    end
+  end
 end

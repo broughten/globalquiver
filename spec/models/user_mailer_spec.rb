@@ -44,5 +44,19 @@ describe UserMailer do
 
     # Test the body of the sent email contains what we expect it to
   end
+
+  it "should send out an email to the recipient of a comment (board owner or original commentor)" do
+    user = User.make()
+    user2 = User.make()
+    board = Board.make(:creator => user)
+    comment = Comment.build_from(board, user2.id, "this is a comment" )
+
+    # Send the email, then test that it got queued
+    ActionMailer::Base.deliveries.clear
+    email = UserMailer.deliver_comment_notification(user, user2, comment)
+    ActionMailer::Base.deliveries.length.should == 1
+
+    # Test the body of the sent email contains what we expect it to
+  end
   
 end
