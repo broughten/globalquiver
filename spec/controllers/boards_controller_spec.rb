@@ -151,6 +151,41 @@ describe BoardsController do
         flash[:error].should == 'Only the board owner can activate and deactivate boards.'
         response.should redirect_to(root_path)
       end
+
+      it "should update measurements properly" do
+
+        board = Board.make(:creator => @user,
+                           :length_feet => 6,
+                           :length_inches => 3,
+                           :width_inches => 20,
+                           :width_fraction => 0.5,
+                           :thickness_inches => 3,
+                           :thickness_fraction => 0
+                          )
+
+        post 'update', { :id=>board.id,
+                          :board => {
+                            :length_feet => "5",
+                            :length_inches => "11",
+                            :width_inches => "17",
+                            :width_fraction => "0",
+                            :thickness_inches => "2",
+                            :thickness_fraction => "0.5"
+                          }
+                          
+        }
+
+
+
+        assigns[:board].length_feet.should == 5
+        assigns[:board].length_inches.should == 11
+        assigns[:board].width_inches.should == 17
+        assigns[:board].width_fraction.should == '0'
+        assigns[:board].thickness_inches.should == 2
+        assigns[:board].thickness_fraction.should == '1/2'
+
+
+      end
     end
     
     

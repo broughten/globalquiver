@@ -62,8 +62,6 @@ class BoardsController < ApplicationController
         @board.images.build
 
       end
-
-      logger.debug("HI JC!!! #{@board.images[index].inspect}")
     end
     
   end
