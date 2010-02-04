@@ -44,6 +44,34 @@ describe BoardsController do
         end
       end
     end
+
+    describe "edit board" do
+      before(:each) do
+        @user.board_locations << BoardLocation.make()
+        @board = Board.make()
+      end
+
+      it "should attempt to find the board in question" do
+        Board.expects(:find).returns(@board)
+        get 'edit', :id=>@board.id
+        assigns[:board].should == @board
+      end
+      it "should assign needed variables for view" do
+        get "edit", :id => @board.id
+        assigns[:existing_locations].should == @user.board_locations
+      end
+
+      it "should render the edit view" do
+        get "edit", :id => @board.id
+        response.should render_template "edit"
+      end
+
+      it "should create Board::MAX_PICTURES for the new board" do
+        get "new"
+        assigns[:board].images.length.should == Board::MAX_IMAGES
+      end
+    end
+
     
     describe "POST /boards (aka create board)" do
       it "should pass parameters to new board" do
@@ -108,6 +136,12 @@ describe BoardsController do
         response.should redirect_to(board_path(@temp_board))
       end
 
+      it "should render the edit view if a field doesn't validate" do
+        Board.any_instance.stubs(:valid?).returns(false)
+        post 'update', {:id=>@temp_board.id, :board => {:daily_fee => "wrong"}}
+        response.should render_template(:edit)
+      end
+
       it "should not allow you to deactivate a board you don't own" do
         @request.env['HTTP_REFERER'] = root_path
         user = User.make
@@ -169,7 +203,23 @@ describe BoardsController do
         xhr :post, 'new_comment', {:id => @temp_board.id, :comment => {:body => "comment"}}
         response.should contain("alert('Ooops! Something went wrong. Please refresh this page and try again.');")
       end
+    end
+    describe "new location for board" do
+      before(:each) do
+        @temp_board = Board.make()
+      end
+      it "should attempt to find the board in question" do
+        Board.expects(:find).returns(@temp_board)
+        post 'new_location_for_board', :id => @temp_board.id
+        assigns[:board].should == @temp_board
+      end
 
+      it "should initialize some instance variables" do
+        post 'new_location_for_board', :id => @temp_board.id
+        assigns[:board_location].should_not be_nil
+        assigns[:existing_locations].should_not be_nil
+        assigns[:map].should_not be_nil
+      end
     end
   end
 

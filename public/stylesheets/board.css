@@ -127,6 +127,21 @@
 
 
 /* show board */
+#board-details {
+  float:left;
+}
+
+.is-you {
+  float:left;
+  padding-top:10px;
+}
+
+#board-edit {
+  float:left;
+  font-size:18px;
+  padding-top:8px;
+}
+
 h1 {
   margin-bottom:5px;
 }
@@ -190,7 +205,49 @@ h1 {
   border-bottom:6px solid white;
 }
 
-.no-photo {
+.edit-photo-holder {
+  float:left;
+  margin-left:10px;
+  margin-bottom:10px;
+  text-align:center;
+
+}
+
+.edit-photo-holder p {
+  text-align:left;
+  margin-left:28px;
+}
+
+.edit-photo-error {
+
+  margin-left:20px;
+  margin-right:20px;
+  font-size:14px;
+  color:red;
+}
+
+.edit-no-photo, .edit-photo {
+  margin-left:30px;
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  height:260px;
+  width:270px;
+  text-align:center;
+  vertical-align:middle;
+  font-size:5em;
+  color:#aaaaaa;
+}
+
+.edit-no-photo p {
+    margin-left:20px;
+  margin-right:20px;
+  text-align:center;
+}
+
+
+
+.no-photo, .edit-no-photo {
   background-color:#eeeeee;
 }
 

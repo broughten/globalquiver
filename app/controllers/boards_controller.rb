@@ -49,8 +49,29 @@ class BoardsController < ApplicationController
     end
   end
 
+  # GET /boards/1/edit
+  def edit
+    @board = Board.find(params[:id])
+
+    # we pull up all the locations that the user has previously entered
+    # because he might want to use one of these for the board he's about to enter
+    @existing_locations = current_user.board_locations.ordered_by_desc_creation
+    (0..Board::MAX_IMAGES).each do |index|
+
+      if @board.images[index].nil?
+        @board.images.build
+
+      end
+
+      logger.debug("HI JC!!! #{@board.images[index].inspect}")
+    end
+    
+  end
+
   # PUT /boards/1
   def update
+    #we need to bail out if someone tries to upload a non jpg or png image
+    
     @board = Board.find(params[:id])
 
     if params[:board] && params[:board][:inactive]
@@ -71,8 +92,11 @@ class BoardsController < ApplicationController
         format.html { redirect_to(@board) }
         format.js
       else
-        flash[:error] = "Something bad happened and your changes weren't save. Please try again."
-        format.html { render :action => "show" }
+        format.html {
+          @existing_locations = current_user.board_locations.ordered_by_desc_creation
+
+          render :edit 
+        }
         format.js
       end
     end
@@ -95,4 +119,14 @@ class BoardsController < ApplicationController
       end
     end
   end
+
+  def new_location_for_board
+    @board = Board.find_by_id(params[:id])
+    @board_location = BoardLocation.new
+    respond_to do |format|
+      format.html {init_data_for_new_view}
+    end
+  end
+
+
 end

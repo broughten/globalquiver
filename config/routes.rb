@@ -13,6 +13,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments
 
   map.connect 'boards/:id/new_comment', :controller => 'boards', :action => 'new_comment'
+  
+  map.new_location_for_board 'boards/:id/new_location_for_board', :controller => 'boards', :action => 'new_location_for_board'
+
 
   map.connect 'comments/:id/reply', :controller => 'comments', :action => 'reply'
 

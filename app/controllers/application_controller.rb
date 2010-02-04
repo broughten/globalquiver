@@ -45,4 +45,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
+  def init_data_for_new_view
+    @existing_locations = current_user.board_locations
+    @map = GMap.new("map")
+    # Use the larger pan/zoom control but disable the map type
+    # selector
+    @map.control_init(:large_map => true,:map_type => false)
+
+    if !@existing_locations.blank?
+      @map.center_zoom_init([@existing_locations.first.geocode.latitude.to_f, @existing_locations.first.geocode.longitude.to_f], 11)
+    else
+      if (remote_location.nil? || remote_location.latitude.nil?)
+        @map.center_zoom_init([33.01802,-117.27828], 8 )
+      else
+        @map.center_zoom_init([remote_location.latitude,remote_location.longitude], 11 )
+      end
+    end
+  end
+
 end

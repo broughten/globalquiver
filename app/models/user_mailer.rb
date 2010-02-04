@@ -9,6 +9,7 @@ class UserMailer < ActionMailer::Base
     subject("Board Reservation Update")
     sent_on(Time.now)    
     body({:added_reservations => added_reservations, :deleted_reservations => deleted_reservations})
+    content_type("text/html")
   end
   
   def board_renter_reservation_details(reservation)

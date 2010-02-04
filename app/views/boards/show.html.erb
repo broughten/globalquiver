@@ -51,7 +51,12 @@
 
 <% end %>
 <div id="show-board-header">
-  <h1>Board Details</h1>
+  <h1 id="board-details">Board Details</h1>
+  <% if @board.user_is_owner(current_user) %>
+    <h2 class="is-you">&nbsp;(This is your board!&nbsp;</h2>
+    <p id="board-edit"><%= link_to "Edit", edit_board_path(:id => @board.id) %></p>
+    <h2 class="is-you">)</h2>
+  <% end %>
 </div>
 <% if !@board.user_is_owner(current_user) && @board.active? %>
   <div id="rent-me-link">
