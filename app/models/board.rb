@@ -26,25 +26,6 @@ class Board < ActiveRecord::Base
   def style_name=(name)
     self.style = Style.find_or_create_by_name(name) unless name.blank?
   end
-
-  
-  FRACTIONS = {'0.0' => '0',
-                '0.0625' => '1/16',
-                '0.125' => '1/8',
-                '0.1875' => '3/16',
-                '0.25' => '1/4',
-                '0.3125' => '5/16',
-                '0.375' => '3/8',
-                '0.4375' => '7/16',
-                '0.5' => '1/2',
-                '0.5625' => '9/16',
-                '0.625' => '5/8',
-                '0.6875' => '11/16',
-                '0.75' => '3/4',
-                '0.8125' => '13/16',
-                '0.875' => '7/8',
-                '0.9375' => '15/16'
-               }
  
 
   def length_feet
@@ -52,7 +33,7 @@ class Board < ActiveRecord::Base
   end
 
   def length_feet=(feet)
-    if (self.length.blank? || self.length >= 12)
+    if (self.length.blank? || self.length_feet >= 1)
       self.length = feet.to_f * 12
     else
       self.length += feet.to_f * 12
@@ -64,7 +45,7 @@ class Board < ActiveRecord::Base
   end
 
   def length_inches=(inches)
-    if (self.length.blank? || self.length < 12)
+    if (self.length.blank? || self.length_inches >= 1)
       self.length = inches.to_f
     else
       self.length += inches.to_f
@@ -81,7 +62,7 @@ class Board < ActiveRecord::Base
   end
 
   def width_inches=(inches)
-    if (self.width.blank? || self.width < 1)
+    if (self.width.blank? || self.width >= 1)
       self.width = inches.to_f
     else
       self.width += inches.to_f
@@ -90,9 +71,9 @@ class Board < ActiveRecord::Base
 
   def width_fraction
     if (!self.width.blank?)
-      fraction_value = FRACTIONS[(self.width - self.width.floor).to_s]
+      fraction_value = (self.width - self.width.floor).to_s
       if (fraction_value.nil?)
-        return '0'
+        return '0.0'
       else
         return fraction_value
       end      
@@ -117,7 +98,7 @@ class Board < ActiveRecord::Base
   end
 
   def thickness_inches=(inches)
-    if (self.thickness.blank? || self.width < 1)
+    if (self.thickness.blank? || self.thickness >= 1)
       self.thickness = inches.to_f
     else
       self.thickness += inches.to_f
@@ -126,9 +107,9 @@ class Board < ActiveRecord::Base
 
   def thickness_fraction
     if (!self.thickness.blank?)
-      fraction_value = FRACTIONS[(self.thickness - self.thickness.floor).to_s]
+      fraction_value = (self.thickness - self.thickness.floor).to_s
       if (fraction_value == nil)
-        return '0'
+        return '0.0'
       else
         return fraction_value
       end
@@ -136,7 +117,7 @@ class Board < ActiveRecord::Base
   end
 
   def thickness_fraction=(fraction)
-    if (self.thickness.blank? || self.width >= 1)
+    if (self.thickness.blank? || self.thickness >= 1)
       self.thickness = fraction.to_f
     else
       self.thickness += fraction.to_f

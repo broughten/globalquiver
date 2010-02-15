@@ -180,9 +180,9 @@ describe BoardsController do
         assigns[:board].length_feet.should == 5
         assigns[:board].length_inches.should == 11
         assigns[:board].width_inches.should == 17
-        assigns[:board].width_fraction.should == '0'
+        assigns[:board].width_fraction.should == '0.0'
         assigns[:board].thickness_inches.should == 2
-        assigns[:board].thickness_fraction.should == '1/2'
+        assigns[:board].thickness_fraction.should == '0.5'
 
 
       end

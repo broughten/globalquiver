@@ -86,7 +86,7 @@
       <p>
         <%= f.label :width, "Width:" %><br />
         <input id="board_width_inches" name="board[width_inches]" size="4" type="text" title="inches" value="<%= @board.width_inches %>" />
-        <%= f.select :width_fraction, fractions, {}, :class => "fraction_dropdown" %>
+        <%= f.select :width_fraction, fractions, :class => "fraction_dropdown" %>
       </p>
       <p>
         <%= f.label :thickness, "Thickness:" %><br />

@@ -21,7 +21,30 @@ module BoardsHelper
       ['15/16' , '0.9375']
     ]
   end
-  
+
+  UNDO_FRACTIONS = {
+      '0.0' => '0',
+      '0.0625' => '1/16',
+      '0.125' => '1/8',
+      '0.1875' => '3/16',
+      '0.25' => '1/4',
+      '0.3125' => '5/16',
+      '0.375' => '3/8',
+      '0.4375' => '7/16',
+      '0.5' => '1/2',
+      '0.5625' => '9/16',
+      '0.625' => '5/8',
+      '0.6875' => '11/16',
+      '0.75' => '3/4',
+      '0.8125' => '13/16',
+      '0.875' => '7/8',
+      '0.9375' => '15/16'
+   }
+
+  def undo_fractions (val)
+    UNDO_FRACTIONS[val]
+  end
+
   def submit_button_text_for(user, board)
     # determine who is viewing the board details
     # page and return a string based on that
