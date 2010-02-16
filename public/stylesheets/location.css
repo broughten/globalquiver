@@ -61,7 +61,10 @@
   background-color:#dddddd;
 }
 
-
+#board_location_submit{
+	margin-top:10px;
+	display:none;
+}
 /* update location */
 
 /* destroy location */

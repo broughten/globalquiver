@@ -68,7 +68,7 @@ function populateFormFields(currentAddress){
 
 function toggleLocationSubmitButton(show){
 	if(show){
-		$("#board_location_submit").show();
+		$("#board_location_submit").show(500);
 	}else{
 		$("#board_location_submit").hide();
 	}
