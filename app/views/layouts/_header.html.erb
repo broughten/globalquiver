@@ -69,22 +69,20 @@
               <%= link_to "Find a surfer", new_surfer_search_url, :id=>"new_search" %>
             </div>
           </div>
-          <% if show_left_nav %>
-            <div id="lower-left-nav">
-              <div class="left-nav-button<%= active_if_current_tab('Add') %>">
-                <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-                <div class="left-link">
-                  <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
-                </div>
-              </div>
-              <div class="left-nav-button<%= active_if_current_tab('Find') %>">
-                <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-                <div class="left-link">
-                  <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
-                </div>
+          <div id="lower-left-nav">
+            <div class="left-nav-button<%= active_if_current_tab('Add') %>">
+              <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+              <div class="left-link">
+                <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
               </div>
             </div>
-          <%  end %>
+            <div class="left-nav-button<%= active_if_current_tab('Find') %>">
+              <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+              <div class="left-link">
+                <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
+              </div>
+            </div>
+          </div>
         </div>
       <div id="container">
       

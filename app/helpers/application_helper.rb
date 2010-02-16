@@ -53,14 +53,6 @@ module ApplicationHelper
       :Shop   => [ lambda { current_page?(new_shop_search_path)    } ]
     }[keyword.to_sym] || []
   end
-
-  def show_left_nav
-    !((current_tab?('Home') && !logged_in?) || 
-       current_page?(page_path('twitter'))  ||
-       current_page?(login_path)            ||
-       current_page?(new_session_path)      ||
-       current_page?(new_user_path))
-  end
   
   def google_analytics_id
     APP_CONFIG['google_analytics_account']
