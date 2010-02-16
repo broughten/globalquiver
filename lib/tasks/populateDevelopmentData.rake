@@ -106,7 +106,7 @@ namespace :db do
     SearchLocation.create(:locality=>"Dana Point", :region=>"CA", :country=>"USA",:search_radius=>100, :creator=>adminSurfer, :updater=>adminSurfer)
 
     #Set up boards for surfer
-    Board.populate 3 do |board|
+    SpecificBoard.populate 3 do |board|
       board.name = ['Art', 'Bobby', 'Child Seat', 'Dropper Inner', 'Eat Me', 'Franks Legend', 'Ghost Board', 'Hippy Board', 'It Board', 'Just a Board', 'Killer', 'Life', 'Manboard', 'No Name', 'Occys Revenge', 'Pounder', 'Quick', 'Rail Rider', 'Slopper', 'Tubs', 'Undermind', 'Velvet Sea', 'X', 'Your Board', 'Zoo Board'].rand
       board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
       board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
@@ -121,7 +121,7 @@ namespace :db do
     end
 
     #Set up 4 boards for slater
-    Board.populate 4 do |board|
+    SpecificBoard.populate 4 do |board|
       board.name = ['Art', 'Bobby', 'Child Seat', 'Dropper Inner', 'Eat Me', 'Franks Legend', 'Ghost Board', 'Hippy Board', 'It Board', 'Just a Board', 'Killer', 'Life', 'Manboard', 'No Name', 'Occys Revenge', 'Pounder', 'Quick', 'Rail Rider', 'Slopper', 'Tubs', 'Undermind', 'Velvet Sea', 'X', 'Your Board', 'Zoo Board'].rand
       board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
       board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
@@ -136,7 +136,7 @@ namespace :db do
     end
 
     #Set up 2 boards for jordy
-    Board.populate 2 do |board|
+    SpecificBoard.populate 2 do |board|
       board.name = ['Art', 'Bobby', 'Child Seat', 'Dropper Inner', 'Eat Me', 'Franks Legend', 'Ghost Board', 'Hippy Board', 'It Board', 'Just a Board', 'Killer', 'Life', 'Manboard', 'No Name', 'Occys Revenge', 'Pounder', 'Quick', 'Rail Rider', 'Slopper', 'Tubs', 'Undermind', 'Velvet Sea', 'X', 'Your Board', 'Zoo Board'].rand
       board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
       board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
@@ -152,7 +152,7 @@ namespace :db do
     end
     
     #Set up boards for shop
-    Board.populate 10 do |board|
+    SpecificBoard.populate 10 do |board|
       board.name = ['1234123','1234124','1234125','1234126','1234127','1234128','1234129','1234130','1234131','1234132','1234133','1234134','1234135','1234136','1234137','1234138','1234139','1234140','1234141','1234142','1234143','1234144','1234145','1234146','1234147','1234148','1234149'].rand
       board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
       board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
@@ -167,7 +167,7 @@ namespace :db do
     end
 
     #Set up 50 boards for killer dana
-    Board.populate 50 do |board|
+    SpecificBoard.populate 50 do |board|
       board.name = ['1234123','1234124','1234125','1234126','1234127','1234128','1234129','1234130','1234131','1234132','1234133','1234134','1234135','1234136','1234137','1234138','1234139','1234140','1234141','1234142','1234143','1234144','1234145','1234146','1234147','1234148','1234149'].rand
       board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
       board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand
@@ -182,7 +182,7 @@ namespace :db do
     end
 
     #Set up 7 boards for hansens
-    Board.populate 7 do |board|
+    SpecificBoard.populate 7 do |board|
       board.name = ['1234123','1234124','1234125','1234126','1234127','1234128','1234129','1234130','1234131','1234132','1234133','1234134','1234135','1234136','1234137','1234138','1234139','1234140','1234141','1234142','1234143','1234144','1234145','1234146','1234147','1234148','1234149'].rand
       board.maker = ['Channel Islands', 'Firewire', 'Hurley'].rand
       board.model = ['Flyer', 'Flyer2', 'Fang', 'Kicker', 'Wave Hound', 'Kook', 'Lip Smasher', 'Meat Eater', 'RDS', 'WRB', 'Super Gun', 'Aloha', 'Aloha 2', 'Apple', 'Work Stinx', 'Sodo', 'Palm', "Banana", "Coconut", "Duck Dive", "Elephant Gun", "Front Runner", "Gore", "Hippie Stick", "Indio", "Jax Beach", "Kulani", "Lava", "Meteor", "Nugget", "Opal", "Pipon", "Quota", "Ride", "Style Ride", "Tube Tamer", "Uberboard", "Vega", "Winner", "Xyzzx", "Yuma", "Zoom Room" ].rand

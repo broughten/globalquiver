@@ -21,7 +21,7 @@ class BoardsController < ApplicationController
       # we pull up all the locations that the user has previously entered
       # because he might want to use one of these for the board he's about to enter
       @existing_locations = current_user.board_locations.ordered_by_desc_creation
-      @board = Board.new
+      @board = SpecificBoard.new
       # allow for pictures on each board
       Board::MAX_IMAGES.times {@board.images.build}
       respond_to do |format|
@@ -35,7 +35,7 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.xml
   def create
-    @board = Board.new(params[:board])
+    @board = SpecificBoard.new(params[:board])
 
     respond_to do |format|
       if @board.save
@@ -87,7 +87,7 @@ class BoardsController < ApplicationController
         format.js
       elsif @board.update_attributes(params[:board])
         flash[:notice] = 'Board was successfully updated.'
-        format.html { redirect_to(@board) }
+        format.html { redirect_to(board_path(@board)) }
         format.js
       else
         format.html {

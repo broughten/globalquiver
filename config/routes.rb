@@ -32,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
     board.resources :reservations
   end
 
+  map.resources :specific_boards
+
   map.resources :users
 
   map.resource :session

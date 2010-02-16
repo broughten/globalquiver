@@ -1,0 +1,3 @@
+class SpecificBoardsController < BoardsController
+
+end

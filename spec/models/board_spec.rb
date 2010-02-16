@@ -30,7 +30,7 @@ describe Board do
     end
     
     it "should have many reservations" do
-      Board.make_unsaved().should respond_to(:reservations)      
+      Board.make_unsaved().should respond_to(:reservations)
     end
 
     it "should have many reserved dates" do
@@ -80,15 +80,6 @@ describe Board do
       board.should_not be_valid
     end
 
-    it "should validate length" do
-      board = Board.make_unsaved(:length=>100)
-      board.should be_valid
-      
-      board.length = nil
-      board.should_not be_valid
-      
-    end
-
     it "should validate name" do
       board = Board.make_unsaved(:name => "Big Blue")
       board.should be_valid
@@ -98,13 +89,6 @@ describe Board do
 
     end
     
-    it "should validate maker" do
-      board = Board.make_unsaved(:maker=>"Test Maker")
-      board.should be_valid
-      
-      board.maker = ""
-      board.should_not be_valid
-    end
     
     it "should validate style" do
       board = Board.make_unsaved(:style=>Style.make())
@@ -169,7 +153,7 @@ describe Board do
   end
   
   it "should allow you to activate a board" do
-    board = Board.make()    
+    board = Board.make()
     board.deactivate
     
     board.should_not be_active

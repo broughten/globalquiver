@@ -7,7 +7,7 @@ describe "pages/overview.html.erb" do
       before(:each) do
         @user = build_surfer
         template.controller.stubs(:current_user).returns(@user)
-        build_boards(10,@user)
+        build_specific_boards(10,@user)
         assigns[:user] = @user
         render "pages/overview.html.erb"
       end
@@ -27,7 +27,7 @@ describe "pages/overview.html.erb" do
       before(:each) do
         @user = build_shop
         template.controller.stubs(:current_user).returns(@user)
-        build_boards(10,@user)
+        build_specific_boards(10,@user)
         assigns[:user] = @user
         render "pages/overview.html.erb"
       end

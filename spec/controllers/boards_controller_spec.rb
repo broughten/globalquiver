@@ -23,7 +23,9 @@ describe BoardsController do
         it "should assign needed variables for view" do
           get "new"
           assigns[:board].should_not be_nil
+          assigns[:board].should be_a(SpecificBoard)
           assigns[:existing_locations].should_not be_nil
+
         end
         
         it "should render the new view" do
@@ -45,10 +47,10 @@ describe BoardsController do
       end
     end
 
-    describe "edit board" do
+    describe "edit specific board" do
       before(:each) do
         @user.board_locations << BoardLocation.make()
-        @board = Board.make()
+        @board = SpecificBoard.make()
       end
 
       it "should attempt to find the board in question" do
@@ -73,13 +75,13 @@ describe BoardsController do
     end
 
     
-    describe "POST /boards (aka create board)" do
+    describe "POST /boards (aka create specific board)" do
       it "should pass parameters to new board" do
         post "create", :board =>{:maker =>"Test Maker"}
         assigns[:board].maker.should == "Test Maker"
       end
       it "should redirect to root path with a flash message on successful save" do
-        Board.any_instance.stubs(:valid?).returns(true)
+        SpecificBoard.any_instance.stubs(:valid?).returns(true)
         post 'create'
         assigns[:board].should_not be_new_record
         flash[:notice].should_not be_nil
@@ -88,7 +90,7 @@ describe BoardsController do
       
       describe "save failure" do
         before(:each) do
-          Board.any_instance.stubs(:valid?).returns(false)
+          SpecificBoard.any_instance.stubs(:valid?).returns(false)
         end
         it "should render new template without a flash message" do
           post 'create'
@@ -105,23 +107,23 @@ describe BoardsController do
     end
     
     
-    describe "PUT /boards (aka update board)" do
+    describe "PUT /boards (aka update board) update specific board" do
       before(:each) do
-        @temp_board = Board.make(:creator => @user)
+        @temp_board = SpecificBoard.make(:creator => @user)
       end
       it "should try to update the attributes of the board" do
-        Board.any_instance.expects(:update_attributes)
+        SpecificBoard.any_instance.expects(:update_attributes)
         post 'update', :id=>@temp_board.id
       end
       it "should redirect to the show view with a flash message after successful update" do
-        Board.any_instance.stubs(:valid?).returns(true)
+        SpecificBoard.any_instance.stubs(:valid?).returns(true)
         post 'update', :id=>@temp_board.id
         flash[:notice].should_not be_nil
         response.should redirect_to(board_path(@temp_board))
       end
       it "should not allow you to deactivate a board with reservations in the future" do
         @request.env['HTTP_REFERER'] = root_path
-        Board.any_instance.stubs(:has_future_reservations).returns(true)
+        SpecificBoard.any_instance.stubs(:has_future_reservations).returns(true)
         post 'update', {:id=>@temp_board.id, :board => {:inactive => true}}
         flash[:error].should_not be_nil
         response.should redirect_to(root_path)
@@ -129,7 +131,7 @@ describe BoardsController do
 
       it "should allow you to change blackout dates on a board with reservations in the future" do
         @request.env['HTTP_REFERER'] = root_path
-        Board.any_instance.stubs(:has_future_reservations).returns(true)
+        SpecificBoard.any_instance.stubs(:has_future_reservations).returns(true)
         post 'update', {:id=>@temp_board.id, :board => {:black_out_dates_attributes => [{:id => "", :date => 3.days.from_now.strftime('%m/%d/%Y')}]}}
         flash[:error].should be_nil
         flash[:notice].should_not be_nil
@@ -137,7 +139,7 @@ describe BoardsController do
       end
 
       it "should render the edit view if a field doesn't validate" do
-        Board.any_instance.stubs(:valid?).returns(false)
+        SpecificBoard.any_instance.stubs(:valid?).returns(false)
         post 'update', {:id=>@temp_board.id, :board => {:daily_fee => "wrong"}}
         response.should render_template(:edit)
       end
@@ -154,7 +156,7 @@ describe BoardsController do
 
       it "should update measurements properly" do
 
-        board = Board.make(:creator => @user,
+        board = SpecificBoard.make(:creator => @user,
                            :length_feet => 6,
                            :length_inches => 3,
                            :width_inches => 20,
@@ -189,9 +191,9 @@ describe BoardsController do
     end
     
     
-    describe "show board" do
+    describe "show specific board" do
       before(:each) do
-        @temp_board = Board.make()
+        @temp_board = SpecificBoard.make()
       end
       it "should attempt to find the board in question" do
         Board.expects(:find).returns(@temp_board)

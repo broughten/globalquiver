@@ -148,18 +148,21 @@ end
 
 Board.blueprint() do
   name {Sham.board_name}
+  style {Style.make()}
+  daily_fee {35}
+  description {Sham.board_description}
+  location {BoardLocation.make()}
+  creator {User.make()}
+  updater {creator}
+end
+
+SpecificBoard.blueprint() do
   maker {Sham.board_maker}
   model {Sham.board_model}
   length {7}
   width {2}
   thickness {5}
-  style {Style.make()}
-  daily_fee {35}
-  description {Sham.board_description}
-  location {BoardLocation.make()}
   construction {Sham.board_construction}
-  creator {User.make()}
-  updater {creator}
 end
 
 # use this blueprint to make sure your 
