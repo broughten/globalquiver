@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216195853) do
+ActiveRecord::Schema.define(:version => 20100217194713) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(:version => 20100216195853) do
     t.boolean  "inactive",                                   :default => false
     t.string   "name"
     t.string   "type"
+    t.integer  "upper_length"
+    t.integer  "lower_length"
   end
 
   create_table "comments", :force => true do |t|

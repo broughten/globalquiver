@@ -165,6 +165,10 @@ SpecificBoard.blueprint() do
   construction {Sham.board_construction}
 end
 
+GenericBoard.blueprint() do
+  lower_length {7}
+  upper_length {12}
+end
 # use this blueprint to make sure your 
 # board is geocodable
 Board.blueprint(:geocodable) do
