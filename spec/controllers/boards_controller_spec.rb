@@ -77,12 +77,12 @@ describe BoardsController do
     
     describe "POST /boards (aka create specific board)" do
       it "should pass parameters to new board" do
-        post "create", :board =>{:maker =>"Test Maker"}
+        post "create", :board =>{:maker =>"Test Maker"}, :board_type => "SpecificBoard"
         assigns[:board].maker.should == "Test Maker"
       end
       it "should redirect to root path with a flash message on successful save" do
         SpecificBoard.any_instance.stubs(:valid?).returns(true)
-        post 'create'
+        post 'create', :board_type => 'SpecificBoard'
         assigns[:board].should_not be_new_record
         flash[:notice].should_not be_nil
         response.should redirect_to(root_path)
@@ -93,15 +93,51 @@ describe BoardsController do
           SpecificBoard.any_instance.stubs(:valid?).returns(false)
         end
         it "should render new template without a flash message" do
-          post 'create'
+          post 'create', :board_type => "SpecificBoard"
           assigns[:board].should be_new_record
           flash[:notice].should be_nil
-          response.should render_template('new')
+          response.should render_template('boards/new')
         end
         
         it "should make sure that board has at least Board::MAX_IMAGES created" do
-          post 'create'
+          post 'create', :board_type => "SpecificBoard"
           assigns[:board].images.length.should == Board::MAX_IMAGES
+        end
+      end
+    end
+
+    describe "POST /boards (aka create generic board)" do
+      it "should pass parameters to new board" do
+        post "create", :board =>{:maker =>"Test Maker"}, :board_type => "GenericBoard"
+        assigns[:board].maker.should == "Test Maker"
+      end
+      it "should redirect to root path with a flash message on successful save" do
+        GenericBoard.any_instance.stubs(:valid?).returns(true)
+        post 'create', :board_type => 'GenericBoard'
+        assigns[:board].should_not be_new_record
+        flash[:notice].should_not be_nil
+        response.should redirect_to(root_path)
+      end
+
+      describe "save failure" do
+        before(:each) do
+          GenericBoard.any_instance.stubs(:valid?).returns(false)
+        end
+        it "should render new template without a flash message" do
+          post 'create', :board_type => "GenericBoard"
+          assigns[:board].should be_new_record
+          flash[:notice].should be_nil
+          response.should render_template('boards/new')
+        end
+
+        it "should make sure that board has at least Board::MAX_IMAGES created" do
+          post 'create', :board_type => "GenericBoard"
+          assigns[:board].images.length.should == Board::MAX_IMAGES
+        end
+
+        it "should create a generic board" do
+          post 'create', :board_type => "GenericBoard"
+          assigns[:board].should be_a GenericBoard
         end
       end
     end

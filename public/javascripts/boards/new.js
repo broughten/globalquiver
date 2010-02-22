@@ -17,9 +17,68 @@ $(document).ready(function(){
     setConfirmUnload(false);
     return true;
   });
+
+
+
+  $("#specific-board").click(function() {
+    show_specific_board();
+  });
+
+  $("#generic-board").click(function() {
+    show_generic_board();
+  });
+
+  var sb_radio_button =  $("#specific-board");
+  if (sb_radio_button.attr("checked") != "undefined" && sb_radio_button.attr("checked") == "checked") {
+    show_specific_board();
+  }
+  var gb_radio_button =  $("#generic-board");
+  if (gb_radio_button.attr("checked") != "undefined" && gb_radio_button.attr("checked") == "checked") {
+    show_generic_board();
+  }
+
   
 });
 
+function show_specific_board() {
+  $("#board_lower_length_feet").attr("disabled","disabled");
+  $("#board_lower_length_inches").attr("disabled","disabled");
+  $("#board_upper_length_feet").attr("disabled","disabled");
+  $("#board_upper_length_inches").attr("disabled","disabled");
+  $("#upper-and-lower-lengths").hide();
+
+  $("#board_maker").removeAttr("disabled");
+  $("#board_model").removeAttr("disabled");
+  $("#board_length_feet").removeAttr("disabled");
+  $("#board_length_inches").removeAttr("disabled");
+  $("#maker-model-length").show();
+
+  $("#board_width_inches").removeAttr("disabled");
+  $("#board_width_fraction").removeAttr("disabled");
+  $("#board_thickness_inches").removeAttr("disabled");
+  $("#board_thickness_fraction").removeAttr("disabled");
+  $("#width-thickness-construction").show();
+}
+
+function show_generic_board() {
+  $("#board_lower_length_feet").removeAttr("disabled");
+  $("#board_lower_length_inches").removeAttr("disabled");
+  $("#board_upper_length_feet").removeAttr("disabled");
+  $("#board_upper_length_inches").removeAttr("disabled");
+  $("#upper-and-lower-lengths").show();
+
+  $("#board_maker").attr("disabled","disabled");
+  $("#board_model").attr("disabled","disabled");
+  $("#board_length_feet").attr("disabled","disabled");
+  $("#board_length_inches").attr("disabled","disabled");
+  $("#maker-model-length").hide();
+
+  $("#board_width_inches").attr("disabled","disabled");
+  $("#board_width_fraction").attr("disabled","disabled");
+  $("#board_thickness_inches").attr("disabled","disabled");
+  $("#board_thickness_fraction").attr("disabled","disabled");
+  $("#width-thickness-construction").hide();
+}
 
 function set_board_location_id(new_id){
   $("#board_location_id").val(new_id);
@@ -30,7 +89,7 @@ function toggleOptionalBoardFields(){
 }
 
 function setVisibilityIndicator(){
-	if ($('#optional_fields').is(':visible')){
+  if ($('#optional_fields').is(':visible')){
     $('#visibility_indicator').text("Hide");
   }else{
     $('#visibility_indicator').text("Show");

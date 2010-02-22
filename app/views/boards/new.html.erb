@@ -41,11 +41,25 @@
 
 <%= render :partial => '/board_locations/list' %>
 
-<% form_for @board, :html => {:name => "new_board_form", :multipart => true } do |f| %>
+<% form_for :board, :url => boards_url, :html => {:name => "new_board_form", :multipart => true } do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field :location_id %>
 <br/>
 <hr/>
+<% if current_user.is_a?(Shop) %>
+  <div id="board-typ">
+    <h2>Listing type</h2>
+    <p>
+      Is this a specific board or does this listing represent one of many different possible boards?
+    </p>
+    <div class="fields">
+      <p><input type="radio" id="specific-board" name="board_type" value="SpecificBoard" checked> Specific board that users can reserve</p>
+      <p><input type="radio" id="generic-board" name="board_type" value="GenericBoard"> <label>Represents one of many boards like it. Users won't know exactly what board they get until they arrive</p>
+    </div>
+  </div>
+  <br/>
+  <hr/>
+<% end %>
 <div id="boardDetails">
   <h2>Next, tell us about the board.</h2>
   <p>Different surfers, different waves, and different conditions require different boards. Describe yours below:</p>
@@ -61,19 +75,33 @@
         <%= f.text_field :name %>
       </p>
     <% end %>
-    <p>
-      <%= f.label :maker, "Maker: (for example Channel Islands)" %><span id="required_star">*</span><br />
-      <%= f.text_field :maker %>
-    </p>
-    <p>
-      <%= f.label :model, "Model: (for example Flyer)" %><br />
-      <%= f.text_field :model %>
-    </p>
-    <p>
-      <%= f.label :length, "Length: (for example, mine is a 6'4\")" %><br />
-      <input id="board_length_feet" name="board[length_feet]" size="4" type="text" title="feet" />
-      <input id="board_length_inches" name="board[length_inches]" size="4" type="text" title="inches" />
-    </p>
+    <div id="maker-model-length">
+      <p>
+        <%= f.label :maker, "Maker: (for example Channel Islands)" %><span id="required_star">*</span><br />
+        <%= f.text_field :maker %>
+      </p>
+      <p>
+        <%= f.label :model, "Model: (for example Flyer)" %><br />
+        <%= f.text_field :model %>
+      </p>
+      <p>
+        <%= f.label :length, "Length: (for example, mine is a 6'4\")" %><br />
+        <input id="board_length_feet" name="board[length_feet]" size="4" type="text" title="feet" />
+        <input id="board_length_inches" name="board[length_inches]" size="4" type="text" title="inches" />
+      </p>
+    </div>
+    <div id="upper-and-lower-lengths" style="display:none">
+      <p>
+        <%= f.label :lower_length, "Shortest length available for this type of board:" %><br />
+        <input id="board_lower_length_feet" name="board[lower_length_feet]" size="4" type="text" title="feet" disabled="true"/>
+        <input id="board_lower_length_inches" name="board[lower_length_inches]" size="4" type="text" title="inches" disabled="true"/>
+      </p>
+      <p>
+        <%= f.label :upper_length, "Longest length available for this type of board:" %><br />
+        <input id="board_upper_length_feet" name="board[upper_length_feet]" size="4" type="text" title="feet" disabled="true"/>
+        <input id="board_upper_length_inches" name="board[upper_length_inches]" size="4" type="text" title="inches" disabled="true"/>
+      </p>
+    </div>
     <p>
       <%= f.label :style_id, "Style:" %><span id="required_star">*</span><br />
       <%= f.collection_select :style_id, Style.all, :id, :name, {:prompt => ""} %>
@@ -84,21 +112,27 @@
     <p><a id='hide_show_optional_fields' href="#" onclick="javascript:void(0); return false;"><span id='visibility_indicator'>Show</span> Optional Fields</a>
     </p>
     <div id="optional_fields" style="display:none;">
-      <p>
-        <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
-        <input id="board_width_inches" name="board[width_inches]" size="4" type="text" title="inches" />
-        <%= f.select :width_fraction, fractions, {}, :class => "fraction_dropdown" %>
-      </p>
-      <p>
-        <%= f.label :thickness, "Thickness: (you can skip this if you don't know)" %><br />
-        <input id="board_thickness_inches" name="board[thickness_inches]" size="4" type="text" title="inches" />
-        <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
-      </p>
+      <div id="width-thickness-construction">
+        <p>
+          <%= f.label :width, "Width: (you can skip this question if you don't know)" %><br />
+          <input id="board_width_inches" name="board[width_inches]" size="4" type="text" title="inches" />
+          <select name="board[width_fraction]" id="board_width_fraction" class="fraction_dropdown">
+            <%= options_for_select fractions %>
+          </select>
 
-      <p>
-        <%= f.label :construction, "Construction: (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
-        <%= f.text_field :construction %>
-      </p>
+        </p>
+        <p>
+          <%= f.label :thickness, "Thickness: (you can skip this if you don't know)" %><br />
+          <input id="board_thickness_inches" name="board[thickness_inches]" size="4" type="text" title="inches" />
+          <select name="board[width_fraction]" id="board_width_fraction" class="fraction_dropdown"><option value="0">fractional inches</option>
+            <%= options_for_select fractions %>
+          </select>
+        </p>
+        <p>
+          <%= f.label :construction, "Construction: (for example fiberglass or tufflite.  skip this one if you're not sure)" %><br />
+          <%= f.text_field :construction %>
+        </p>
+      </div>
       <p>
         <%= f.label :description, "Anything else you want to mention about this board?" %><br />
         <%= f.text_area :description, :size => "60x2"%>
@@ -131,8 +165,10 @@
       </p>
     </div>
     <div class="fields">
-      <%= f.label :daily_fee, "Daily Fee:" %><br />
-      $<%= f.text_field :daily_fee, :size => 5 %>
+      <p>
+        <%= f.label :daily_fee, "Daily Fee:" %><br />
+        $<%= f.text_field :daily_fee, :size => 5 %>
+      </p>
     </div>
   <% end %>
   <br/>
@@ -146,11 +182,11 @@
     </p>
   </div>
   <div class="fields">
-  <%for image in @board.images%>
+  <% @board.images.each_with_index do |image, index| %>
     <p>
       <% f.fields_for :images, image do |image_fields| -%>
         <%= image_fields.label :data, 'Your image' -%>
-        <%= image_fields.file_field :data -%>
+        <input type="file" size="30" name="board[images_attributes][<%=index%>][data]" id="board_images_attributes_<%=index%>_data">
       <% end -%>
     </p>
   <%end%>

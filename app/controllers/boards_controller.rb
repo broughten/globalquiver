@@ -35,11 +35,17 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.xml
   def create
-    @board = SpecificBoard.new(params[:board])
 
+    #figure out what type of board we need to make
+    if params[:board_type] == 'SpecificBoard'
+      @board = SpecificBoard.new(params[:board])
+    else
+      @board = GenericBoard.new(params[:board])
+    end
+    
     respond_to do |format|
       if @board.save
-        flash[:notice] = 'Board was successfully created.'
+        flash[:notice] = 'Board listing was successfully created.'
         format.html { redirect_to(root_path) }
       else
         @existing_locations = current_user.board_locations.ordered_by_desc_creation
