@@ -2,13 +2,16 @@ Hi <%=  @reservation.creator.first_name %>,
 
 You just made a reservation on Global Quiver. Thanks! The details of your reservation are below, but here are a few important things you should know:
 <% if @reservation.board.creator.is_a?(Surfer) %>
--- The owner of the board knows you reserved it but doesn't know who you are or how to get the baord to you. You have to conact the owner at <%= @reservation.board.creator.email %> to figure out how to do the pickup and drop off.
+-- The owner of the board knows you reserved it but doesn't know who you are or how to get the board to you. You have to contact the owner at <%= @reservation.board.creator.email %> to figure out how to do the pickup and drop off.
 <% if @reservation.board.daily_fee != 0.00 %>-- You should plan on paying for your board in cash in advance unless the owner of the board tell you otherwise.<% end %>
 -- Please be cool. If you bust up a board and it's your fault, offer to pay for the repairs. The owner was doing you a favor to let you use it.
--- Be on time, don't flake and call the owner if there's an issue. This community depends on a little bit of being responsible.<% else %>
--- Make sure you know the shop's hours. It might be worth giving them a call if you have any questions.
+-- Be on time, don't flake and call the owner if there's an issue. This community depends on a little bit of being responsible.
+<% else %>
+-- Make sure you know the shop's hours so you don't show up to pick up the board while they are closed.
+-- Please call or email the shop at <%= @reservation.board.creator.email %> to enquire about any steps needed to confirm your reservation.  You reservation may not be confirmed until you complete these steps with the shop.
 -- Global Quiver doesn't manage or track surf shop rental policies. Be ready to pay a deposit, or pay in cash, or use a credit card, and in general do what the shop requires.
--- Please be cool. Don't flake on your reservations and call the shop if there's an issue. This community depends on a little bit of being responsible.<% end %>
+-- Please be cool. Don't flake on your reservations and call the shop if there's an issue. This community depends on a little bit of being responsible.
+<% end %>
 
 OK. Here are the details of your reservation:
 
