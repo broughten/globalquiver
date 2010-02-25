@@ -128,17 +128,16 @@ describe User do
       is_shop.should == false
   end
   
-  it "should not return anything for display_name" do
+  it "should return 'User' for display_name" do
     user = User.make()
     display_name = user.display_name
-    display_name.should == ""
+    display_name.should == "User"
   end
   
-  it "should should return an empty string for full_name" do
+  it "should return 'User' for full_name" do
     user = User.make()
-    user.full_name.should == ""
+    user.full_name.should == "User"
   end
-  
   
   
   it "should allow you to find all users with reservations on owned boards that have been created since a certain date" do
@@ -200,20 +199,20 @@ describe User do
   end
   
   it "should allow you to send an email to all board owners who have boards with new reservations" do
-    board_owner = User.make()
+    board_owner = Shop.make()
     board1 = Board.make(:creator=>board_owner)
     board2 = Board.make(:creator=>board_owner)
     reservation1 = Reservation.make(:board=>board1)
     reservation2 = Reservation.make(:board=>board1, :created_at=>2.days.ago)
     
-     ActionMailer::Base.deliveries.clear
+    ActionMailer::Base.deliveries.clear
     User.send_reservation_update_for_owned_boards(1.day.ago)
     # you should only have one email to board_owner
     ActionMailer::Base.deliveries.length.should == 1
     email = ActionMailer::Base.deliveries.first
-    # that email should contain only dates for board1
-    email.body.should contain(board1.maker)
-    email.body.should_not contain(board2.maker)
+    # that email should contain only dates for reservation1
+    email.body.should contain(reservation1.creator.full_name)
+    email.body.should_not contain(reservation2.creator.full_name)
     
     #push back the creation of the reservation
     reservation1.created_at = 2.days.ago
@@ -224,7 +223,7 @@ describe User do
   end
 
   it "should allow you to send an email to all board owners who have boards with deleted reservations" do
-    board_owner = User.make()
+    board_owner = Shop.make()
     board1 = Board.make(:creator=>board_owner)
     board2 = Board.make(:creator=>board_owner)
     reservation1 = Reservation.make(:board=>board1, :created_at=>2.days.ago, :deleted_at=>Date.today)
@@ -236,9 +235,9 @@ describe User do
     # you should only have one email to board_owner
     ActionMailer::Base.deliveries.length.should == 1
     email = ActionMailer::Base.deliveries.first
-    # that email should contain only dates for board1
-    email.body.should contain(board1.maker)
-    email.body.should_not contain(board2.maker)
+    # that email should contain only dates for reservation1
+    email.body.should contain(reservation1.creator.full_name)
+    email.body.should_not contain(reservation2.creator.full_name)
 
     #push back the deletion of the reservation
     reservation1.deleted_at = 2.days.ago

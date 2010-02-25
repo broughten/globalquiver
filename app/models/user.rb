@@ -103,11 +103,11 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    "" # placeholder...will be redefined in sub classes.
+    "User" # placeholder...will be redefined in sub classes.
   end
   
   def full_name
-    "" # placeholder...will be redefined in sub classes.
+    "User" # placeholder...will be redefined in sub classes.
   end
 
   def create_password_reset_code

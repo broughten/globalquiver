@@ -1,21 +1,41 @@
+Hello,
 
-		<%@added_reservations.each do |reservation|%>
-		<h1>New reservation for <%=h reservation.board.model%> by <%=h reservation.board.maker%></h1>
+Thanks again for using Global Quiver to list your boards.
 
-		<ul>
-			<% reservation.reserved_dates.each do |reservation_date| %>
-				<li><%=h reservation_date.date%></li>
-			<% end %>
-		</ul>
-		<%end%>
-		<%@deleted_reservations.each do |reservation|%>
-		<h1>Deleted reservation for <%=h reservation.board.model%> by <%=h reservation.board.maker%></h1>
+Here is a listing of recent reservation changes to your boards.
 
-		<ul>
-			<% reservation.reserved_dates.each do |reservation_date| %>
-				<li><%=h reservation_date.date%></li>
-			<% end %>
-		</ul>
-		<%end%>
-	</body>
-</html>
+<%unless @added_reservations.empty?%>
+New Reservations:
+<%@added_reservations.each do |reservation|%>
+Board Name:  <%= h reservation.board.name%>
+Board Model: <%= h reservation.board.model%>
+Board Maker: <%= h reservation.board.maker%>
+Person reserving: <%= h reservation.creator.full_name%>
+Email address: <%=h reservation.creator.email%>
+Dates reserved:
+<% reservation.reserved_dates.each do |reservation_date| %>
+<%=h reservation_date.date%><%unless reservation_date == reservation.reserved_dates.last%>, <%end%>
+<% end #of reserved_dates.each%>
+
+<%end #of @added_reservations.each%>
+<%end #of unless%>
+		
+<%unless @deleted_reservations.empty?%>
+Deleted Reservations:
+<%@deleted_reservations.each do |reservation|%>
+Board Name:  <%= h reservation.board.name%>
+Board Model: <%= h reservation.board.model%>
+Board Maker: <%= h reservation.board.maker%>
+Person reserving: <%=h reservation.creator.full_name%>
+Email address: <%=h reservation.creator.email%>
+Dates reserved:
+<% reservation.reserved_dates.each do |reservation_date| %>
+<%=h reservation_date.date%><%unless reservation_date == reservation.reserved_dates.last%>, <%end%>
+<% end #of reserved_dates.each%>
+
+<%end #of @deleted_reservations.each%>
+<%end #of unless%>
+
+Thanks for listing your boards on Global Quiver.
+--Jon and Mike
+www.globalquiver.com
