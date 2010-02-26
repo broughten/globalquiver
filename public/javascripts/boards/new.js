@@ -28,6 +28,14 @@ $(document).ready(function(){
     show_generic_board();
   });
 
+	$("#board_for_rent").click(function() {
+    toggleRentPurchaseFields();
+  });
+
+	$("#board_for_purchase").click(function() {
+    toggleRentPurchaseFields();
+  });
+
   var sb_radio_button =  $("#specific-board");
   if (sb_radio_button.attr("checked") != "undefined" && sb_radio_button.attr("checked") == "checked") {
     show_specific_board();
@@ -94,6 +102,19 @@ function setVisibilityIndicator(){
   }else{
     $('#visibility_indicator').text("Show");
   }
+}
+
+function toggleRentPurchaseFields(){
+	if ($('#board_for_rent').is(':checked')){
+		// board is for rent
+   	$('#purchase_info').hide();
+		$('#rental_info').show();
+  }else { // board is for sale
+    $('#purchase_info').show();
+		$('#rental_info').hide();
+  }
+	
+	
 }
 
 

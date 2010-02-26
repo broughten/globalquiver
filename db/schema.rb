@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100217194713) do
+ActiveRecord::Schema.define(:version => 20100225225811) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -34,12 +34,15 @@ ActiveRecord::Schema.define(:version => 20100217194713) do
     t.string   "construction"
     t.integer  "creator_id"
     t.integer  "updater_id"
-    t.decimal  "daily_fee",    :precision => 8, :scale => 2
-    t.boolean  "inactive",                                   :default => false
+    t.decimal  "daily_fee",      :precision => 8, :scale => 2
+    t.boolean  "inactive",                                     :default => false
     t.string   "name"
     t.string   "type"
     t.integer  "upper_length"
     t.integer  "lower_length"
+    t.decimal  "purchase_price", :precision => 8, :scale => 2
+    t.decimal  "buy_back_price", :precision => 8, :scale => 2
+    t.boolean  "for_purchase",                                 :default => false
   end
 
   create_table "comments", :force => true do |t|

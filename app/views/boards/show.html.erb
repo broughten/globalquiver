@@ -173,13 +173,9 @@
   </ul>
   <div id="show-daily-fee">
     <ul>
-      <li id="money" class="attr-name">Daily Fee</li>
+      <li id="money" class="attr-name">Fee Type:<br/><%= get_fee_text_for_board(@board)%></li>
       <li class="value">
-        <% if @board.daily_fee == 0.00 %>
-          Free!
-        <% else %>
-          <%= h number_to_currency(@board.daily_fee, :unit => "$") %>
-        <% end %>
+				<%= h get_fee_amounts_for_board(@board)%>
       </li>
     </ul>
   </div>

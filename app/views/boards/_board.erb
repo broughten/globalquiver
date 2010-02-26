@@ -81,11 +81,8 @@ $(document).ready(function() {
     <div id="centering-div">
       <p>
         <%= link_to "", board_path(board)%>
-        <% if board.daily_fee == 0.00 %>
-          Free!
-        <% else %>
-          $<%= sprintf("%.2f", board.daily_fee) %>
-        <% end %>
+				<%= get_fee_text_for_board(board)%><br/>
+        <%= h get_fee_amounts_for_board(board)%>
       </p>
     </div>
   </li>
