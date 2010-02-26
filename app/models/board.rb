@@ -11,7 +11,9 @@ class Board < ActiveRecord::Base
   has_many :black_out_dates, :class_name=>'UnavailableDate', :as=> :parent
 
   validates_presence_of :name, :style, :location
-  validates_numericality_of :daily_fee, :on => :create
+  validates_numericality_of :daily_fee, :unless => :for_purchase?, :on => :create
+  validates_numericality_of :purchase_price, :if => :for_purchase?, :on => :create
+  validates_numericality_of :buy_back_price, :if => :for_purchase?, :on => :create
 
   accepts_nested_attributes_for :images
   accepts_nested_attributes_for :black_out_dates, :allow_destroy => true

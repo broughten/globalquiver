@@ -154,6 +154,7 @@ Board.blueprint() do
   location {BoardLocation.make()}
   creator {User.make()}
   updater {creator}
+  # for_purchase will default to false
 end
 
 SpecificBoard.blueprint() do

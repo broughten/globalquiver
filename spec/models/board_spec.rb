@@ -8,6 +8,25 @@ describe Board do
     Board.make().should be_valid
   end
   
+  describe "attributes" do
+    it "should have an for_purchase flag" do
+      Board.make_unsaved().should respond_to(:for_purchase?)
+    end
+    
+    it "should default for_purchase flag to false" do
+      board = Board.make()
+      board.for_purchase.should be_false
+    end
+    
+    it "should have a purchase_price field" do
+      Board.make_unsaved().should respond_to(:purchase_price)
+    end
+    
+    it "should have a buy_back_price field" do
+      Board.make_unsaved().should respond_to(:buy_back_price)
+    end
+  end
+  
   describe "associations" do
     it "should have a style" do
       Board.make_unsaved().should respond_to(:style)
@@ -72,12 +91,23 @@ describe Board do
       board.should_not be_valid
     end
 
-    it "should validate numericality of daily fee" do
-      board = Board.make_unsaved()
-      board.should be_valid
-
-      board.daily_fee = "hi jc!"
+    it "should validate numericality of daily fee for non for purchase boards" do
+      board = Board.make_unsaved(:for_purchase=>false, :daily_fee=>"hello")
       board.should_not be_valid
+      
+      board.daily_fee = 20
+      board.should be_valid
+    end
+    
+    it "should validate numericality of purchase_price and buy_back_price for purchasable boards" do
+      board = Board.make_unsaved(:for_purchase=>true, :purchase_price=>"hello", :buy_back_price=>"hello")
+      board.should_not be_valid
+      
+      board.purchase_price = 35
+      board.should_not be_valid
+      
+      board.buy_back_price = 35
+      board.should be_valid
     end
 
     it "should validate name" do
