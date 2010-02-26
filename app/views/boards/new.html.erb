@@ -54,13 +54,14 @@
     </p>
     <div class="fields">
       <p><input type="radio" id="specific-board" name="board_type" value="SpecificBoard" checked> Specific board that users can reserve</p>
-      <p><input type="radio" id="generic-board" name="board_type" value="GenericBoard"> <label>Represents one of many boards like it. Users won't know exactly what board they get until they arrive</p>
+      <p><input type="radio" id="generic-board" name="board_type" value="GenericBoard"> Represents one of many boards like it. Users won't know exactly what board they get until they arrive</p>
     </div>
   </div>
+	<div id="board-for-purchase">
+	</div>
   <br/>
   <hr/>
 <% else %>
-<% # Surfers can only enter in specific boards so make sure the controller knows this.%>
 <input type="hidden" id="specific-board" name="board_type" value="SpecificBoard">
 <% end %>
 <div id="boardDetails">
