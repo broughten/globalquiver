@@ -146,20 +146,50 @@
   <br/>
   <hr/>
   <% if current_user.is_a?(Surfer) %>
-    <div class="explanation">
-      <h2>Make some money from your board.</h2>
-      <p>
-        You can set a daily rental fee or lend out your boards for free. It's completely up to you.
-        For the record, if you rent just one board for 20 or 30 days at a typical daily rate, you'll
-        have made enough money to get a new board!
-      </p>
+		<h2>Make some money from your board.</h2>
+		<div class="explanation">
+			<p>
+				Tell us if this board can be rented from your or if this board is available for purchase/buy back.
+			</p>
+		</div>
+		<div class="fields">
+      <p><input type="radio" id="board_for_rent" name="board[for_purchase]" value="false" checked> This board can only be rented from me.</p>
+      <p><input type="radio" id="board_for_purchase" name="board[for_purchase]" value="true"> This board can only be purchased with the option to sell it back to you.</p>
     </div>
-    <div class="fields">
-      <p>
-        <%= f.label :daily_fee, "Daily Fee: (Put in any amount or 0 if you want to pass along the stoke for free)" %><br />
-        $<%= f.text_field :daily_fee, :size => 4 %>
-      </p>
-    </div>
+		<div id="rental_info">
+    	<div class="explanation">
+      	<p>
+        	You can set a daily rental fee or lend out your boards for free. It's completely up to you.
+        	For the record, if you rent just one board for 20 or 30 days at a typical daily rate, you'll
+        	have made enough money to get a new board!
+      	</p>
+    	</div>
+    	<div class="fields">
+      	<p>
+        	<%= f.label :daily_fee, "Daily Fee: (Put in any amount or 0 if you want to pass along the stoke for free)" %><br />
+        	$<%= f.text_field :daily_fee, :size => 4 %>
+      	</p>
+    	</div>
+		</div>
+		<div id="purchase_info" style="display:none;">
+    	<div class="explanation">
+      	<p>
+        	Tell us how much you would like to get when you sell this board and how much you are willing to
+					pay the purchaser when they bring the board back to you.  
+      	</p>
+    	</div>
+    	<div class="fields">
+      	<p>
+        	<%= f.label :purchase_price, "Purchase Price: (Put in any amount)" %><br />
+        	$<%= f.text_field :purchase_price, :size => 4 %>
+      	</p>
+				<p>
+        	<%= f.label :buy_back_price, "Buy Back Price: (Put in any amount)" %><br />
+        	$<%= f.text_field :buy_back_price, :size => 4 %>
+      	</p>
+    	</div>
+		</div>
+		
   <% else %>
     <div class="explanation">
       <h2>Daily rental fee</h2>
