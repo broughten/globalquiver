@@ -59,6 +59,9 @@
   </div>
   <br/>
   <hr/>
+<% else %>
+<% # Surfers can only enter in specific boards so make sure the controller knows this.%>
+<input type="hidden" id="specific-board" name="board_type" value="SpecificBoard">
 <% end %>
 <div id="boardDetails">
   <h2>Next, tell us about the board.</h2>
