@@ -187,4 +187,15 @@ describe Reservation do
     reservation.calendar_strip_text(reserver).should contain reservation.board.creator.full_name
   end
   
+  it "should allow you to get the total cost of the reservation" do
+    rental_board = Board.make()
+    rental_reservation = Reservation.make(:board=>rental_board,:reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now)])
+    sale_board = Board.make(:for_purchase)
+    sale_reservation = Reservation.make(:board=>sale_board,:reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now)])
+    
+    rental_reservation.total_cost.should == rental_reservation.reserved_dates.count * rental_reservation.board.daily_fee
+    
+    sale_reservation.total_cost.should == sale_reservation.board.purchase_price
+  end
+  
 end

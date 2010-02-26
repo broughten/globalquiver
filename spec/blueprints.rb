@@ -157,6 +157,18 @@ Board.blueprint() do
   # for_purchase will default to false
 end
 
+Board.blueprint(:for_purchase) do
+  name {Sham.board_name}
+  style {Style.make()}
+  purchase_price {35}
+  buy_back_price {20}
+  description {Sham.board_description}
+  location {BoardLocation.make()}
+  creator {User.make()}
+  updater {creator}
+  for_purchase{true}
+end
+
 SpecificBoard.blueprint() do
   maker {Sham.board_maker}
   model {Sham.board_model}
