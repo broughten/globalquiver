@@ -83,4 +83,24 @@ module BoardsHelper
       return ""
     end
   end
+  
+  def get_fee_text_for_board(board)
+    if board.for_purchase?
+      "Sale/Buy Back"
+    else
+      "Daily"
+    end
+  end
+  
+  def get_fee_amounts_for_board(board)
+    if board.for_purchase?
+      "#{number_to_currency(board.purchase_price)} / #{number_to_currency(board.buy_back_price)}"
+    else
+      if board.daily_fee == 0.00
+        "Free!"
+      else
+        number_to_currency(board.daily_fee)
+      end
+    end
+  end
 end
