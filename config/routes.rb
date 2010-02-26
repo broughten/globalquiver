@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :specific_boards
+  map.resources :generic_boards
 
   map.resources :users
 

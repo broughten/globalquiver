@@ -340,4 +340,15 @@ h1 {
   margin-bottom:10px;
 }
 
+
+#generic-board-header {
+  width:535px;
+  height:40px;
+  background-color:#5ACBF9;
+  color:white;
+  padding-left:10px;
+  padding-top:3px;
+  padding-bottom:3px;
+}
+
 /* destroy boards */

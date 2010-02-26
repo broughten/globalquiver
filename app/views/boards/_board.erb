@@ -13,6 +13,21 @@ $(document).ready(function() {
   });
 });
 <% end %>
+<% if board.is_a?(GenericBoard) %>
+<div id="generic-board-header">
+  <% if current_user.is_a?(Shop) %>
+    <p>
+      The listing below represents a type of board. When your customers reserve it, they
+      will expect the board they get to be within the range that is described.
+    </p>
+  <% else %>
+    <p>
+      The listing below represents a type of board. If you reserve it, you'll be
+      reserving a board from the range described rather than a specific board.
+    </p>
+  <% end %>
+</div>
+<% end %>
 <ul id="list-table">
   <li class="board-link<%=board.id%> pic">
     <div id="centering-div">
@@ -31,7 +46,12 @@ $(document).ready(function() {
     <div id="centering-div">
       <p>
         <%= link_to "", board_path(board)%>
-        <%=h board.model %> by <%=h board.maker%>
+        <% if board.is_a?(SpecificBoard) %>
+          <%=h board.model %> by <%=h board.maker%>
+        <% else %>
+          Rental Set:<br/>
+          <%=h board.name %>
+        <% end %>
       </p>
     </div>
   </li>
@@ -47,7 +67,13 @@ $(document).ready(function() {
     <div id="centering-div">
       <p>
         <%= link_to "", board_path(board)%>
-        <%=h board.length_feet%>' <%=h board.length_inches%>"
+        <% if board.is_a?(SpecificBoard) %>
+          <%=h board.length_feet%>' <%=h board.length_inches%>"
+        <% else %>
+          <%=h board.lower_length_feet%>' <%=h board.lower_length_inches%>"<br/>
+          to<br/>
+          <%=h board.upper_length_feet%>' <%=h board.upper_length_inches%>"
+        <% end %>
       </p>
     </div>
   </li>
@@ -67,7 +93,7 @@ $(document).ready(function() {
     <li class="board-delete short">
       <div id="centering-div">
         <p>
-          <% form_for board do |f| %>
+          <% form_for :board, :url => boards_url do |f| %>
             <% if board.active? %>
               <%= f.hidden_field :inactive, :value => "true" %>
               <%= f.submit "Remove\nfrom\nquiver" %>
