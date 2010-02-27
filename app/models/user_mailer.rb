@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     recipients(board_owner.email)
     from("Global Quiver <noreply@globalquiver.com>")
     subject("Board Reservation Update")
-    sent_on(Time.now)    
+    sent_on(Time.now)
     body({:added_reservations => added_reservations, :deleted_reservations => deleted_reservations})
   end
   

@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   end
   
   def self.send_reservation_update_for_owned_boards(time)
-    User.board_owners_needing_reminder_emails(time).find_each do |user|
+    User.board_owners_needing_reminder_emails(time).each do |user|
       UserMailer.deliver_board_owner_reservation_update(user, 
         user.reservations_for_owned_boards.created_since(time),
         user.reservations_for_owned_boards.deleted_since(time))
