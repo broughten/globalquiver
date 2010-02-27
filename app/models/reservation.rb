@@ -52,6 +52,14 @@ class Reservation < ActiveRecord::Base
      
     end
   end
+  
+  def total_cost
+    if (self.board.for_purchase?)
+      self.board.purchase_price
+    else
+      self.board.daily_fee * self.reserved_dates.count
+    end
+  end
 
   protected
 

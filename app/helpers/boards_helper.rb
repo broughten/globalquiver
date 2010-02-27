@@ -86,7 +86,7 @@ module BoardsHelper
   
   def get_fee_text_for_board(board)
     if board.for_purchase?
-      "Sale/Buy Back"
+      "Sale / Buy Back"
     else
       "Daily"
     end
