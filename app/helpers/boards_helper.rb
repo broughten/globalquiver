@@ -103,4 +103,12 @@ module BoardsHelper
       end
     end
   end
+  
+  def get_reserve_board_text_for_board(board)
+    if board.is_generic?
+      "Reserve A Board Like This!"
+    else
+      "Reserve This Board!"
+    end
+  end
 end

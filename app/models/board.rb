@@ -64,4 +64,8 @@ class Board < ActiveRecord::Base
   def has_future_reservations
     self.reservations.with_dates_after(Time.now).length > 0
   end
+  
+  def is_generic?
+    self.is_a?(GenericBoard)
+  end
 end
