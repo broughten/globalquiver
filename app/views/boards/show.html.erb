@@ -85,6 +85,14 @@
 <div id="info-table">
   <h2>Info</h2>
 
+	<ul>
+    <li class="attr-name">Status</li>
+    <li class="<%=status_style_for_board(@board)%> value">
+      <span id="val-span"><%=h @board.status %></span>
+    </li>
+  </ul>
+  <div class="clear"></div>
+
   <ul>
     <% if @board.creator.is_a?(Surfer) %>
       <li class="attr-name">Nickname</li>

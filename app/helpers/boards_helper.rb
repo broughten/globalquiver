@@ -111,4 +111,8 @@ module BoardsHelper
       "Reserve This Board!"
     end
   end
+  
+  def status_style_for_board(board)
+    board.status.downcase
+  end
 end
