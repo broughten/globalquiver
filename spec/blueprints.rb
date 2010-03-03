@@ -206,6 +206,10 @@ UnavailableDate.blueprint(:for_board) do
   parent {Board.make}
 end
 
+UnavailableDate.blueprint(:for_specific_board) do
+  parent {SpecificBoard.make()}
+end
+
 UnavailableDate.blueprint(:for_generic_board) do
   parent {GenericBoard.make}
 end

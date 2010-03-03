@@ -43,5 +43,32 @@ describe BoardsHelper do
     it "should return 4 days ago for a comment made 4 days ago" do
       comment_time_ago(4.days.ago).should == "4 days ago"
     end
+    
+    it "should allow you to get fee text for a board depending on the for purchase status of the board" do
+      @board.stubs(:for_purchase?).returns(true)
+      get_fee_text_for_board(@board).should == "Sale / Buy Back"
+      
+      @board.stubs(:for_purchase?).returns(false)
+      get_fee_text_for_board(@board).should == "Daily"
+    end
+    
+    it "should allow you to get fee amounts for a board depending on the for purchase status of the board" do
+      @board.stubs(:for_purchase?).returns(true)
+      get_fee_amounts_for_board(@board).should == "#{number_to_currency(@board.purchase_price)} / #{number_to_currency(@board.buy_back_price)}"
+      
+      @board.stubs(:for_purchase?).returns(false)
+      get_fee_amounts_for_board(@board).should == number_to_currency(@board.daily_fee)
+      
+      @board.stubs(:daily_fee).returns(0.00)
+      get_fee_amounts_for_board(@board).should == "Free!"
+    end
+    
+    it "should allow you to get a status style for a board" do
+      @board.activate
+      status_style_for_board(@board).should == "active_board"
+      
+      @board.deactivate
+      status_style_for_board(@board).should == "inactive_board"
+    end
   end
 end
