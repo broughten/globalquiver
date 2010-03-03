@@ -342,7 +342,7 @@ h1 {
 
 
 #generic-board-header {
-  width:535px;
+  width:462px; /* If you tweak this please make sure you check the board search page. */
   height:40px;
   background-color:#5ACBF9;
   color:white;
