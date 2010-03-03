@@ -113,6 +113,6 @@ module BoardsHelper
   end
   
   def status_style_for_board(board)
-    board.status.downcase
+    "#{board.status.downcase}_board"
   end
 end
