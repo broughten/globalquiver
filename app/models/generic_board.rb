@@ -10,7 +10,7 @@ class GenericBoard < Board
   end
 
   def lower_length_feet=(feet)
-    if (self.lower_length.blank? || self.lower_length_feet >= 1)
+    if (self.lower_length.blank? || self.lower_length >= 12)
       self.lower_length = feet.to_f * 12
     else
       self.lower_length += feet.to_f * 12
@@ -35,7 +35,7 @@ class GenericBoard < Board
   end
 
   def upper_length_feet=(feet)
-    if (self.upper_length.blank? || self.upper_length_feet >= 1)
+    if (self.upper_length.blank? || self.upper_length >= 12)
       self.upper_length = feet.to_f * 12
     else
       self.upper_length += feet.to_f * 12

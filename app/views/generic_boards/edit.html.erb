@@ -69,9 +69,14 @@
       <%= f.text_field :model %>
     </p>
     <p>
-      <%= f.label :length, "Length:" %><br />
-      <input id="board_length_feet" name="board[length_feet]" size="4" type="text" title="feet" value="<%= @board.length_feet %>"/>
-      <input id="board_length_inches" name="board[length_inches]" size="4" type="text" title="inches" value="<%= @board.length_inches %>"" />
+      <%= f.label :lower_length, "Shortest length available for this type of board:" %><br />
+      <input id="generic_board_lower_length_feet" name="generic_board[lower_length_feet]" size="4" type="text" title="feet" disabled="true"/>
+      <input id="generic_board_lower_length_inches" name="generic_board[lower_length_inches]" size="4" type="text" title="inches" disabled="true"/>
+    </p>
+    <p>
+      <%= f.label :upper_length, "Longest length available for this type of board:" %><br />
+      <input id="generic_board_upper_length_feet" name="generic_board[upper_length_feet]" size="4" type="text" title="feet" disabled="true"/>
+      <input id="generic_board_upper_length_inches" name="generic_board[upper_length_inches]" size="4" type="text" title="inches" disabled="true"/>
     </p>
     <p>
       <%= f.label :style_id, "Style:" %><span id="required_star">*</span><br />
@@ -83,21 +88,6 @@
     <p><a id='hide_show_optional_fields' href="#" onclick="javascript:void(0); return false;"><span id='visibility_indicator'>Show</span> Optional Fields</a>
     </p>
     <div id="optional_fields" style="display:none;">
-      <p>
-        <%= f.label :width, "Width:" %><br />
-        <input id="board_width_inches" name="board[width_inches]" size="4" type="text" title="inches" value="<%= @board.width_inches %>" />
-        <%= f.select :width_fraction, fractions, :class => "fraction_dropdown" %>
-      </p>
-      <p>
-        <%= f.label :thickness, "Thickness:" %><br />
-        <input id="board_thickness_inches" name="board[thickness_inches]" size="4" type="text" title="inches" value="<%= @board.thickness_inches %>" />
-        <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
-      </p>
-
-      <p>
-        <%= f.label :construction, "Construction:" %><br />
-        <%= f.text_field :construction %>
-      </p>
       <p>
         <%= f.label :description, "Description:" %><br />
         <%= f.text_area :description, :size => "60x2"%>

@@ -7,7 +7,7 @@ class SpecificBoard < Board
   end
 
   def length_feet=(feet)
-    if (self.length.blank? || self.length_feet >= 1)
+    if (self.length.blank? || self.length >= 12)
       self.length = feet.to_f * 12
     else
       self.length += feet.to_f * 12
@@ -19,7 +19,7 @@ class SpecificBoard < Board
   end
 
   def length_inches=(inches)
-    if (self.length.blank? || self.length_inches >= 1)
+    if (self.length.blank? || self.length >= 1)
       self.length = inches.to_f
     else
       self.length += inches.to_f

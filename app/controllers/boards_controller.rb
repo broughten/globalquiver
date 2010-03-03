@@ -62,7 +62,7 @@ class BoardsController < ApplicationController
     # we pull up all the locations that the user has previously entered
     # because he might want to use one of these for the board he's about to enter
     @existing_locations = current_user.board_locations.ordered_by_desc_creation
-    (0..Board::MAX_IMAGES).each do |index|
+    (0..Board::MAX_IMAGES-1).each do |index|
 
       if @board.images[index].nil?
         @board.images.build
@@ -102,7 +102,7 @@ class BoardsController < ApplicationController
         format.html {
           @existing_locations = current_user.board_locations.ordered_by_desc_creation
 
-          render :edit 
+          render :template => "#{board_type.pluralize}/edit"
         }
         format.js
       end

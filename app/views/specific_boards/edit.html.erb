@@ -70,8 +70,8 @@
     </p>
     <p>
       <%= f.label :length, "Length:" %><br />
-      <input id="board_length_feet" name="board[length_feet]" size="4" type="text" title="feet" value="<%= @board.length_feet %>"/>
-      <input id="board_length_inches" name="board[length_inches]" size="4" type="text" title="inches" value="<%= @board.length_inches %>"" />
+      <input id="specific_board_length_feet" name="specific_board[length_feet]" size="4" type="text" title="feet" value="<%= @board.length_feet %>"/>
+      <input id="specific_board_length_inches" name="specific_board[length_inches]" size="4" type="text" title="inches" value="<%= @board.length_inches %>"" />
     </p>
     <p>
       <%= f.label :style_id, "Style:" %><span id="required_star">*</span><br />
@@ -85,12 +85,12 @@
     <div id="optional_fields" style="display:none;">
       <p>
         <%= f.label :width, "Width:" %><br />
-        <input id="board_width_inches" name="board[width_inches]" size="4" type="text" title="inches" value="<%= @board.width_inches %>" />
+        <input id="specific_board_width_inches" name="specific_board[width_inches]" size="4" type="text" title="inches" value="<%= @board.width_inches %>" />
         <%= f.select :width_fraction, fractions, :class => "fraction_dropdown" %>
       </p>
       <p>
         <%= f.label :thickness, "Thickness:" %><br />
-        <input id="board_thickness_inches" name="board[thickness_inches]" size="4" type="text" title="inches" value="<%= @board.thickness_inches %>" />
+        <input id="specific_board_thickness_inches" name="specific_board[thickness_inches]" size="4" type="text" title="inches" value="<%= @board.thickness_inches %>" />
         <%= f.select :thickness_fraction, fractions, {}, :class => "fraction_dropdown"  %>
       </p>
 

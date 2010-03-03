@@ -1,0 +1,3 @@
+class GenericBoardsController < BoardsController
+
+end
