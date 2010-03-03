@@ -90,7 +90,7 @@ $(document).ready(function() {
     <li class="board-delete short">
       <div id="centering-div">
         <p>
-          <% form_for :board, :url => boards_url do |f| %>
+          <% form_for :board, :url => board_path(board), :html=>{:method => :put} do |f| %>
             <% if board.active? %>
               <%= f.hidden_field :inactive, :value => "true" %>
               <%= f.submit "Remove\nfrom\nquiver" %>

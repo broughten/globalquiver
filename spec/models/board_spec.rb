@@ -220,4 +220,14 @@ describe Board do
     unreserved_board.has_future_reservations.should be_false
   end
   
+  it "should be able to tell if it is a generic board" do
+    generic_board = GenericBoard.make_unsaved()
+    specific_board = SpecificBoard.make_unsaved()
+    board = Board.make_unsaved()
+    
+    generic_board.is_generic?.should be_true
+    specific_board.is_generic?.should be_false
+    board.is_generic?.should be_false
+  end
+  
 end

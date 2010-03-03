@@ -351,4 +351,8 @@ h1 {
   padding-bottom:3px;
 }
 
+.active{background-color:green !important; color:#000000;}
+
+.inactive{background-color:red !important; color:#000000;}
+
 /* destroy boards */

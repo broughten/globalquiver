@@ -66,7 +66,7 @@
 </div>
 <% if !@board.user_is_owner(current_user) && @board.active? %>
   <div id="rent-me-link">
-    <%= link_to "Reserve This Board!", new_board_reservation_path(@board) %>
+    <%= link_to get_reserve_board_text_for_board(@board), new_board_reservation_path(@board) %>
   </div>
 <% end %>
 <div class="clear"></div>
@@ -90,6 +90,14 @@
 <br/>
 <div id="info-table">
   <h2>Info</h2>
+
+	<ul>
+    <li class="attr-name">Status</li>
+    <li class="<%=status_style_for_board(@board)%> value">
+      <span id="val-span"><%=h @board.status %></span>
+    </li>
+  </ul>
+  <div class="clear"></div>
 
   <ul>
     <% if @board.creator.is_a?(Surfer) %>
@@ -119,12 +127,21 @@
   </ul>
   <div class="clear"></div>
 
+	<% if @board.is_generic?%>
   <ul>
+    <li class="attr-name">Length</li>
+    <li class="value">
+      <%=h @board.lower_length_feet %>' <%=h @board.lower_length_inches %>" to <%=h @board.upper_length_feet %>' <%=h @board.upper_length_inches %>"
+    </li>
+  </ul>
+	<%else%>
+	<ul>
     <li class="attr-name">Length</li>
     <li class="value">
       <%=h @board.length_feet %>' <%=h @board.length_inches %>"
     </li>
   </ul>
+	<%end%>
   <div class="clear"></div>
 
   <ul>
@@ -227,7 +244,7 @@
 <% end %>
 <% if !@board.user_is_owner(current_user) && @board.active? %>
   <div id="rent-me-link-too">
-    <%= link_to "Reserve This Board!", new_board_reservation_path(@board) %>
+    <%= link_to get_reserve_board_text_for_board(@board), new_board_reservation_path(@board) %>
   </div>
 <% end %>
 
