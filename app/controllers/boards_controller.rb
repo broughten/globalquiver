@@ -77,6 +77,9 @@ class BoardsController < ApplicationController
     #we need to bail out if someone tries to upload a non jpg or png image
     
     @board = Board.find(params[:id])
+    logger.debug("HI JC!!! found board #{@board.inspect}")
+
+    board_type = @board.type.to_s.underscore
 
     if params[:board] && params[:board][:inactive]
       attempting_to_deactivate = true
@@ -91,7 +94,7 @@ class BoardsController < ApplicationController
         flash[:error] = "This board cant be deactivated because it has upcoming reservations. Please contact the reservation holder(s) if this board is truly no longer available."
         format.html { redirect_to(:back) }
         format.js
-      elsif @board.update_attributes(params[:board])
+      elsif @board.update_attributes(params[board_type])
         flash[:notice] = 'Board was successfully updated.'
         format.html { redirect_to(board_path(@board)) }
         format.js

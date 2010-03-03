@@ -54,7 +54,13 @@
   <h1 id="board-details">Board Details</h1>
   <% if @board.user_is_owner(current_user) %>
     <h2 class="is-you">&nbsp;(This is your board!&nbsp;</h2>
-    <p id="board-edit"><%= link_to "Edit", edit_board_path(:id => @board.id) %></p>
+    <p id="board-edit">
+    <% if @board.is_a?(GenericBoard) %>
+      <%= link_to "Edit", edit_generic_board_path(:id => @board.id) %>
+    <% else %>
+      <%= link_to "Edit", edit_specific_board_path(:id => @board.id) %>
+    <% end %>
+    </p>
     <h2 class="is-you">)</h2>
   <% end %>
 </div>
