@@ -342,8 +342,6 @@ h1 {
 
 
 #generic-board-header {
-  width:462px; /* If you tweak this please make sure you check the board search page. */
-  height:40px;
   background-color:#5ACBF9;
   color:white;
   padding-left:10px;
@@ -351,8 +349,21 @@ h1 {
   padding-bottom:3px;
 }
 
-.active_board{background-color:green !important; color:#000000;}
+.search-generic-header {
+  width:462px;
+}
+
+.home-generic-header {
+  width:535px;
+}
+
+.active_board{background-color:#AEFF4B !important; color:#000000;}
 
 .inactive_board{background-color:red !important; color:#000000;}
+
+.fieldWithErrors {
+  font-size:14px;
+  color:#640010;
+}
 
 /* destroy boards */

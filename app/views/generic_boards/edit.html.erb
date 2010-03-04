@@ -70,13 +70,13 @@
     </p>
     <p>
       <%= f.label :lower_length, "Shortest length available for this type of board:" %><br />
-      <input id="generic_board_lower_length_feet" name="generic_board[lower_length_feet]" size="4" type="text" title="feet" disabled="true"/>
-      <input id="generic_board_lower_length_inches" name="generic_board[lower_length_inches]" size="4" type="text" title="inches" disabled="true"/>
+      <input id="generic_board_lower_length_feet" name="generic_board[lower_length_feet]" size="4" type="text" title="feet" value="<%= @board.lower_length_feet %>"/>
+      <input id="generic_board_lower_length_inches" name="generic_board[lower_length_inches]" size="4" type="text" title="inches" value="<%= @board.lower_length_inches %>"/>
     </p>
     <p>
       <%= f.label :upper_length, "Longest length available for this type of board:" %><br />
-      <input id="generic_board_upper_length_feet" name="generic_board[upper_length_feet]" size="4" type="text" title="feet" disabled="true"/>
-      <input id="generic_board_upper_length_inches" name="generic_board[upper_length_inches]" size="4" type="text" title="inches" disabled="true"/>
+      <input id="generic_board_upper_length_feet" name="generic_board[upper_length_feet]" size="4" type="text" title="feet" value="<%= @board.upper_length_feet %>"/>
+      <input id="generic_board_upper_length_inches" name="generic_board[upper_length_inches]" size="4" type="text" title="inches" value="<%= @board.upper_length_inches %>"/>
     </p>
     <p>
       <%= f.label :style_id, "Style:" %><span id="required_star">*</span><br />
@@ -117,8 +117,12 @@
       </p>
     </div>
     <div class="fields">
-      <%= f.label :daily_fee, "Daily Fee:" %><br />
-      $<%= f.text_field :daily_fee, :size => 5 %>
+      <p>
+        <%= f.label :daily_fee, "Daily Fee:" %><br />
+      </p>
+      <p>
+        $<%= f.text_field :daily_fee, :size => 5 %>
+      </p>
     </div>
   <% end %>
   <br/>

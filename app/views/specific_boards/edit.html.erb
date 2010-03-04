@@ -106,30 +106,72 @@
   </div>
   <br/>
   <hr/>
+  <h2>Fee</h2>
   <% if current_user.is_a?(Surfer) %>
-    <div class="explanation">
-      <h2>Daily Fee</h2>
-      <p>
-        Put in a number or 0 if you want it to be free.
-      </p>
-    </div>
-    <div class="fields">
-      <p>
-        <%= f.label :daily_fee, "Daily Fee:" %><br />
-        $<%= f.text_field :daily_fee, :size => 4 %>
-      </p>
-    </div>
+    <% if @board.for_purchase %>
+      <div class="explanation">
+      	<p>
+          Tell us how much you would like to get when you sell this board and how much you are willing to
+          pay the purchaser when they bring the board back to you if it is in the same condition as when they bought it.
+      	</p>
+      </div>
+      <div class="fields">
+      	<p>
+          <%= f.label :purchase_price, "Sale Price: (Put in any amount)" %><br />
+          $<%= f.text_field :purchase_price, :size => 4 %>
+      	</p>
+	<p>
+          <%= f.label :buy_back_price, "Buy Back Price: (Put in any amount)" %><br />
+          $<%= f.text_field :buy_back_price, :size => 4 %>
+      	</p>
+      </div>
+    <% else %>
+      <div class="explanation">
+        <p>
+          Put in a number or 0 if you want it to be free.
+        </p>
+      </div>
+      <div class="fields">
+        <p>
+          <%= f.label :daily_fee, "Daily Fee:" %><br />
+        </p>
+        <p>
+          $<%= f.text_field :daily_fee, :size => 4 %>
+        </p>
+      </div>
+    <% end %>
   <% else %>
-    <div class="explanation">
-      <h2>Daily rental fee</h2>
-      <p>
-        Set the daily rental fee below.
-      </p>
-    </div>
-    <div class="fields">
-      <%= f.label :daily_fee, "Daily Fee:" %><br />
-      $<%= f.text_field :daily_fee, :size => 5 %>
-    </div>
+    <% if @board.for_purchase %>
+      <div class="explanation">
+      	<p>
+          Enter the sale price and the buy-back price.
+      	</p>
+      </div>
+      <div class="fields">
+      	<p>
+          <%= f.label :purchase_price, "Sale Price: (Put in any amount)" %><br />
+          $<%= f.text_field :purchase_price, :size => 4 %>
+      	</p>
+	<p>
+          <%= f.label :buy_back_price, "Buy Back Price: (Put in any amount)" %><br />
+          $<%= f.text_field :buy_back_price, :size => 4 %>
+      	</p>
+      </div>
+    <% else %>
+      <div class="explanation">
+        <p>
+          Set the daily rental fee below.
+        </p>
+      </div>
+      <div class="fields">
+        <p>
+          <%= f.label :daily_fee, "Daily Fee:" %><br />
+        </p>
+        <p>
+          $<%= f.text_field :daily_fee, :size => 5 %>
+        </p>
+      </div>
+    <% end %>
   <% end %>
   <br/>
   <hr/>

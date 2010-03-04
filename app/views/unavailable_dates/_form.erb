@@ -16,6 +16,7 @@
     <% end %>
   </div>
   <script language="javascript">
+    var board_type = "<%= (current_page?(new_board_path))?"board":board.type.to_s.underscore %>";
     var blackOutDates = <%= black_out_dates_json_for(board) %>;
     var reservedDates = <%= reserved_dates_json_for(board) %>;
   </script>

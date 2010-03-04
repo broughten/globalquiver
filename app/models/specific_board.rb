@@ -7,10 +7,12 @@ class SpecificBoard < Board
   end
 
   def length_feet=(feet)
-    if (self.length.blank? || self.length >= 12)
+    if (self.length.blank? || !@length_set)
       self.length = feet.to_f * 12
+      @length_set = true
     else
       self.length += feet.to_f * 12
+      @length_set = false
     end
   end
 
@@ -19,10 +21,12 @@ class SpecificBoard < Board
   end
 
   def length_inches=(inches)
-    if (self.length.blank? || self.length >= 1)
+    if (self.length.blank? || !@length_set)
       self.length = inches.to_f
+      @length_set = true
     else
       self.length += inches.to_f
+      @length_set = false
     end
   end
 
@@ -36,10 +40,12 @@ class SpecificBoard < Board
   end
 
   def width_inches=(inches)
-    if (self.width.blank? || self.width >= 1)
+    if (self.width.blank? || !@width_set)
       self.width = inches.to_f
+      @width_set = true
     else
       self.width += inches.to_f
+      @width_set = false
     end
   end
 
@@ -55,10 +61,12 @@ class SpecificBoard < Board
   end
 
   def width_fraction=(fraction)
-    if (self.width.blank? || self.width >= 1)
+    if (self.width.blank? || !@width_set)
       self.width = fraction.to_f
+      @width_set = true
     else
       self.width += fraction.to_f
+      @width_set = false
     end
   end
 
@@ -72,10 +80,12 @@ class SpecificBoard < Board
   end
 
   def thickness_inches=(inches)
-    if (self.thickness.blank? || self.thickness >= 1)
+    if (self.thickness.blank? || !@thickness_set)
       self.thickness = inches.to_f
+      @thickness_set = true
     else
       self.thickness += inches.to_f
+      @thickness_set = false
     end
   end
 
@@ -91,12 +101,20 @@ class SpecificBoard < Board
   end
 
   def thickness_fraction=(fraction)
-    if (self.thickness.blank? || self.thickness >= 1)
+    if (self.thickness.blank? || !@thickness_set)
       self.thickness = fraction.to_f
+      @thickness_set = true
     else
       self.thickness += fraction.to_f
+      @thickness_set = false
     end
 
   end
-  
+
+  private
+
+  @length_set = false
+  @width_set = false
+  @thickness_set = false
+
 end

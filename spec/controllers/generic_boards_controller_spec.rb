@@ -67,10 +67,15 @@ describe GenericBoardsController do
       it "should allow you to change blackout dates on a board with reservations in the future" do
         @request.env['HTTP_REFERER'] = root_path
         GenericBoard.any_instance.stubs(:has_future_reservations).returns(true)
-        post 'update', {:id=>@temp_board.id, :board => {:black_out_dates_attributes => [{:id => "", :date => 3.days.from_now.strftime('%m/%d/%Y')}]}}
+        post 'update', {:id=>@temp_board.id, :generic_board => {:black_out_dates_attributes => [{:id => "", :date => 3.days.from_now.strftime('%m/%d/%Y')}]}}
         flash[:error].should be_nil
         flash[:notice].should_not be_nil
         response.should redirect_to(board_path(@temp_board))
+      end
+
+      it "should add the blackout dates that you select to the board" do
+        post 'update', {:id=>@temp_board.id, :generic_board => {:black_out_dates_attributes => [{:id => "", :date => 3.days.from_now.strftime('%m/%d/%Y')}]}}
+        assigns[:board].black_out_dates.first.date.should == 3.days.from_now.to_date
       end
 
       it "should render the edit view if a field doesn't validate" do
@@ -117,6 +122,5 @@ describe GenericBoardsController do
 
       end
     end
-
   end
 end

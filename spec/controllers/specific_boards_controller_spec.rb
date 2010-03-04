@@ -73,6 +73,11 @@ describe SpecificBoardsController do
         response.should redirect_to(board_path(@temp_board))
       end
 
+      it "should add the blackout dates that you select to the board" do
+        post 'update', {:id=>@temp_board.id, :specific_board => {:black_out_dates_attributes => [{:id => "", :date => 3.days.from_now.strftime('%m/%d/%Y')}]}}
+        assigns[:board].black_out_dates.first.date.should == 3.days.from_now.to_date
+      end
+
       it "should render the edit view if a field doesn't validate" do
         SpecificBoard.any_instance.stubs(:valid?).returns(false)
         post 'update', {:id=>@temp_board.id, :board => {:daily_fee => "wrong"}}

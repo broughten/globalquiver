@@ -80,10 +80,10 @@ function addFormField(date, td, status) {
       //date to the form.
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[black_out_dates_attributes][][id]");
+      "name='" + board_type + "[black_out_dates_attributes][][id]");
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[black_out_dates_attributes][][date]' " +
+      "name='" + board_type + "[black_out_dates_attributes][][date]' " +
       "value='" + date.asString() + "'>");
     }
   } else {
@@ -92,11 +92,11 @@ function addFormField(date, td, status) {
       //this creates an hidden input with the date marked for removal
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[black_out_dates_attributes][][id]' " +
+      "name='" + board_type + "[black_out_dates_attributes][][id]' " +
       "value='" + getUnavailableDateId(date.asString('yyyy-mm-dd')) +"'>");
       $("#multimonth").append(
       "<input type='hidden' " +
-      "name='board[black_out_dates_attributes][][_delete]' " +
+      "name='" + board_type + "[black_out_dates_attributes][][_delete]' " +
       "value='1'>");
     } else {
       //and if the date was just chosen during this session and later

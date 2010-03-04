@@ -146,63 +146,96 @@
   <br/>
   <hr/>
   <% if current_user.is_a?(Surfer) %>
-		<h2>Make some money from your board.</h2>
-		<div class="explanation">
-			<p>
-				Tell us if this board can be rented from your or if this board is available for purchase/buy back.
-			</p>
-		</div>
-		<div class="fields">
-      <p><input type="radio" id="board_for_rent" name="board[for_purchase]" value="false" checked> This board can only be rented from me.</p>
-      <p><input type="radio" id="board_for_purchase" name="board[for_purchase]" value="true"> This board can only be purchased with the option to sell it back to you.</p>
-    </div>
-		<div id="rental_info">
-    	<div class="explanation">
-      	<p>
-        	You can set a daily rental fee or lend out your boards for free. It's completely up to you.
-        	For the record, if you rent just one board for 20 or 30 days at a typical daily rate, you'll
-        	have made enough money to get a new board!
-      	</p>
-    	</div>
-    	<div class="fields">
-      	<p>
-        	<%= f.label :daily_fee, "Daily Fee: (Put in any amount or 0 if you want to pass along the stoke for free)" %><br />
-        	$<%= f.text_field :daily_fee, :size => 4 %>
-      	</p>
-    	</div>
-		</div>
-		<div id="purchase_info" style="display:none;">
-    	<div class="explanation">
-      	<p>
-        	Tell us how much you would like to get when you sell this board and how much you are willing to
-					pay the purchaser when they bring the board back to you.  
-      	</p>
-    	</div>
-    	<div class="fields">
-      	<p>
-        	<%= f.label :purchase_price, "Purchase Price: (Put in any amount)" %><br />
-        	$<%= f.text_field :purchase_price, :size => 4 %>
-      	</p>
-				<p>
-        	<%= f.label :buy_back_price, "Buy Back Price: (Put in any amount)" %><br />
-        	$<%= f.text_field :buy_back_price, :size => 4 %>
-      	</p>
-    	</div>
-		</div>
-		
-  <% else %>
+    <h2>Make some money from your board.</h2>
     <div class="explanation">
-      <h2>Daily rental fee</h2>
       <p>
-        Set the daily rental fee below. All board renters will see this fee on this site and expect to pay it
-        in person at your shop.
+        Tell us if this board can be rented from you or if this board is available for purchase/buy back.
       </p>
     </div>
     <div class="fields">
-      <p>
-        <%= f.label :daily_fee, "Daily Fee:" %><br />
-        $<%= f.text_field :daily_fee, :size => 5 %>
-      </p>
+      <p><input type="radio" id="board_for_rent" name="board[for_purchase]" value="false" checked> This board can only be rented.</p>
+      <p><input type="radio" id="board_for_purchase" name="board[for_purchase]" value="true"> This board is for sale with a buy-back price.</p>
+    </div>
+    <div id="rental_info">
+      <div class="explanation">
+        <p>
+          You can set a daily rental fee or lend out your boards for free. It's completely up to you.
+          For the record, if you rent just one board for 20 or 30 days at a typical daily rate, you'll
+          have made enough money to get a new board!
+        </p>
+      </div>
+      <div class="fields">
+        <p>
+          <%= f.label :daily_fee, "Daily Fee: (Put in any amount or 0 if you want to pass along the stoke for free)" %><br />
+        </p>
+        <p>
+          $<%= f.text_field :daily_fee, :size => 4 %>
+        </p>
+      </div>
+    </div>
+    <div id="purchase_info" style="display:none;">
+      <div class="explanation">
+      	<p>
+          Tell us how much you would like to get when you sell this board and how much you are willing to
+          pay the purchaser when they bring the board back to you if it is in the same condition as when they bought it.
+      	</p>
+      </div>
+      <div class="fields">
+      	<p>
+          <%= f.label :purchase_price, "Sale Price: (Put in any amount)" %><br />
+          $<%= f.text_field :purchase_price, :size => 4 %>
+      	</p>
+	<p>
+          <%= f.label :buy_back_price, "Buy Back Price: (Put in any amount)" %><br />
+          $<%= f.text_field :buy_back_price, :size => 4 %>
+      	</p>
+      </div>
+    </div>
+		
+  <% else %>
+    <h2>Fee</h2>
+    <div id="fee-type-question">
+      <div class="explanation">
+        <p>
+          Indicate whether this board is for rent or for sale with a buy-back option.
+        </p>
+      </div>
+      <div class="fields">
+        <p><input type="radio" id="board_for_rent" name="board[for_purchase]" value="false" checked> This board can only be rented.</p>
+        <p><input type="radio" id="board_for_purchase" name="board[for_purchase]" value="true"> This board is for sale/buy-back.</p>
+      </div>
+    </div>
+    <div id="rental_info">
+      <div class="explanation">
+        <p>
+          Set the daily rental fee below. All board renters will see this fee on this site and expect to pay it
+          in person at your shop.
+        </p>
+      </div>
+      <div class="fields">
+        <p>
+          <%= f.label :daily_fee, "Daily Fee:" %><br />
+          $<%= f.text_field :daily_fee, :size => 5 %>
+        </p>
+      </div>
+    </div>
+    <div id="purchase_info" style="display:none;">
+      <div class="explanation">
+      	<p>
+          Set the board price and board buy-back price below. Surfers will expect to be able to sell this board
+          back to the shop for the listed buy-back price if they return it in the same condition they bought it.
+      	</p>
+      </div>
+      <div class="fields">
+      	<p>
+          <%= f.label :purchase_price, "Sale Price:" %><br />
+          $<%= f.text_field :purchase_price, :size => 4 %>
+      	</p>
+	<p>
+          <%= f.label :buy_back_price, "Buy Back Price:" %><br />
+          $<%= f.text_field :buy_back_price, :size => 4 %>
+      	</p>
+      </div>
     </div>
   <% end %>
   <br/>

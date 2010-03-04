@@ -66,6 +66,12 @@ function show_specific_board() {
   $("#board_thickness_inches").removeAttr("disabled");
   $("#board_thickness_fraction").removeAttr("disabled");
   $("#width-thickness-construction").show();
+
+  $("#fee-type-question").show();
+  $("#board_daily_fee").attr("disabled","disabled");
+  $("#board_purchase_price").removeAttr("disabled");
+  $("#board_buy_back_price").removeAttr("disabled");
+
 }
 
 function show_generic_board() {
@@ -86,6 +92,14 @@ function show_generic_board() {
   $("#board_thickness_inches").attr("disabled","disabled");
   $("#board_thickness_fraction").attr("disabled","disabled");
   $("#width-thickness-construction").hide();
+
+  $('input[id="board_for_rent"]').attr('checked', true);
+  $("#fee-type-question").hide();
+  $("#purchase_info").hide();
+  $("#rental_info").show();
+  $("#board_daily_fee").removeAttr("disabled");
+  $("#board_purchase_price").attr("disabled","disabled");
+  $("#board_buy_back_price").attr("disabled","disabled");
 }
 
 function set_board_location_id(new_id){

@@ -14,7 +14,7 @@ $(document).ready(function() {
 });
 <% end %>
 <% if board.is_a?(GenericBoard) %>
-<div id="generic-board-header">
+<div id="generic-board-header" class="<%= (current_controller?("board_searches"))?"search-generic-header":"home-generic-header" %>">
   <% if current_user.is_a?(Shop) %>
     <p>
       The listing below represents a type of board. When your customers reserve it, they
