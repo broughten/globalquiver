@@ -17,7 +17,7 @@ module UnavailableDatesHelper
   end
   
   def reserved_dates_json_for(board)
-    if (board.reserved_dates.blank?)
+    if (board.reserved_dates.blank? || board.is_generic?)
       return 'null'
     else
       reservations = board.reserved_dates

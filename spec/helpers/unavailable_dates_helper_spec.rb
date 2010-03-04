@@ -37,6 +37,11 @@ describe UnavailableDatesHelper do
         @board = Board.make()
         reserved_dates_json_for(@board).should eql("null")
       end
+      
+      it "should return null for generic board reservations" do
+        generic_board_reservation = Reservation.make(:board=>GenericBoard.make())
+        reserved_dates_json_for(generic_board_reservation.board).should eql("null")
+      end
    
       it "should return a json list of reserved dates for this board created by the current user" do
         @me = Surfer.make()
