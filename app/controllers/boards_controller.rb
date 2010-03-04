@@ -83,6 +83,7 @@ class BoardsController < ApplicationController
 
     if params[:board] && params[:board][:inactive]
       attempting_to_deactivate = true
+      board_type = "board"
     end
 
     respond_to do |format|

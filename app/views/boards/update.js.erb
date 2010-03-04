@@ -2,7 +2,6 @@ function addFlash(element) {
   <% if !flash[:error].blank? %>
     alert('<%= escape_javascript(flash.delete(:error)) %>');
   <% else %>
-
   var message = "<%= escape_javascript(flash.delete(:notice)) %>";
   if ($.browser.msie) {
     $("#" +element).parent().parent().parent().parent().prev().after('<div class="flash board-flash"><div id="flash_notice"><p>' + message + '</p></div></div>');
