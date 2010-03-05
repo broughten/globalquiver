@@ -62,11 +62,21 @@ function getAddressFromPlacemark(ourPlacemark){
     //check for Thoroughfare
     if (ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.Thoroughfare != null) {
       ourAddress.street = ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.Thoroughfare.ThoroughfareName;
+    } else {
+      //Just found this concept of a Dependent Locality in the geocode response for florianopolis
+      if (ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.Thoroughfare != null) {
+        ourAddress.street = ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.Thoroughfare.ThoroughfareName;
+      }
     }
 
     //check for Zip
     if (ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.PostalCode) {
       ourAddress.zipCode = ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.PostalCode.PostalCodeNumber;
+    } else {
+      //Just found this concept of a Dependent Locality in the geocode response for florianopolis
+      if (ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.PostalCode != null) {
+        ourAddress.zipCode = ourPlacemark.AddressDetails.Country.AdministrativeArea.Locality.DependentLocality.PostalCode.PostalCodeNumber;
+      }
     }
   } else {
     //just found another address that has a sub administrative area.
