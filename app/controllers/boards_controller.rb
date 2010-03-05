@@ -77,8 +77,7 @@ class BoardsController < ApplicationController
     #we need to bail out if someone tries to upload a non jpg or png image
     
     @board = Board.find(params[:id])
-    logger.debug("HI JC!!! found board #{@board.inspect}")
-
+    
     board_type = @board.type.to_s.underscore
 
     if params[:board] && params[:board][:inactive]
