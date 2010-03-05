@@ -1,6 +1,6 @@
 class AddTypeToBoards < ActiveRecord::Migration
   def self.up
-    add_column :boards, :type, :string
+    add_column :boards, :type, :string, :default => "SpecificBoard"
   end
 
   def self.down
