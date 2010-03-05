@@ -18,6 +18,10 @@
       Note: We use your zip or postal code to share your general location (city/state/country) with other users.
       If you don't put your zip code here, then you won't show up in location-based searches.
     </p>
+  <% else %>
+    <p>
+      Note: This is used to set your shop's location so that users can find it in a search.
+    </p>
   <% end %>
   <% if !@user.location.nil? %>
     <div id="current-location">

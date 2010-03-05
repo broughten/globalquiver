@@ -20,6 +20,7 @@
         </div>
       </div>
     <% end %>
+  </div>
     <div id="photo-form">
       <h2>Upload/Change Photo</h2>
       <% form_for @user, :html => {:multipart => true } do |form| %>
@@ -33,9 +34,7 @@
       <% end %>
     </div>
     <%= render :partial => '/locations/form' %>
-
   </div>
-</div>
 <div class="right-column">
   <% semantic_form_for @user do |form| %>
     <div class="user-info-table">
