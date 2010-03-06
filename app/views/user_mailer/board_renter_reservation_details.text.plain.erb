@@ -1,45 +1,47 @@
 Hi <%=  @reservation.creator.first_name %>,
 
 You just made a reservation on Global Quiver. Thanks! The details of your reservation are below, but here are a few important things you should know:
-<% if @reservation.board.creator.is_a?(Surfer) %>
+
+<%- if @reservation.board.creator.is_a?(Surfer) -%>
 -- The owner of the board knows you reserved it but doesn't know who you are or how to get the board to you. You have to contact the owner at <%= @reservation.board.creator.email %> to figure out how to do the pickup and drop off.
-<% if @reservation.board.daily_fee != 0.00 %>-- You should plan on paying for your board in cash in advance unless the owner of the board tell you otherwise.<% end %>
+<%- if @reservation.board.daily_fee != 0.00 -%>-- You should plan on paying for your board in cash in advance unless the owner of the board tell you otherwise.<%- end -%>
 -- Please be cool. If you bust up a board and it's your fault, offer to pay for the repairs. The owner was doing you a favor to let you use it.
 -- Be on time, don't flake and call the owner if there's an issue. This community depends on a little bit of being responsible.
-<% else %>
+<%- else -%>
 -- Make sure you know the shop's hours so you don't show up to pick up the board while they are closed.
 -- Please call or email the shop at <%= @reservation.board.creator.email %> to enquire about any steps needed to confirm your reservation.  You reservation may not be confirmed until you complete these steps with the shop.
 -- Global Quiver doesn't manage or track surf shop rental policies. Be ready to pay a deposit, or pay in cash, or use a credit card, and in general do what the shop requires.
 -- Please be cool. Don't flake on your reservations and call the shop if there's an issue. This community depends on a little bit of being responsible.
-<% end %>
+<%- end -%>
 
 OK. Here are the details of your reservation:
 
   Board Name:  <%= h @reservation.board.name%>
-  <% if @reservation.board.is_a?(SpecificBoard) %>Board Model: <%= @reservation.board.model%><%end%>
-  <% if @reservation.board.is_a?(SpecificBoard) %>Board Maker: <%= @reservation.board.maker%><%end%>
-  <% if @reservation.board.is_a?(GenericBoard) %>Board Length: Between <%= @reservation.board.lower_length_feet%>'<%= @reservation.board.lower_length_inches%>" and <%= @reservation.board.upper_length_feet%>'<%= @reservation.board.upper_length_inches%>"<%end%>
+  <%- if @reservation.board.is_a?(SpecificBoard) -%>Board Model: <%= @reservation.board.model%><%-end-%>
+  <%- if @reservation.board.is_a?(SpecificBoard) -%>Board Maker: <%= @reservation.board.maker%><%-end-%>
+  <%- if @reservation.board.is_a?(GenericBoard) -%>Board Length: Between <%= @reservation.board.lower_length_feet%>'<%= @reservation.board.lower_length_inches%>" and <%= @reservation.board.upper_length_feet%>'<%= @reservation.board.upper_length_inches%>"<%-end-%>
   Board Style: <%= h @reservation.board.style.name%>
-  <% if @reservation.board.creator.is_a?(Surfer) %>
+  <%- if @reservation.board.creator.is_a?(Surfer) -%>
   Board Owner: <%= h @reservation.board.creator.full_name%>
   Owner Email: <%= h @reservation.board.creator.email%>
-  <% else %>
+  <%- else -%>
   Board Shop:  <%= h @reservation.board.creator.full_name%>
   Shop Email:  <%= h @reservation.board.creator.email%>
-  <% end %>
+  <%- end -%>
 
   Reservation Date(s):
-    <% @reservation.reserved_dates.each do |reservation_date| %><%=h reservation_date.date%><%unless reservation_date == @reservation.reserved_dates.last%>, <%end%>
-    <% end %>
+    <%- @reservation.reserved_dates.each do |reservation_date| -%>
+      <%=h reservation_date.date%><%-unless reservation_date == @reservation.reserved_dates.last-%>,<%-end-%>
+    <%- end -%>
 
   Amount owed to board owner at pickup: <%= number_to_currency(@reservation.total_cost)%>
 
-  <%if @reservation.board.for_purchase?%>
+  <%-if @reservation.board.for_purchase?-%>
   Note: You are purchasing this board from the board owner.  The board owner has agreed to buy this board back from you for
   <%= h number_to_currency(@reservation.board.buy_back_price)%>.  The board owner may decide to alter this buy back
   price when they see the condition of the board upon return.  Accidents happen but bringing the board back in the condition
   you bought it in increases your chance of getting the most money upon return.
-  <%end%>
+  <%-end-%>
         
   And possibly the most important part.... Board Pickup Location:
     Address: <%= h @reservation.board.location.street %>
