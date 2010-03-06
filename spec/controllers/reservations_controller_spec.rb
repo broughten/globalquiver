@@ -55,7 +55,7 @@ describe ReservationsController do
     
     describe "POST /boards/:id/reservations (aka create reservation for board)" do
       before(:each) do
-        @test_board = Board.make()
+        @test_board = SpecificBoard.make()
       end
       
       it "should find the existing board and assign it to the reservation" do

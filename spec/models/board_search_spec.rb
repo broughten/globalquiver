@@ -53,14 +53,14 @@ describe BoardSearch do
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
       board_search = BoardSearch.make(:location=>search_location)
       result = board_search.execute
-      result.first.should be_instance_of(Board)
+      result.first.should be_instance_of(SpecificBoard)
     end
     
     it "execute should filter results based on location" do
-      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+      board1 = SpecificBoard.make(:location=>BoardLocation.make(:santa_barbara_ca))
       # this board comes back with a location that is a mix of the BoardLocation.make(:santa_barbara_ca)
       # blueprint and the Location.make() blueprint.  This is why the geocoding is failing.
-      board2 = Board.make(:location=>board1.location)
+      board2 = SpecificBoard.make(:location=>board1.location)
       board2.location = board1.location
       board2.save
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
@@ -80,10 +80,10 @@ describe BoardSearch do
     end
 
     it "execute should filter results based on style" do
-      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+      board1 = GenericBoard.make(:location=>BoardLocation.make(:santa_barbara_ca))
       # this board comes back with a location that is a mix of the BoardLocation.make(:santa_barbara_ca)
       # blueprint and the Location.make() blueprint.  This is why the geocoding is failing.
-      board2 = Board.make(:location=>board1.location)
+      board2 = SpecificBoard.make(:location=>board1.location)
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
       board_search = BoardSearch.make(:location=>search_location,:style=>nil)
       result = board_search.execute
@@ -98,10 +98,10 @@ describe BoardSearch do
     end
     
     it "should only show active boards" do
-      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+      board1 = SpecificBoard.make(:location=>BoardLocation.make(:santa_barbara_ca))
       # this board comes back with a location that is a mix of the BoardLocation.make(:santa_barbara_ca)
       # blueprint and the Location.make() blueprint.  This is why the geocoding is failing.
-      board2 = Board.make(:location=>board1.location)
+      board2 = GenericBoard.make(:location=>board1.location)
       board2.deactivate
       board2.save
       

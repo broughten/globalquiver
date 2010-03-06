@@ -17,7 +17,7 @@ describe CommentsController do
     
     describe "reply to comment" do
       before(:each) do
-        @temp_board = Board.make()
+        @temp_board = SpecificBoard.make()
         @temp_comment = Comment.build_from(@temp_board, @user.id, "this is a comment" )
         @temp_comment.save
       end

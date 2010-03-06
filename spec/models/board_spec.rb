@@ -193,8 +193,8 @@ describe Board do
   end
   
   it "should allow you to find only the active boards" do
-    board1 = Board.make()
-    board2 = Board.make()
+    board1 = SpecificBoard.make()
+    board2 = GenericBoard.make()
     board2.deactivate
     board2.save
     

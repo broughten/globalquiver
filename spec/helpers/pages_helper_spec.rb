@@ -3,9 +3,9 @@ include PagesHelper
 describe PagesHelper do
   describe "most_popular_board" do
     before(:each) do
-      @less_popular_board = Board.make(:images => [Image.make()])
-      @more_popular_board = Board.make(:images => [Image.make()])
-      @board_without_photos = Board.make()
+      @less_popular_board = SpecificBoard.make(:images => [Image.make()])
+      @more_popular_board = SpecificBoard.make(:images => [Image.make()])
+      @board_without_photos = SpecificBoard.make()
       @inactive_board = Board.make()
       @date = Date.today
     end

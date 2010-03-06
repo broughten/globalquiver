@@ -5,7 +5,7 @@ module PagesHelper
     Board.find(:first,
       :select => 'count(*) as number, boards.*',
       :joins => "inner join reservations r on boards.id = r.board_id inner join unavailable_dates ud on ud.parent_id = r.id inner join images i on i.owner_id = boards.id",
-      :conditions => "boards.inactive = false and ud.parent_type = 'Reservation' and i.owner_type = 'Board'",
+      :conditions => "boards.inactive = false and boards.type = 'SpecificBoard' and ud.parent_type = 'Reservation' and i.owner_type = 'Board'",
       :group => 'boards.id',
       :order => 'number desc'
     )
