@@ -6,7 +6,7 @@ Here is a listing of recent reservation changes to your boards.
 
 <%-unless @added_reservations.empty?-%>
 New Reservations:
-<%-@added_reservations.each do |reservation|-%>
+<%@added_reservations.each do |reservation|%>
 Board Name:  <%= h reservation.board.name%>
 Board Model: <%= h reservation.board.model%>
 Board Maker: <%= h reservation.board.maker%>
@@ -22,7 +22,7 @@ Dates reserved:
 		
 <%-unless @deleted_reservations.empty?-%>
 Deleted Reservations:
-<%-@deleted_reservations.each do |reservation|-%>
+<%@deleted_reservations.each do |reservation|%>
 Board Name:  <%= h reservation.board.name%>
 Board Model: <%= h reservation.board.model%>
 Board Maker: <%= h reservation.board.maker%>
@@ -33,8 +33,8 @@ Dates reserved:
 <%=h reservation_date.date%><%-unless reservation_date == reservation.reserved_dates.last%>, <%end%>
 <%- end #of reserved_dates.each-%>
 
-<%-end #of @deleted_reservations.each-%>
-<%-end #of unless-%>
+<%end #of @deleted_reservations.each%>
+<%end #of unless%>
 
 Thanks for listing your boards on Global Quiver.
 --Jon and Mike
