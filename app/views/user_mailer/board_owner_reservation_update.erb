@@ -4,7 +4,7 @@ Thanks again for using Global Quiver to list your boards.
 
 Here is a listing of recent reservation changes to your boards.
 
-<%-unless @added_reservations.empty?-%>
+<%unless @added_reservations.empty?%>
 New Reservations:
 <%@added_reservations.each do |reservation|%>
 Board Name:  <%= h reservation.board.name%>
@@ -20,7 +20,7 @@ Dates reserved:
 <%end #of @added_reservations.each%>
 <%end #of unless%>
 		
-<%-unless @deleted_reservations.empty?-%>
+<%unless @deleted_reservations.empty?%>
 Deleted Reservations:
 <%@deleted_reservations.each do |reservation|%>
 Board Name:  <%= h reservation.board.name%>
