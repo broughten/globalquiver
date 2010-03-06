@@ -17,9 +17,9 @@ You just made a reservation on Global Quiver. Thanks! The details of your reserv
 OK. Here are the details of your reservation:
 
   Board Name:  <%= h @reservation.board.name%>
-  <%- if @reservation.board.is_a?(SpecificBoard) -%>Board Model: <%= @reservation.board.model%><%-end-%>
-  <%- if @reservation.board.is_a?(SpecificBoard) -%>Board Maker: <%= @reservation.board.maker%><%-end-%>
-  <%- if @reservation.board.is_a?(GenericBoard) -%>Board Length: Between <%= @reservation.board.lower_length_feet%>'<%= @reservation.board.lower_length_inches%>" and <%= @reservation.board.upper_length_feet%>'<%= @reservation.board.upper_length_inches%>"<%-end-%>
+  <% if @reservation.board.is_a?(SpecificBoard) -%>Board Model: <%= @reservation.board.model%><%-end-%>
+  <% if @reservation.board.is_a?(SpecificBoard) -%>Board Maker: <%= @reservation.board.maker%><%-end-%>
+  <% if @reservation.board.is_a?(GenericBoard) -%>Board Length: Between <%= @reservation.board.lower_length_feet%>'<%= @reservation.board.lower_length_inches%>" and <%= @reservation.board.upper_length_feet%>'<%= @reservation.board.upper_length_inches%>"<%-end-%>
   Board Style: <%= h @reservation.board.style.name%>
   <%- if @reservation.board.creator.is_a?(Surfer) -%>
   Board Owner: <%= h @reservation.board.creator.full_name%>
