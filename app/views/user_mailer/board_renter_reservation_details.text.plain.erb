@@ -16,9 +16,10 @@ You just made a reservation on Global Quiver. Thanks! The details of your reserv
 OK. Here are the details of your reservation:
 
   Board Name:  <%= h @reservation.board.name%>
-  Board Model: <%= h @reservation.board.model%>
-  Board Maker: <%= h @reservation.board.maker%>
-
+  <% if @reservation.board.is_a?(SpecificBoard) %>Board Model: <%= @reservation.board.model%><%end%>
+  <% if @reservation.board.is_a?(SpecificBoard) %>Board Maker: <%= @reservation.board.maker%><%end%>
+  <% if @reservation.board.is_a?(GenericBoard) %>Board Length: Between <%= @reservation.board.lower_length_feet%>'<%= @reservation.board.lower_length_inches%>" and <%= @reservation.board.upper_length_feet%>'<%= @reservation.board.upper_length_inches%>"<%end%>
+  Board Style: <%= h @reservation.board.style.name%>
   <% if @reservation.board.creator.is_a?(Surfer) %>
   Board Owner: <%= h @reservation.board.creator.full_name%>
   Owner Email: <%= h @reservation.board.creator.email%>
@@ -31,16 +32,15 @@ OK. Here are the details of your reservation:
     <% @reservation.reserved_dates.each do |reservation_date| %><%=h reservation_date.date%><%unless reservation_date == @reservation.reserved_dates.last%>, <%end%>
     <% end %>
 
-	Amount owed to board owner at pickup: <%@reservation.total_cost%>
-	
-	<%if @reservation.board.for_purchase?%>
-	Note: You are purchasing this board from the board owner.  The board owner has agreed to buy this board back from you for
-	<%= h number_to_currency(@reservation.board.buy_back_price)%>.  The board owner may decide to alter this buy back
-	price when they see the condition of the board upon return.  Accidents happen but bringing the board back in the condition
-	you bought it in increases your chance of getting the most money upon return.
-	<%end%>
-	
-    
+  Amount owed to board owner at pickup: <%= number_to_currency(@reservation.total_cost)%>
+
+  <%if @reservation.board.for_purchase?%>
+  Note: You are purchasing this board from the board owner.  The board owner has agreed to buy this board back from you for
+  <%= h number_to_currency(@reservation.board.buy_back_price)%>.  The board owner may decide to alter this buy back
+  price when they see the condition of the board upon return.  Accidents happen but bringing the board back in the condition
+  you bought it in increases your chance of getting the most money upon return.
+  <%end%>
+        
   And possibly the most important part.... Board Pickup Location:
     Address: <%= h @reservation.board.location.street %>
     City:    <%= h @reservation.board.location.locality %>
