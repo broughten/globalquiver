@@ -103,7 +103,7 @@ function show_generic_board() {
 }
 
 function set_board_location_id(new_id){
-  $("#board_location_id").val(new_id);
+  $("#" + board_type + "_location_id").val(new_id);
 }
 
 function toggleOptionalBoardFields(){
