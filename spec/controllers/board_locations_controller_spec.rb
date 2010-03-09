@@ -61,6 +61,50 @@ describe BoardLocationsController do
         post "create", :board_location =>{:country =>"USA"}
         assigns[:board_location].country.should == "USA"
       end
+
+      it "should find the specific board passed in if there was one" do
+        board = SpecificBoard.make
+        post "create", :board_location => {:region => "CA",
+                                           :country => "USA",
+                                           :postal_code => "93110",
+                                           :street => "4426 Via Bendita",
+                                           :locality => "Santa Barbara"},
+                       :specific_board => {:id => board.id}
+        assigns[:board].should == board
+      end
+
+      it "should find the generic board passed in if there was one" do
+        board = GenericBoard.make
+        post "create", :board_location => {:region => "CA",
+                                           :country => "USA",
+                                           :postal_code => "93110",
+                                           :street => "4426 Via Bendita",
+                                           :locality => "Santa Barbara"},
+                       :generic_board => {:id => board.id}
+        assigns[:board].should == board
+      end
+
+      it "should redirect to the generic board edit page if a new location is created for a generic board" do
+        board = GenericBoard.make
+        post "create", :board_location => {:region => "CA",
+                                           :country => "USA",
+                                           :postal_code => "93110",
+                                           :street => "4426 Via Bendita",
+                                           :locality => "Santa Barbara"},
+                       :generic_board => {:id => board.id}
+        response.should redirect_to(edit_generic_board_path(board))
+      end
+
+      it "should redirect to the specific board edit page if a new location is created for a specific board" do
+        board = SpecificBoard.make
+        post "create", :board_location => {:region => "CA",
+                                           :country => "USA",
+                                           :postal_code => "93110",
+                                           :street => "4426 Via Bendita",
+                                           :locality => "Santa Barbara"},
+                       :specific_board => {:id => board.id}
+        response.should redirect_to(edit_specific_board_path(board))
+      end
     end
 
   end

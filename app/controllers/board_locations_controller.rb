@@ -11,8 +11,10 @@ class BoardLocationsController < ApplicationController
 
   # POST /locations
   def create
-    if params[:board] && params[:board][:id]
-      @board = Board.find_by_id(params[:board][:id])
+    if params[:specific_board] && params[:specific_board][:id]
+      @board = Board.find_by_id(params[:specific_board][:id])
+    elsif params[:generic_board] && params[:generic_board][:id]
+      @board = Board.find_by_id(params[:generic_board][:id])
     end
     @board_location = BoardLocation.new(params[:board_location])
         
@@ -23,7 +25,7 @@ class BoardLocationsController < ApplicationController
           if @board
             @board.location = @board_location
             @board.save
-            redirect_to(edit_board_path(@board))
+            redirect_to(send("edit_#{@board.type.to_s.underscore}_path", @board))
           else
             redirect_to(new_board_path)
           end
