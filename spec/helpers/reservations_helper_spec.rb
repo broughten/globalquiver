@@ -54,7 +54,64 @@ describe ReservationsHelper do
        @board = Board.make(:creator => @me)
        days_until_next_reservation.should eql(-1)
      end
-   
+
+
+     it "should not include my canceled reservations" do
+       board = Board.make(:creator => @someone_else)
+       #reservations created by @me
+       rez_to_cancel = Reservation.make(:creator => @me, :board => board, :reserved_dates => [
+         UnavailableDate.make(:date => 3.days.from_now),
+         UnavailableDate.make(:date => 5.days.from_now),
+         UnavailableDate.make(:date => 7.days.from_now),
+         UnavailableDate.make(:date => 9.days.from_now),
+         UnavailableDate.make(:date => 11.days.from_now)
+       ])
+
+
+
+       Reservation.make(:creator => @me, :board => board, :reserved_dates => [
+         UnavailableDate.make(:date => 6.days.from_now),
+         UnavailableDate.make(:date => 8.days.from_now),
+         UnavailableDate.make(:date => 10.days.from_now),
+         UnavailableDate.make(:date => 12.days.from_now)
+       ])
+
+       rez_to_cancel.deleted_at = Time.now
+
+       rez_to_cancel.save
+
+       days_until_next_reservation.should eql(6.days.from_now.to_date - Date.today)
+
+     end
+
+     it "should not include reservations canceled on me" do
+       board = Board.make(:creator => @me)
+       #reservations created by @me
+       rez_to_cancel = Reservation.make(:creator => @someone_else, :board => board, :reserved_dates => [
+         UnavailableDate.make(:date => 3.days.from_now),
+         UnavailableDate.make(:date => 5.days.from_now),
+         UnavailableDate.make(:date => 7.days.from_now),
+         UnavailableDate.make(:date => 9.days.from_now),
+         UnavailableDate.make(:date => 11.days.from_now)
+       ])
+
+
+
+       Reservation.make(:creator => @someone_else, :board => board, :reserved_dates => [
+         UnavailableDate.make(:date => 6.days.from_now),
+         UnavailableDate.make(:date => 8.days.from_now),
+         UnavailableDate.make(:date => 10.days.from_now),
+         UnavailableDate.make(:date => 12.days.from_now)
+       ])
+
+       rez_to_cancel.deleted_at = Time.now
+
+       rez_to_cancel.save
+
+       days_until_next_reservation.should eql(6.days.from_now.to_date - Date.today)
+
+     end
+
    end
 
   describe "next_reservation" do
