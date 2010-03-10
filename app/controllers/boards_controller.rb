@@ -5,6 +5,8 @@ class BoardsController < ApplicationController
   # GET /boards/1
   def show
     @board = Board.find(params[:id])
+    @comments = @board.root_comments
+    logger.debug("HI JC!!! did we get any comments?: #{@comments.inspect}")
 
     respond_to do |format|
       format.html # show.html.erb

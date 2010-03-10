@@ -1,5 +1,5 @@
 class SpecificBoard < Board
-
+  
   validates_presence_of :maker, :length
  
   def length_feet

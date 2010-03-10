@@ -17,7 +17,7 @@ class Comment < ActiveRecord::Base
   def self.build_from(obj, user_id, comment)
     c = self.new
     c.commentable_id = obj.id 
-    c.commentable_type = obj.class.name 
+    c.commentable_type = ActiveRecord::Base.send(:class_name_of_active_record_descendant, obj.class).to_s
     c.body = comment 
     c.user_id = user_id
     c

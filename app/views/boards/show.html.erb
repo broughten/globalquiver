@@ -250,8 +250,8 @@
 
 <% if logged_in? %>
   <%= render :partial => "new_comment" %>
-
-  <%= render :partial => "comment", :collection => @board.root_comments %>
+  <% logger.debug "HI JC!!! #{@board.type}" %>
+  <%= render :partial => "comment", :collection => @comments %>
 
 <% else %>
   <% if !@board.root_comments.blank? %>
