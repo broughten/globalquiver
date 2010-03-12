@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100225225811) do
+ActiveRecord::Schema.define(:version => 20100312222352) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20100225225811) do
     t.decimal  "daily_fee",      :precision => 8, :scale => 2
     t.boolean  "inactive",                                     :default => false
     t.string   "name"
-    t.string   "type",                                         :default => "SpecificBoard"
+    t.string   "type"
     t.integer  "upper_length"
     t.integer  "lower_length"
     t.decimal  "purchase_price", :precision => 8, :scale => 2
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(:version => 20100225225811) do
     t.string   "last_name"
     t.text     "description"
     t.boolean  "friendly"
-    t.string   "url"
+    t.string   "website"
     t.integer  "location_id"
     t.boolean  "admin"
     t.string   "password_reset_code",       :limit => 40

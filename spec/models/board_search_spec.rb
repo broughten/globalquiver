@@ -53,7 +53,7 @@ describe BoardSearch do
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
       board_search = BoardSearch.make(:location=>search_location)
       result = board_search.execute
-      result.first.should be_instance_of(SpecificBoard)
+      result.first.should be_instance_of(Board)
     end
     
     it "execute should filter results based on location" do

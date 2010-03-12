@@ -6,6 +6,13 @@ describe User do
     User.make().should be_valid
   end
   
+  describe "model attributes" do
+    it "should have a website field" do
+      User.make().should respond_to(:website)
+    end
+  end
+  
+  
   describe "model associations" do
     it "should allow one image" do
       User.make().should respond_to(:image)

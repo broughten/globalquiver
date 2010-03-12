@@ -76,7 +76,9 @@
     <ul>
       <li class="attr-name">Website</li>
       <li class="value">
-        <%= link_to @user.url unless @user.url.nil?%>
+				<% unless @user.website.nil?%>
+        <a href="http://<%=h @user.website%>"><%=h @user.website%></a>
+				<%end%>
       </li>
     </ul>
     <div class="clear"></div>
