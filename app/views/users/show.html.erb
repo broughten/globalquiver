@@ -90,7 +90,7 @@
       <% else %>
         <h2>About <%= @user.name %></h2>
       <% end %>
-        <% if @user.description.nil? %>
+        <% if @user.description.blank? %>
           <p>...</p>
         <% else %>
           <p><%= @user.description %></p>
