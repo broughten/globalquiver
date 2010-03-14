@@ -28,6 +28,7 @@ Rails::Initializer.run do |config|
     config.gem 'acts_as_geocodable'
     # gem used to easily define cron jobs and create crontab file
     config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
+    config.gem 'hoptoad_notifier'
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
