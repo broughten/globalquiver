@@ -1,8 +1,8 @@
-<h1>Please log in first</h1>
+<h1>Login</h1>
 <div class="login-header">
   <h3>Don't have an account?</h3>
-  <%= link_to 'Sign up now!', new_user_path, :class=>'call_to_action'%>
-  <h3>As a registered user, you'll be able to list your boards for rent or rent boards for your next trip</h3>
+  <%= link_to 'Create one real quick', new_user_path, :class=>'call_to_action'%>
+  <h3>Sign up so that you can list boards, search surfers, and make reservations.</h3>
 </div>
 <% form_for :session,
         :url => session_path(),
