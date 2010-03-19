@@ -1,4 +1,15 @@
 /* put any css in here that is specific to ie */
+#header {
+  height:80px;
+}
+
+#login-signup{
+  margin-top:15px;
+}
+
+#logo-holder {
+  margin-top:15px;
+}
 .terms-checkbox {
   padding-right:70px;
 }

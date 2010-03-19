@@ -1,0 +1,22 @@
+/* put any css in here that is specific to ie */
+#header {
+  height:70px;
+}
+#login-signup {
+  margin-top:15px;
+}
+#logo-holder {
+  margin-top:0px;
+}
+
+.tabs li {
+  margin-bottom:0px;
+}
+
+#shop-button {
+  text-align:left;
+  margin-right:35px;
+}
+#shop-button a {
+  padding-left:155px;
+}
