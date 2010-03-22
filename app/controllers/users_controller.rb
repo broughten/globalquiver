@@ -54,11 +54,15 @@ class UsersController < ApplicationController
     @image = Image.new(params[class_string][:image_attributes])
     
     if !@image.nil? && !@image.valid?
-      render :action => :edit
+      # This must specifically call out the users/edit template
+      # because of the subclassing of the users model and controller
+      render :template => 'users/edit'
     elsif @user.update_attributes(params[class_string])
       flash[:notice] = 'Profile successfully updated.'
       redirect_to(edit_user_path(:id =>  @user.id))
     else
+      # This must specifically call out the users/edit template
+      # because of the subclassing of the users model and controller
       render :template => 'users/edit'
     end
   end
