@@ -48,12 +48,12 @@ describe BoardSearch do
       results.should be_instance_of(Array)
     end
     
-    it "execute should return Board objects" do
-      board1 = Board.make(:location=>BoardLocation.make(:santa_barbara_ca))
+    it "execute should return properly typed objects" do
+      board1 = SpecificBoard.make(:location=>BoardLocation.make(:santa_barbara_ca))
       search_location = SearchLocation.make(:locality=>board1.location.locality, :region=>board1.location.region, :country=>board1.location.country)
       board_search = BoardSearch.make(:location=>search_location)
       result = board_search.execute
-      result.first.should be_instance_of(Board)
+      result.first.should be_instance_of(SpecificBoard)
     end
     
     it "execute should filter results based on location" do

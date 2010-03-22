@@ -106,21 +106,24 @@ a.call_to_action{
 }
 
 #container {
+  float:right;
   text-align: left;
   width: 805px;
-  margin: 0 auto;
+  margin-top:0;
+  margin-right:170px;
   padding: 0;
 }
 
 #outer-container {
   width:1149px;
-  margin:0 auto;
+  margin:0 10px;
 }
 
 #header {
-  width:845px;
+  width:847px;
   height:70px;
   margin-left:175px;
+  margin-right:165px;
   margin-bottom:15px;
   margin-top:15px;
   background-color: #fff;
@@ -137,17 +140,15 @@ a.call_to_action{
 }
 
 
-#header .right{
-  float: right;
-  margin-top:-10px;
-  margin-right:20px;
-  text-align: right;
-}
-
-#header .left{
-  margin-top:3px;
-  margin-left:13px;
-  text-align: right;
+#logo-holder {
+  display:table;
+  float:left;
+  #position:relative;
+  overflow:hidden;
+  height:70px;
+  width:287px;
+  margin-left:12px;
+  text-align:left;
 }
 
 
@@ -207,11 +208,9 @@ a.call_to_action{
 
 #left-nav img {
   float:left;
-  width:15px;
-  margin-top:5px;
+  margin-right:10px
 }
 .left-nav-button {
-  float:left;
   vertical-align:middle;
   text-align:left;
   height:40px;
@@ -224,10 +223,11 @@ a.call_to_action{
 }
 
 .left-link {
-  margin-left:10px;
+  /*margin-left:10px;
   margin-top:7px;
   float:right;
-  height:40px;
+  height:40px;*/
+
 }
 
 /*Main content----------------*/
@@ -332,8 +332,7 @@ a.call_to_action{
   float:left;
   height:100px;
   width:100px;
-  text-align:center;
-  vertical-align: middle;
+  text-align:left;
   margin-right:3px;
 }
 
@@ -515,6 +514,7 @@ a.call_to_action{
   background-color: #666666;
   color:white;
   border: 1px solid black;
+  text-align:center;
 
 }
 

@@ -98,7 +98,14 @@
 }
 
 #login-signup{
-    float:none;
+  float:right;
+  margin-right:20px;
+  display:table;
+  #position:relative;
+  overflow:hidden;
+  height:70px;
+  width:40%;
+  text-align:left;
 }
 
 #login-signup ul li {
@@ -107,8 +114,8 @@
   display: inline-block;
   vertical-align: top;
   /*margin-left: 1px;*/
-  margin-top: 30px;
   font-size: 1.2em;
+  float:right;
 }
 
 
@@ -119,7 +126,7 @@
   vertical-align: top;
  /* width: 80px;*/
   padding: 10px 15px;
-  text-align: center;
+  text-align: left;
   background: #333333;
   color: #ffffff;
   font-weight:bold;
@@ -161,6 +168,11 @@
 
 #errorExplanation li {
   font-size:1em;
+}
+
+#centering-div ul {
+  #position:relative;
+  #top:-50%;
 }
 
 /* update authentication */

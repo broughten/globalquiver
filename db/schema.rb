@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20100312222352) do
     t.decimal  "daily_fee",      :precision => 8, :scale => 2
     t.boolean  "inactive",                                     :default => false
     t.string   "name"
-    t.string   "type"
+    t.string   "type",                                         :default => "SpecificBoard"
     t.integer  "upper_length"
     t.integer  "lower_length"
     t.decimal  "purchase_price", :precision => 8, :scale => 2
