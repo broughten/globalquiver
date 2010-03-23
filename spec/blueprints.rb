@@ -247,3 +247,7 @@ Reservation.blueprint() do
   updater {creator}
   reserved_dates {[UnavailableDate.make()]}
 end
+
+Invoice.blueprint() do
+  
+end

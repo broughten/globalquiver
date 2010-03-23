@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many  :locations, :foreign_key =>"creator_id"
   has_one   :image, :as => :owner, :dependent => :destroy
   has_many  :reservations_for_owned_boards, :through=>:boards, :source=>:reservations
+  has_many  :invoices, :foreign_key => "responsible_user_id"
 
   belongs_to :location
   belongs_to :user_location, :foreign_key => 'location_id'

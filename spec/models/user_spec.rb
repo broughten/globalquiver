@@ -41,6 +41,18 @@ describe User do
       owner1.reservations_for_owned_boards.count.should == 1
       owner2.reservations_for_owned_boards.should be_empty
     end
+    
+    it "should have many invoices" do
+      invoice1 = Invoice.make()
+      invoice2 = Invoice.make()
+      user = User.make()
+      user.invoices << invoice1
+      user.invoices << invoice2
+      
+      user.invoices.should include(invoice1)
+      user.invoices.should include(invoice2)
+      user.invoices.count.should == 2
+    end
 
     describe "locations schmoekations" do
       it "should allow one location" do
