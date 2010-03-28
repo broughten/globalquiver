@@ -211,6 +211,9 @@ a.call_to_action{
   margin-right:10px
 }
 .left-nav-button {
+  display:table;
+  #position:relative;
+  overflow:hidden;
   vertical-align:middle;
   text-align:left;
   height:40px;
@@ -223,10 +226,7 @@ a.call_to_action{
 }
 
 .left-link {
-  /*margin-left:10px;
-  margin-top:7px;
-  float:right;
-  height:40px;*/
+  width:158px;
 
 }
 
