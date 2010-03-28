@@ -49,7 +49,7 @@ describe BoardsHelper do
       get_fee_text_for_board(@board).should == "Sale / Buy Back"
       
       @board.stubs(:for_purchase?).returns(false)
-      get_fee_text_for_board(@board).should == "Daily"
+      get_fee_text_for_board(@board).should == "Daily / Weekly"
     end
     
     it "should allow you to get fee amounts for a board depending on the for purchase status of the board" do
@@ -57,10 +57,50 @@ describe BoardsHelper do
       get_fee_amounts_for_board(@board).should == "#{number_to_currency(@board.purchase_price)} / #{number_to_currency(@board.buy_back_price)}"
       
       @board.stubs(:for_purchase?).returns(false)
-      get_fee_amounts_for_board(@board).should == number_to_currency(@board.daily_fee)
+      get_fee_amounts_for_board(@board).should == "#{number_to_currency(@board.daily_fee)} / n/a"
       
       @board.stubs(:daily_fee).returns(0.00)
       get_fee_amounts_for_board(@board).should == "Free!"
+    end
+
+    it "should allow you to get 'first' fee text for a board depending on the for purchase status of the board" do
+      @board.stubs(:for_purchase?).returns(true)
+      get_first_fee_text_for_board(@board).should == "Sale:"
+
+      @board.stubs(:for_purchase?).returns(false)
+      get_first_fee_text_for_board(@board).should == "Day:"
+    end
+
+    it "should allow you to get 'first' fee amounts for a board depending on the for purchase status of the board" do
+      @board.stubs(:for_purchase?).returns(true)
+      @board.stubs(:purchase_price).returns(100.0)
+      get_first_fee_amounts_for_board(@board).should == "#{number_to_currency(@board.purchase_price)}"
+
+      @board.stubs(:for_purchase?).returns(false)
+      get_first_fee_amounts_for_board(@board).should == "#{number_to_currency(@board.daily_fee)}"
+
+      @board.stubs(:daily_fee).returns(0.00)
+      get_first_fee_amounts_for_board(@board).should == "Free!"
+    end
+
+    it "should allow you to get 'second' fee text for a board depending on the for purchase status of the board" do
+      @board.stubs(:for_purchase?).returns(true)
+      get_second_fee_text_for_board(@board).should == "Buy Back:"
+
+      @board.stubs(:for_purchase?).returns(false)
+      get_second_fee_text_for_board(@board).should == "Week:"
+    end
+
+    it "should allow you to get 'second' fee amounts for a board depending on the for purchase status of the board" do
+      @board.stubs(:for_purchase?).returns(true)
+      get_second_fee_amounts_for_board(@board).should == number_to_currency(@board.buy_back_price)
+      
+      @board.stubs(:for_purchase?).returns(false)
+      @board.stubs(:weekly_fee).returns(15.0)
+      get_second_fee_amounts_for_board(@board).should == "#{number_to_currency(@board.weekly_fee)}"
+
+      @board.stubs(:weekly_fee).returns(nil)
+      get_second_fee_amounts_for_board(@board).should == "n/a"
     end
     
     it "should allow you to get a status style for a board" do

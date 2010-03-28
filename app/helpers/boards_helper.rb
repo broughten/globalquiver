@@ -88,7 +88,7 @@ module BoardsHelper
     if board.for_purchase?
       "Sale / Buy Back"
     else
-      "Daily"
+      "Daily / Weekly"
     end
   end
   
@@ -99,7 +99,47 @@ module BoardsHelper
       if board.daily_fee == 0.00
         "Free!"
       else
+        "#{number_to_currency(board.daily_fee)} / #{(board.weekly_fee.nil?)?'n/a':number_to_currency(board.weekly_fee)}"
+      end
+    end
+  end
+
+    def get_first_fee_text_for_board(board)
+    if board.for_purchase?
+      "Sale:"
+    else
+      "Day:"
+    end
+  end
+
+  def get_first_fee_amounts_for_board(board)
+    if board.for_purchase?
+      number_to_currency(board.purchase_price)
+    else
+      if board.daily_fee == 0.00
+        "Free!"
+      else
         number_to_currency(board.daily_fee)
+      end
+    end
+  end
+
+    def get_second_fee_text_for_board(board)
+    if board.for_purchase?
+      "Buy Back:"
+    else
+      "Week:"
+    end
+  end
+
+  def get_second_fee_amounts_for_board(board)
+    if board.for_purchase?
+      number_to_currency(board.buy_back_price)
+    else
+      if board.daily_fee == 0.00
+        "Free!"
+      else
+        "#{(board.weekly_fee.nil?)?'n/a':number_to_currency(board.weekly_fee)}"
       end
     end
   end

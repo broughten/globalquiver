@@ -187,15 +187,69 @@ describe Reservation do
     reservation.calendar_strip_text(reserver).should contain reservation.board.creator.full_name
   end
   
-  it "should allow you to get the total cost of the reservation" do
-    rental_board = Board.make()
-    rental_reservation = Reservation.make(:board=>rental_board,:reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now)])
+  it "should allow you to get the total cost of the reservation when the board is sell/buy-back" do
     sale_board = Board.make(:for_purchase)
-    sale_reservation = Reservation.make(:board=>sale_board,:reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now)])
-    
-    rental_reservation.total_cost.should == rental_reservation.reserved_dates.count * rental_reservation.board.daily_fee
-    
+    sale_reservation = Reservation.make(:board=>sale_board,:reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now)])   
     sale_reservation.total_cost.should == sale_reservation.board.purchase_price
   end
-  
+
+  it "should allow you to get the total cost of the reservation when the board is rented for less than a week and weekly fee is nil" do
+    rental_board = Board.make(:daily_fee => 20.0)
+    rental_reservation = Reservation.make(:board=>rental_board,
+                                        :reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now),
+                                                          UnavailableDate.make(:date=>3.days.from_now),
+                                                          UnavailableDate.make(:date=>4.days.from_now)])
+    rental_reservation.total_cost.should == 60
+  end
+
+  it "should allow you to get the total cost of the reservation when the board is rented for less than a week and weekly fee is greater than the multiplied daily fee" do
+    rental_board = Board.make(:daily_fee => 20.0, :weekly_fee => 70.0)
+    rental_reservation = Reservation.make(:board=>rental_board,
+                                        :reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now),
+                                                          UnavailableDate.make(:date=>3.days.from_now),
+                                                          UnavailableDate.make(:date=>4.days.from_now)])
+    rental_reservation.total_cost.should == 60
+  end
+
+  it "should allow you to get the total cost of the reservation when the board is rented for less than a week and weekly fee is less than the multiplied daily fee" do
+    rental_board = Board.make(:daily_fee => 20.0, :weekly_fee => 50.0)
+    rental_reservation = Reservation.make(:board=>rental_board,
+                                        :reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now),
+                                                          UnavailableDate.make(:date=>3.days.from_now),
+                                                          UnavailableDate.make(:date=>4.days.from_now)])
+    rental_reservation.total_cost.should == 50
+  end
+
+  it "should allow you to get the total cost of the reservation when the board is rented for more than a week and weekly fee is greater than the multiplied daily fee" do
+    rental_board = Board.make(:daily_fee => 20.0, :weekly_fee => 70.0)
+    rental_reservation = Reservation.make(:board=>rental_board,
+                                        :reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now),
+                                                          UnavailableDate.make(:date=>3.days.from_now),
+                                                          UnavailableDate.make(:date=>4.days.from_now),
+                                                          UnavailableDate.make(:date=>5.days.from_now),
+                                                          UnavailableDate.make(:date=>6.days.from_now),
+                                                          UnavailableDate.make(:date=>7.days.from_now),
+                                                          UnavailableDate.make(:date=>8.days.from_now),
+                                                          UnavailableDate.make(:date=>9.days.from_now),
+                                                          UnavailableDate.make(:date=>10.days.from_now),
+                                                          UnavailableDate.make(:date=>11.days.from_now)])
+    rental_reservation.total_cost.should == 130
+  end
+
+  it "should allow you to get the total cost of the reservation when the board is rented for more than a week and weekly fee is less than the multiplied daily fee" do
+    rental_board = Board.make(:daily_fee => 20.0, :weekly_fee => 50.0)
+    rental_reservation = Reservation.make(:board=>rental_board,
+                                        :reserved_dates=>[UnavailableDate.make(:date=>2.days.from_now),
+                                                          UnavailableDate.make(:date=>3.days.from_now),
+                                                          UnavailableDate.make(:date=>4.days.from_now),
+                                                          UnavailableDate.make(:date=>5.days.from_now),
+                                                          UnavailableDate.make(:date=>6.days.from_now),
+                                                          UnavailableDate.make(:date=>7.days.from_now),
+                                                          UnavailableDate.make(:date=>8.days.from_now),
+                                                          UnavailableDate.make(:date=>9.days.from_now),
+                                                          UnavailableDate.make(:date=>10.days.from_now),
+                                                          UnavailableDate.make(:date=>11.days.from_now)])
+    rental_reservation.total_cost.should == 100
+  end
+
 end

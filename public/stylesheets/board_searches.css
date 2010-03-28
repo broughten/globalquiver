@@ -70,12 +70,12 @@ h1 {
 
 #redo-search {
   float:right;
-  width:300px;
-  margin-right:20px;
+  width:280px;
+  margin-right:0px;
 }
 
 .board-owner {
-  width:452px;
+  width:477px;
   padding-top:0px;
   height:25px;
   margin-bottom:2px;

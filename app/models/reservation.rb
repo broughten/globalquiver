@@ -54,11 +54,24 @@ class Reservation < ActiveRecord::Base
   end
   
   def total_cost
+    cost = 0
+    num_days = self.reserved_dates.count
+    daily_fee = self.board.daily_fee
+    weekly_fee = self.board.weekly_fee
     if (self.board.for_purchase?)
-      self.board.purchase_price
-    else
-      self.board.daily_fee * self.reserved_dates.count
+      cost = self.board.purchase_price
+    elsif weekly_fee.nil?
+      cost = num_days * daily_fee
+    elsif num_days < 7
+      cost = (daily_fee * num_days < weekly_fee)?daily_fee*num_days:weekly_fee
+    elsif num_days >= 7
+      num_weeks = num_days / 7
+      remainder_days = num_days % 7
+      final_week_cost = (daily_fee * remainder_days < weekly_fee)?daily_fee*remainder_days:weekly_fee
+      weeks_cost = num_weeks * weekly_fee
+      cost = weeks_cost + final_week_cost
     end
+    return cost
   end
 
   protected

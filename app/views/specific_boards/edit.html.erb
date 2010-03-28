@@ -138,6 +138,12 @@
         <p>
           $<%= f.text_field :daily_fee, :size => 4 %>
         </p>
+        <p>
+          <%= f.label :weekly_fee, "Weekly Fee:" %><br />
+        </p>
+        <p>
+          $<%= f.text_field :weekly_fee, :size => 4 %>
+        </p>
       </div>
     <% end %>
   <% else %>
@@ -168,7 +174,13 @@
           <%= f.label :daily_fee, "Daily Fee:" %><br />
         </p>
         <p>
-          $<%= f.text_field :daily_fee, :size => 5 %>
+          $<%= f.text_field :daily_fee, :size => 4 %>
+        </p>
+        <p>
+          <%= f.label :weekly_fee, "Weekly Fee:" %><br />
+        </p>
+        <p>
+          $<%= f.text_field :weekly_fee, :size => 4 %>
         </p>
       </div>
     <% end %>

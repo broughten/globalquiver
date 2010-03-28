@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100312222352) do
+ActiveRecord::Schema.define(:version => 20100328025925) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20100312222352) do
     t.decimal  "purchase_price", :precision => 8, :scale => 2
     t.decimal  "buy_back_price", :precision => 8, :scale => 2
     t.boolean  "for_purchase",                                 :default => false
+    t.decimal  "weekly_fee",     :precision => 8, :scale => 2
   end
 
   create_table "comments", :force => true do |t|

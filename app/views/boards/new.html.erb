@@ -159,7 +159,7 @@
     <div id="rental_info">
       <div class="explanation">
         <p>
-          You can set a daily rental fee or lend out your boards for free. It's completely up to you.
+          You can set a daily and weekly rental fee or lend out your boards for free. It's completely up to you.
           For the record, if you rent just one board for 20 or 30 days at a typical daily rate, you'll
           have made enough money to get a new board!
         </p>
@@ -170,6 +170,12 @@
         </p>
         <p>
           $<%= f.text_field :daily_fee, :size => 4 %>
+        </p>
+        <p>
+          <%= f.label :weekly_fee, "Weekly Fee: (Put in any amount or 0 if you want to pass along the stoke for free)" %><br />
+        </p>
+        <p>
+          $<%= f.text_field :weekly_fee, :size => 4 %>
         </p>
       </div>
     </div>
@@ -215,7 +221,11 @@
       <div class="fields">
         <p>
           <%= f.label :daily_fee, "Daily Fee:" %><br />
-          $<%= f.text_field :daily_fee, :size => 5 %>
+          $<%= f.text_field :daily_fee, :size => 4 %>
+        </p>
+        <p>
+          <%= f.label :weekly_fee, "Daily Fee:" %><br />
+          $<%= f.text_field :weekly_fee, :size => 4 %>
         </p>
       </div>
     </div>

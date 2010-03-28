@@ -17,7 +17,7 @@
 }
 
 .board-flash {
-  width:545px;
+  width:570px;
   margin-bottom:2px;
 }
 
@@ -87,6 +87,10 @@
   width:70px;
 }
 
+#list-table li.fee p {
+  width:105px;
+}
+
 
 #list-table li.model p {
   width:120px;
@@ -109,15 +113,19 @@
 }
 
 #list-table li.medium p {
-  width:100px;
+  width:90px;
 }
 
 #list-headings li.short {
   width:70px;
 }
 
+#list-headings li.fee {
+  width:105px;
+}
+
 #list-headings li.medium {
-  width:100px;
+  width:90px;
 }
 
 #list-table li:hover {
@@ -256,7 +264,7 @@ h1 {
 }
 
 
-#show-daily-fee {
+#show-fee {
   margin-top:1px;
 }
 #money {
@@ -350,11 +358,11 @@ h1 {
 }
 
 .search-generic-header {
-  width:462px;
+  width:487px;
 }
 
 .home-generic-header {
-  width:535px;
+  width:560px;
 }
 
 .active_board{background-color:#AEFF4B !important; color:#000000;}
