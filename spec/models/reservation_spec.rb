@@ -29,6 +29,13 @@ describe Reservation do
     it "should have many dates" do
       Reservation.make_unsaved().should respond_to(:reserved_dates)
     end
+    
+    it "should belong to an invoice" do
+      invoice = Invoice.make()
+      reservation = Reservation.make(:invoice =>invoice)
+      
+      reservation.invoice.should == invoice
+    end
   end
   
   describe "validations" do

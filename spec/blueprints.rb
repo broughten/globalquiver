@@ -249,5 +249,6 @@ Reservation.blueprint() do
 end
 
 Invoice.blueprint() do
-  
+  responsible_user {User.make()}
+  due_date {10.days.from_now.to_date}
 end

@@ -4,6 +4,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
   belongs_to :updater, :class_name => 'User'
   has_many :reserved_dates, :class_name => 'UnavailableDate', :as => :parent, :order => 'date'
+  belongs_to :invoice
   
   accepts_nested_attributes_for :reserved_dates
   

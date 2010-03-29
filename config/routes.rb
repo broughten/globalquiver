@@ -46,6 +46,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pages
 
   map.resource :blog_theme
+  
+  map.resources :invoices
 
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.lost_password '/lost_password', :controller => 'users', :action => 'lost_password'

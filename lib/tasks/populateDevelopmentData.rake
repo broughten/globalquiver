@@ -205,11 +205,12 @@ namespace :db do
       UnavailableDate.create(:date=>3.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>5.days.from_now, :creator=>surfer, :updater=>surfer)])
         
-    Reservation.create(:creator=>surfer,:updater=>surfer,
+    reservation = Reservation.create(:creator=>surfer,:updater=>surfer,
       :board=>hansens.boards.last,:reserved_dates=>[UnavailableDate.create(:date=>10.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>11.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>15.days.from_now, :creator=>surfer, :updater=>surfer)])
     
+    Invoice.create(:responsible_user=>shop, :due_date=>30.days.from_now, :reservations=>[reservation])
     
   end
 end

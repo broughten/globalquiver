@@ -97,6 +97,14 @@
                 <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
               </div>
             </div>
+						<% if current_user && current_user.is_rental_shop?%>
+						<div class="left-nav-button<%= active_if_current_tab('Invoices') %>">
+              <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+              <div class="left-link">
+                <%= link_to "View your invoices", invoices_url, :id=>"new_search" %>
+              </div>
+            </div>
+						<% end %>
           </div>
         </div>
       <div id="container">
