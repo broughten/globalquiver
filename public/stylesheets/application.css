@@ -19,6 +19,11 @@ h1 {
   #top:-50%;
 }
 
+#centering-div a {
+  #position:relative;
+  #top:-50%;
+}
+
 
 #list-headings li {
   text-align:center;

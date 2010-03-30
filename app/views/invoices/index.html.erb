@@ -1,10 +1,19 @@
 <% content_for :head do %>
   
 <% end %>
-
+<h1>Your invoices</h1>
 <% if @invoices.empty?%>
-	<p>You have no invoices to display.</p>
+	<h2>You have no invoices to display.</h2>
 <% else %>
-	<%= render :partial => "invoice", :collection => @invoices %>
+  <div class="invoice-list">
+		<ul id="list-headings">
+			<li class="pic">Number</li>
+			<li class="model">Creation Date</li>
+			<li class="medium">Due Date</li>
+			<li class="medium">Total</li>
+			<li class="short">View</li>
+		</ul>
+		<%= render :partial => "invoice", :collection => @invoices %>
+	</div>
 <% end %>
 

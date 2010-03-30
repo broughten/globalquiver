@@ -1,1 +1,28 @@
-<p>Invoice Number: <%= invoice.id %></p>
+<ul id="list-table">
+  <li>
+    <div id="centering-div">
+      <p><%=h invoice.id%></p>
+    </div>
+  </li>
+  <li>
+    <div id="centering-div">
+      <p><%=h invoice.created_at.to_date.to_formatted_s(:rfc822) %></p>
+    </div>
+  </li>
+  <li>
+    <div id="centering-div">
+      <p><%=h invoice.due_date.to_formatted_s(:rfc822) %></p>
+    </div>
+  </li>
+  <li>
+    <div id="centering-div">
+      <p><%=h number_to_currency(invoice.total)%></p>
+    </div>
+  </li>
+	<li>
+    <div id="centering-div">
+      <p><%= link_to "View", invoice_path(invoice)%></p>
+    </div>
+  </li>
+</ul>
+<div class="clear"></div>
