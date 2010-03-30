@@ -336,23 +336,6 @@ a.call_to_action{
   margin-right:3px;
 }
 
-#centering-div {
-  #position:absolute;
-  #top:50%;
-  display:table-cell;
-  vertical-align:middle;
-}
-
-#centering-div img {
-  #position:relative;
-  #top:-50%;
-}
-
-#centering-div a {
-  #position:relative;
-  #top:-50%;
-}
-
 .feature-desc {
   padding-top:15px;
   font-size: 15px;
