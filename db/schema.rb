@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100329171243) do
+ActiveRecord::Schema.define(:version => 20100330160223) do
 
   create_table "board_searches", :force => true do |t|
     t.integer  "style_id"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20100329171243) do
     t.date     "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "paid",                :default => false
   end
 
   create_table "locations", :force => true do |t|
@@ -203,6 +204,7 @@ ActiveRecord::Schema.define(:version => 20100329171243) do
     t.integer  "location_id"
     t.boolean  "admin"
     t.string   "password_reset_code",       :limit => 40
+    t.decimal  "reservation_invoice_fee",                 :precision => 8, :scale => 2, :default => 0.0
   end
 
 end

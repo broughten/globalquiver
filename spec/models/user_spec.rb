@@ -10,6 +10,15 @@ describe User do
     it "should have a website field" do
       User.make().should respond_to(:website)
     end
+    
+    it "should have a reservation fee field that defaults to 0" do
+      user = User.make()
+      
+      user.reservation_invoice_fee.should == 0
+      
+      user.reservation_invoice_fee = 4
+      user.reservation_invoice_fee.should == 4
+    end
   end
   
   
