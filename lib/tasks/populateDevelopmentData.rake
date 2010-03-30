@@ -54,14 +54,16 @@ namespace :db do
     killerdana = Shop.create(:name=>"Killer Dana Surf Shop",   :password=>"testing",
       :password_confirmation=>"testing", :email=>"killerdana@test.com", :terms_of_service=>"true")
     shop = Shop.create(:name=>"Dev Shop",   :password=>"testing",
-      :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true",
-      :reservation_invoice_fee => 4)
+      :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true")
     hansens = Shop.create(:name=>"Hansen's Surf Shop",   :password=>"testing",
       :password_confirmation=>"testing", :email=>"hansens@test.com", :terms_of_service=>"true")
     emptySurfer = Surfer.create(:first_name=>"Empty", :last_name=>"Surfer", :password=>"testing", 
       :password_confirmation=>"testing", :email=>"emptysurfer@test.com", :terms_of_service=>"true")
     adminSurfer = Surfer.create(:first_name=>"Admin", :last_name=>"Surfer", :password=>"testing", 
       :password_confirmation=>"testing", :email=>"adminsurfer@test.com", :terms_of_service=>"true")
+      
+    shop.reservation_invoice_fee = 4
+    shop.save
 
     #give Jordy, Kelly, and devSurfer images
     create_image_for_user(jordy, RAILS_ROOT + '/spec/fixtures/images/users/jordy.png')
