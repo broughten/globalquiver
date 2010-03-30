@@ -35,7 +35,8 @@ namespace :db do
     require 'fileutils'
     
     #Clear out the tables
-    [BoardSearch, User, UnavailableDate, Board, Location, Style, Image, Geocode, Geocoding, PickupTime, Reservation].each(&:delete_all)
+    [BoardSearch, User, UnavailableDate, Board, Location, Style, Image, 
+      Geocode, Geocoding, PickupTime, Reservation, Invoice].each(&:delete_all)
     
     #Clear out the images folder to remove old images
    FileUtils.rm_rf RAILS_ROOT + '/public/system/datas/'
@@ -53,7 +54,8 @@ namespace :db do
     killerdana = Shop.create(:name=>"Killer Dana Surf Shop",   :password=>"testing",
       :password_confirmation=>"testing", :email=>"killerdana@test.com", :terms_of_service=>"true")
     shop = Shop.create(:name=>"Dev Shop",   :password=>"testing",
-      :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true")
+      :password_confirmation=>"testing", :email=>"devshop@test.com", :terms_of_service=>"true",
+      :reservation_invoice_fee => 4)
     hansens = Shop.create(:name=>"Hansen's Surf Shop",   :password=>"testing",
       :password_confirmation=>"testing", :email=>"hansens@test.com", :terms_of_service=>"true")
     emptySurfer = Surfer.create(:first_name=>"Empty", :last_name=>"Surfer", :password=>"testing", 
