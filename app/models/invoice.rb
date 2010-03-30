@@ -7,11 +7,11 @@ class Invoice < ActiveRecord::Base
   named_scope :for_user, lambda { |user| {:conditions => ['invoices.responsible_user_id = ?', user.id]} }
   
   def total
-    the_total = 0
+    total_days = 0
     self.reservations.each do |reservation|
-      the_total = the_total + reservation.total_cost
+      total_days = total_days + reservation.reserved_dates.count
     end
-    the_total
+    total_days * responsible_user.reservation_invoice_fee
   end
   
 end

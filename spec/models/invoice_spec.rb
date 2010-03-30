@@ -39,7 +39,8 @@ describe Invoice do
     
     it "should allow you to get the invoice total" do
       #An empty invoice should return 0
-      invoice = Invoice.make()
+      user = User.make(:reservation_invoice_fee=>4)
+      invoice = Invoice.make(:responsible_user=>user)
       
       invoice.total.should == 0
       
@@ -48,7 +49,23 @@ describe Invoice do
       invoice.reservations << res1
       invoice.reservations << res2
       
-      invoice.total.should == res1.total_cost + res2.total_cost
+      total_days = 0
+      
+      invoice.reservations.each do |reservation|
+        total_days = total_days + reservation.reserved_dates.count
+      end
+      
+      invoice.total.should == total_days * invoice.responsible_user.reservation_invoice_fee
+      invoice.total.should > 0
+    end
+    
+    it "should allow you to set an invoice as paid and should default to false" do
+      invoice = Invoice.make()
+      invoice.paid.should be_false
+      
+      invoice.paid = true
+      invoice.paid.should be_true
+      
     end
     
   end
