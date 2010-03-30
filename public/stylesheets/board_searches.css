@@ -57,10 +57,12 @@ h1 {
 
 .board-list {
   margin-bottom:10px;
+  margin-top:10px;
 }
 
 #search-results .board-list {
   float:left;
+  min-height: 500px;
 }
 
 #search-results .search-form-div {
@@ -69,9 +71,17 @@ h1 {
 }
 
 #redo-search {
-  float:right;
-  width:280px;
-  margin-right:0px;
+  float: left;
+  position:absolute;
+  margin-left:505px;
+  margin-top:4px;
+  width:500px;
+}
+
+#redo-search-form {
+  background-color: white;
+  width:230px;
+  height:140px;
 }
 
 .board-owner {
@@ -87,6 +97,12 @@ h1 {
 
 .board-owner a {
   color:#333333;
+}
+
+#map {
+  border-style:solid;
+  border-color:white;
+  border-width: 6px;
 }
 
 

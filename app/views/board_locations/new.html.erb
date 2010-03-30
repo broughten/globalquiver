@@ -24,14 +24,11 @@
     <br>
     <input id="addressInput" type="text" name="address" value="" />
     <input id="addressLookup" type="submit" value="Find" />
-<% if !@existing_locations.empty? %>
-    <%= link_to 'Use Existing Location', new_board_path, :class=>'call_to_action' %>
-<%end%>
-    
-
+    <% if !@existing_locations.empty? %>
+      <%= link_to 'Use Existing Location', new_board_path, :class=>'call_to_action' %>
+    <%end%>
   </form>
-
-	<% form_for @board_location do |f| -%>
+  <% form_for @board_location do |f| -%>
     <%= f.hidden_field :street %>
     <%= f.hidden_field :locality %>
     <%= f.hidden_field :region %>
@@ -39,9 +36,5 @@
     <%= f.hidden_field :country %>
     <%= f.submit 'Use this location', :class => 'submitBtn' %>
   <% end -%>
-<%= @map.div(:width => 710, :height => 400) %>
-
-
-  
-  
+  <%= @map.div(:width => 710, :height => 400) %>
 </div>
