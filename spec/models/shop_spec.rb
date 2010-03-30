@@ -30,5 +30,13 @@ describe Shop do
   it "should inherit from User" do
     Shop.make_unsaved().should be_a_kind_of(User)
   end
+  
+  it "should allow you to find all shops with uninvoiced reservations" do
+    uninvoiced_shop = make_uninvoiced_reservation_and_get_shop
+    invoiced_shop = make_invoiced_reservation_and_get_shop
+    
+    Shop.with_uninvoiced_reservations.should include(uninvoiced_shop)
+    Shop.with_uninvoiced_reservations.should_not include(invoiced_shop)
+  end
 
 end

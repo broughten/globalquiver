@@ -132,6 +132,15 @@ describe Reservation do
       result.length.should == 1
     end
 
+    it "should be able to find uninvoiced reservations" do
+      invoiced_reservation = Reservation.make()
+      uninvoiced_reservation = Reservation.make()
+      invoice = Invoice.make(:reservations=>[invoiced_reservation])
+      
+      Reservation.uninvoiced.should include(uninvoiced_reservation)
+      Reservation.uninvoiced.should_not include(invoiced_reservation)
+      
+    end
 
 
     it "should contain inactive that only returns the inactive records" do

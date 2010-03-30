@@ -17,5 +17,17 @@ class Shop < User
   def is_rental_shop?
     true
   end
+  
+  def self.with_uninvoiced_reservations
+    shops = []
+    
+    Shop.all.each do |shop|
+      if shop.reservations_for_owned_boards.uninvoiced.count > 0
+        shops << shop 
+      end
+    end
+    
+    shops
+  end
 
 end

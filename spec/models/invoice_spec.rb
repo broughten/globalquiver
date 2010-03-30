@@ -110,5 +110,27 @@ describe Invoice do
     end
   end
   
+  it "should create new invoices for shops that have uninvoiced reservations" do
+    shop_with_uninvoiced_reservation = make_uninvoiced_reservation_and_get_shop
+    shop_without_uninvoiced_reservation = make_invoiced_reservation_and_get_shop
+    surfer = Surfer.make()
+    
+    Invoice.for_user(surfer).count.should == 0
+    Invoice.for_user(shop_with_uninvoiced_reservation).count.should == 0
+    Invoice.for_user(shop_without_uninvoiced_reservation).count.should == 1
+    
+    new_invoices = Invoice.create_invoices_for_uninvoiced_reservations
+    
+    Invoice.for_user(surfer).count.should == 0
+    Invoice.for_user(shop_with_uninvoiced_reservation).count.should == 1
+    Invoice.for_user(shop_without_uninvoiced_reservation).count.should == 1
+    new_invoices.count.should == 1
+    new_invoices.first.reservations.count.should == 1
+    new_invoices.first.responsible_user.should == shop_with_uninvoiced_reservation
+    new_invoices.first.due_date.should == 30.days.from_now.to_date
+    
+  end
+  
+  
   
 end

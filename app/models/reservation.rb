@@ -20,6 +20,7 @@ class Reservation < ActiveRecord::Base
   named_scope :active, :conditions => ["reservations.deleted_at IS ?", nil]
   named_scope :with_dates_after, 
       lambda { |time| {:select => "DISTINCT reservations.*",:joins=>:reserved_dates, :conditions => ['date > ?', time]} }
+  named_scope :uninvoiced, :conditions => ["invoice_id IS ?", nil]
        
   def before_destroy
     if (too_near_to_delete)
