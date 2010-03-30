@@ -35,7 +35,7 @@ class BoardSearchesController < ApplicationController
     @map.control_init(:large_map => true,:map_type => false)
 
     #center map around search location and zoom in according to the search radius
-    zoom_level = (search_location.search_radius < 100)?8:10
+    zoom_level = (search_location.search_radius < 100)?9:7
     @map.center_zoom_init([search_location.geocode.latitude,search_location.geocode.longitude], zoom_level)
 
 
