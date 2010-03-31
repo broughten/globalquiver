@@ -55,10 +55,12 @@
 
 .board-list {
   margin-bottom:10px;
+  margin-top:10px;
 }
 
 #search-results .board-list {
   float:left;
+  min-height: 500px;
 }
 
 #search-results .search-form-div {
@@ -67,13 +69,21 @@
 }
 
 #redo-search {
-  float:right;
-  width:300px;
-  margin-right:20px;
+  float: left;
+  position:absolute;
+  margin-left:505px;
+  margin-top:4px;
+  width:500px;
+}
+
+#redo-search-form {
+  background-color: white;
+  width:230px;
+  height:140px;
 }
 
 .board-owner {
-  width:452px;
+  width:477px;
   padding-top:0px;
   height:25px;
   margin-bottom:2px;
@@ -85,6 +95,13 @@
 
 .board-owner a {
   color:#333333;
+}
+
+#map {
+  border-style:solid;
+  border-color:white;
+  border-width: 6px;
+  background-color:#cccccc;
 }
 
 

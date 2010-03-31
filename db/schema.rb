@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20100330160223) do
     t.decimal  "purchase_price", :precision => 8, :scale => 2
     t.decimal  "buy_back_price", :precision => 8, :scale => 2
     t.boolean  "for_purchase",                                 :default => false
+    t.decimal  "weekly_fee",     :precision => 8, :scale => 2
   end
 
   create_table "comments", :force => true do |t|

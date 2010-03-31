@@ -77,12 +77,14 @@ $(document).ready(function() {
       </p>
     </div>
   </li>
-  <li class="board-link<%=board.id%> short">
+  <li class="board-link<%=board.id%> fee">
     <div id="centering-div">
       <p>
         <%= link_to "", board_path(board)%>
-				<%= get_fee_text_for_board(board)%><br/>
-        <%= h get_fee_amounts_for_board(board)%>
+	<%= get_first_fee_text_for_board(board)%>
+        <%= h get_first_fee_amounts_for_board(board)%><br/>
+        <%= get_second_fee_text_for_board(board)%>
+        <%= h get_second_fee_amounts_for_board(board)%><br/>
       </p>
     </div>
   </li>

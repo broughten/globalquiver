@@ -61,6 +61,7 @@
               <% end -%>
             </ul>
           </div>
+          <!--[if lte ie 7]><div style="float:right;font-size:14px; width:230px;margin-right:300px;">NOTE: Internet Explorer version 7 and below may not work very well.</div><![endif]-->
         </div>
       </div>
       <div class="tabs">
@@ -74,28 +75,36 @@
       <div class="clear"></div>
         <div id="left-nav">
           <div class="left-nav-button<%= active_if_current_tab('Shop') %>">
-            <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-            <div class="left-link">
-              <%= link_to "Find a shop", new_shop_search_url, :id=>"new_search" %>
+            <div id="centering-div">
+              <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+              <div class="left-link">
+                <%= link_to "Find a shop", new_shop_search_url, :id=>"new_search" %>
+              </div>
             </div>
           </div>
           <div class="left-nav-button<%= active_if_current_tab('Surfer') %>">
-            <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-            <div class="left-link">
-              <%= link_to "Find a surfer", new_surfer_search_url, :id=>"new_search" %>
+            <div id="centering-div">
+              <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+              <div class="left-link">
+                <%= link_to "Find a surfer", new_surfer_search_url, :id=>"new_search" %>
+              </div>
             </div>
           </div>
           <div id="lower-left-nav">
             <div class="left-nav-button<%= active_if_current_tab('Add') %>">
-              <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-              <div class="left-link">
-                <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
+              <div id="centering-div">
+                <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+                <div class="left-link">
+                  <%= link_to "Add a board", new_board_url, :id=>"new_board" %>
+                </div>
               </div>
             </div>
             <div class="left-nav-button<%= active_if_current_tab('Find') %>">
-              <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
-              <div class="left-link">
-                <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
+              <div id="centering-div">
+                <%= image_tag '/images/bluearrow.png', :alt => "arrow" %>
+                <div class="left-link">
+                  <%= link_to "Find a board", new_board_search_url, :id=>"new_search" %>
+                </div>
               </div>
             </div>
 						<% if current_user && current_user.is_rental_shop?%>

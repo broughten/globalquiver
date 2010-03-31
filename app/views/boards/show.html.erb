@@ -194,11 +194,11 @@
       <span id="val-span"><%=h @board.location %></span>
     </li>
   </ul>
-  <div id="show-daily-fee">
+  <div id="show-fee">
     <ul>
       <li id="money" class="attr-name">Fee Type:<br/><%= get_fee_text_for_board(@board)%></li>
       <li class="value">
-				<%= h get_fee_amounts_for_board(@board)%>
+        <%= h get_fee_amounts_for_board(@board)%>
       </li>
     </ul>
   </div>
@@ -250,7 +250,6 @@
 
 <% if logged_in? %>
   <%= render :partial => "new_comment" %>
-  <% logger.debug "HI JC!!! #{@board.type}" %>
   <%= render :partial => "comment", :collection => @comments %>
 
 <% else %>

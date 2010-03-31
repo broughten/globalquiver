@@ -9,7 +9,7 @@ class BoardSearch < ActiveRecord::Base
   def execute
     boards = Array.new
     BoardLocation.find(:all, :within => self.location.search_radius, :origin => self.location.to_s).each do |board_location|
-      board_location.boards.active.find_each do |board|
+      board_location.boards.active.each do |board|
         boards << board if (self.style == nil || board.style == self.style)
       end
     end

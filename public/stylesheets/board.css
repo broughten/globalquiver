@@ -17,7 +17,7 @@
 }
 
 .board-flash {
-  width:545px;
+  width:570px;
   margin-bottom:2px;
 }
 
@@ -160,7 +160,7 @@
 }
 
 
-#show-daily-fee {
+#show-fee {
   margin-top:1px;
 }
 #money {
@@ -254,11 +254,11 @@
 }
 
 .search-generic-header {
-  width:462px;
+  width:487px;
 }
 
 .home-generic-header {
-  width:535px;
+  width:560px;
 }
 
 .active_board{background-color:#AEFF4B !important; color:#000000;}
