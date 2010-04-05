@@ -60,7 +60,11 @@ describe BoardsHelper do
       get_fee_amounts_for_board(@board).should == "#{number_to_currency(@board.daily_fee)} / n/a"
       
       @board.stubs(:daily_fee).returns(0.00)
-      get_fee_amounts_for_board(@board).should == "Free!"
+      get_fee_amounts_for_board(@board).should == "Free / n/a"
+      @board.stubs(:daily_fee).returns(0.00)
+      @board.stubs(:weekly_fee).returns(50.00)
+      get_fee_amounts_for_board(@board).should == "Free / $50.00"
+
     end
 
     it "should allow you to get 'first' fee text for a board depending on the for purchase status of the board" do
@@ -101,6 +105,9 @@ describe BoardsHelper do
 
       @board.stubs(:weekly_fee).returns(nil)
       get_second_fee_amounts_for_board(@board).should == "n/a"
+      @board.stubs(:weekly_fee).returns(0.00)
+      get_second_fee_amounts_for_board(@board).should == "Free!"
+
     end
     
     it "should allow you to get a status style for a board" do

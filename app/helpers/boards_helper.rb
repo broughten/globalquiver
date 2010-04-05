@@ -96,11 +96,9 @@ module BoardsHelper
     if board.for_purchase?
       "#{number_to_currency(board.purchase_price)} / #{number_to_currency(board.buy_back_price)}"
     else
-      if board.daily_fee == 0.00
-        "Free!"
-      else
-        "#{number_to_currency(board.daily_fee)} / #{(board.weekly_fee.nil?)?'n/a':number_to_currency(board.weekly_fee)}"
-      end
+      daily_fee = (board.daily_fee == 0.00)?'Free':number_to_currency(board.daily_fee)
+      weekly_fee = (board.weekly_fee.nil?)?'n/a':(board.weekly_fee == 0.00)?'Free':number_to_currency(board.weekly_fee)
+      "#{daily_fee} / #{weekly_fee}"
     end
   end
 
@@ -136,11 +134,7 @@ module BoardsHelper
     if board.for_purchase?
       number_to_currency(board.buy_back_price)
     else
-      if board.daily_fee == 0.00
-        "Free!"
-      else
-        "#{(board.weekly_fee.nil?)?'n/a':number_to_currency(board.weekly_fee)}"
-      end
+        "#{(board.weekly_fee.nil?)?'n/a':(board.weekly_fee == 0.00)?'Free!':number_to_currency(board.weekly_fee)}"
     end
   end
   
