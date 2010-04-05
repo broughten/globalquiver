@@ -87,7 +87,7 @@ describe ReservationsController do
     
     describe "Get /reservations/:id (aka show reservation)" do
       before(:each) do
-        @reservation = Reservation.make()
+        @reservation = Reservation.make(:board => Board.make(:location => BoardLocation.make(:santa_barbara_ca)))
       end
       
       it "should attempt to find the reservation in question" do

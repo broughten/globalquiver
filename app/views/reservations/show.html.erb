@@ -1,28 +1,31 @@
 <% content_for :head do %>
+  <%= GMap.header %>
+  <%= @map.to_html %>
   <%= stylesheet_link_tag 'reservation', :media => 'screen' %>
 <%  end %>
 
 <h1>Reservation
-  <% if !@reservation.deleted_at.nil? %>
-    <span class="canceled-reservation">(Canceled)</span>
-    </h1>
+<% if !@reservation.deleted_at.nil? %>
+  <span class="canceled-reservation">(Canceled)</span>
+  </h1>
+  <p>
+    <%= link_to "Return to home page", root_path %>
+  </p>
+<% else %>
+  </h1>
+  <% if @reservation.too_near_to_delete %>
     <p>
-      <%= link_to "Return to home page", root_path %>
+      Reservations less than a day from now can't be canceled.
+      If you can't make it, please contact <%= link_to @reservation.board.creator.full_name, user_path(@reservation.board.creator) %>
+    </p>
   <% else %>
-    </h1>
-    <% if @reservation.too_near_to_delete %>
+    <% if @reservation.creator == current_user %>
       <p>
-        Reservations less than a day from now can't be canceled.
-        If you can't make it, please contact <%= link_to @reservation.board.creator.full_name, user_path(@reservation.board.creator) %>
+        <%= link_to "Click to Cancel", @reservation, :confirm => "Are you sure you want to cancel this reservation?", :method=>:delete%>
       </p>
-    <% else %>
-      <% if @reservation.creator == current_user %>
-        <p>
-          <%= link_to "Click to Cancel", @reservation, :confirm => "Are you sure you want to cancel this reservation?", :method=>:delete%>
-        </p>
-      <% end %>
     <% end %>
   <% end %>
+<% end %>
 
 <div id="info-table">
   <h2>Board Info</h2>
@@ -91,6 +94,10 @@
       <%= h number_to_currency(@reservation.total_cost)%>
     </li>
   </ul>
-	<div class="clear"></div>
+  <div class="clear"></div>
   <br/>
+</div>
+<div id="reservation-map">
+  <h2>Pickup Location</h2>
+  <%= @map.div(:width => 500, :height => 350) %>
 </div>

@@ -38,6 +38,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/1
   def show
     @reservation = Reservation.find(params[:id])
+    init_map_for_show_view
 
     respond_to do |format|
       format.html # show.html.erb
@@ -63,4 +64,40 @@ class ReservationsController < ApplicationController
       end
     end
   end
+
+  def init_map_for_show_view
+    place = @reservation.board.location
+    @map = GMap.new("map")
+    # Use the larger pan/zoom control but disable the map type
+    # selector
+    @map.control_init(:large_map => true,:map_type => false)
+
+    #center map around search location and zoom in according to the search radius
+    zoom_level = 12
+    @map.center_zoom_init([place.geocode.latitude,place.geocode.longitude], zoom_level)
+
+
+    #Make a map icon for surfers
+    @map.icon_global_init(GIcon.new(:image => "/images/surf.png",
+                                    :icon_size => GSize.new(48, 48),
+                                    :icon_anchor => GPoint.new(48, 48),
+                                    :info_window_anchor => GPoint.new(0, 5)), 'surfer_icon')
+    surfer_icon = Variable.new('surfer_icon')
+
+    #put surfer icon on the map
+    @map.overlay_init(GMarker.new([place.geocode.latitude,place.geocode.longitude],
+                                    :icon => surfer_icon,
+                                    :info_window => "
+                                      <div>
+                                        <a style='font-size:14px' href='#{user_path(@reservation.board.creator_id)}'>#{@reservation.board.creator.full_name}</a>
+                                        <p style='font-size:13px'>#{place.street}</p>
+                                        <p style='font-size:13px'>#{place.locality}, #{place.region}, #{place.postal_code}</p>
+                                      </div>",
+                                    :title => "board location"
+                                    ))
+
+
+  end
+
+
 end

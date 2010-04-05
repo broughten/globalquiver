@@ -82,3 +82,7 @@
   background-color:#eeeeee;
 }
 
+#reservation-map {
+  float:right;
+  margin-right:40px;
+}

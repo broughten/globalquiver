@@ -35,6 +35,16 @@
   width:580px;
 }
 
+#jon h3 {
+  float:left;
+}
+
+#jon a {
+  float:left;
+  padding-top:5px;
+  padding-left:5px;
+}
+
 #jon-pic {
   padding-top:15px;
   width:188px;
