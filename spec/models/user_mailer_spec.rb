@@ -59,4 +59,17 @@ describe UserMailer do
     # Test the body of the sent email contains what we expect it to
   end
   
+  it "should send out an email to the responsible user for an invoice" do
+    make_uninvoiced_reservation_and_get_shop
+    
+    invoices = Invoice.create_invoices_for_uninvoiced_reservations
+    
+    # Send the email, then test that it got queued
+    ActionMailer::Base.deliveries.clear
+    #there should be only one invoice in the array because you only created one
+    email = UserMailer.deliver_invoice_notification(invoices.first) 
+    ActionMailer::Base.deliveries.length.should == 1
+    
+  end
+  
 end

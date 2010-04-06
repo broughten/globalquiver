@@ -22,6 +22,12 @@ class Invoice < ActiveRecord::Base
     invoices
   end
   
+  def self.create_and_email_new_invoice_notifications
+    create_invoices_for_uninvoiced_reservations.each do |invoice|
+      UserMailer.deliver_invoice_notification(invoice) 
+    end
+  end
+  
   def total
     total_days = 0
     self.reservations.each do |reservation|

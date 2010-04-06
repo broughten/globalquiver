@@ -1,12 +1,12 @@
 def make_invoiced_reservation_and_get_shop
-  shop_without_uninvoiced_reservations = Shop.make()
+  shop_with_invoiced_reservations = Shop.make()
   invoiced_reservation = Reservation.make()
-  invoiced_reservation.board.creator = shop_without_uninvoiced_reservations
+  invoiced_reservation.board.creator = shop_with_invoiced_reservations
   invoiced_reservation.board.save
-  existing_invoice = Invoice.make(:responsible_user=>shop_without_uninvoiced_reservations,
+  existing_invoice = Invoice.make(:responsible_user=>shop_with_invoiced_reservations,
   :reservations=>[invoiced_reservation])
   
-  shop_without_uninvoiced_reservations
+  shop_with_invoiced_reservations
 end
 
 def make_uninvoiced_reservation_and_get_shop

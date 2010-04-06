@@ -131,6 +131,15 @@ describe Invoice do
     
   end
   
-  
+  it "should send emails for newly created invoices" do
+    make_uninvoiced_reservation_and_get_shop
+    make_uninvoiced_reservation_and_get_shop
+ 
+    # Send the email, then test that it got queued
+    ActionMailer::Base.deliveries.clear
+    Invoice.create_and_email_new_invoice_notifications
+    ActionMailer::Base.deliveries.length.should == 2
+    
+  end
   
 end

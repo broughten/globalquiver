@@ -42,5 +42,13 @@ class UserMailer < ActionMailer::Base
     sent_on(Time.now)
     body({:commentor => commentor, :target_user => target_user, :comment => comment})
   end
-
+  
+  def invoice_notification(invoice)
+    recipients(invoice.responsible_user.email)
+    from("GlobalQuiver Invoicing <invoices@globalquiver.com>")
+    subject('Your invoice from Global Quiver')
+    sent_on(Time.now)
+    body({:invoice => invoice})
+  end
+  
 end
