@@ -68,6 +68,18 @@ module ApplicationHelper
       string
     end
   end
+  
+  def show_invoices_link?(user)
+    user && (user.is_rental_shop? || user.role?(:admin))
+  end
+  
+  def invoices_link_text(user)
+    if(user && user.role?(:admin))
+      "View all invoices"
+    else
+      "View your invoices"
+    end
+  end
 
 
   
