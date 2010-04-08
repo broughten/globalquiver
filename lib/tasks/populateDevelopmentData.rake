@@ -45,7 +45,7 @@ namespace :db do
     surfer = Surfer.create(:first_name=>"Dev", :last_name=>"Surfer", :password=>"testing", 
       :password_confirmation=>"testing", :email=>"devsurfer@test.com", :terms_of_service=>"true")
     #we can't actually set the admin flag with the app.  Has to be manually set in the database
-    admin = Surfer.create(:first_name=>"Admin", :last_name=>"Surfer", :password=>"testing",
+    admin = Surfer.create(:first_name=>"Admin", :last_name=>"Admin", :password=>"testing",
       :password_confirmation=>"testing", :email=>"admin@test.com", :terms_of_service=>"true")
     slater = Surfer.create(:first_name=>"Kelly", :last_name=>"Slater", :password=>"testing",
       :password_confirmation=>"testing", :email=>"slater@test.com", :terms_of_service=>"true")
@@ -64,6 +64,9 @@ namespace :db do
       
     shop.reservation_invoice_fee = 4
     shop.save
+    
+    admin.roles = ["admin"]
+    admin.save
 
     #give Jordy, Kelly, and devSurfer images
     create_image_for_user(jordy, RAILS_ROOT + '/spec/fixtures/images/users/jordy.png')
@@ -204,17 +207,18 @@ namespace :db do
       create_images_for_board(board,RAILS_ROOT + '/spec/fixtures/images/boards/*')
     end
     
-    Reservation.create(:creator=>surfer,:updater=>surfer,
+    reservation1 = Reservation.create(:creator=>surfer,:updater=>surfer,
       :board=>hansens.boards.first,:reserved_dates=>[UnavailableDate.create(:date=>2.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>3.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>5.days.from_now, :creator=>surfer, :updater=>surfer)])
         
-    reservation = Reservation.create(:creator=>surfer,:updater=>surfer,
-      :board=>hansens.boards.last,:reserved_dates=>[UnavailableDate.create(:date=>10.days.from_now, :creator=>surfer, :updater=>surfer),
+    reservation2 = Reservation.create(:creator=>surfer,:updater=>surfer,
+      :board=>shop.boards.last,:reserved_dates=>[UnavailableDate.create(:date=>10.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>11.days.from_now, :creator=>surfer, :updater=>surfer),
       UnavailableDate.create(:date=>15.days.from_now, :creator=>surfer, :updater=>surfer)])
     
-    Invoice.create(:responsible_user=>shop, :due_date=>30.days.from_now, :reservations=>[reservation])
+    Invoice.create(:responsible_user=>hansens, :due_date=>30.days.from_now, :reservations=>[reservation1])
+    Invoice.create(:responsible_user=>shop, :due_date=>30.days.from_now, :reservations=>[reservation2])
     
   end
 end
