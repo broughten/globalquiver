@@ -10,9 +10,8 @@ module ControllerHelpers
   end
 
   def login_as_admin
-    @user = User.make()
+    @user = User.make(:roles_mask=>1)
     controller.stubs(:current_user).returns(@user)
-    controller.stubs(:admin?).returns(true)
   end
  
 end

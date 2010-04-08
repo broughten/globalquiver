@@ -8,8 +8,26 @@ describe InvoicesController do
   it "should use InvoicesController" do
     controller.should be_an_instance_of(InvoicesController)
   end
+  
+  describe "authenticated admin user" do
+    before(:each) do
+      login_as_admin
+    end
+    
+    describe "list invoices (GET /invoices)" do
+      it "should grab all of the invoices in the system" do
+        invoice1 = Invoice.make()
+        invoice2 = Invoice.make()
+        
+        get "index"
+        
+        assigns[:invoices].should include(invoice1)
+        assigns[:invoices].should include(invoice2)
+      end
+    end
+  end
 
-  describe "authenticated user" do
+  describe "authenticated guest user" do
     before(:each) do
       login_as_user
     end

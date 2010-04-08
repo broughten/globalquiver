@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   def admin?
     if current_user
-      current_user.admin?
+      current_user.role?(:admin)
     else
       false
     end

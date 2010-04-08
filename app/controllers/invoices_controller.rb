@@ -4,7 +4,11 @@ class InvoicesController < ApplicationController
   
   #GET /invoices
   def index
-    @invoices = Invoice.for_user(current_user)
+    if(current_user.role?(:admin))
+      @invoices = Invoice.all
+    else
+      @invoices = Invoice.for_user(current_user)
+    end
   end
 
   # GET /invoices/1
