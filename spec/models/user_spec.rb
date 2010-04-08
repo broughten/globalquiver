@@ -19,6 +19,23 @@ describe User do
       user.reservation_invoice_fee = 4
       user.reservation_invoice_fee.should == 4
     end
+    
+    it "should have a roles_mask field that defaults to 0 because users are guests by default" do
+      user = User.make()
+      user.roles_mask.should == 0
+    end
+    
+    it "should have a way of setting and getting the roles associated with this user" do
+      user = User.make()
+      user.roles = ["admin"]
+      user.roles.should == ["admin"]
+    end
+  end
+  
+  describe "constants" do
+    it "should have a ROLES constant that only has an admin role" do
+      User::ROLES.should == ["admin"]
+    end
   end
   
   
@@ -148,6 +165,12 @@ describe User do
       user = User.make(:first_name => 'Kelly', :last_name => 'slater', :email => 'sl8ter@domain.com')
       User.authenticate('sl8ter@domain.com', 'boogieboardforever!').should be_nil
     end
+  end
+  
+  it "should be able to tell if a user is in a certain role" do
+    user = User.make(:roles=>["admin"])
+    user.role?(:admin).should be_true
+    user.role?(:hello).should be_false
   end
 
   it "should not think that it is a shop" do

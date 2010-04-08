@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_location
  
   has_and_belongs_to_many :pickup_times
+  
+  # A guest user will not have any roles (0 in the roles_mask bitmask)
+  # admin = 1 in the roles_mask
+  ROLES = %w[admin]
 
 
   # Virtual attribute for the unencrypted password
@@ -45,6 +49,18 @@ class User < ActiveRecord::Base
   # allows for the image assocation to be created by auto assignment but you still have to 
   # add image_attributes to attr_accessible above.
   accepts_nested_attributes_for :image
+  
+  def roles=(roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
+  end
+
+  def roles
+    ROLES.reject { |r| ((roles_mask || 0) & 2**ROLES.index(r)).zero? }
+  end
+  
+  def role?(role)
+    roles.include? role.to_s
+  end
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
