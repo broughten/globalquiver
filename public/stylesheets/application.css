@@ -93,6 +93,10 @@ h1 {
   width:100px;
 }
 
+#list-headings li.fee {
+  width:80px;
+}
+
 #list-table li:hover {
   background-color:#F1F4F4;
   cursor:pointer;
